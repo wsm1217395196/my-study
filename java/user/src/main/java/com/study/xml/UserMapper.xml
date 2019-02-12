@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.study.mapper.UserMapper">
+
+    <!-- 通用查询映射结果 -->
+    <resultMap id="BaseResultMap" type="com.study.model.User">
+        <id column="id" property="id" />
+        <result column="name" property="name" />
+        <result column="nickname" property="nickname" />
+        <result column="password" property="password" />
+        <result column="phone" property="phone" />
+        <result column="email" property="email" />
+        <result column="pic_small" property="picSmall" />
+        <result column="pic_medium" property="picMedium" />
+        <result column="pic_big" property="picBig" />
+        <result column="qq_openid" property="qqOpenid" />
+        <result column="wechat_openid" property="wechatOpenid" />
+        <result column="blog_openid" property="blogOpenid" />
+        <result column="create_by" property="createBy" />
+        <result column="create_time" property="createTime" />
+        <result column="update_by" property="updateBy" />
+        <result column="update_time" property="updateTime" />
+        <result column="is_enable" property="isEnable" />
+        <result column="remark" property="remark" />
+    </resultMap>
+
+</mapper>
