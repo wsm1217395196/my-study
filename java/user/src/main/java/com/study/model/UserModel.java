@@ -16,7 +16,7 @@ import java.io.Serializable;
  * @since 2019-01-28
  */
 @TableName("user")
-public class User implements Serializable {
+public class UserModel implements Serializable {
 
     private static final long serialVersionUID = 1L;
 
@@ -85,7 +85,7 @@ public class User implements Serializable {
      * 是否有效
      */
     @TableField("is_enabled")
-    private Boolean isEnabled;
+    private Integer isEnabled;
     /**
      * 备注
      */
@@ -212,11 +212,11 @@ public class User implements Serializable {
         this.updateTime = updateTime;
     }
 
-    public Boolean getEnabled() {
+    public Integer getIsEnabled() {
         return isEnabled;
     }
 
-    public void setEnabled(Boolean isEnabled) {
+    public void setIsEnabled(Integer isEnabled) {
         this.isEnabled = isEnabled;
     }
 
@@ -230,7 +230,7 @@ public class User implements Serializable {
 
     @Override
     public String toString() {
-        return "User{" +
+        return "UserModel{" +
         ", id=" + id +
         ", name=" + name +
         ", nikename=" + nikename +

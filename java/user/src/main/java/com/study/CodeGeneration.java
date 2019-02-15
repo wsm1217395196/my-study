@@ -30,6 +30,7 @@ public class CodeGeneration {
 
         // 全局配置
         GlobalConfig gc = new GlobalConfig();
+//        gc.setOutputDir("C:\\Users\\wang\\Desktop\\my-study\\user\\src\\main\\java");
         gc.setOutputDir("C:\\Users\\wang\\Desktop\\my-study\\user\\src\\main\\java");
         gc.setFileOverride(true);
         gc.setActiveRecord(false);// 不需要ActiveRecord特性的请改为false

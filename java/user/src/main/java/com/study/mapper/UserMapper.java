@@ -1,7 +1,7 @@
 package com.study.mapper;
 
 import com.baomidou.mybatisplus.mapper.BaseMapper;
-import com.study.model.User;
+import com.study.model.UserModel;
 
 /**
  * <p>
@@ -11,6 +11,6 @@ import com.study.model.User;
  * @author wsm
  * @since 2019-01-28
  */
-public interface UserMapper extends BaseMapper<User> {
+public interface UserMapper extends BaseMapper<UserModel> {
 
 }

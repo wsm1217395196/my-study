@@ -5,7 +5,7 @@ import com.baomidou.mybatisplus.plugins.Page;
 import com.baomidou.mybatisplus.service.impl.ServiceImpl;
 import com.study.currency.PageParam;
 import com.study.currency.PageResult;
-import com.study.model.User;
+import com.study.model.UserModel;
 import com.study.mapper.UserMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.configurationprocessor.json.JSONException;
@@ -25,7 +25,7 @@ import java.util.List;
  * @since 2019-01-28
  */
 @Service
-public class UserService extends ServiceImpl<UserMapper, User> {
+public class UserService extends ServiceImpl<UserMapper, UserModel> {
 
     @Autowired
     private UserMapper userMapper;

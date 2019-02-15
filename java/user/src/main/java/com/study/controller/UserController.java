@@ -1,16 +1,14 @@
 package com.study.controller;
 
 
-import com.baomidou.mybatisplus.plugins.Page;
 import com.study.currency.PageParam;
 import com.study.currency.PageResult;
 import com.study.currency.result.ResultView;
 import com.study.currency.utils.CreateUtil;
-import com.study.model.User;
+import com.study.model.UserModel;
 import com.study.service.UserService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
-import io.swagger.annotations.ApiParam;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.configurationprocessor.json.JSONException;
 import org.springframework.web.bind.annotation.*;
@@ -38,7 +36,7 @@ public class UserController {
     @ApiOperation(value = "查询全部", notes = "")
     @GetMapping("/getAll")
     public ResultView getAll() {
-        List<User> models = userService.selectList(null);
+        List<UserModel> models = userService.selectList(null);
         return ResultView.success(models);
     }
 
@@ -52,13 +50,13 @@ public class UserController {
     @ApiOperation(value = "根据id查询", notes = "")
     @GetMapping("/getById/{id}")
     public ResultView getById(@PathVariable Long id) {
-        User model = userService.selectById(id);
+        UserModel model = userService.selectById(id);
         return ResultView.success(model);
     }
 
     @ApiOperation(value = "新增", notes = "")
     @PostMapping("/add")
-    public ResultView add(User model) {
+    public ResultView add(UserModel model) {
         Date date = new Date();
         model.setId(CreateUtil.id());
         model.setCreateTime(date);
@@ -69,7 +67,7 @@ public class UserController {
 
     @ApiOperation(value = "修改", notes = "")
     @PostMapping("/update")
-    public ResultView update(User model) {
+    public ResultView update(UserModel model) {
         Date date = new Date();
         model.setUpdateTime(date);
         userService.updateById(model);
