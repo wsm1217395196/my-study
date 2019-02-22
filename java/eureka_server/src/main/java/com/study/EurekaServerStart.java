@@ -11,7 +11,7 @@ public class EurekaServerStart {
 
     public static void main(String[] args) {
         SpringApplication.run(EurekaServerStart.class, args);
-        System.out.println("EurekaServer启动了！！！");
+        System.err.println("EurekaServer启动了！！！");
     }
 
 }

@@ -14,7 +14,7 @@ public class UserStart {
 
     public static void main(String[] args) {
         SpringApplication.run(UserStart.class, args);
-        System.out.println("user启动了！！！");
+        System.err.println("user启动了！！！");
     }
 
 }
