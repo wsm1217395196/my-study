@@ -2,11 +2,12 @@ package com.study.service;
 
 import com.baomidou.mybatisplus.mapper.EntityWrapper;
 import com.baomidou.mybatisplus.plugins.Page;
-import com.baomidou.mybatisplus.service.impl.ServiceImpl;
+import com.baomidou.mybatisplus.service.IService;
 import com.study.currency.PageParam;
 import com.study.currency.PageResult;
-import com.study.model.UserModel;
-import com.study.mapper.UserMapper;
+import com.study.model.WorkModel;
+import com.study.mapper.WorkMapper;
+import com.baomidou.mybatisplus.service.impl.ServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.configurationprocessor.json.JSONException;
 import org.springframework.boot.configurationprocessor.json.JSONObject;
@@ -15,38 +16,37 @@ import org.springframework.util.StringUtils;
 
 import java.util.List;
 
-
 /**
  * <p>
- * 用户 服务实现类
+ * 职业信息表 服务实现类
  * </p>
  *
- * @author wsm
- * @since 2019-01-28
+ * @author wsm123
+ * @since 2019-02-28
  */
 @Service
-public class UserService extends ServiceImpl<UserMapper, UserModel> {
+public class WorkService extends ServiceImpl<WorkMapper, WorkModel> implements IService<WorkModel> {
 
     @Autowired
-    private UserMapper userMapper;
+    private WorkMapper workMapper;
 
     public PageResult getPage(PageParam pageParam) throws JSONException {
         String sort = pageParam.getSort();
         JSONObject object = new JSONObject(pageParam.getCondition());
-        String name = object.getString("name");
-        String nikename = object.getString("nikename");
-        String sex = object.getString("sex");
+        Long recruitPlatformId = object.getLong("recruitPlatformId");
+        Long jobId = object.getLong("jobId");
+        String site = object.getString("site");
         String isEnable = object.getString("isEnable");
 
         EntityWrapper ew = new EntityWrapper();
-        if (!StringUtils.isEmpty(name)) {
-            ew.like("name", name);
+        if (!StringUtils.isEmpty(recruitPlatformId)) {
+            ew.eq("recruit_platform_id", recruitPlatformId);
         }
-        if (!StringUtils.isEmpty(nikename)) {
-            ew.like("nikename", nikename);
+        if (!StringUtils.isEmpty(jobId)) {
+            ew.eq("job_id", jobId);
         }
-        if (!StringUtils.isEmpty(sex)) {
-            ew.eq("sex", sex);
+        if (!StringUtils.isEmpty(site)) {
+            ew.like("site", site);
         }
         if (!StringUtils.isEmpty(isEnable)) {
             ew.eq("isEnable", isEnable);
@@ -56,8 +56,8 @@ public class UserService extends ServiceImpl<UserMapper, UserModel> {
         }
 
         Page page = new Page(pageParam.getPageStart(), pageParam.getPageSize());
-        Integer total = userMapper.selectCount(ew);
-        List list = userMapper.selectPage(page, ew);
+        Integer total = workMapper.selectCount(ew);
+        List list = workMapper.selectPage(page, ew);
         PageResult pageResult = new PageResult(pageParam.getPageIndex(), pageParam.getPageSize(), total, list);
         return pageResult;
     }

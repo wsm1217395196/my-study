@@ -1,66 +1,28 @@
 package com.study.model;
 
+import java.util.Date;
 import com.baomidou.mybatisplus.annotations.TableField;
 import com.baomidou.mybatisplus.annotations.TableName;
-
-import java.util.Date;
-
 import java.io.Serializable;
 
 /**
  * <p>
- * 用户表
+ * 招聘平台表
  * </p>
  *
- * @author wsm
- * @since 2019-01-28
+ * @author wsm123
+ * @since 2019-02-28
  */
-@TableName("user")
-public class UserModel implements Serializable {
+@TableName("recruit_platform")
+public class RecruitPlatformModel implements Serializable {
 
     private static final long serialVersionUID = 1L;
 
     private Long id;
     /**
-     * 用户名
+     * 名称
      */
     private String name;
-    /**
-     * 昵称
-     */
-    private String nikename;
-    /**
-     * 密码
-     */
-    private String password;
-    /**
-     * 头像
-     */
-    private String photo;
-    /**
-     * 性别(0女,1男)
-     */
-    private Integer sex;
-    /**
-     * 生日
-     */
-    private Date birthday;
-    /**
-     * 手机号
-     */
-    private String phone;
-    /**
-     * 邮箱
-     */
-    private String mail;
-    /**
-     * 地址
-     */
-    private String address;
-    /**
-     * 个人说明
-     */
-    private String explain;
     /**
      * 创建人
      */
@@ -106,78 +68,6 @@ public class UserModel implements Serializable {
 
     public void setName(String name) {
         this.name = name;
-    }
-
-    public String getNikename() {
-        return nikename;
-    }
-
-    public void setNikename(String nikename) {
-        this.nikename = nikename;
-    }
-
-    public String getPassword() {
-        return password;
-    }
-
-    public void setPassword(String password) {
-        this.password = password;
-    }
-
-    public String getPhoto() {
-        return photo;
-    }
-
-    public void setPhoto(String photo) {
-        this.photo = photo;
-    }
-
-    public Integer getSex() {
-        return sex;
-    }
-
-    public void setSex(Integer sex) {
-        this.sex = sex;
-    }
-
-    public Date getBirthday() {
-        return birthday;
-    }
-
-    public void setBirthday(Date birthday) {
-        this.birthday = birthday;
-    }
-
-    public String getPhone() {
-        return phone;
-    }
-
-    public void setPhone(String phone) {
-        this.phone = phone;
-    }
-
-    public String getMail() {
-        return mail;
-    }
-
-    public void setMail(String mail) {
-        this.mail = mail;
-    }
-
-    public String getAddress() {
-        return address;
-    }
-
-    public void setAddress(String address) {
-        this.address = address;
-    }
-
-    public String getExplain() {
-        return explain;
-    }
-
-    public void setExplain(String explain) {
-        this.explain = explain;
     }
 
     public String getCreateBy() {
@@ -230,18 +120,9 @@ public class UserModel implements Serializable {
 
     @Override
     public String toString() {
-        return "UserModel{" +
+        return "RecruitPlatformModel{" +
         ", id=" + id +
         ", name=" + name +
-        ", nikename=" + nikename +
-        ", password=" + password +
-        ", photo=" + photo +
-        ", sex=" + sex +
-        ", birthday=" + birthday +
-        ", phone=" + phone +
-        ", mail=" + mail +
-        ", address=" + address +
-        ", explain=" + explain +
         ", createBy=" + createBy +
         ", createTime=" + createTime +
         ", updateBy=" + updateBy +

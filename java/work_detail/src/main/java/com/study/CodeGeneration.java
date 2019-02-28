@@ -8,8 +8,6 @@ import com.baomidou.mybatisplus.generator.config.StrategyConfig;
 import com.baomidou.mybatisplus.generator.config.rules.DbType;
 import com.baomidou.mybatisplus.generator.config.rules.NamingStrategy;
 
-import java.awt.*;
-
 /**
  * 
  * @ClassName: CodeGeneration
@@ -31,7 +29,7 @@ public class CodeGeneration {
         // 全局配置
         GlobalConfig gc = new GlobalConfig();
 //        gc.setOutputDir("C:\\Users\\wang\\Desktop\\my-study\\user\\src\\main\\java");
-        gc.setOutputDir("C:\\Users\\wang\\Desktop\\my-study\\java\\user\\src\\main\\java");
+        gc.setOutputDir("C:\\Users\\wang\\Desktop\\my-study\\java\\work_detail\\src\\main\\java");
         gc.setFileOverride(true);
         gc.setActiveRecord(false);// 不需要ActiveRecord特性的请改为false
         gc.setEnableCache(false);// XML 二级缓存
@@ -61,7 +59,7 @@ public class CodeGeneration {
         strategy.setTablePrefix(new String[] { "" });// 此处可以修改为您的表前缀
         strategy.setNaming(NamingStrategy.underline_to_camel);// 表名生成策略
 //        strategy.setInclude(new String[] { }); // 需要生成的表
-        strategy.setInclude("user"); // 需要生成的表
+        strategy.setInclude("recruit_platform","job"); // 需要生成的表
 
         strategy.setSuperServiceClass(null);
         strategy.setSuperServiceImplClass(null);

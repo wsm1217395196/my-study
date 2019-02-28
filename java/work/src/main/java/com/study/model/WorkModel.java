@@ -1,66 +1,51 @@
 package com.study.model;
 
+import java.util.Date;
 import com.baomidou.mybatisplus.annotations.TableField;
 import com.baomidou.mybatisplus.annotations.TableName;
-
-import java.util.Date;
-
 import java.io.Serializable;
 
 /**
  * <p>
- * 用户表
+ * 职业信息表
  * </p>
  *
- * @author wsm
- * @since 2019-01-28
+ * @author wsm123
+ * @since 2019-02-28
  */
-@TableName("user")
-public class UserModel implements Serializable {
+@TableName("work")
+public class WorkModel implements Serializable {
 
     private static final long serialVersionUID = 1L;
 
     private Long id;
     /**
-     * 用户名
+     * 招聘平台id
      */
-    private String name;
+    @TableField("recruit_platform_id")
+    private Long recruitPlatformId;
     /**
-     * 昵称
+     * 职位id
      */
-    private String nikename;
+    @TableField("job_id")
+    private Long jobId;
     /**
-     * 密码
+     * 地点
      */
-    private String password;
+    private String site;
     /**
-     * 头像
+     * 日期
      */
-    private String photo;
+    private Date date;
     /**
-     * 性别(0女,1男)
+     * 条件
      */
-    private Integer sex;
+    private String condition;
     /**
-     * 生日
+     * 职位条数
      */
-    private Date birthday;
-    /**
-     * 手机号
-     */
-    private String phone;
-    /**
-     * 邮箱
-     */
-    private String mail;
-    /**
-     * 地址
-     */
-    private String address;
-    /**
-     * 个人说明
-     */
-    private String explain;
+    @TableField("job_number")
+    private Integer jobNumber;
     /**
      * 创建人
      */
@@ -100,84 +85,52 @@ public class UserModel implements Serializable {
         this.id = id;
     }
 
-    public String getName() {
-        return name;
+    public Long getRecruitPlatformId() {
+        return recruitPlatformId;
     }
 
-    public void setName(String name) {
-        this.name = name;
+    public void setRecruitPlatformId(Long recruitPlatformId) {
+        this.recruitPlatformId = recruitPlatformId;
     }
 
-    public String getNikename() {
-        return nikename;
+    public Long getJobId() {
+        return jobId;
     }
 
-    public void setNikename(String nikename) {
-        this.nikename = nikename;
+    public void setJobId(Long jobId) {
+        this.jobId = jobId;
     }
 
-    public String getPassword() {
-        return password;
+    public String getSite() {
+        return site;
     }
 
-    public void setPassword(String password) {
-        this.password = password;
+    public void setSite(String site) {
+        this.site = site;
     }
 
-    public String getPhoto() {
-        return photo;
+    public Date getDate() {
+        return date;
     }
 
-    public void setPhoto(String photo) {
-        this.photo = photo;
+    public void setDate(Date date) {
+        this.date = date;
     }
 
-    public Integer getSex() {
-        return sex;
+    public String getCondition() {
+        return condition;
     }
 
-    public void setSex(Integer sex) {
-        this.sex = sex;
+    public void setCondition(String condition) {
+        this.condition = condition;
     }
 
-    public Date getBirthday() {
-        return birthday;
+    public Integer getJobNumber() {
+        return jobNumber;
     }
 
-    public void setBirthday(Date birthday) {
-        this.birthday = birthday;
-    }
-
-    public String getPhone() {
-        return phone;
-    }
-
-    public void setPhone(String phone) {
-        this.phone = phone;
-    }
-
-    public String getMail() {
-        return mail;
-    }
-
-    public void setMail(String mail) {
-        this.mail = mail;
-    }
-
-    public String getAddress() {
-        return address;
-    }
-
-    public void setAddress(String address) {
-        this.address = address;
-    }
-
-    public String getExplain() {
-        return explain;
-    }
-
-    public void setExplain(String explain) {
-        this.explain = explain;
+    public void setJobNumber(Integer jobNumber) {
+        this.jobNumber = jobNumber;
     }
 
     public String getCreateBy() {
@@ -230,18 +183,14 @@ public class UserModel implements Serializable {
 
     @Override
     public String toString() {
-        return "UserModel{" +
+        return "WorkModel{" +
         ", id=" + id +
-        ", name=" + name +
-        ", nikename=" + nikename +
-        ", password=" + password +
-        ", photo=" + photo +
-        ", sex=" + sex +
-        ", birthday=" + birthday +
-        ", phone=" + phone +
-        ", mail=" + mail +
-        ", address=" + address +
-        ", explain=" + explain +
+        ", recruitPlatformId=" + recruitPlatformId +
+        ", jobId=" + jobId +
+        ", site=" + site +
+        ", date=" + date +
+        ", condition=" + condition +
+        ", jobNumber=" + jobNumber +
         ", createBy=" + createBy +
         ", createTime=" + createTime +
         ", updateBy=" + updateBy +

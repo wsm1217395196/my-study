@@ -13,6 +13,8 @@
     <modules>
         <module>../eureka_server</module>
         <module>../user</module>
+        <module>../work</module>
+        <module>../work_detail</module>
     </modules>
 
     <groupId>com.study</groupId>
