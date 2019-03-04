@@ -3,9 +3,8 @@ package com.study.model;
 import com.baomidou.mybatisplus.annotations.TableField;
 import com.baomidou.mybatisplus.annotations.TableName;
 
-import java.util.Date;
-
 import java.io.Serializable;
+import java.util.Date;
 
 /**
  * <p>
@@ -84,8 +83,8 @@ public class UserModel implements Serializable {
     /**
      * 是否有效
      */
-    @TableField("if_enabled")
-    private Integer ifEnabled;
+    @TableField("is_Enabled")
+    private Integer isEnabled;
     /**
      * 备注
      */
@@ -212,12 +211,12 @@ public class UserModel implements Serializable {
         this.updateTime = updateTime;
     }
 
-    public Integer getIfEnabled() {
-        return ifEnabled;
+    public Integer getIsEnabled() {
+        return isEnabled;
     }
 
-    public void setIfEnabled(Integer ifEnabled) {
-        this.ifEnabled = ifEnabled;
+    public void setIsEnabled(Integer isEnabled) {
+        this.isEnabled = isEnabled;
     }
 
     public String getRemark() {
@@ -231,23 +230,23 @@ public class UserModel implements Serializable {
     @Override
     public String toString() {
         return "UserModel{" +
-        ", id=" + id +
-        ", name=" + name +
-        ", nikename=" + nikename +
-        ", password=" + password +
-        ", photo=" + photo +
-        ", sex=" + sex +
-        ", birthday=" + birthday +
-        ", phone=" + phone +
-        ", mail=" + mail +
-        ", address=" + address +
-        ", explain=" + explain +
-        ", createBy=" + createBy +
-        ", createTime=" + createTime +
-        ", updateBy=" + updateBy +
-        ", updateTime=" + updateTime +
-        ", ifEnabled=" + ifEnabled +
-        ", remark=" + remark +
-        "}";
+                "id=" + id +
+                ", name='" + name + '\'' +
+                ", nikename='" + nikename + '\'' +
+                ", password='" + password + '\'' +
+                ", photo='" + photo + '\'' +
+                ", sex=" + sex +
+                ", birthday=" + birthday +
+                ", phone='" + phone + '\'' +
+                ", mail='" + mail + '\'' +
+                ", address='" + address + '\'' +
+                ", explain='" + explain + '\'' +
+                ", createBy='" + createBy + '\'' +
+                ", createTime=" + createTime +
+                ", updateBy='" + updateBy + '\'' +
+                ", updateTime=" + updateTime +
+                ", isEnabled=" + isEnabled +
+                ", remark='" + remark + '\'' +
+                '}';
     }
 }

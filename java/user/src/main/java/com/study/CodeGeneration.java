@@ -8,8 +8,6 @@ import com.baomidou.mybatisplus.generator.config.StrategyConfig;
 import com.baomidou.mybatisplus.generator.config.rules.DbType;
 import com.baomidou.mybatisplus.generator.config.rules.NamingStrategy;
 
-import java.awt.*;
-
 /**
  * 
  * @ClassName: CodeGeneration
@@ -31,7 +29,7 @@ public class CodeGeneration {
         // 全局配置
         GlobalConfig gc = new GlobalConfig();
 //        gc.setOutputDir("C:\\Users\\wang\\Desktop\\my-study\\user\\src\\main\\java");
-        gc.setOutputDir("C:\\Users\\wang\\Desktop\\my-study\\java\\user\\src\\main\\java");
+        gc.setOutputDir("C:\\Users\\wang\\Desktop\\test");
         gc.setFileOverride(true);
         gc.setActiveRecord(false);// 不需要ActiveRecord特性的请改为false
         gc.setEnableCache(false);// XML 二级缓存

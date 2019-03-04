@@ -56,7 +56,7 @@ public class UserController {
 
     @ApiOperation(value = "新增", notes = "")
     @PostMapping("/add")
-    public ResultView add(UserModel model) {
+    public ResultView add(@RequestBody UserModel model) {
         Date date = new Date();
         model.setId(CreateUtil.id());
         model.setCreateTime(date);
@@ -67,7 +67,7 @@ public class UserController {
 
     @ApiOperation(value = "修改", notes = "")
     @PostMapping("/update")
-    public ResultView update(UserModel model) {
+    public ResultView update(@RequestBody UserModel model) {
         Date date = new Date();
         model.setUpdateTime(date);
         userService.updateById(model);

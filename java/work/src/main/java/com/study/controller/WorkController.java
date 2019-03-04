@@ -40,7 +40,7 @@ public class WorkController {
         return ResultView.success(models);
     }
 
-    @ApiOperation(value = "分页条件查询", notes = "提交参数：{\"pageIndex\":1,\"pageSize\":10,\"sort\":\"name desc\",\"condition\":\"{\'name\':\'\',\'nikename\':\'\',\'sex\':\'\',\'isEnable\':\'\'}\"}")
+    @ApiOperation(value = "分页条件查询", notes = "提交参数：{\"pageIndex\":1,\"pageSize\":10,\"sort\":\"name desc\",\"condition\":\"{\'recruitPlatformId\':\'\',\'jobId\':\'\',\'site\':\'\',\'isEnable\':\'\'}\"}")
     @PostMapping("/getPage")
     public ResultView getPage(@RequestBody PageParam pageParam) throws JSONException {
         PageResult pageResult = workService.getPage(pageParam);
@@ -56,7 +56,7 @@ public class WorkController {
 
     @ApiOperation(value = "新增", notes = "")
     @PostMapping("/add")
-    public ResultView add(WorkModel model) {
+    public ResultView add(@RequestBody WorkModel model) {
         Date date = new Date();
         model.setId(CreateUtil.id());
         model.setCreateTime(date);
@@ -67,7 +67,7 @@ public class WorkController {
 
     @ApiOperation(value = "修改", notes = "")
     @PostMapping("/update")
-    public ResultView update(WorkModel model) {
+    public ResultView update(@RequestBody WorkModel model) {
         Date date = new Date();
         model.setUpdateTime(date);
         workService.updateById(model);

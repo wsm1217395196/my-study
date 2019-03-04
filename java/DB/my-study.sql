@@ -27,14 +27,14 @@ CREATE TABLE `job` (
   `create_time` datetime DEFAULT NULL COMMENT '创建时间',
   `update_by` varchar(50) COLLATE utf8_unicode_ci DEFAULT NULL COMMENT '更新人',
   `update_time` datetime DEFAULT NULL COMMENT '更新时间',
-  `if_enabled` bit(1) NOT NULL DEFAULT b'1' COMMENT '是否有效',
+  `is_enabled` tinyint(4) NOT NULL DEFAULT '1' COMMENT '是否有效(0无效，1有效)',
   `remark` text COLLATE utf8_unicode_ci COMMENT '备注',
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci COMMENT='职位表';
 
 /*Data for the table `job` */
 
-insert  into `job`(`id`,`name`,`create_by`,`create_time`,`update_by`,`update_time`,`if_enabled`,`remark`) values (1,'1','1','2019-02-23 16:21:48',NULL,'2019-02-23 16:21:51','',NULL);
+insert  into `job`(`id`,`name`,`create_by`,`create_time`,`update_by`,`update_time`,`is_enabled`,`remark`) values (1,'1','1','2019-02-23 16:21:48',NULL,'2019-02-23 16:21:51',1,NULL);
 
 /*Table structure for table `recruit_platform` */
 
@@ -47,7 +47,7 @@ CREATE TABLE `recruit_platform` (
   `create_time` datetime DEFAULT NULL COMMENT '创建时间',
   `update_by` varchar(50) COLLATE utf8_unicode_ci DEFAULT NULL COMMENT '更新人',
   `update_time` datetime DEFAULT NULL COMMENT '更新时间',
-  `if_enabled` bit(1) NOT NULL DEFAULT b'1' COMMENT '是否有效',
+  `is_enabled` tinyint(4) NOT NULL DEFAULT '1' COMMENT '是否有效(0无效，1有效)',
   `remark` text COLLATE utf8_unicode_ci COMMENT '备注',
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci COMMENT='招聘平台表';
@@ -64,7 +64,7 @@ CREATE TABLE `user` (
   `nikename` varchar(50) COLLATE utf8_unicode_ci DEFAULT NULL COMMENT '昵称',
   `password` varchar(50) COLLATE utf8_unicode_ci NOT NULL DEFAULT '666' COMMENT '密码',
   `photo` varchar(50) COLLATE utf8_unicode_ci DEFAULT NULL COMMENT '头像',
-  `sex` bit(1) DEFAULT NULL COMMENT '性别(0女,1男)',
+  `sex` tinyint(4) DEFAULT NULL COMMENT '性别(0女,1男)',
   `birthday` date DEFAULT NULL COMMENT '生日',
   `phone` char(11) COLLATE utf8_unicode_ci DEFAULT NULL COMMENT '手机号',
   `mail` varchar(50) COLLATE utf8_unicode_ci DEFAULT NULL COMMENT '邮箱',
@@ -74,12 +74,14 @@ CREATE TABLE `user` (
   `create_time` datetime DEFAULT NULL COMMENT '创建时间',
   `update_by` varchar(50) COLLATE utf8_unicode_ci DEFAULT NULL COMMENT '更新人',
   `update_time` datetime DEFAULT NULL COMMENT '更新时间',
-  `if_enabled` bit(1) NOT NULL DEFAULT b'1' COMMENT '是否有效',
+  `is_enabled` tinyint(4) NOT NULL DEFAULT '1' COMMENT '是否有效(0无效，1有效)',
   `remark` text COLLATE utf8_unicode_ci COMMENT '备注',
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci COMMENT='用户表';
 
 /*Data for the table `user` */
+
+insert  into `user`(`id`,`name`,`nikename`,`password`,`photo`,`sex`,`birthday`,`phone`,`mail`,`address`,`explain`,`create_by`,`create_time`,`update_by`,`update_time`,`is_enabled`,`remark`) values (2019890304481870710,'string','string','string','string',0,'2019-03-04','string','string','string','string','string','2019-03-04 09:07:11','string','2019-03-04 09:07:11',0,'string');
 
 /*Table structure for table `work` */
 
@@ -97,7 +99,7 @@ CREATE TABLE `work` (
   `create_time` datetime DEFAULT NULL COMMENT '创建时间',
   `update_by` varchar(50) COLLATE utf8_unicode_ci DEFAULT NULL COMMENT '更新人',
   `update_time` datetime DEFAULT NULL COMMENT '更新时间',
-  `if_enabled` bit(1) NOT NULL DEFAULT b'1' COMMENT '是否有效',
+  `is_enabled` tinyint(4) NOT NULL DEFAULT '1' COMMENT '是否有效(0无效，1有效)',
   `remark` text COLLATE utf8_unicode_ci COMMENT '备注',
   PRIMARY KEY (`id`),
   KEY `recruit_platform_id` (`recruit_platform_id`),

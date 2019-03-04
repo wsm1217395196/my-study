@@ -1,9 +1,10 @@
 package com.study.model;
 
-import java.util.Date;
 import com.baomidou.mybatisplus.annotations.TableField;
 import com.baomidou.mybatisplus.annotations.TableName;
+
 import java.io.Serializable;
+import java.util.Date;
 
 /**
  * <p>
@@ -69,13 +70,12 @@ public class WorkModel implements Serializable {
     /**
      * 是否有效
      */
-    @TableField("if_enabled")
-    private Integer ifEnabled;
+    @TableField("is_Enabled")
+    private Integer isEnabled;
     /**
      * 备注
      */
     private String remark;
-
 
     public Long getId() {
         return id;
@@ -165,12 +165,12 @@ public class WorkModel implements Serializable {
         this.updateTime = updateTime;
     }
 
-    public Integer getIfEnabled() {
-        return ifEnabled;
+    public Integer getIsEnabled() {
+        return isEnabled;
     }
 
-    public void setIfEnabled(Integer ifEnabled) {
-        this.ifEnabled = ifEnabled;
+    public void setIsEnabled(Integer isEnabled) {
+        this.isEnabled = isEnabled;
     }
 
     public String getRemark() {
@@ -184,19 +184,19 @@ public class WorkModel implements Serializable {
     @Override
     public String toString() {
         return "WorkModel{" +
-        ", id=" + id +
-        ", recruitPlatformId=" + recruitPlatformId +
-        ", jobId=" + jobId +
-        ", site=" + site +
-        ", date=" + date +
-        ", condition=" + condition +
-        ", jobNumber=" + jobNumber +
-        ", createBy=" + createBy +
-        ", createTime=" + createTime +
-        ", updateBy=" + updateBy +
-        ", updateTime=" + updateTime +
-        ", ifEnabled=" + ifEnabled +
-        ", remark=" + remark +
-        "}";
+                "id=" + id +
+                ", recruitPlatformId=" + recruitPlatformId +
+                ", jobId=" + jobId +
+                ", site='" + site + '\'' +
+                ", date=" + date +
+                ", condition='" + condition + '\'' +
+                ", jobNumber=" + jobNumber +
+                ", createBy='" + createBy + '\'' +
+                ", createTime=" + createTime +
+                ", updateBy='" + updateBy + '\'' +
+                ", updateTime=" + updateTime +
+                ", isEnabled=" + isEnabled +
+                ", remark='" + remark + '\'' +
+                '}';
     }
 }

@@ -10,7 +10,7 @@
         <result column="create_time" property="createTime" />
         <result column="update_by" property="updateBy" />
         <result column="update_time" property="updateTime" />
-        <result column="if_enabled" property="ifEnabled" />
+        <result column="is_Enabled" property="isEnabled" />
         <result column="remark" property="remark" />
     </resultMap>
 

@@ -40,7 +40,7 @@ public class RecruitPlatformController {
         return ResultView.success(models);
     }
 
-    @ApiOperation(value = "分页条件查询", notes = "提交参数：{\"pageIndex\":1,\"pageSize\":10,\"sort\":\"name desc\",\"condition\":\"{\'name\':\'\',\'nikename\':\'\',\'sex\':\'\',\'isEnable\':\'\'}\"}")
+    @ApiOperation(value = "分页条件查询", notes = "提交参数：{\"pageIndex\":1,\"pageSize\":10,\"sort\":\"name desc\",\"condition\":\"{\'name\':\'\',\'isEnable\':\'\'}\"}")
     @PostMapping("/getPage")
     public ResultView getPage(@RequestBody PageParam pageParam) throws JSONException {
         PageResult pageResult = recruitPlatformService.getPage(pageParam);
@@ -56,7 +56,7 @@ public class RecruitPlatformController {
 
     @ApiOperation(value = "新增", notes = "")
     @PostMapping("/add")
-    public ResultView add(RecruitPlatformModel model) {
+    public ResultView add(@RequestBody RecruitPlatformModel model) {
         Date date = new Date();
         model.setId(CreateUtil.id());
         model.setCreateTime(date);
@@ -67,7 +67,7 @@ public class RecruitPlatformController {
 
     @ApiOperation(value = "修改", notes = "")
     @PostMapping("/update")
-    public ResultView update(RecruitPlatformModel model) {
+    public ResultView update(@RequestBody RecruitPlatformModel model) {
         Date date = new Date();
         model.setUpdateTime(date);
         recruitPlatformService.updateById(model);
