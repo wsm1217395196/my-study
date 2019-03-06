@@ -3,10 +3,11 @@ package com.study.service;
 import com.baomidou.mybatisplus.mapper.EntityWrapper;
 import com.baomidou.mybatisplus.plugins.Page;
 import com.baomidou.mybatisplus.service.impl.ServiceImpl;
+import com.study.currency.Constant;
 import com.study.currency.PageParam;
 import com.study.currency.PageResult;
-import com.study.model.UserModel;
 import com.study.mapper.UserMapper;
+import com.study.model.UserModel;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.configurationprocessor.json.JSONException;
 import org.springframework.boot.configurationprocessor.json.JSONObject;
@@ -31,6 +32,9 @@ public class UserService extends ServiceImpl<UserMapper, UserModel> {
     private UserMapper userMapper;
 
     public PageResult getPage(PageParam pageParam) throws JSONException {
+        int pageIndex = pageParam.getPageIndex();
+        int pageSize = pageParam.getPageSize();
+//        int pageStart = pageParam.getPageStart();
         String sort = pageParam.getSort();
         JSONObject object = new JSONObject(pageParam.getCondition());
         String name = object.getString("name");
@@ -55,10 +59,15 @@ public class UserService extends ServiceImpl<UserMapper, UserModel> {
             ew.orderBy(sort);
         }
 
-        Page page = new Page(pageParam.getPageStart(), pageParam.getPageSize());
-        Integer total = userMapper.selectCount(ew);
-        List list = userMapper.selectPage(page, ew);
-        PageResult pageResult = new PageResult(pageParam.getPageIndex(), pageParam.getPageSize(), total, list);
+        Page page = new Page();
+        int total = 0;
+        if (pageIndex != Constant.Zero && pageSize != Constant.Zero) {
+            page.setCurrent(pageIndex);
+            page.setSize(pageSize);
+            total = userMapper.selectCount(ew);
+        }
+        List records = userMapper.selectPage(page, ew);
+        PageResult pageResult = new PageResult(pageIndex, pageSize, total, records);
         return pageResult;
     }
 }

@@ -3,11 +3,12 @@ package com.study.service;
 import com.baomidou.mybatisplus.mapper.EntityWrapper;
 import com.baomidou.mybatisplus.plugins.Page;
 import com.baomidou.mybatisplus.service.IService;
+import com.baomidou.mybatisplus.service.impl.ServiceImpl;
+import com.study.currency.Constant;
 import com.study.currency.PageParam;
 import com.study.currency.PageResult;
-import com.study.model.RecruitPlatformModel;
 import com.study.mapper.RecruitPlatformMapper;
-import com.baomidou.mybatisplus.service.impl.ServiceImpl;
+import com.study.model.RecruitPlatformModel;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.configurationprocessor.json.JSONException;
 import org.springframework.boot.configurationprocessor.json.JSONObject;
@@ -31,6 +32,9 @@ public class RecruitPlatformService extends ServiceImpl<RecruitPlatformMapper, R
     private RecruitPlatformMapper recruitPlatformMapper;
 
     public PageResult getPage(PageParam pageParam) throws JSONException {
+        int pageIndex = pageParam.getPageIndex();
+        int pageSize = pageParam.getPageSize();
+//        int pageStart = pageParam.getPageStart();
         String sort = pageParam.getSort();
         JSONObject object = new JSONObject(pageParam.getCondition());
         String name = object.getString("name");
@@ -47,10 +51,15 @@ public class RecruitPlatformService extends ServiceImpl<RecruitPlatformMapper, R
             ew.orderBy(sort);
         }
 
-        Page page = new Page(pageParam.getPageStart(), pageParam.getPageSize());
-        Integer total = recruitPlatformMapper.selectCount(ew);
-        List list = recruitPlatformMapper.selectPage(page, ew);
-        PageResult pageResult = new PageResult(pageParam.getPageIndex(), pageParam.getPageSize(), total, list);
+        Page page = new Page();
+        int total = 0;
+        if (pageIndex != Constant.Zero && pageSize != Constant.Zero) {
+            page.setCurrent(pageIndex);
+            page.setSize(pageSize);
+            total = recruitPlatformMapper.selectCount(ew);
+        }
+        List records = recruitPlatformMapper.selectPage(page, ew);
+        PageResult pageResult = new PageResult(pageIndex, pageSize, total, records);
         return pageResult;
     }
 }

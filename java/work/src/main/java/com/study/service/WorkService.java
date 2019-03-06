@@ -3,11 +3,12 @@ package com.study.service;
 import com.baomidou.mybatisplus.mapper.EntityWrapper;
 import com.baomidou.mybatisplus.plugins.Page;
 import com.baomidou.mybatisplus.service.IService;
+import com.baomidou.mybatisplus.service.impl.ServiceImpl;
+import com.study.currency.Constant;
 import com.study.currency.PageParam;
 import com.study.currency.PageResult;
-import com.study.model.WorkModel;
 import com.study.mapper.WorkMapper;
-import com.baomidou.mybatisplus.service.impl.ServiceImpl;
+import com.study.model.WorkModel;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.configurationprocessor.json.JSONException;
 import org.springframework.boot.configurationprocessor.json.JSONObject;
@@ -31,6 +32,9 @@ public class WorkService extends ServiceImpl<WorkMapper, WorkModel> implements I
     private WorkMapper workMapper;
 
     public PageResult getPage(PageParam pageParam) throws JSONException {
+        int pageIndex = pageParam.getPageIndex();
+        int pageSize = pageParam.getPageSize();
+//        int pageStart = pageParam.getPageStart();
         String sort = pageParam.getSort();
         JSONObject object = new JSONObject(pageParam.getCondition());
         Long recruitPlatformId = object.getLong("recruitPlatformId");
@@ -55,10 +59,15 @@ public class WorkService extends ServiceImpl<WorkMapper, WorkModel> implements I
             ew.orderBy(sort);
         }
 
-        Page page = new Page(pageParam.getPageStart(), pageParam.getPageSize());
-        Integer total = workMapper.selectCount(ew);
-        List list = workMapper.selectPage(page, ew);
-        PageResult pageResult = new PageResult(pageParam.getPageIndex(), pageParam.getPageSize(), total, list);
+        Page page = new Page();
+        int total = 0;
+        if (pageIndex != Constant.Zero && pageSize != Constant.Zero) {
+            page.setCurrent(pageIndex);
+            page.setSize(pageSize);
+            total = workMapper.selectCount(ew);
+        }
+        List records = workMapper.selectPage(page, ew);
+        PageResult pageResult = new PageResult(pageIndex, pageSize, total, records);
         return pageResult;
     }
 }
