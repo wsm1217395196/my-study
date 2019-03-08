@@ -10,6 +10,7 @@ eureka:
 #      向注册中心注册服务
       defaultZone: http://wsm:1@${eureka.instance.hostname}:8000/eureka
 
+
 spring:
   application:
     name: wsm-user #服务名
@@ -31,3 +32,8 @@ mybatis-plus:
     logic-delete-value: 0
     logic-not-delete-value: 1
     sql-injector: com.baomidou.mybatisplus.mapper.LogicSqlInjector
+
+#熔断器开启
+feign:
+  hystrix:
+    enabled: true

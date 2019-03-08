@@ -4,12 +4,11 @@ import com.study.currency.result.ResultView;
 import org.springframework.cloud.openfeign.FeignClient;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
 
-@FeignClient("wsm-work")
-@RequestMapping("/work")
-public interface WorkInterface {
+@FeignClient(value = "wsm-work",fallback = WorkHystrix.class)
+public interface WorkFeign {
 
-    @GetMapping("/getById/{id}")
+//    @RequestMapping(value = "/work/getById/{id}",method = RequestMethod.GET)
+    @GetMapping("/work/getById/{id}")
     ResultView getById(@PathVariable("id") Long id);
 }

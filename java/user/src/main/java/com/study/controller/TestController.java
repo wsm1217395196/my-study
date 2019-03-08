@@ -2,7 +2,7 @@ package com.study.controller;
 
 
 import com.study.currency.result.ResultView;
-import com.study.feign.WorkInterface;
+import com.study.feign.WorkFeign;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -25,9 +25,9 @@ import org.springframework.web.bind.annotation.RestController;
 public class TestController {
 
     @Autowired
-    private WorkInterface workInterface;
+    private WorkFeign workInterface;
 
-    @ApiOperation(value = "根据id查询", notes = "")
+    @ApiOperation(value = "根据id查询work", notes = "")
     @GetMapping("/getById/{id}")
     public ResultView getById(@PathVariable Long id) {
         ResultView resultView = workInterface.getById(id);
