@@ -54,6 +54,8 @@ CREATE TABLE `recruit_platform` (
 
 /*Data for the table `recruit_platform` */
 
+insert  into `recruit_platform`(`id`,`name`,`create_by`,`create_time`,`update_by`,`update_time`,`is_enabled`,`remark`) values (1,'1',NULL,NULL,NULL,NULL,1,NULL);
+
 /*Table structure for table `user` */
 
 DROP TABLE IF EXISTS `user`;
@@ -91,10 +93,10 @@ CREATE TABLE `work` (
   `id` bigint(20) NOT NULL,
   `recruit_platform_id` bigint(20) NOT NULL COMMENT '招聘平台id',
   `job_id` bigint(20) NOT NULL COMMENT '职位id',
-  `site` varchar(50) COLLATE utf8_unicode_ci NOT NULL COMMENT '地点',
-  `date` date NOT NULL COMMENT '日期',
+  `site` varchar(50) COLLATE utf8_unicode_ci DEFAULT NULL COMMENT '地点',
+  `date` date DEFAULT NULL COMMENT '日期',
   `condition` varchar(100) COLLATE utf8_unicode_ci DEFAULT NULL COMMENT '条件',
-  `job_number` int(11) NOT NULL COMMENT '职位条数',
+  `job_number` int(11) DEFAULT NULL COMMENT '职位条数',
   `create_by` varchar(50) COLLATE utf8_unicode_ci DEFAULT NULL COMMENT '创建人',
   `create_time` datetime DEFAULT NULL COMMENT '创建时间',
   `update_by` varchar(50) COLLATE utf8_unicode_ci DEFAULT NULL COMMENT '更新人',
@@ -109,6 +111,8 @@ CREATE TABLE `work` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci COMMENT='职业信息表';
 
 /*Data for the table `work` */
+
+insert  into `work`(`id`,`recruit_platform_id`,`job_id`,`site`,`date`,`condition`,`job_number`,`create_by`,`create_time`,`update_by`,`update_time`,`is_enabled`,`remark`) values (1,1,1,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,1,NULL);
 
 /*!40101 SET SQL_MODE=@OLD_SQL_MODE */;
 /*!40014 SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS */;
