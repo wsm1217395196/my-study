@@ -11,10 +11,10 @@
     <modelVersion>4.0.0</modelVersion>
     <packaging>pom</packaging>
     <modules>
-        <module>../eureka_server</module>
-        <module>../user</module>
-        <module>../work</module>
-        <module>../work_detail</module>
+        <module>../wsm-discovery</module>
+        <module>../wsm-user</module>
+        <module>../wsm-work</module>
+        <module>../wsm-demo</module>
     </modules>
 
     <groupId>com.study</groupId>
