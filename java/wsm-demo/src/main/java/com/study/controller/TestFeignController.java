@@ -22,7 +22,7 @@ import org.springframework.web.bind.annotation.RestController;
 @Api(description = "测试控制器")
 @RestController
 @RequestMapping("/test")
-public class TestController {
+public class TestFeignController {
 
     @Autowired
     private WorkFeign workInterface;

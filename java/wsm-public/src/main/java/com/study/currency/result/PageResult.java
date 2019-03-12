@@ -1,4 +1,4 @@
-package com.study.currency;
+package com.study.currency.result;
 
 import java.util.List;
 

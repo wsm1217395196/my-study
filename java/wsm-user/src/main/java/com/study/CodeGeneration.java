@@ -12,8 +12,8 @@ import com.baomidou.mybatisplus.generator.config.rules.NamingStrategy;
  * 
  * @ClassName: CodeGeneration
  * @Description: 代码生成器
- * @author cheng
- * @date 2018年1月25日 下午2:55:14
+ * @author wsm
+ * @date 2019-01-28
  */
 public class CodeGeneration {
 

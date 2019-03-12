@@ -1,6 +1,6 @@
 #端口号
 server:
-  port: 8001
+  port: 8002
 
 eureka:
   instance:
@@ -31,14 +31,3 @@ mybatis-plus:
     logic-delete-value: 0
     logic-not-delete-value: 1
     sql-injector: com.baomidou.mybatisplus.mapper.LogicSqlInjector
-
-#熔断器开启
-feign:
-  hystrix:
-    enabled: true
-
-#management:
-#  endpoints:
-#    web:
-#      exposure:
-#        include: hystrix.stream

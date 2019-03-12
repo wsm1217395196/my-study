@@ -11,7 +11,7 @@ public class DiscoveryStart {
 
     public static void main(String[] args) {
         SpringApplication.run(DiscoveryStart.class, args);
-        System.err.println("EurekaServer启动了！！！");
+        System.err.println("discovery启动了！！！");
     }
 
 }

@@ -1,0 +1,26 @@
+#端口号
+server:
+  port: 8001
+
+eureka:
+  instance:
+    hostname: localhost #地址
+  client:
+    service-url:
+#      向注册中心注册服务
+      defaultZone: http://wsm:1@${eureka.instance.hostname}:8000/eureka
+
+spring:
+  application:
+    name: wsm-public #服务名
+
+  mail: #配置邮件
+    host: smtp.qq.com
+    port: 465
+    username: 358632813@qq.com
+    password: srudivdfeslkcaic
+    properties:
+      mail:
+        smtp:
+          ssl:
+            enable: true

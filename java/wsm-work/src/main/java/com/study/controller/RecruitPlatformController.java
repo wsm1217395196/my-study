@@ -1,8 +1,8 @@
 package com.study.controller;
 
 
-import com.study.currency.PageParam;
-import com.study.currency.PageResult;
+import com.study.currency.result.PageParam;
+import com.study.currency.result.PageResult;
 import com.study.currency.result.ResultView;
 import com.study.currency.utils.CreateUtil;
 import com.study.model.RecruitPlatformModel;

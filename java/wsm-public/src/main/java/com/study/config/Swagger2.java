@@ -29,8 +29,8 @@ public class Swagger2 {
 
     private ApiInfo apiInfo() {
         return new ApiInfoBuilder()
-                .title("wsm-demo")
-                .description("演示练习Api")
+                .title("wsm-public")
+                .description("公共服务Api")
                 .build();
     }
 }
