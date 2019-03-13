@@ -54,8 +54,7 @@ public class JobService extends ServiceImpl<JobMapper, JobModel> implements ISer
         Page page = new Page();
         int total = 0;
         if (pageIndex != Constant.Zero && pageSize != Constant.Zero) {
-            page.setCurrent(pageIndex);
-            page.setSize(pageSize);
+            page = new Page(pageIndex, pageSize);
             total = jobMapper.selectCount(ew);
         }
         List records = jobMapper.selectPage(page, ew);

@@ -62,8 +62,7 @@ public class WorkService extends ServiceImpl<WorkMapper, WorkModel> implements I
         Page page = new Page();
         int total = 0;
         if (pageIndex != Constant.Zero && pageSize != Constant.Zero) {
-            page.setCurrent(pageIndex);
-            page.setSize(pageSize);
+            page = new Page(pageIndex, pageSize);
             total = workMapper.selectCount(ew);
         }
         List records = workMapper.selectPage(page, ew);

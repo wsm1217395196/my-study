@@ -62,8 +62,7 @@ public class UserService extends ServiceImpl<UserMapper, UserModel> {
         Page page = new Page();
         int total = 0;
         if (pageIndex != Constant.Zero && pageSize != Constant.Zero) {
-            page.setCurrent(pageIndex);
-            page.setSize(pageSize);
+            page = new Page(pageIndex, pageSize);
             total = userMapper.selectCount(ew);
         }
         List records = userMapper.selectPage(page, ew);

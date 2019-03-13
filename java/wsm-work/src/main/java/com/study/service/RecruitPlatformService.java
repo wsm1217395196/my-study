@@ -54,8 +54,7 @@ public class RecruitPlatformService extends ServiceImpl<RecruitPlatformMapper, R
         Page page = new Page();
         int total = 0;
         if (pageIndex != Constant.Zero && pageSize != Constant.Zero) {
-            page.setCurrent(pageIndex);
-            page.setSize(pageSize);
+            page = new Page(pageIndex, pageSize);
             total = recruitPlatformMapper.selectCount(ew);
         }
         List records = recruitPlatformMapper.selectPage(page, ew);
