@@ -1,6 +1,6 @@
-# study-vue
+# wsm-manage
 
-> 
+>
 
 ## Build Setup
 
