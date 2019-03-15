@@ -21,7 +21,7 @@ import org.springframework.web.bind.annotation.RestController;
  */
 @Api(description = "测试控制器")
 @RestController
-@RequestMapping("/test")
+@RequestMapping("/testFeign")
 public class TestFeignController {
 
     @Autowired

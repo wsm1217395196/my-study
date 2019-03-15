@@ -41,9 +41,9 @@ public class EmailController {
         mailMessage.setFrom(emailFrom);
         mailMessage.setTo(email);
         mailMessage.setSubject("wsm验证码");
-        mailMessage.setText("你的邮箱验证码码为：" + emailCode + "，请于3分钟之内填写!");
+        mailMessage.setText("你的邮箱验证码码为：" + emailCode + "，请于5分钟之内填写!");
         javaMailSender.send(mailMessage);
-        redisTemplate.opsForValue().set(email, emailCode, 180, TimeUnit.SECONDS);
+        redisTemplate.opsForValue().set(email, emailCode, 300, TimeUnit.SECONDS);
         return ResultView.success();
     }
 
