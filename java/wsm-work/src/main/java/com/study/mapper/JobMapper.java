@@ -2,6 +2,10 @@ package com.study.mapper;
 
 import com.baomidou.mybatisplus.mapper.BaseMapper;
 import com.study.model.JobModel;
+import io.lettuce.core.dynamic.annotation.Param;
+
+import java.util.Date;
+import java.util.List;
 
 /**
  * <p>
@@ -13,4 +17,5 @@ import com.study.model.JobModel;
  */
 public interface JobMapper extends BaseMapper<JobModel> {
 
+    List<JobModel> test(@Param("startTime") Date startTime, @Param("endTime") Date endTime);
 }

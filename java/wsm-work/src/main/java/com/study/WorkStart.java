@@ -6,7 +6,7 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.cloud.client.discovery.EnableDiscoveryClient;
 
 
-@MapperScan("com.study.mapper")
+@MapperScan({"com.study.mapper","com.study.xml/*.xml"})
 @SpringBootApplication
 @EnableDiscoveryClient
 public class WorkStart {

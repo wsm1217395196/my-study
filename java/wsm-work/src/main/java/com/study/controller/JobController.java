@@ -33,6 +33,13 @@ public class JobController {
     @Autowired
     private JobService jobService;
 
+    @ApiOperation(value = "测试查询时间段",notes = "")
+    @GetMapping("/test")
+    public ResultView test(){
+        List<JobModel> models = jobService.test();
+        return ResultView.success(models);
+    }
+
     @ApiOperation(value = "查询全部", notes = "")
     @GetMapping("/getAll")
     public ResultView getAll() {

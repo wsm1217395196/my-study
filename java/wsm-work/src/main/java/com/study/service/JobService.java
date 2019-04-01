@@ -15,6 +15,7 @@ import org.springframework.boot.configurationprocessor.json.JSONObject;
 import org.springframework.stereotype.Service;
 import org.springframework.util.StringUtils;
 
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -60,5 +61,12 @@ public class JobService extends ServiceImpl<JobMapper, JobModel> implements ISer
         List records = jobMapper.selectPage(page, ew);
         PageResult pageResult = new PageResult(pageIndex, pageSize, total, records);
         return pageResult;
+    }
+
+    public List<JobModel> test() {
+        Date startTime = new Date();
+        Date endTime = new Date();
+        List<JobModel> models = jobMapper.test(startTime, endTime);
+        return models;
     }
 }
