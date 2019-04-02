@@ -3,13 +3,18 @@ package com.study.currency.utils;
 import java.text.Format;
 import java.text.SimpleDateFormat;
 import java.util.Date;
-import java.util.UUID;
+import java.util.Random;
 
 /**
  * 生成啥啥啥工具类
  */
 public class CreateUtil {
 
+    /**
+     * 生成id
+     *
+     * @return
+     */
     public static Long id() {
         Format format = new SimpleDateFormat("yyyyMMddHHmmss");
         int a = (int) (Math.random() * 10.0D);
@@ -26,4 +31,20 @@ public class CreateUtil {
         String createdId = sb.toString();
         return Long.parseLong(createdId);
     }
+
+    /**
+     * 生成指定长度验证码
+     *
+     * @param length
+     * @return
+     */
+    public static String validateCode(int length) {
+        String validateCode = "";
+        Random random = new Random();
+        for (int i = 0; i < length; i++) {
+            validateCode += random.nextInt(9);
+        }
+        return validateCode;
+    }
+
 }

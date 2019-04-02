@@ -70,6 +70,13 @@
             <artifactId>spring-boot-starter-mail</artifactId>
         </dependency>
 
+        <!--阿里核心jar包-->
+        <dependency>
+            <groupId>com.aliyun</groupId>
+            <artifactId>aliyun-java-sdk-core</artifactId>
+            <version>4.1.0</version>
+        </dependency>
+
 
         <!--本项目依赖结束-->
 
