@@ -16,6 +16,7 @@
         <module>../wsm-work</module>
         <module>../wsm-demo</module>
         <module>../wsm-public</module>
+        <module>../wsm-config-server</module>
     </modules>
 
     <groupId>com.study</groupId>

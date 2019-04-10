@@ -24,3 +24,12 @@ spring:
         smtp:
           ssl:
             enable: true
+  cloud:
+    config:
+      label: master #指明远程仓库的分支
+      profile: java #dev开发环境配置文件,test测试环境,pro正式环境
+      uri: http://localhost:8004/ #配置服务中心的网址
+      discovery:
+        enabled: true #是从配置中心读取文件。
+        service-id: wsm-config-server #服务名
+

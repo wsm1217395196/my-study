@@ -7,11 +7,13 @@ import com.aliyuncs.IAcsClient;
 import com.aliyuncs.exceptions.ClientException;
 import com.aliyuncs.http.MethodType;
 import com.aliyuncs.profile.DefaultProfile;
+import com.study.currency.result.ResultEnum;
 import com.study.currency.result.ResultView;
 import com.study.currency.utils.CreateUtil;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -20,6 +22,9 @@ import org.springframework.web.bind.annotation.RestController;
 @Api(description = "短信控制器")
 @RestController
 public class SmsController {
+
+    @Value("${wsm.name}")
+    private String userName;
 
     @Autowired
     private RedisTemplate redisTemplate;
@@ -60,10 +65,15 @@ public class SmsController {
 
     @ApiOperation(value = "验证短信验证码", notes = "")
     @PostMapping("/vaildateSmsCode")
-    public ResultView vaildateSmsCode(@RequestParam String phone,@RequestParam String smsCode){
-
-        return ResultView.success();
+    public ResultView vaildateSmsCode(@RequestParam String phone, @RequestParam String smsCode) {
+        System.out.println(userName);
+        ResultView resultView = ResultView.error(ResultEnum.CODE_4);
+        String redisSmsCode = (String) redisTemplate.opsForValue().get(phone);
+        if (redisSmsCode != null && redisSmsCode.equals(smsCode)) {
+            resultView = ResultView.success();
+            resultView.setMsg("验证码正确！");
+        }
+        return resultView;
     }
-
 
 }
