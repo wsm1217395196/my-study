@@ -1,3 +1,7 @@
 target
 node_modules
 .idea
+.gitignore
+maven-wrapper.properties
+mvnw
+mvnw.cmd
