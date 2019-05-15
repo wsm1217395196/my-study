@@ -1,6 +1,6 @@
 package com.study.controller;
 
-import com.study.currency.result.ResultView;
+import com.study.result.ResultView;
 import com.study.service.WebSoketService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;

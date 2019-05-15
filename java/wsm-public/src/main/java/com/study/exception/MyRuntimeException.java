@@ -1,7 +1,7 @@
 package com.study.exception;
 
 
-import com.study.currency.result.ResultView;
+import com.study.result.ResultView;
 
 /**
  * 自定义运行时异常

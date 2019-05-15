@@ -2,12 +2,11 @@ package com.study.service;
 
 import com.baomidou.mybatisplus.mapper.EntityWrapper;
 import com.baomidou.mybatisplus.plugins.Page;
-import com.baomidou.mybatisplus.service.impl.ServiceImpl;
-import com.study.currency.Constant;
-import com.study.currency.result.PageParam;
-import com.study.currency.result.PageResult;
+import com.baomidou.mybatisplus.service.impl.ServiceImpl;import com.study.Constant;
 import com.study.mapper.UserMapper;
 import com.study.model.UserModel;
+import com.study.result.PageParam;
+import com.study.result.PageResult;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.configurationprocessor.json.JSONException;
 import org.springframework.boot.configurationprocessor.json.JSONObject;

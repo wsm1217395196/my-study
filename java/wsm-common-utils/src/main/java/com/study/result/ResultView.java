@@ -1,29 +1,22 @@
-package com.study.currency.result;
-
-import io.swagger.annotations.ApiModel;
-import io.swagger.annotations.ApiModelProperty;
+package com.study.result;
 
 /**
  * 结果视图类
  */
-@ApiModel(value = "结果视图类", description = "")
 public class ResultView {
     /**
      * 状态码
      */
-    @ApiModelProperty(name = "code", value = "状态码", example = "200")
     private Integer code;
 
     /**
      * 消息
      */
-    @ApiModelProperty(name = "msg", value = "消息", example = "操作成功")
     private String msg;
 
     /**
      * 数据
      */
-    @ApiModelProperty(name = "data", value = "数据", example = "")
     private Object data;
 
 //    /**

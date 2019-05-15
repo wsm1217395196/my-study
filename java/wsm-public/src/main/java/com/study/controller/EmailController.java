@@ -1,7 +1,7 @@
 package com.study.controller;
 
-import com.study.currency.result.ResultEnum;
-import com.study.currency.result.ResultView;
+import com.study.result.ResultEnum;
+import com.study.result.ResultView;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;

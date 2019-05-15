@@ -1,4 +1,4 @@
-package com.study.currency.result;
+package com.study.result;
 
 
 /**
@@ -6,27 +6,27 @@ package com.study.currency.result;
  */
 public enum ResultEnum {
     /**
-     * 操作成功
+     * 操作成功！
      */
     CODE_1(1, "操作成功！"),
     /**
-     * 操作失败
+     * 操作失败！
      */
     CODE_2(2, "操作失败！"),
     /**
-     * 调用服务失败
+     * 调用服务失败！
      */
     CODE_3(3, "调用服务失败！"),
     /**
      * 验证码错误或已过期！
      */
-    CODE_4(4, "调用服务失败！"),
+    CODE_4(4, "验证码错误或已过期！"),
 
     /**
-     * 服务器神游中
+     * 服务器神游中！
      */
     CODE_666(666, "服务器神游中！");
-    
+
 
     /**
      * 状态码

@@ -19,6 +19,13 @@
 
     <dependencies>
         <!--通用依赖-->
+        <dependency>
+            <groupId>com.study</groupId>
+            <artifactId>wsm-common-utils</artifactId>
+            <version>0.0.1-SNAPSHOT</version>
+            <scope>compile</scope>
+        </dependency>
+
         <!--spring cloud-->
         <dependency>
             <groupId>org.springframework.cloud</groupId>

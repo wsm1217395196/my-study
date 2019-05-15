@@ -7,9 +7,9 @@ import com.aliyuncs.IAcsClient;
 import com.aliyuncs.exceptions.ClientException;
 import com.aliyuncs.http.MethodType;
 import com.aliyuncs.profile.DefaultProfile;
-import com.study.currency.result.ResultEnum;
-import com.study.currency.result.ResultView;
-import com.study.currency.utils.CreateUtil;
+import com.study.result.ResultEnum;
+import com.study.result.ResultView;
+import com.study.utils.CreateUtil;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -24,7 +24,7 @@ import org.springframework.web.bind.annotation.RestController;
 public class SmsController {
 
     @Value("${wsm.name}")
-    private String userName;
+    private String wsmName;
 
     @Autowired
     private RedisTemplate redisTemplate;
@@ -66,7 +66,6 @@ public class SmsController {
     @ApiOperation(value = "验证短信验证码", notes = "")
     @PostMapping("/vaildateSmsCode")
     public ResultView vaildateSmsCode(@RequestParam String phone, @RequestParam String smsCode) {
-        System.out.println(userName);
         ResultView resultView = ResultView.error(ResultEnum.CODE_4);
         String redisSmsCode = (String) redisTemplate.opsForValue().get(phone);
         if (redisSmsCode != null && redisSmsCode.equals(smsCode)) {

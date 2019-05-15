@@ -1,12 +1,11 @@
 package com.study.controller;
 
-
-import com.study.currency.result.PageParam;
-import com.study.currency.result.PageResult;
-import com.study.currency.result.ResultView;
-import com.study.currency.utils.CreateUtil;
 import com.study.model.UserModel;
+import com.study.result.PageParam;
+import com.study.result.PageResult;
+import com.study.result.ResultView;
 import com.study.service.UserService;
+import com.study.utils.CreateUtil;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;

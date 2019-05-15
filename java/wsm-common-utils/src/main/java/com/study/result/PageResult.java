@@ -1,4 +1,4 @@
-package com.study.currency.result;
+package com.study.result;
 
 import java.util.List;
 
@@ -7,22 +7,31 @@ import java.util.List;
  */
 public class PageResult {
 
+    /**
+     * 当前页
+     */
     private Integer pageIndex;
-
+    /**
+     * 当前页多少数据
+     */
     private Integer pageSize;
-
+    /**
+     * 总记录数
+     */
     private Integer total;
-
-    private List list;
+    /**
+     * 记录
+     */
+    private List records;
 
     public PageResult() {
     }
 
-    public PageResult(Integer pageIndex, Integer pageSize, Integer total, List list) {
+    public PageResult(Integer pageIndex, Integer pageSize, Integer total, List records) {
         this.pageIndex = pageIndex;
         this.pageSize = pageSize;
         this.total = total;
-        this.list = list;
+        this.records = records;
     }
 
     public Integer getPageIndex() {
@@ -49,11 +58,11 @@ public class PageResult {
         this.total = total;
     }
 
-    public List getList() {
-        return list;
+    public List getRecords() {
+        return records;
     }
 
-    public void setList(List list) {
-        this.list = list;
+    public void setRecords(List records) {
+        this.records = records;
     }
 }

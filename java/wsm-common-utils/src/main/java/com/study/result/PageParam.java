@@ -1,4 +1,4 @@
-package com.study.currency.result;
+package com.study.result;
 
 /**
  * 分页参数类

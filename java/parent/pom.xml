@@ -17,6 +17,7 @@
         <module>../wsm-demo</module>
         <module>../wsm-public</module>
         <module>../wsm-config-server</module>
+        <module>../wsm-common-utils</module>
     </modules>
 
     <groupId>com.study</groupId>
@@ -46,6 +47,13 @@
                 <version>${spring-cloud.version}</version>
                 <type>pom</type>
                 <scope>import</scope>
+            </dependency>
+
+            <dependency>
+                <groupId>com.study</groupId>
+                <artifactId>wsm-public</artifactId>
+                <version>0.0.1-SNAPSHOT</version>
+                <scope>compile</scope>
             </dependency>
 
             <!--版本冲突检测-->

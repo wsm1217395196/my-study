@@ -1,7 +1,7 @@
 package com.study.controller;
 
 
-import com.study.currency.result.ResultView;
+import com.study.result.ResultView;
 import com.study.feign.WorkFeign;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;

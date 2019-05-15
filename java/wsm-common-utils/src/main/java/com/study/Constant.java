@@ -1,4 +1,4 @@
-package com.study.currency;
+package com.study;
 
 /**
  * 常量类
