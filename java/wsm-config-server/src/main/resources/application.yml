@@ -15,13 +15,15 @@ spring:
     name: wsm-config-server #服务名
   cloud:
     config:
-      label: master #配置仓库的分支
       server:
         git:
-          uri: https://github.com/wsm1217395196/my-study.git #配置git仓库地址
-          search-paths: config #配置仓库路径
-          username: 1217395196@qq.com #访问git仓库的用户名
-          password: Wsm960921 #访问git仓库的用户密码
+          uri: https://github.com/wsm1217395196/my-study #配置git仓库地址
+          search-paths: config
+          username: 1217395196@qq.com
+          password: Wsm960921
+#          force-pull: true
+      label: master
+
 
 
 
