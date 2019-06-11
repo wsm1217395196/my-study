@@ -22,7 +22,7 @@ spring:
           username: 1217395196@qq.com
           password: Wsm960921
 #          force-pull: true
-      label: master
+#      label: master
 
 
 
