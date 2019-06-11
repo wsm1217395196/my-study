@@ -2,14 +2,14 @@ package com.study.service;
 
 import com.baomidou.mybatisplus.mapper.EntityWrapper;
 import com.baomidou.mybatisplus.plugins.Page;
-import com.baomidou.mybatisplus.service.impl.ServiceImpl;import com.study.Constant;
+import com.baomidou.mybatisplus.service.impl.ServiceImpl;
+import com.study.Constant;
 import com.study.mapper.UserMapper;
 import com.study.model.UserModel;
 import com.study.result.PageParam;
 import com.study.result.PageResult;
+import org.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.configurationprocessor.json.JSONException;
-import org.springframework.boot.configurationprocessor.json.JSONObject;
 import org.springframework.stereotype.Service;
 import org.springframework.util.StringUtils;
 
@@ -30,7 +30,7 @@ public class UserService extends ServiceImpl<UserMapper, UserModel> {
     @Autowired
     private UserMapper userMapper;
 
-    public PageResult getPage(PageParam pageParam) throws JSONException {
+    public PageResult getPage(PageParam pageParam) {
         int pageIndex = pageParam.getPageIndex();
         int pageSize = pageParam.getPageSize();
 //        int pageStart = pageParam.getPageStart();

@@ -33,7 +33,7 @@ public class CreateUtil {
     }
 
     /**
-     * 生成指定长度验证码
+     * 生成指定长度的数字验证码
      *
      * @param length
      * @return

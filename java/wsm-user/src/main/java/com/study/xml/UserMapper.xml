@@ -6,7 +6,7 @@
     <resultMap id="BaseResultMap" type="com.study.model.UserModel">
         <id column="id" property="id" />
         <result column="name" property="name" />
-        <result column="nikename" property="nikename" />
+        <result column="nickname" property="nickname" />
         <result column="password" property="password" />
         <result column="photo" property="photo" />
         <result column="sex" property="sex" />

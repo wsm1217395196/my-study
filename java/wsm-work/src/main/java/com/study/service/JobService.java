@@ -5,13 +5,13 @@ import com.baomidou.mybatisplus.plugins.Page;
 import com.baomidou.mybatisplus.service.IService;
 import com.baomidou.mybatisplus.service.impl.ServiceImpl;
 import com.study.Constant;
-import com.study.result.PageParam;
-import com.study.result.PageResult;
 import com.study.mapper.JobMapper;
 import com.study.model.JobModel;
+import com.study.result.PageParam;
+import com.study.result.PageResult;
+import org.json.JSONException;
+import org.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.configurationprocessor.json.JSONException;
-import org.springframework.boot.configurationprocessor.json.JSONObject;
 import org.springframework.stereotype.Service;
 import org.springframework.util.StringUtils;
 
@@ -32,7 +32,7 @@ public class JobService extends ServiceImpl<JobMapper, JobModel> implements ISer
     @Autowired
     private JobMapper jobMapper;
 
-    public PageResult getPage(PageParam pageParam) throws JSONException {
+    public PageResult getPage(PageParam pageParam) {
         int pageIndex = pageParam.getPageIndex();
         int pageSize = pageParam.getPageSize();
 //        int pageStart = pageParam.getPageStart();

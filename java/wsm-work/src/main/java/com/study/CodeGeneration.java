@@ -39,8 +39,8 @@ public class CodeGeneration {
 
         // 自定义文件命名，注意 %s 会自动填充表实体属性！
         gc.setControllerName("%sController");
-        gc.setServiceName("%sService");
-        gc.setServiceImplName("%sServiceImpl");
+        gc.setServiceName("%sServiceI");
+        gc.setServiceImplName("%sService");
         gc.setMapperName("%sMapper");
         gc.setXmlName("%sMapper");
         mpg.setGlobalConfig(gc);
@@ -71,7 +71,7 @@ public class CodeGeneration {
         PackageConfig pc = new PackageConfig();
         pc.setParent("com.study");
         pc.setController("controller");
-        pc.setService("service");
+        pc.setService("serviceI");
         pc.setServiceImpl("service");
         pc.setMapper("mapper");
         pc.setEntity("model");

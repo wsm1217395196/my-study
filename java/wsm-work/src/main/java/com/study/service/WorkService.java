@@ -5,13 +5,12 @@ import com.baomidou.mybatisplus.plugins.Page;
 import com.baomidou.mybatisplus.service.IService;
 import com.baomidou.mybatisplus.service.impl.ServiceImpl;
 import com.study.Constant;
-import com.study.result.PageParam;
-import com.study.result.PageResult;
 import com.study.mapper.WorkMapper;
 import com.study.model.WorkModel;
+import com.study.result.PageParam;
+import com.study.result.PageResult;
+import org.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.configurationprocessor.json.JSONException;
-import org.springframework.boot.configurationprocessor.json.JSONObject;
 import org.springframework.stereotype.Service;
 import org.springframework.util.StringUtils;
 
@@ -31,7 +30,7 @@ public class WorkService extends ServiceImpl<WorkMapper, WorkModel> implements I
     @Autowired
     private WorkMapper workMapper;
 
-    public PageResult getPage(PageParam pageParam) throws JSONException {
+    public PageResult getPage(PageParam pageParam) {
         int pageIndex = pageParam.getPageIndex();
         int pageSize = pageParam.getPageSize();
 //        int pageStart = pageParam.getPageStart();

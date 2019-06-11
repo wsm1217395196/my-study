@@ -27,7 +27,7 @@ public class UserModel implements Serializable {
     /**
      * 昵称
      */
-    private String nikename;
+    private String nickname;
     /**
      * 密码
      */
@@ -107,12 +107,12 @@ public class UserModel implements Serializable {
         this.name = name;
     }
 
-    public String getNikename() {
-        return nikename;
+    public String getNickname() {
+        return nickname;
     }
 
-    public void setNikename(String nikename) {
-        this.nikename = nikename;
+    public void setNickname(String nickname) {
+        this.nickname = nickname;
     }
 
     public String getPassword() {
@@ -232,7 +232,7 @@ public class UserModel implements Serializable {
         return "UserModel{" +
                 "id=" + id +
                 ", name='" + name + '\'' +
-                ", nikename='" + nikename + '\'' +
+                ", nickname='" + nickname + '\'' +
                 ", password='" + password + '\'' +
                 ", photo='" + photo + '\'' +
                 ", sex=" + sex +

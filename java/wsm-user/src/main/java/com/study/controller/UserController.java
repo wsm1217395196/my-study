@@ -9,7 +9,6 @@ import com.study.utils.CreateUtil;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.configurationprocessor.json.JSONException;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.Arrays;
@@ -41,7 +40,7 @@ public class UserController {
 
     @ApiOperation(value = "分页条件查询", notes = "提交参数：{\"pageIndex\":1,\"pageSize\":10,\"sort\":\"name desc\",\"condition\":\"{\'name\':\'\',\'nikename\':\'\',\'sex\':\'\',\'isEnable\':\'\'}\"}")
     @PostMapping("/getPage")
-    public ResultView getPage(@RequestBody PageParam pageParam) throws JSONException {
+    public ResultView getPage(@RequestBody PageParam pageParam) {
         PageResult pageResult = userService.getPage(pageParam);
         return ResultView.success(pageResult);
     }

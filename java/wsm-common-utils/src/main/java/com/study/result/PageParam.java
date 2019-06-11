@@ -13,6 +13,10 @@ public class PageParam {
      */
     private int pageSize;
     /**
+     * 要查的字段(别名=model属性名)
+     */
+    private String sqlColumns;
+    /**
      * 排序
      */
     private String sort;
@@ -37,6 +41,14 @@ public class PageParam {
 
     public void setSort(String sort) {
         this.sort = sort;
+    }
+
+    public String getSqlColumns() {
+        return sqlColumns;
+    }
+
+    public void setSqlColumns(String sqlColumns) {
+        this.sqlColumns = sqlColumns;
     }
 
     public int getPageStart() {
