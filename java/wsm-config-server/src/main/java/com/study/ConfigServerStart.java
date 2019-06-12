@@ -9,10 +9,22 @@ import org.springframework.cloud.config.server.EnableConfigServer;
 @SpringBootApplication(exclude = {DataSourceAutoConfiguration.class})
 @EnableConfigServer
 @EnableDiscoveryClient
-public class ComfigServerStart {
+public class ConfigServerStart {
 
     public static void main(String[] args) {
-        SpringApplication.run(ComfigServerStart.class, args);
+        SpringApplication.run(ConfigServerStart.class, args);
         System.err.println("configServer启动了");
     }
+
+//    /**
+//     * 解决从git 配置文件中获取不到值的bean
+//     *
+//     * @return
+//     */
+//    @Bean
+//    public static PropertySourcesPlaceholderConfigurer placeholderConfigurer() {
+//        PropertySourcesPlaceholderConfigurer c = new PropertySourcesPlaceholderConfigurer();
+//        c.setIgnoreUnresolvablePlaceholders(true);
+//        return c;
+//    }
 }

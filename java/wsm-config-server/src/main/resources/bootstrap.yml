@@ -1,0 +1,32 @@
+#端口号
+server:
+  port: 8004
+
+eureka:
+  instance:
+    hostname: localhost #地址
+  client:
+    service-url:
+#      向注册中心注册服务
+      defaultZone: http://wsm:1@${eureka.instance.hostname}:8000/eureka
+
+spring:
+  application:
+    name: wsm-config-server #服务名
+
+#config server 相关配置
+  cloud:
+    config:
+      server:
+        git:
+          uri: https://github.com/wsm1217395196/my-study.git    # 配置git仓库的地址
+          search-paths: config-file                            # git仓库地址下的相对地址，可以配置多个，用,分割。
+#          username: git用户名                                  # git仓库的账号（私有库必填）
+#          password: git密码                                    # git仓库的密码（私有库必填）
+      label: master
+
+
+
+
+
+

@@ -1,0 +1,40 @@
+#端口号
+server:
+  port: 8001
+
+eureka:
+  instance:
+    hostname: localhost #地址
+  client:
+    service-url:
+#      向注册中心注册服务
+      defaultZone: http://wsm:1@${eureka.instance.hostname}:8000/eureka
+
+spring:
+  application:
+    name: wsm-public #服务名
+
+#config client 相关配置
+  cloud:
+    config:
+      name: wsm-config                     #对应{application}部分
+      profile: dev                         #对应{profile}部分
+#      uri: http://localhost:8884/          #配置中心的具体地址
+      label: master                        #对应git的分支。如果配置中心使用的是本地存储，则该参数无用
+      discovery:
+        service-id: wsm-config-server      #指定配置中心的service-id，便于扩展为高可用配置集群。
+        enabled: true                      #开启Config服务发现支持
+
+#配置邮件
+  mail:
+    host: smtp.qq.com
+    port: 465
+    username: 358632813@qq.com
+    password: srudivdfeslkcaic
+    properties:
+      mail:
+        smtp:
+          ssl:
+            enable: true
+
+
