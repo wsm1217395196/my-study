@@ -13,9 +13,7 @@ import com.study.utils.CreateUtil;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.data.redis.core.RedisTemplate;
-import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
@@ -24,27 +22,8 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 public class SmsController {
 
-    @Value("${wsm.name}")
-    private String wsmName;
-    @Value("${wsm.age}")
-    private String wsmAge;
-    @Value("${wsm.sex}")
-    private String wsmSex;
-    @Value("${wsm.test}")
-    private String wsmTest;
-
     @Autowired
     private RedisTemplate redisTemplate;
-
-    @ApiOperation(value = "test", notes = "")
-    @GetMapping("/test")
-    public String test() {
-        System.out.println(this.wsmName);
-        System.out.println(wsmAge);
-        System.out.println(wsmSex);
-        System.out.println(wsmTest);
-        return wsmName;
-    }
 
     @ApiOperation(value = "发送短信验证码", notes = "")
     @PostMapping("/sendSmsCode")
