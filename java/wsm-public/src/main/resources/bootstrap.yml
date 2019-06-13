@@ -25,6 +25,13 @@ spring:
         service-id: wsm-config-server      #指定配置中心的service-id，便于扩展为高可用配置集群。
         enabled: true                      #开启Config服务发现支持
 
+#Spring Cloud Bus刷新配置(刷新config)
+  rabbitmq:
+    host: localhost
+    port: 5672
+    username: guest
+    password: guest
+
 #配置邮件
   mail:
     host: smtp.qq.com
