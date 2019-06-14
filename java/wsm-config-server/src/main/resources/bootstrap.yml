@@ -25,6 +25,24 @@ spring:
 #          password: git密码                                    # git仓库的密码（私有库必填）
       label: master
 
+# Rabbitmq配置  Spring Cloud Bus刷新配置(刷新config)
+  rabbitmq:
+    host: localhost
+    port: 5672
+    username: guest
+    password: guest
+    cache:
+      channel:
+        checkout-timeout: 1s
+
+#暴露/actuator/bus-refresh接口
+management:
+  endpoints:
+    web:
+      exposure:
+        include: "*"
+
+
 
 
 
