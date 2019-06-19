@@ -1,0 +1,45 @@
+#端口号
+server:
+  port: 8001
+
+eureka:
+  instance:
+    hostname: localhost #地址
+
+  client:
+    service-url:
+#      向注册中心注册服务
+      defaultZone: http://wsm:1@${eureka.instance.hostname}:8000/eureka
+
+spring:
+  application:
+    name: wsm-gateway #服务名
+
+  cloud:
+    gateway:
+      routes:
+      - id: route-wsm-public
+        uri: lb://wsm-public # uri以lb://开头（后面接的服务名称)
+        predicates:
+        - Path=/public/**
+
+      - id: route-wsm-user
+        uri: lb://wsm-user # uri以lb://开头（后面接的服务名称)
+        predicates:
+        - Path=/user/**
+
+      - id: route-wsm-work
+        uri: lb://wsm-work # uri以lb://开头（后面接的服务名称)
+        predicates:
+        - Path=/work/**
+
+      - id: route-wsm-demo
+        uri: lb://wsm-demo # uri以lb://开头（后面接的服务名称)
+        predicates:
+        - Path=/demo/**
+
+
+
+
+
+

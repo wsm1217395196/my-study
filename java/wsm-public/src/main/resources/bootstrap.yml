@@ -1,6 +1,6 @@
 #端口号
 server:
-  port: 8001
+  port: 8010
 
 eureka:
   instance:
@@ -19,7 +19,7 @@ spring:
     config:
       name: wsm-config                     #对应{application}部分
       profile: dev                         #对应{profile}部分
-#      uri: http://localhost:8884/          #配置中心的具体地址
+#      uri: http://localhost:8002/          #配置中心的具体地址
       label: master                        #对应git的分支。如果配置中心使用的是本地存储，则该参数无用
       discovery:
         service-id: wsm-config-server      #指定配置中心的service-id，便于扩展为高可用配置集群。

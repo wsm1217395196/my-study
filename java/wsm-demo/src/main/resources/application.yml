@@ -1,6 +1,6 @@
 #端口号
 server:
-  port: 8008
+  port: 8009
 
 eureka:
   instance:

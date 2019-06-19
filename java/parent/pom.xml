@@ -18,6 +18,7 @@
         <module>../wsm-public</module>
         <module>../wsm-config-server</module>
         <module>../wsm-common-utils</module>
+        <module>../wsm-gateway</module>
     </modules>
 
     <groupId>com.study</groupId>
