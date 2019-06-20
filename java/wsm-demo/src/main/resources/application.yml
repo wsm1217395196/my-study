@@ -36,3 +36,10 @@ mybatis-plus:
 feign:
   hystrix:
     enabled: true
+
+#开启指标流端点 为了url访问
+management:
+  endpoints:
+    web:
+      exposure:
+        include: hystrix.stream

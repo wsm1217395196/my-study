@@ -15,28 +15,54 @@ spring:
   application:
     name: wsm-gateway #服务名
 
+#网关路由有两种方式：1、bean方式，2、yml配置文件方式
   cloud:
     gateway:
       routes:
+
       - id: route-wsm-public
         uri: lb://wsm-public # uri以lb://开头（后面接的服务名称)
         predicates:
-        - Path=/public/**
+        - Path=/wsm-public/**
+        filters:
+        - StripPrefix=1 # 表示路由整个项目，不加只能路由一个控制器
+        - name: Hystrix
+          args:
+            name: public-hystrix
+            fallbackUri: forward:/common/fallback #设置熔断器
 
       - id: route-wsm-user
-        uri: lb://wsm-user # uri以lb://开头（后面接的服务名称)
+        uri: lb://wsm-user
         predicates:
-        - Path=/user/**
+        - Path=/wsm-user/**
+        filters:
+        - StripPrefix=1
+        - name: Hystrix
+          args:
+            name: user-hystrix
+            fallbackUri: forward:/common/fallback
 
       - id: route-wsm-work
-        uri: lb://wsm-work # uri以lb://开头（后面接的服务名称)
+        uri: lb://wsm-work
         predicates:
-        - Path=/work/**
+        - Path=/wsm-work/**
+        filters:
+        - StripPrefix=1
+        - name: Hystrix
+          args:
+            name: work-hystrix
+            fallbackUri: forward:/common/fallback
 
       - id: route-wsm-demo
-        uri: lb://wsm-demo # uri以lb://开头（后面接的服务名称)
+        uri: lb://wsm-demo
         predicates:
-        - Path=/demo/**
+        - Path=/wsm-demo/**
+        filters:
+        - StripPrefix=1
+        - name: Hystrix
+          args:
+            name: demo-hystrix
+            fallbackUri: forward:/common/fallback
 
 
 

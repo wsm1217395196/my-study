@@ -8,6 +8,31 @@ import org.springframework.cloud.client.discovery.EnableDiscoveryClient;
 @EnableDiscoveryClient
 public class GatewayStrat {
 
+    /**
+     * 网关路由有两种方式：1、bean方式，2、yml配置文件方式
+     * filters设置了熔断器
+     *
+     * @param builder
+     * @return
+     */
+//    @Bean
+//    public RouteLocator myRouteLocator(RouteLocatorBuilder builder) {
+//        return builder.routes().
+//                route(r -> r.path("/wsm-public/**").
+//                        filters(f -> f.hystrix(h -> h.setName("public-hystrix").setFallbackUri("forward:/common/fallback")).
+//                                stripPrefix(1)).uri("lb:/wsm-public")).
+//                route(r -> r.path("/wsm-user/**").
+//                        filters(f -> f.hystrix(h -> h.setName("user-hystrix").setFallbackUri("forward:/common/fallback")).
+//                                stripPrefix(1)).uri("lb://wsm-user")).
+//                route(r -> r.path("/wsm-work/**").
+//                        filters(f -> f.hystrix(h -> h.setName("work-hystrix").setFallbackUri("forward:/common/fallback")).
+//                                stripPrefix(1)).uri("lb://wsm-work")).
+//                route(r -> r.path("/wsm-demo/**").
+//                        filters(f -> f.hystrix(h -> h.setName("demo-hystrix").setFallbackUri("forward:/common/fallback")).
+//                                stripPrefix(1)).uri("lb://wsm-demo"))
+//                .build();
+//    }
+
     public static void main(String[] args) {
         SpringApplication.run(GatewayStrat.class, args);
         System.err.println("网关wsm-gateway启动了！！");
