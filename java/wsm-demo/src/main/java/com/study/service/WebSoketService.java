@@ -39,6 +39,7 @@ public class WebSoketService {
             webSoket.session.getBasicRemote().sendText("发送消息：" + message);
         }
         System.err.println("发送了消息：" + this);
+        System.err.println("发送了消息：" + message);
     }
 
     /*websocket 发生错误时进行调用*/
