@@ -49,6 +49,7 @@ public class UserController {
     @GetMapping("/getById/{id}")
     public ResultView getById(@PathVariable Long id) {
         UserModel model = userService.selectById(id);
+        int i = 10 / 0;
         return ResultView.success(model);
     }
 

@@ -5,3 +5,4 @@ node_modules
 maven-wrapper.properties
 mvnw
 mvnw.cmd
+/java/logs
