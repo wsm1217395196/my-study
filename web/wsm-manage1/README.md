@@ -1,6 +1,6 @@
-# wsm-demo
+# wsm-manage1
 
-> A Vue.js project
+> 
 
 ## Build Setup
 
