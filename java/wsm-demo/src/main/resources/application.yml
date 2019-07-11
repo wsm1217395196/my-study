@@ -20,13 +20,6 @@ spring:
     password: admin
     url: jdbc:mysql://${eureka.instance.hostname}:3306/my-study?characterEncoding=utf-8&useSSL=false&serverTimezone=UTC
 
-#neo4j配置
-  data:
-    neo4j:
-      username: neo4j
-      password: root
-      uri: bolt://${eureka.instance.hostname}:7687
-
 # 配置mybatis-plus
 mybatis-plus:
   # 配置扫描xml

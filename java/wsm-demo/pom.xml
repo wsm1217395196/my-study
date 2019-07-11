@@ -137,18 +137,6 @@
             <scope>provided</scope>
         </dependency>
 
-        <!--neo4j-->
-        <dependency>
-            <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot-starter-data-neo4j</artifactId>
-        </dependency>
-        <!--<dependency>-->
-            <!--<groupId>org.neo4j</groupId>-->
-            <!--<artifactId>neo4j-ogm-bolt-driver</artifactId>-->
-            <!--<version>3.1.4</version>-->
-        <!--</dependency>-->
-
-
         <!--本项目依赖结束-->
 
     </dependencies>
