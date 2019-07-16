@@ -21,9 +21,9 @@ public class GatewayStrat {
 //                route(r -> r.path("/wsm-public/**").
 //                        filters(f -> f.hystrix(h -> h.setName("public-hystrix").setFallbackUri("forward:/common/fallback")).
 //                                stripPrefix(1)).uri("lb:/wsm-public")).
-//                route(r -> r.path("/wsm-user/**").
+//                route(r -> r.path("/wsm-upms/**").
 //                        filters(f -> f.hystrix(h -> h.setName("user-hystrix").setFallbackUri("forward:/common/fallback")).
-//                                stripPrefix(1)).uri("lb://wsm-user")).
+//                                stripPrefix(1)).uri("lb://wsm-upms")).
 //                route(r -> r.path("/wsm-work/**").
 //                        filters(f -> f.hystrix(h -> h.setName("work-hystrix").setFallbackUri("forward:/common/fallback")).
 //                                stripPrefix(1)).uri("lb://wsm-work")).

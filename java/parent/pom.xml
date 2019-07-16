@@ -12,7 +12,7 @@
     <packaging>pom</packaging>
     <modules>
         <module>../wsm-discovery</module>
-        <module>../wsm-user</module>
+        <module>../wsm-upms</module>
         <module>../wsm-work</module>
         <module>../wsm-demo</module>
         <module>../wsm-public</module>

@@ -39,10 +39,10 @@ spring:
             name: public-hystrix
             fallbackUri: forward:/common/fallback #设置熔断器
 
-      - id: route-wsm-user
-        uri: lb://wsm-user
+      - id: route-wsm-upms
+        uri: lb://wsm-upms
         predicates:
-        - Path=/wsm-user/**
+        - Path=/wsm-upms/**
         filters:
         - StripPrefix=1
         - name: Hystrix
