@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.study.mapper.RoleMapper">
+
+    <!-- 通用查询映射结果 -->
+    <resultMap id="BaseResultMap" type="com.study.model.RoleModel">
+        <id column="id" property="id"/>
+        <result column="name" property="name"/>
+        <result column="code" property="code"/>
+        <result column="project_id" property="projectId"/>
+        <result column="create_by" property="createBy"/>
+        <result column="create_time" property="createTime"/>
+        <result column="update_by" property="updateBy"/>
+        <result column="update_time" property="updateTime"/>
+        <result column="is_enabled" property="isEnabled"/>
+        <result column="remark" property="remark"/>
+    </resultMap>
+
+    <resultMap id="BaseDtoMap" type="com.study.dto.BaseDto">
+        <id column="id" property="id"/>
+        <result column="name" property="name"/>
+    </resultMap>
+
+    <select id="getRoleByUserId" resultMap="BaseResultMap">
+        SELECT t3.id,t3.name FROM `user` t1,user_role t2,role t3
+        WHERE  t1.`id` = t2.`user_id`
+        AND t2.`role_id` = t3.`id` AND t1.`id` = #{userId};
+    </select>
+
+</mapper>

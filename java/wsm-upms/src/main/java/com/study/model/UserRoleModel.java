@@ -6,36 +6,28 @@ import java.io.Serializable;
 
 /**
  * <p>
- * 用户组-用户-关系表
+ * 用户-角色-关系表
  * </p>
  *
  * @author wsm
- * @since 2019-07-16
+ * @since 2019-07-18
  */
-@TableName("user_group_user_relation")
-public class UserGroupUserRelation implements Serializable {
+@TableName("user_role")
+public class UserRoleModel implements Serializable {
 
     private static final long serialVersionUID = 1L;
 
-    /**
-     * 用户组id
-     */
-    @TableField("user_group_id")
-    private Long userGroupId;
     /**
      * 用户id
      */
     @TableField("user_id")
     private Long userId;
+    /**
+     * 用户组id
+     */
+    @TableField("role_id")
+    private Long roleId;
 
-
-    public Long getUserGroupId() {
-        return userGroupId;
-    }
-
-    public void setUserGroupId(Long userGroupId) {
-        this.userGroupId = userGroupId;
-    }
 
     public Long getUserId() {
         return userId;
@@ -45,11 +37,19 @@ public class UserGroupUserRelation implements Serializable {
         this.userId = userId;
     }
 
+    public Long getRoleId() {
+        return roleId;
+    }
+
+    public void setRoleId(Long roleId) {
+        this.roleId = roleId;
+    }
+
     @Override
     public String toString() {
-        return "UserGroupUserRelation{" +
-        ", userGroupId=" + userGroupId +
+        return "UserRoleModel{" +
         ", userId=" + userId +
+        ", roleId=" + roleId +
         "}";
     }
 }

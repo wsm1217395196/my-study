@@ -7,15 +7,15 @@ import org.springframework.stereotype.Controller;
 
 /**
  * <p>
- * 用户组 前端控制器
+ * 角色 前端控制器
  * </p>
  *
  * @author wsm
- * @since 2019-07-16
+ * @since 2019-07-18
  */
 @Controller
-@RequestMapping("/userGroup")
-public class UserGroupController {
+@RequestMapping("/role")
+public class RoleController {
 
 }
 

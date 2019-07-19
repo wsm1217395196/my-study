@@ -99,6 +99,17 @@
             <artifactId>json</artifactId>
             <version>20180813</version>
         </dependency>
+
+        <!--  Security的相关依赖-->
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-security</artifactId>
+        </dependency>
+
+        <dependency>
+            <groupId>org.springframework.cloud</groupId>
+            <artifactId>spring-cloud-starter-oauth2</artifactId>
+        </dependency>
         <!--通用依赖结束-->
 
         <!--本项目依赖-->

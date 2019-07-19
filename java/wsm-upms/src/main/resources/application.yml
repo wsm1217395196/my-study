@@ -31,3 +31,7 @@ mybatis-plus:
     logic-delete-value: 0
     logic-not-delete-value: 1
     sql-injector: com.baomidou.mybatisplus.mapper.LogicSqlInjector
+
+myConfig:
+  isStartSecurity: true #是否启用权限
+  projectCode: wsm_project #项目编码

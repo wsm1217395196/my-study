@@ -6,22 +6,17 @@ import java.io.Serializable;
 
 /**
  * <p>
- * 用户组-资源-关系表
+ * 资源-角色-关系表
  * </p>
  *
  * @author wsm
- * @since 2019-07-16
+ * @since 2019-07-18
  */
-@TableName("user_group_resource_relation")
-public class UserGroupResourceRelation implements Serializable {
+@TableName("resource_role")
+public class ResourceRoleModel implements Serializable {
 
     private static final long serialVersionUID = 1L;
 
-    /**
-     * 用户组id
-     */
-    @TableField("user_group_id")
-    private Long userGroupId;
     /**
      * 资源id
      */
@@ -32,15 +27,12 @@ public class UserGroupResourceRelation implements Serializable {
      */
     @TableField("resource_button")
     private String resourceButton;
+    /**
+     * 用户组id
+     */
+    @TableField("role_id")
+    private Long roleId;
 
-
-    public Long getUserGroupId() {
-        return userGroupId;
-    }
-
-    public void setUserGroupId(Long userGroupId) {
-        this.userGroupId = userGroupId;
-    }
 
     public Long getResourceId() {
         return resourceId;
@@ -58,12 +50,20 @@ public class UserGroupResourceRelation implements Serializable {
         this.resourceButton = resourceButton;
     }
 
+    public Long getRoleId() {
+        return roleId;
+    }
+
+    public void setRoleId(Long roleId) {
+        this.roleId = roleId;
+    }
+
     @Override
     public String toString() {
-        return "UserGroupResourceRelation{" +
-        ", userGroupId=" + userGroupId +
+        return "ResourceRoleModel{" +
         ", resourceId=" + resourceId +
         ", resourceButton=" + resourceButton +
+        ", roleId=" + roleId +
         "}";
     }
 }

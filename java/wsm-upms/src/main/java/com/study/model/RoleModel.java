@@ -7,14 +7,14 @@ import java.io.Serializable;
 
 /**
  * <p>
- * 用户组
+ * 角色
  * </p>
  *
  * @author wsm
- * @since 2019-07-16
+ * @since 2019-07-18
  */
-@TableName("user_group")
-public class UserGroupModel implements Serializable {
+@TableName("role")
+public class RoleModel implements Serializable {
 
     private static final long serialVersionUID = 1L;
 
@@ -145,7 +145,7 @@ public class UserGroupModel implements Serializable {
 
     @Override
     public String toString() {
-        return "UserGroupModel{" +
+        return "RoleModel{" +
         ", id=" + id +
         ", name=" + name +
         ", code=" + code +

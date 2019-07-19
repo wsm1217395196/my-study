@@ -32,7 +32,7 @@ public class UserController {
     private UserService userService;
 
     @ApiOperation(value = "查询全部", notes = "")
-    @GetMapping("/getAll")
+    @GetMapping("/authority/getAll")
     public ResultView getAll() {
         List<UserModel> models = userService.selectList(null);
         return ResultView.success(models);
@@ -49,7 +49,6 @@ public class UserController {
     @GetMapping("/getById/{id}")
     public ResultView getById(@PathVariable Long id) {
         UserModel model = userService.selectById(id);
-        int i = 10 / 0;
         return ResultView.success(model);
     }
 
