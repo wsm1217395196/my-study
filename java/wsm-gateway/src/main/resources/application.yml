@@ -47,7 +47,7 @@ spring:
         - StripPrefix=1
         - name: Hystrix
           args:
-            name: user-hystrix
+            name: upms-hystrix
             fallbackUri: forward:/common/fallback
 
       - id: route-wsm-work
@@ -61,6 +61,17 @@ spring:
             name: work-hystrix
             fallbackUri: forward:/common/fallback
 
+      - id: route-wsm-oauth
+        uri: lb://wsm-oauth
+        predicates:
+        - Path=/wsm-oauth/**
+        filters:
+        - StripPrefix=1
+        - name: Hystrix
+          args:
+            name: oauth-hystrix
+            fallbackUri: forward:/common/fallback
+
       - id: route-wsm-demo
         uri: lb://wsm-demo
         predicates:
@@ -71,6 +82,7 @@ spring:
           args:
             name: demo-hystrix
             fallbackUri: forward:/common/fallback
+
 
 
 

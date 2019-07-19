@@ -6,7 +6,13 @@ import org.springframework.cloud.client.discovery.EnableDiscoveryClient;
 
 @SpringBootApplication
 @EnableDiscoveryClient
+//@EnableOAuth2Sso
 public class GatewayStrat {
+
+    public static void main(String[] args) {
+        SpringApplication.run(GatewayStrat.class, args);
+        System.err.println("网关wsm-gateway启动了！！");
+    }
 
     /**
      * 网关路由有两种方式：1、bean方式，2、yml配置文件方式
@@ -33,8 +39,4 @@ public class GatewayStrat {
 //                .build();
 //    }
 
-    public static void main(String[] args) {
-        SpringApplication.run(GatewayStrat.class, args);
-        System.err.println("网关wsm-gateway启动了！！");
-    }
 }
