@@ -19,6 +19,7 @@
         <module>../wsm-config-server</module>
         <module>../wsm-common-utils</module>
         <module>../wsm-gateway</module>
+        <module>../wsm-oauth</module>
     </modules>
 
     <groupId>com.study</groupId>
