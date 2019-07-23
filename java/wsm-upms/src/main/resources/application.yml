@@ -32,6 +32,21 @@ mybatis-plus:
     logic-not-delete-value: 1
     sql-injector: com.baomidou.mybatisplus.mapper.LogicSqlInjector
 
+security:
+  oauth2:
+    resource:
+      id: wsm-upms
+      user-info-uri: http://localhost:8001/wsm-oauth/user/principal?clientname=wsm-upms
+      prefer-token-info: false
+
+ribbon:
+  ReadTimeout: 10000
+  ConnectTimeout: 10000
+  MaxAutoRetries: 1
+  MaxAutoRetriesNextServer: 2
+
 myConfig:
   isStartSecurity: true #是否启用权限
   projectCode: wsm_project #项目编码
+
+

@@ -1,37 +1,31 @@
 package com.study.config;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.core.annotation.Order;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.oauth2.config.annotation.web.configuration.EnableResourceServer;
 import org.springframework.security.oauth2.config.annotation.web.configuration.ResourceServerConfigurerAdapter;
-
-import javax.servlet.http.HttpServletResponse;
+import org.springframework.security.oauth2.config.annotation.web.configurers.ResourceServerSecurityConfigurer;
+import org.springframework.security.oauth2.provider.token.TokenStore;
 
 /**
- * @ClassName ResourceServerConfig
- * @Description TODO  访问权限配置
- * @Author Zeus
- * @Date 2019/3/27 14:16
- * @Version 1.0
+ * TODO  访问权限配置
  **/
 @Configuration
 @EnableResourceServer
-@Order(3)
 public class ResourceServerConfig extends ResourceServerConfigurerAdapter {
+
+    @Autowired
+    TokenStore tokenStore;
+
     @Override
     public void configure(HttpSecurity http) throws Exception {
-        http
-                .csrf().disable()
-                .exceptionHandling()
-                .authenticationEntryPoint((request, response, authException) -> response.sendError(HttpServletResponse.SC_UNAUTHORIZED))
-                .and()
-                .requestMatchers().antMatchers("/oauth/**")
-                .and()
-                .authorizeRequests()
-                .antMatchers("/oauth/**").authenticated()
-                .and()
-                .httpBasic();
+        http.requestMatchers().antMatchers("/api/**").and().authorizeRequests().antMatchers("/api/**").authenticated();
+    }
+
+    @Override
+    public void configure(ResourceServerSecurityConfigurer resources) throws Exception {
+        resources.tokenStore(tokenStore).resourceId("resourcesId").stateless(true);
     }
 }
 

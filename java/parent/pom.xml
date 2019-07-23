@@ -20,6 +20,7 @@
         <module>../wsm-common-utils</module>
         <module>../wsm-gateway</module>
         <module>../wsm-oauth</module>
+        <module>../wsm-zull</module>
     </modules>
 
     <groupId>com.study</groupId>

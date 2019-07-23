@@ -100,12 +100,7 @@
             <version>20180813</version>
         </dependency>
 
-        <!--  Security的相关依赖-->
-        <dependency>
-            <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot-starter-security</artifactId>
-        </dependency>
-
+        <!--  Security oauth2的相关依赖-->
         <dependency>
             <groupId>org.springframework.cloud</groupId>
             <artifactId>spring-cloud-starter-oauth2</artifactId>

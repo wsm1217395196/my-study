@@ -6,7 +6,6 @@ import org.springframework.cloud.client.discovery.EnableDiscoveryClient;
 
 @SpringBootApplication
 @EnableDiscoveryClient
-//@EnableOAuth2Sso
 public class GatewayStrat {
 
     public static void main(String[] args) {

@@ -1,0 +1,72 @@
+#端口号
+server:
+  port: 8001
+  servlet:
+    session:
+      cookie:
+        name: OAUTH2SESSION
+
+eureka:
+  instance:
+    prefer-ip-address: true
+    hostname: localhost #地址
+
+  client:
+    service-url:
+#      向注册中心注册服务
+      defaultZone: http://wsm:1@${eureka.instance.hostname}:8000/eureka
+
+spring:
+  application:
+    name: wsm-zull #服务名
+
+#网关路由
+zuul:
+  routes:
+    wsm-oauth:
+      path: /wsm-oauth/**
+      sensitiveHeaders:
+      serviceId : wsm-oauth
+    wsm-public:
+      path: /wsm-public/**
+      sensitiveHeaders:
+      serviceId : wsm-public
+    wsm-upms:
+      path: /wsm-upms/**
+      sensitiveHeaders:
+      serviceId : wsm-upms
+    wsm-work:
+      path: /wsm-work/**
+      sensitiveHeaders:
+      serviceId : wsm-work
+    wsm-demo:
+      path: /wsm-demo/**
+      sensitiveHeaders:
+      serviceId : wsm-demo
+
+security:
+  oauth2:
+    client:
+      access-token-uri: http://localhost:8001/wsm-oauth/oauth/token
+      user-authorization-uri: http://localhost:8001/wsm-oauth/oauth/authorize
+      client-id: client
+#      client-secret: secret
+    resource:
+      user-info-uri: http://localhost:8001/wsm-oauth/user/principal
+      prefer-token-info: false
+
+ribbon:
+  ReadTimeout: 10000
+  ConnectTimeout: 10000
+  MaxAutoRetries: 1
+  MaxAutoRetriesNextServer: 2
+  eureka:
+    enabled: true
+
+
+
+
+
+
+
+
