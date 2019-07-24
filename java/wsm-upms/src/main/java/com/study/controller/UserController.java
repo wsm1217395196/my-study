@@ -39,7 +39,7 @@ public class UserController {
     }
 
     @ApiOperation(value = "分页条件查询", notes = "提交参数：{\"pageIndex\":1,\"pageSize\":10,\"sort\":\"name desc\",\"condition\":\"{\'name\':\'\',\'nikename\':\'\',\'sex\':\'\',\'isEnable\':\'\'}\"}")
-    @PostMapping("/getPage")
+    @PostMapping("/authority/getPage")
     public ResultView getPage(@RequestBody PageParam pageParam) {
         PageResult pageResult = userService.getPage(pageParam);
         return ResultView.success(pageResult);
@@ -53,7 +53,7 @@ public class UserController {
     }
 
     @ApiOperation(value = "新增", notes = "")
-    @PostMapping("/add")
+    @PostMapping("/authority/add")
     public ResultView add(@RequestBody UserModel model) {
         Date date = new Date();
         model.setId(CreateUtil.id());
@@ -64,7 +64,7 @@ public class UserController {
     }
 
     @ApiOperation(value = "修改", notes = "")
-    @PostMapping("/update")
+    @PostMapping("/authority/update")
     public ResultView update(@RequestBody UserModel model) {
         Date date = new Date();
         model.setUpdateTime(date);
@@ -73,14 +73,14 @@ public class UserController {
     }
 
     @ApiOperation(value = "根据id删除", notes = "")
-    @DeleteMapping("/deleteById/{id}")
-    public ResultView deleteById(@PathVariable Long id) {
+    @DeleteMapping("/authority_button/deleteById")
+    public ResultView deleteById(@RequestParam Long id) {
         userService.deleteById(id);
         return ResultView.success();
     }
 
     @ApiOperation(value = "根据ids删除", notes = "")
-    @DeleteMapping("/deleteByIds")
+    @DeleteMapping("/authority_button/deleteByIds")
     public ResultView deleteByIds(@RequestParam Long[] ids) {
         userService.deleteBatchIds(Arrays.asList(ids));
         return ResultView.success();

@@ -1,9 +1,10 @@
 package com.study.model;
 
-import java.util.Date;
 import com.baomidou.mybatisplus.annotations.TableField;
 import com.baomidou.mybatisplus.annotations.TableName;
+
 import java.io.Serializable;
+import java.util.Date;
 
 /**
  * <p>
@@ -32,7 +33,7 @@ public class ResourceModel implements Serializable {
      */
     private String button;
     /**
-     * 权限API路径匹配
+     * 权限API路径匹配(注：即后台控制器名，后面带authority,或者authority_button(对应button字段)代表受权限控制)
      */
     @TableField("url_pattern")
     private String urlPattern;

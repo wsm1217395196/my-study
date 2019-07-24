@@ -15,7 +15,7 @@ import springfox.documentation.swagger2.annotations.EnableSwagger2;
  */
 @Configuration
 @EnableSwagger2
-public class Swagger2 {
+public class Swagger2Config {
 
     @Bean
     public Docket CreateRestApi() {
@@ -29,8 +29,8 @@ public class Swagger2 {
 
     private ApiInfo apiInfo() {
         return new ApiInfoBuilder()
-                .title("wsm-demo")
-                .description("演示练习Api")
+                .title("wsm-public")
+                .description("公共服务Api")
                 .build();
     }
 }

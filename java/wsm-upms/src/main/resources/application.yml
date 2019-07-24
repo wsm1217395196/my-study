@@ -46,7 +46,7 @@ ribbon:
   MaxAutoRetriesNextServer: 2
 
 myConfig:
-  isStartSecurity: true #是否启用权限
+  isUseSecurity: true #是否使用security权限
   projectCode: wsm_project #项目编码
 
 

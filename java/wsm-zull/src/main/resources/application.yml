@@ -1,14 +1,9 @@
 #端口号
 server:
   port: 8001
-  servlet:
-    session:
-      cookie:
-        name: OAUTH2SESSION
 
 eureka:
   instance:
-    prefer-ip-address: true
     hostname: localhost #地址
 
   client:
