@@ -28,8 +28,8 @@ public class CodeGeneration {
 
         // 全局配置
         GlobalConfig gc = new GlobalConfig();
-        gc.setOutputDir("C:\\Users\\wang\\Desktop\\my-study\\java\\wsm-upms\\src\\main\\java");
-//        gc.setOutputDir("C:\\Users\\wang\\Desktop\\test");
+//        gc.setOutputDir("C:\\Users\\wang\\Desktop\\my-study\\java\\wsm-upms\\src\\main\\java");
+        gc.setOutputDir("C:\\Users\\wang\\Desktop\\test");
         gc.setFileOverride(true);
         gc.setActiveRecord(false);// 不需要ActiveRecord特性的请改为false
         gc.setEnableCache(false);// XML 二级缓存
@@ -58,7 +58,7 @@ public class CodeGeneration {
         StrategyConfig strategy = new StrategyConfig();
         strategy.setTablePrefix(new String[] { "" });// 此处可以修改为您的表前缀
         strategy.setNaming(NamingStrategy.underline_to_camel);// 表名生成策略
-        strategy.setInclude(new String[] {"user_role"}); // 需要生成的表
+        strategy.setInclude(new String[] {"oauth_client_details"}); // 需要生成的表
 //        strategy.setInclude("user"); // 需要生成的表
 
         strategy.setSuperServiceClass(null);

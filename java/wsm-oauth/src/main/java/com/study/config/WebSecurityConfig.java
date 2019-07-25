@@ -9,7 +9,7 @@ import org.springframework.security.config.annotation.web.configuration.EnableWe
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 
 /**
- * 配置Spring Security
+ * TODO web安全配置
  * ResourceServerConfig WebSecurityConfig 的优先级低的
  **/
 @Configuration
@@ -23,9 +23,9 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
         http.authorizeRequests().antMatchers("/oauth/**").permitAll().anyRequest().authenticated();
     }
 
-
     /**
      * 需要配置这个支持password模式 support password grant type
+     *
      * @return
      * @throws Exception
      */
@@ -34,5 +34,6 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
     public AuthenticationManager authenticationManagerBean() throws Exception {
         return super.authenticationManagerBean();
     }
+
 }
 

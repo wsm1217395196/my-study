@@ -13,6 +13,11 @@ import java.security.Principal;
 @RequestMapping("/user")
 public class UserController {
 
+    /**
+     * 根据token获取登录用户主体相关信息（用户名，token，角色。。。等）
+     *
+     * @return
+     */
     @GetMapping("/principal")
     public Principal user() {
         SecurityContext context = SecurityContextHolder.getContext();

@@ -13,7 +13,6 @@ import org.springframework.security.oauth2.config.annotation.web.configuration.R
 import org.springframework.security.oauth2.config.annotation.web.configurers.ResourceServerSecurityConfigurer;
 import org.springframework.util.StringUtils;
 
-import javax.swing.*;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -102,8 +101,8 @@ public class ResourceSeverConfig extends ResourceServerConfigurerAdapter {
         }
     }
 
-    @Override
-    public void configure(ResourceServerSecurityConfigurer resources) throws Exception {
-        resources.resourceId("resourcesId").stateless(true);
-    }
+//    @Override
+//    public void configure(ResourceServerSecurityConfigurer resources) throws Exception {
+//        resources.resourceId("resourcesId").stateless(true);
+//    }
 }

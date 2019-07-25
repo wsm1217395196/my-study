@@ -1,7 +1,5 @@
 package com.study.model;
 
-import com.baomidou.mybatisplus.annotations.TableField;
-import com.baomidou.mybatisplus.annotations.TableName;
 
 import java.io.Serializable;
 import java.util.Date;
@@ -14,7 +12,6 @@ import java.util.Date;
  * @author wsm
  * @since 2019-07-16
  */
-@TableName("user")
 public class UserModel implements Serializable {
 
     private static final long serialVersionUID = 1L;
@@ -63,7 +60,6 @@ public class UserModel implements Serializable {
     /**
      * 用户来源
      */
-    @TableField("user_source")
     private Integer userSource;
     /**
      * 用户状态（1：正常，2：异常，3：禁用）
@@ -72,22 +68,18 @@ public class UserModel implements Serializable {
     /**
      * 创建人
      */
-    @TableField("create_by")
     private String createBy;
     /**
      * 创建时间
      */
-    @TableField("create_time")
     private Date createTime;
     /**
      * 更新人
      */
-    @TableField("update_by")
     private String updateBy;
     /**
      * 更新时间
      */
-    @TableField("update_time")
     private Date updateTime;
     /**
      * 备注
