@@ -45,8 +45,14 @@ ribbon:
   MaxAutoRetries: 1
   MaxAutoRetriesNextServer: 2
 
+#熔断器开启
+feign:
+  hystrix:
+    enabled: true
+
 myConfig:
   isUseSecurity: true #是否使用security权限
   projectCode: wsm_project #项目编码
+  clientId: client_wsm
 
 

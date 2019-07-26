@@ -4,7 +4,7 @@ import com.baomidou.mybatisplus.mapper.EntityWrapper;
 import com.baomidou.mybatisplus.plugins.Page;
 import com.baomidou.mybatisplus.service.IService;
 import com.baomidou.mybatisplus.service.impl.ServiceImpl;
-import com.study.Constant;
+import com.study.MyConstant;
 import com.study.mapper.WorkMapper;
 import com.study.model.WorkModel;
 import com.study.result.PageParam;
@@ -38,7 +38,7 @@ public class WorkService extends ServiceImpl<WorkMapper, WorkModel> implements I
         JSONObject object = new JSONObject(pageParam.getCondition());
         Long recruitPlatformId = object.getLong("recruitPlatformId");
         Long jobId = object.getLong("jobId");
-        String site = object.getString("site");
+        String site = object.getString("site").trim();
         String isEnable = object.getString("isEnable");
 
         EntityWrapper ew = new EntityWrapper();
@@ -60,7 +60,7 @@ public class WorkService extends ServiceImpl<WorkMapper, WorkModel> implements I
 
         Page page = new Page();
         int total = 0;
-        if (pageIndex != Constant.Zero && pageSize != Constant.Zero) {
+        if (pageIndex != MyConstant.Zero && pageSize != MyConstant.Zero) {
             page = new Page(pageIndex, pageSize);
             total = workMapper.selectCount(ew);
         }

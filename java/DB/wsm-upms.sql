@@ -16,6 +16,75 @@ CREATE DATABASE /*!32312 IF NOT EXISTS*/`wsm-upms` /*!40100 DEFAULT CHARACTER SE
 
 USE `wsm-upms`;
 
+/*Table structure for table `oauth_access_token` */
+
+DROP TABLE IF EXISTS `oauth_access_token`;
+
+CREATE TABLE `oauth_access_token` (
+  `token_id` varchar(255) CHARACTER SET utf8 DEFAULT NULL,
+  `token` blob,
+  `authentication_id` varchar(255) CHARACTER SET utf8 DEFAULT NULL,
+  `user_name` varchar(255) CHARACTER SET utf8 DEFAULT NULL,
+  `client_id` varchar(255) CHARACTER SET utf8 DEFAULT NULL,
+  `authentication` blob,
+  `refresh_token` varchar(255) CHARACTER SET utf8 DEFAULT NULL,
+  KEY `token_id_index` (`token_id`),
+  KEY `authentication_id_index` (`authentication_id`),
+  KEY `user_name_index` (`user_name`),
+  KEY `client_id_index` (`client_id`),
+  KEY `refresh_token_index` (`refresh_token`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+
+/*Data for the table `oauth_access_token` */
+
+/*Table structure for table `oauth_client_details` */
+
+DROP TABLE IF EXISTS `oauth_client_details`;
+
+CREATE TABLE `oauth_client_details` (
+  `client_id` varchar(255) CHARACTER SET utf8 NOT NULL,
+  `resource_ids` varchar(255) CHARACTER SET utf8 DEFAULT NULL,
+  `client_secret` varchar(255) CHARACTER SET utf8 DEFAULT NULL,
+  `scope` varchar(255) CHARACTER SET utf8 DEFAULT NULL,
+  `authorized_grant_types` varchar(255) CHARACTER SET utf8 DEFAULT NULL,
+  `web_server_redirect_uri` varchar(255) CHARACTER SET utf8 DEFAULT NULL,
+  `authorities` varchar(255) CHARACTER SET utf8 DEFAULT NULL,
+  `access_token_validity` int(11) DEFAULT NULL,
+  `refresh_token_validity` int(11) DEFAULT NULL,
+  `additional_information` text CHARACTER SET utf8,
+  `autoapprove` varchar(255) CHARACTER SET utf8 DEFAULT 'false',
+  PRIMARY KEY (`client_id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+
+/*Data for the table `oauth_client_details` */
+
+insert  into `oauth_client_details`(`client_id`,`resource_ids`,`client_secret`,`scope`,`authorized_grant_types`,`web_server_redirect_uri`,`authorities`,`access_token_validity`,`refresh_token_validity`,`additional_information`,`autoapprove`) values ('client_wsm','','secret_wsm','scope_wsm','client_credentials,authorization_code,password,refresh_token',NULL,NULL,NULL,NULL,NULL,'false');
+
+/*Table structure for table `oauth_code` */
+
+DROP TABLE IF EXISTS `oauth_code`;
+
+CREATE TABLE `oauth_code` (
+  `code` varchar(255) CHARACTER SET utf8 DEFAULT NULL,
+  `authentication` blob,
+  KEY `code_index` (`code`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+
+/*Data for the table `oauth_code` */
+
+/*Table structure for table `oauth_refresh_token` */
+
+DROP TABLE IF EXISTS `oauth_refresh_token`;
+
+CREATE TABLE `oauth_refresh_token` (
+  `token_id` varchar(255) CHARACTER SET utf8 DEFAULT NULL,
+  `token` blob,
+  `authentication` blob,
+  KEY `token_id_index` (`token_id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+
+/*Data for the table `oauth_refresh_token` */
+
 /*Table structure for table `project` */
 
 DROP TABLE IF EXISTS `project`;
@@ -38,6 +107,8 @@ CREATE TABLE `project` (
 
 /*Data for the table `project` */
 
+insert  into `project`(`id`,`name`,`code`,`region_id`,`create_by`,`create_time`,`update_by`,`update_time`,`is_enabled`,`remark`) values (1,'wsm项目','wsm_project',1,'wsm','2019-07-18 11:36:48',NULL,NULL,1,NULL);
+
 /*Table structure for table `region` */
 
 DROP TABLE IF EXISTS `region`;
@@ -58,6 +129,8 @@ CREATE TABLE `region` (
 
 /*Data for the table `region` */
 
+insert  into `region`(`id`,`name`,`code`,`parent_id`,`create_by`,`create_time`,`update_by`,`update_time`,`is_enabled`,`remark`) values (1,'wsm域','666',NULL,'wsm','2019-07-18 11:35:49',NULL,NULL,1,NULL);
+
 /*Table structure for table `resource` */
 
 DROP TABLE IF EXISTS `resource`;
@@ -67,7 +140,7 @@ CREATE TABLE `resource` (
   `name` varchar(50) COLLATE utf8_unicode_ci NOT NULL COMMENT '名称',
   `code` varchar(20) COLLATE utf8_unicode_ci DEFAULT NULL COMMENT '编码',
   `button` varchar(200) COLLATE utf8_unicode_ci DEFAULT NULL COMMENT '按钮（页面要权限控制的按钮,也是后台接口方法名,多个用逗号分隔）',
-  `url_pattern` varchar(100) COLLATE utf8_unicode_ci DEFAULT NULL COMMENT '权限API路径匹配',
+  `url_pattern` varchar(100) COLLATE utf8_unicode_ci DEFAULT NULL COMMENT '权限API路径匹配(注：即后台控制器名，后面带authority,或者authority_button(对应button字段)代表受权限控制)',
   `project_id` bigint(20) DEFAULT NULL COMMENT '项目id',
   `create_by` varchar(50) COLLATE utf8_unicode_ci DEFAULT NULL COMMENT '创建人',
   `create_time` datetime DEFAULT NULL COMMENT '创建时间',
@@ -82,6 +155,50 @@ CREATE TABLE `resource` (
 
 /*Data for the table `resource` */
 
+insert  into `resource`(`id`,`name`,`code`,`button`,`url_pattern`,`project_id`,`create_by`,`create_time`,`update_by`,`update_time`,`is_enabled`,`remark`) values (1,'用户管理','user','add,deleteById,deleteByIds','/user',1,'wsm','2019-07-18 13:43:07',NULL,NULL,1,NULL),(2,'角色管理','role','add,update,deleteById','/role',1,'wsm','2019-07-18 17:18:58',NULL,NULL,1,NULL);
+
+/*Table structure for table `resource_role` */
+
+DROP TABLE IF EXISTS `resource_role`;
+
+CREATE TABLE `resource_role` (
+  `resource_id` bigint(20) NOT NULL COMMENT '资源id',
+  `resource_button` varchar(200) COLLATE utf8_unicode_ci DEFAULT NULL COMMENT '资源按钮（页面要权限控制的按钮,也是后台接口方法名,多个用逗号分隔）',
+  `role_id` bigint(20) NOT NULL COMMENT '用户组id',
+  KEY `user_group_id` (`role_id`),
+  KEY `resource_id` (`resource_id`),
+  CONSTRAINT `resource_role_ibfk_1` FOREIGN KEY (`role_id`) REFERENCES `role` (`id`),
+  CONSTRAINT `resource_role_ibfk_2` FOREIGN KEY (`resource_id`) REFERENCES `resource` (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci COMMENT='资源-角色-关系表';
+
+/*Data for the table `resource_role` */
+
+insert  into `resource_role`(`resource_id`,`resource_button`,`role_id`) values (1,'add,deleteById,deleteByIds',1),(1,NULL,2);
+
+/*Table structure for table `role` */
+
+DROP TABLE IF EXISTS `role`;
+
+CREATE TABLE `role` (
+  `id` bigint(20) NOT NULL,
+  `name` varchar(50) COLLATE utf8_unicode_ci NOT NULL COMMENT '名称',
+  `code` varchar(20) COLLATE utf8_unicode_ci DEFAULT NULL COMMENT '编码',
+  `project_id` bigint(20) DEFAULT NULL COMMENT '项目id',
+  `create_by` varchar(50) COLLATE utf8_unicode_ci DEFAULT NULL COMMENT '创建人',
+  `create_time` datetime DEFAULT NULL COMMENT '创建时间',
+  `update_by` varchar(50) COLLATE utf8_unicode_ci DEFAULT NULL COMMENT '更新人',
+  `update_time` datetime DEFAULT NULL COMMENT '更新时间',
+  `is_enabled` tinyint(4) DEFAULT '1' COMMENT '是否有效(0无效，1有效)',
+  `remark` varchar(200) COLLATE utf8_unicode_ci DEFAULT NULL COMMENT '备注',
+  PRIMARY KEY (`id`),
+  KEY `project_id` (`project_id`),
+  CONSTRAINT `role_ibfk_1` FOREIGN KEY (`project_id`) REFERENCES `project` (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci COMMENT='角色';
+
+/*Data for the table `role` */
+
+insert  into `role`(`id`,`name`,`code`,`project_id`,`create_by`,`create_time`,`update_by`,`update_time`,`is_enabled`,`remark`) values (1,'wsm项目_管理员','wsm_project_manage',1,'wsm','2019-07-18 11:42:24',NULL,NULL,1,NULL),(2,'wsm项目_普通用户','wsm_project_user',1,'wsm','2019-07-18 11:42:26',NULL,NULL,1,NULL);
+
 /*Table structure for table `user` */
 
 DROP TABLE IF EXISTS `user`;
@@ -90,7 +207,7 @@ CREATE TABLE `user` (
   `id` bigint(20) NOT NULL,
   `name` varchar(50) COLLATE utf8_unicode_ci NOT NULL COMMENT '用户名',
   `nickname` varchar(50) COLLATE utf8_unicode_ci DEFAULT NULL COMMENT '昵称',
-  `password` varchar(50) COLLATE utf8_unicode_ci NOT NULL DEFAULT '666' COMMENT '密码',
+  `password` varchar(200) COLLATE utf8_unicode_ci NOT NULL DEFAULT '123456' COMMENT '密码',
   `photo` varchar(50) COLLATE utf8_unicode_ci DEFAULT NULL COMMENT '头像',
   `sex` tinyint(4) DEFAULT NULL COMMENT '性别(0女,1男)',
   `birthday` date DEFAULT NULL COMMENT '生日',
@@ -110,60 +227,24 @@ CREATE TABLE `user` (
 
 /*Data for the table `user` */
 
-insert  into `user`(`id`,`name`,`nickname`,`password`,`photo`,`sex`,`birthday`,`phone`,`mail`,`address`,`explain`,`user_source`,`status`,`create_by`,`create_time`,`update_by`,`update_time`,`remark`) values (2507172906111144231,'string','string','string','string',0,'2019-06-11','string','string','string','string',NULL,0,'string','2019-06-11 06:42:31','string','2019-06-11 06:42:31','string');
+insert  into `user`(`id`,`name`,`nickname`,`password`,`photo`,`sex`,`birthday`,`phone`,`mail`,`address`,`explain`,`user_source`,`status`,`create_by`,`create_time`,`update_by`,`update_time`,`remark`) values (1,'wsm1',NULL,'123456',NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,1,NULL,NULL,NULL,NULL,NULL),(2,'wsm2','王帅逼2','123456',NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,1,NULL,NULL,NULL,'2019-07-24 09:25:51',NULL),(2019077926741772519,'wsm3','王帅逼','123456',NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,1,NULL,'2019-07-24 09:25:20',NULL,'2019-07-24 09:25:20',NULL);
 
-/*Table structure for table `user_group` */
+/*Table structure for table `user_role` */
 
-DROP TABLE IF EXISTS `user_group`;
+DROP TABLE IF EXISTS `user_role`;
 
-CREATE TABLE `user_group` (
-  `id` bigint(20) NOT NULL,
-  `name` varchar(50) COLLATE utf8_unicode_ci NOT NULL COMMENT '名称',
-  `code` varchar(20) COLLATE utf8_unicode_ci DEFAULT NULL COMMENT '编码',
-  `project_id` bigint(20) DEFAULT NULL COMMENT '项目id',
-  `create_by` varchar(50) COLLATE utf8_unicode_ci DEFAULT NULL COMMENT '创建人',
-  `create_time` datetime DEFAULT NULL COMMENT '创建时间',
-  `update_by` varchar(50) COLLATE utf8_unicode_ci DEFAULT NULL COMMENT '更新人',
-  `update_time` datetime DEFAULT NULL COMMENT '更新时间',
-  `is_enabled` tinyint(4) DEFAULT '1' COMMENT '是否有效(0无效，1有效)',
-  `remark` varchar(200) COLLATE utf8_unicode_ci DEFAULT NULL COMMENT '备注',
-  PRIMARY KEY (`id`),
-  KEY `project_id` (`project_id`),
-  CONSTRAINT `user_group_ibfk_1` FOREIGN KEY (`project_id`) REFERENCES `project` (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci COMMENT='用户组';
-
-/*Data for the table `user_group` */
-
-/*Table structure for table `user_group_resource_relation` */
-
-DROP TABLE IF EXISTS `user_group_resource_relation`;
-
-CREATE TABLE `user_group_resource_relation` (
-  `user_group_id` bigint(20) NOT NULL COMMENT '用户组id',
-  `resource_id` bigint(20) NOT NULL COMMENT '资源id',
-  `resource_button` varchar(200) COLLATE utf8_unicode_ci DEFAULT NULL COMMENT '资源按钮（页面要权限控制的按钮,也是后台接口方法名,多个用逗号分隔）',
-  KEY `user_group_id` (`user_group_id`),
-  KEY `resource_id` (`resource_id`),
-  CONSTRAINT `user_group_resource_relation_ibfk_1` FOREIGN KEY (`user_group_id`) REFERENCES `user_group` (`id`),
-  CONSTRAINT `user_group_resource_relation_ibfk_2` FOREIGN KEY (`resource_id`) REFERENCES `resource` (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci COMMENT='用户组-资源-关系表';
-
-/*Data for the table `user_group_resource_relation` */
-
-/*Table structure for table `user_group_user_relation` */
-
-DROP TABLE IF EXISTS `user_group_user_relation`;
-
-CREATE TABLE `user_group_user_relation` (
-  `user_group_id` bigint(20) NOT NULL COMMENT '用户组id',
+CREATE TABLE `user_role` (
   `user_id` bigint(20) NOT NULL COMMENT '用户id',
-  KEY `user_group_id` (`user_group_id`),
+  `role_id` bigint(20) NOT NULL COMMENT '用户组id',
+  KEY `user_group_id` (`role_id`),
   KEY `user_id` (`user_id`),
-  CONSTRAINT `user_group_user_relation_ibfk_1` FOREIGN KEY (`user_group_id`) REFERENCES `user_group` (`id`),
-  CONSTRAINT `user_group_user_relation_ibfk_2` FOREIGN KEY (`user_id`) REFERENCES `user` (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci COMMENT='用户组-用户-关系表';
+  CONSTRAINT `user_role_ibfk_1` FOREIGN KEY (`role_id`) REFERENCES `role` (`id`),
+  CONSTRAINT `user_role_ibfk_2` FOREIGN KEY (`user_id`) REFERENCES `user` (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci COMMENT='用户-角色-关系表';
 
-/*Data for the table `user_group_user_relation` */
+/*Data for the table `user_role` */
+
+insert  into `user_role`(`user_id`,`role_id`) values (1,1),(2,2);
 
 /*!40101 SET SQL_MODE=@OLD_SQL_MODE */;
 /*!40014 SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS */;

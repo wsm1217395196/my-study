@@ -38,7 +38,7 @@ public class UserController {
         return ResultView.success(models);
     }
 
-    @ApiOperation(value = "分页条件查询", notes = "提交参数：{\"pageIndex\":1,\"pageSize\":10,\"sort\":\"name desc\",\"condition\":\"{\'name\':\'\',\'nikename\':\'\',\'sex\':\'\',\'isEnable\':\'\'}\"}")
+    @ApiOperation(value = "分页条件查询", notes = "提交参数：{\"pageIndex\":1,\"pageSize\":10,\"sort\":\"name desc\",\"condition\":\"{\'name\':\'\',\'nickname\':\'\',\'sex\':\'\',\'isEnable\':\'\'}\"}")
     @PostMapping("/authority/getPage")
     public ResultView getPage(@RequestBody PageParam pageParam) {
         PageResult pageResult = userService.getPage(pageParam);
@@ -53,7 +53,7 @@ public class UserController {
     }
 
     @ApiOperation(value = "新增", notes = "")
-    @PostMapping("/authority/add")
+    @PostMapping("/authority_button/add")
     public ResultView add(@RequestBody UserModel model) {
         Date date = new Date();
         model.setId(CreateUtil.id());

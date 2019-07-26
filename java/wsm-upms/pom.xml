@@ -108,6 +108,11 @@
         <!--通用依赖结束-->
 
         <!--本项目依赖-->
+        <!--feign(默认集成hystrix熔断器)-->
+        <dependency>
+            <groupId>org.springframework.cloud</groupId>
+            <artifactId>spring-cloud-starter-openfeign</artifactId>
+        </dependency>
 
         <!--本项目依赖结束-->
 

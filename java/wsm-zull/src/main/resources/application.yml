@@ -44,17 +44,17 @@ security:
     client:
       access-token-uri: http://localhost:8001/wsm-oauth/oauth/token
       user-authorization-uri: http://localhost:8001/wsm-oauth/oauth/authorize
-      client-id: client
+      client-id: client_wsm
 #      client-secret: secret
     resource:
       user-info-uri: http://localhost:8001/wsm-oauth/user/principal
       prefer-token-info: false
 
 ribbon:
-  ReadTimeout: 10000
-  ConnectTimeout: 10000
-  MaxAutoRetries: 1
-  MaxAutoRetriesNextServer: 2
+  ReadTimeout: 10000 #请求处理的超时时间
+  ConnectTimeout: 10000 #请求连接的超时时间
+  MaxAutoRetries: 1 #对当前实例的重试次数
+  MaxAutoRetriesNextServer: 2 #切换实例的重试次数
   eureka:
     enabled: true
 

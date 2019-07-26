@@ -3,7 +3,14 @@ package com.study;
 /**
  * 常量类
  */
-public class Constant {
+public class MyConstant {
+
+    //服务名
+    public static final String wsm_oauth = "wsm-oauth";
+    public static final String wsm_zull = "wsm-zull";
+    public static final String wsm_upms = "wsm-upms";
+    public static final String wsm_work = "wsm-work";
+    public static final String wsm_demo = "wsm-demo";
 
     //表名
     public static final String T_User = "用户";

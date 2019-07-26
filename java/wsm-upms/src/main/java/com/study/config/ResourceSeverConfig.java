@@ -10,7 +10,6 @@ import org.springframework.security.config.annotation.method.configuration.Enabl
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.oauth2.config.annotation.web.configuration.EnableResourceServer;
 import org.springframework.security.oauth2.config.annotation.web.configuration.ResourceServerConfigurerAdapter;
-import org.springframework.security.oauth2.config.annotation.web.configurers.ResourceServerSecurityConfigurer;
 import org.springframework.util.StringUtils;
 
 import java.util.ArrayList;
@@ -25,9 +24,15 @@ import java.util.List;
 @EnableGlobalMethodSecurity(prePostEnabled = true)
 public class ResourceSeverConfig extends ResourceServerConfigurerAdapter {
 
+    /**
+     * 是否使用security权限
+     */
     @Value("${myConfig.isUseSecurity}")
     private boolean isUseSecurity;
 
+    /**
+     * 项目编码
+     */
     @Value("${myConfig.projectCode}")
     private String projectCode;
 

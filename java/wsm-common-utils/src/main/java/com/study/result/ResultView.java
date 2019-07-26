@@ -19,12 +19,6 @@ public class ResultView {
      */
     private Object data;
 
-//    /**
-//     * 时间
-//     */
-//    @ApiModelProperty(name = "time", value = "时间", example = "1541486801195")
-//    private long time;
-
     /**
      * 成功
      *
@@ -55,6 +49,18 @@ public class ResultView {
     }
 
     /**
+     * 调用服务的错误
+     *
+     * @param serviceName 服务名
+     * @return 结果视图
+     */
+    public static ResultView hystrixError(String serviceName) {
+        ResultEnum resultEnum = ResultEnum.CODE_3;
+        String msg = resultEnum.getMsg().replace("xxx", serviceName);
+        return new ResultView(resultEnum.getCode(), msg);
+    }
+
+    /**
      * 自定义错误消息
      *
      * @param msg 错误消息
@@ -73,13 +79,11 @@ public class ResultView {
         this.data = data;
         this.code = ResultEnum.CODE_1.getCode();
         this.msg = ResultEnum.CODE_1.getMsg();
-//        this.time = System.currentTimeMillis();
     }
 
     private ResultView(Integer code, String msg) {
         this.code = code;
         this.msg = msg;
-//        this.time = System.currentTimeMillis();
     }
 
     public Integer getCode() {
@@ -105,4 +109,5 @@ public class ResultView {
     public void setData(Object data) {
         this.data = data;
     }
+
 }

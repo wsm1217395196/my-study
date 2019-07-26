@@ -3,7 +3,7 @@ package com.study.service;
 import com.baomidou.mybatisplus.mapper.EntityWrapper;
 import com.baomidou.mybatisplus.plugins.Page;
 import com.baomidou.mybatisplus.service.impl.ServiceImpl;
-import com.study.Constant;
+import com.study.MyConstant;
 import com.study.mapper.UserMapper;
 import com.study.model.UserModel;
 import com.study.result.PageParam;
@@ -36,8 +36,9 @@ public class UserService extends ServiceImpl<UserMapper, UserModel> {
 //        int pageStart = pageParam.getPageStart();
         String sort = pageParam.getSort();
         JSONObject object = new JSONObject(pageParam.getCondition());
-        String name = object.getString("name");
-        String nikename = object.getString("nikename");
+        String name = object.getString("name").trim();
+        String nickname = object.getString("nickname").trim();
+        String phone = object.getString("phone").trim();
         String sex = object.getString("sex");
         String isEnable = object.getString("isEnable");
 
@@ -45,8 +46,11 @@ public class UserService extends ServiceImpl<UserMapper, UserModel> {
         if (!StringUtils.isEmpty(name)) {
             ew.like("name", name);
         }
-        if (!StringUtils.isEmpty(nikename)) {
-            ew.like("nikename", nikename);
+        if (!StringUtils.isEmpty(nickname)) {
+            ew.like("nickname", nickname);
+        }
+        if (!StringUtils.isEmpty(phone)) {
+            ew.like("phone", phone);
         }
         if (!StringUtils.isEmpty(sex)) {
             ew.eq("sex", sex);
@@ -60,7 +64,7 @@ public class UserService extends ServiceImpl<UserMapper, UserModel> {
 
         Page page = new Page();
         int total = 0;
-        if (pageIndex != Constant.Zero && pageSize != Constant.Zero) {
+        if (pageIndex != MyConstant.Zero && pageSize != MyConstant.Zero) {
             page = new Page(pageIndex, pageSize);
             total = userMapper.selectCount(ew);
         }

@@ -4,7 +4,7 @@ import com.baomidou.mybatisplus.mapper.EntityWrapper;
 import com.baomidou.mybatisplus.plugins.Page;
 import com.baomidou.mybatisplus.service.IService;
 import com.baomidou.mybatisplus.service.impl.ServiceImpl;
-import com.study.Constant;
+import com.study.MyConstant;
 import com.study.mapper.RecruitPlatformMapper;
 import com.study.model.RecruitPlatformModel;
 import com.study.result.PageParam;
@@ -36,7 +36,7 @@ public class RecruitPlatformService extends ServiceImpl<RecruitPlatformMapper, R
 //        int pageStart = pageParam.getPageStart();
         String sort = pageParam.getSort();
         JSONObject object = new JSONObject(pageParam.getCondition());
-        String name = object.getString("name");
+        String name = object.getString("name").trim();
         String isEnable = object.getString("isEnable");
 
         EntityWrapper ew = new EntityWrapper();
@@ -52,7 +52,7 @@ public class RecruitPlatformService extends ServiceImpl<RecruitPlatformMapper, R
 
         Page page = new Page();
         int total = 0;
-        if (pageIndex != Constant.Zero && pageSize != Constant.Zero) {
+        if (pageIndex != MyConstant.Zero && pageSize != MyConstant.Zero) {
             page = new Page(pageIndex, pageSize);
             total = recruitPlatformMapper.selectCount(ew);
         }

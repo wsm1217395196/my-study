@@ -1,6 +1,5 @@
 package com.study.controller;
 
-import com.study.result.ResultEnum;
 import com.study.result.ResultView;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -14,6 +13,6 @@ public class FallbackController {
 
     @RequestMapping("fallback")
     public ResultView fallback() {
-        return ResultView.error(ResultEnum.CODE_3);
+        return ResultView.hystrixError("xxx");
     }
 }

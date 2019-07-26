@@ -4,12 +4,11 @@ import com.baomidou.mybatisplus.mapper.EntityWrapper;
 import com.baomidou.mybatisplus.plugins.Page;
 import com.baomidou.mybatisplus.service.IService;
 import com.baomidou.mybatisplus.service.impl.ServiceImpl;
-import com.study.Constant;
+import com.study.MyConstant;
 import com.study.mapper.JobMapper;
 import com.study.model.JobModel;
 import com.study.result.PageParam;
 import com.study.result.PageResult;
-import org.json.JSONException;
 import org.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -38,7 +37,7 @@ public class JobService extends ServiceImpl<JobMapper, JobModel> implements ISer
 //        int pageStart = pageParam.getPageStart();
         String sort = pageParam.getSort();
         JSONObject object = new JSONObject(pageParam.getCondition());
-        String name = object.getString("name");
+        String name = object.getString("name").trim();
         String isEnable = object.getString("isEnable");
 
         EntityWrapper ew = new EntityWrapper();
@@ -54,7 +53,7 @@ public class JobService extends ServiceImpl<JobMapper, JobModel> implements ISer
 
         Page page = new Page();
         int total = 0;
-        if (pageIndex != Constant.Zero && pageSize != Constant.Zero) {
+        if (pageIndex != MyConstant.Zero && pageSize != MyConstant.Zero) {
             page = new Page(pageIndex, pageSize);
             total = jobMapper.selectCount(ew);
         }
