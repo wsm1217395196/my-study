@@ -38,6 +38,8 @@ security:
       id: wsm-upms
       user-info-uri: http://localhost:8001/wsm-oauth/user/principal?clientname=wsm-upms
       prefer-token-info: false
+      jwt:
+        key-value: jwt_wsm
 
 ribbon:
   ReadTimeout: 10000

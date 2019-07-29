@@ -15,10 +15,14 @@ import org.springframework.security.oauth2.config.annotation.web.configuration.E
 import org.springframework.security.oauth2.config.annotation.web.configurers.AuthorizationServerEndpointsConfigurer;
 import org.springframework.security.oauth2.config.annotation.web.configurers.AuthorizationServerSecurityConfigurer;
 import org.springframework.security.oauth2.provider.token.DefaultTokenServices;
+import org.springframework.security.oauth2.provider.token.TokenEnhancer;
+import org.springframework.security.oauth2.provider.token.TokenEnhancerChain;
 import org.springframework.security.oauth2.provider.token.TokenStore;
 import org.springframework.security.oauth2.provider.token.store.JdbcTokenStore;
+import org.springframework.security.oauth2.provider.token.store.JwtAccessTokenConverter;
 
 import javax.sql.DataSource;
+import java.util.Arrays;
 
 
 /**
@@ -48,6 +52,27 @@ public class AuthorizationServerConfig extends AuthorizationServerConfigurerAdap
         return new BCryptPasswordEncoder();
     }
 
+    /**
+     * 对Jwt签名时，增加一个密钥
+     * JwtAccessTokenConverter：对Jwt来进行编码以及解码的类
+     */
+    @Bean
+    public JwtAccessTokenConverter jwtAccessTokenConverter() {
+        JwtAccessTokenConverter jwtAccessTokenConverter = new JwtAccessTokenConverter();
+        jwtAccessTokenConverter.setSigningKey("jwt_wsm");//对称加密方式
+        return jwtAccessTokenConverter;
+    }
+
+    /**
+     * 注入自定义token生成方式
+     *
+     * @return
+     */
+    @Bean
+    public TokenEnhancer myTokenEnhancer() {
+        return new MyTokenEnhancer();
+    }
+
     @Bean
     public TokenStore tokenStore() {
         // token保存在内存中（也可以保存在数据库、Redis中）。
@@ -60,19 +85,29 @@ public class AuthorizationServerConfig extends AuthorizationServerConfigurerAdap
 
     @Override
     public void configure(AuthorizationServerEndpointsConfigurer endpoints) throws Exception {
+        //指定认证管理器
         endpoints.authenticationManager(authenticationManager);
         endpoints.allowedTokenEndpointRequestMethods(HttpMethod.GET, HttpMethod.POST);
+        //指定token存储位置
         endpoints.tokenStore(tokenStore());
+
+        //        endpoints.accessTokenConverter(jwtAccessTokenConverter());//使用jwt
+        // 自定义token生成方式
+        TokenEnhancerChain tokenEnhancerChain = new TokenEnhancerChain();
+        tokenEnhancerChain.setTokenEnhancers(Arrays.asList(myTokenEnhancer(), jwtAccessTokenConverter()));
+        endpoints.tokenEnhancer(tokenEnhancerChain);
+
         // 配置TokenServices参数
         DefaultTokenServices tokenServices = new DefaultTokenServices();
+//        DefaultTokenServices tokenServices = (DefaultTokenServices) endpoints.getDefaultAuthorizationServerTokenServices();
         tokenServices.setTokenStore(endpoints.getTokenStore());
-
         // 这里如果设置为false则不能更新refresh_token，如果需要刷新token的功能需要设置成true
         tokenServices.setSupportRefreshToken(true);
-
+        // 设置刷新token后上次token不可用（清除上次数据库token）
+        tokenServices.setReuseRefreshToken(false);
         tokenServices.setClientDetailsService(endpoints.getClientDetailsService());
         tokenServices.setTokenEnhancer(endpoints.getTokenEnhancer());
-
+//        tokenServices.setAccessTokenValiditySeconds((int) TimeUnit.DAYS.toSeconds(1)); // 1天
         endpoints.tokenServices(tokenServices);
     }
 
