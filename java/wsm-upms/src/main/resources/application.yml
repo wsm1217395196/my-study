@@ -38,8 +38,14 @@ security:
       id: wsm-upms
       user-info-uri: http://localhost:8001/wsm-oauth/user/principal?clientname=wsm-upms
       prefer-token-info: false
+
+# key-value跟key-uri：token的验证可以直接在本地（即本服务）完成，不需要连接wsm-oauth服务认证服务器。
+#                     但是刷新token后、或者注销登录，以前的token还可用。（无状态）
+#               注意：如果token的验证要连接wsm-oauth服务，刷新token后、或者注销登录，以前的token不可用。
+#                     请注释下面三行（有状态）
       jwt:
-        key-value: jwt_wsm
+#        key-value: jwt_wsm #对称加密方式
+        key-uri: http://localhost:8001/wsm-oauth/oauth/token_key #非对称加密方式 (获取公钥地址)
 
 ribbon:
   ReadTimeout: 10000

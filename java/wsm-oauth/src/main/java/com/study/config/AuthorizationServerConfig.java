@@ -4,6 +4,7 @@ import com.study.service.MyClientDetailsService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.core.io.ClassPathResource;
 import org.springframework.data.redis.connection.RedisConnectionFactory;
 import org.springframework.http.HttpMethod;
 import org.springframework.security.authentication.AuthenticationManager;
@@ -20,6 +21,7 @@ import org.springframework.security.oauth2.provider.token.TokenEnhancerChain;
 import org.springframework.security.oauth2.provider.token.TokenStore;
 import org.springframework.security.oauth2.provider.token.store.JdbcTokenStore;
 import org.springframework.security.oauth2.provider.token.store.JwtAccessTokenConverter;
+import org.springframework.security.oauth2.provider.token.store.KeyStoreKeyFactory;
 
 import javax.sql.DataSource;
 import java.util.Arrays;
@@ -58,8 +60,16 @@ public class AuthorizationServerConfig extends AuthorizationServerConfigurerAdap
      */
     @Bean
     public JwtAccessTokenConverter jwtAccessTokenConverter() {
+
         JwtAccessTokenConverter jwtAccessTokenConverter = new JwtAccessTokenConverter();
-        jwtAccessTokenConverter.setSigningKey("jwt_wsm");//对称加密方式
+
+        //对称加密方式
+//        jwtAccessTokenConverter.setSigningKey("jwt_wsm");
+
+        //非对称加密方式
+        KeyStoreKeyFactory keyStoreKeyFactory = new KeyStoreKeyFactory(new ClassPathResource("mytest.jks"), "mypass".toCharArray());
+        jwtAccessTokenConverter.setKeyPair(keyStoreKeyFactory.getKeyPair("mytest"));
+
         return jwtAccessTokenConverter;
     }
 
@@ -81,6 +91,7 @@ public class AuthorizationServerConfig extends AuthorizationServerConfigurerAdap
 //        return new InMemoryTokenStore();//存内存
 //        return new RedisTokenStore(redisConnectionFactory);//存redis
         return new JdbcTokenStore(dataSource);//存数据库
+//        return new JwtTokenStore(jwtAccessTokenConverter()); //jwt存储
     }
 
     @Override
@@ -91,7 +102,6 @@ public class AuthorizationServerConfig extends AuthorizationServerConfigurerAdap
         //指定token存储位置
         endpoints.tokenStore(tokenStore());
 
-        //        endpoints.accessTokenConverter(jwtAccessTokenConverter());//使用jwt
         // 自定义token生成方式
         TokenEnhancerChain tokenEnhancerChain = new TokenEnhancerChain();
         tokenEnhancerChain.setTokenEnhancers(Arrays.asList(myTokenEnhancer(), jwtAccessTokenConverter()));
@@ -103,7 +113,7 @@ public class AuthorizationServerConfig extends AuthorizationServerConfigurerAdap
         tokenServices.setTokenStore(endpoints.getTokenStore());
         // 这里如果设置为false则不能更新refresh_token，如果需要刷新token的功能需要设置成true
         tokenServices.setSupportRefreshToken(true);
-        // 设置刷新token后上次token不可用（清除上次数据库token）
+        // 设置上次RefreshToken是否还可以使用 默认为true
         tokenServices.setReuseRefreshToken(false);
         tokenServices.setClientDetailsService(endpoints.getClientDetailsService());
         tokenServices.setTokenEnhancer(endpoints.getTokenEnhancer());

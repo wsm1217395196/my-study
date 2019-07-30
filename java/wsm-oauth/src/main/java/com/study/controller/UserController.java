@@ -6,6 +6,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContext;
 import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.jwt.Jwt;
+import org.springframework.security.jwt.JwtHelper;
 import org.springframework.security.oauth2.provider.token.ConsumerTokenServices;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -28,6 +30,7 @@ public class UserController {
      */
     @GetMapping("/principal")
     public Principal user() {
+        System.err.println("调用了principal");
         SecurityContext context = SecurityContextHolder.getContext();
         Authentication authentication = context.getAuthentication();
         return authentication;
@@ -47,6 +50,18 @@ public class UserController {
         } else {
             return ResultView.error(ResultEnum.CODE_8);
         }
+    }
+
+    /**
+     * 解析jwt token
+     *
+     * @param token
+     * @return
+     */
+    @GetMapping("/decodeToken")
+    public ResultView decodeToken(@RequestParam String token) {
+        Jwt decode = JwtHelper.decode(token);
+        return ResultView.success(decode);
     }
 
 }

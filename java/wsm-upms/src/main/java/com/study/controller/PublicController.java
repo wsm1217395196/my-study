@@ -93,7 +93,7 @@ public class PublicController {
 
         Map map = new HashMap();
         map.put("user", userModel);
-        map.put("token", tokenInfo.get("access_token"));
+        map.put("tokenInfo", tokenInfo);
         return ResultView.success(map);
     }
 
