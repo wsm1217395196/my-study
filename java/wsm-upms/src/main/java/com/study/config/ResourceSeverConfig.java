@@ -5,13 +5,24 @@ import com.study.mapper.ResourceRoleMapper;
 import com.study.model.ResourceRoleModel;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.core.io.ClassPathResource;
+import org.springframework.core.io.Resource;
+import org.springframework.data.redis.connection.RedisConnectionFactory;
 import org.springframework.security.config.annotation.method.configuration.EnableGlobalMethodSecurity;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.oauth2.config.annotation.web.configuration.EnableResourceServer;
 import org.springframework.security.oauth2.config.annotation.web.configuration.ResourceServerConfigurerAdapter;
+import org.springframework.security.oauth2.config.annotation.web.configurers.ResourceServerSecurityConfigurer;
+import org.springframework.security.oauth2.provider.token.TokenStore;
+import org.springframework.security.oauth2.provider.token.store.JdbcTokenStore;
+import org.springframework.security.oauth2.provider.token.store.JwtAccessTokenConverter;
+import org.springframework.util.FileCopyUtils;
 import org.springframework.util.StringUtils;
 
+import javax.sql.DataSource;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -24,24 +35,58 @@ import java.util.List;
 @EnableGlobalMethodSecurity(prePostEnabled = true)
 public class ResourceSeverConfig extends ResourceServerConfigurerAdapter {
 
-    /**
-     * 是否使用security权限
-     */
     @Value("${myConfig.isUseSecurity}")
     private boolean isUseSecurity;
-
-    /**
-     * 项目编码
-     */
     @Value("${myConfig.projectCode}")
     private String projectCode;
-
     @Autowired
     private ResourceRoleMapper resourceRoleMapper;
+    @Autowired
+    private RedisConnectionFactory redisConnectionFactory;
+    @Autowired
+    private DataSource dataSource;
+
+    /**
+     * Jwt的bean配置。也可以使用yml方式
+     */
+//    @Bean
+    public JwtAccessTokenConverter jwtAccessTokenConverter() {
+        JwtAccessTokenConverter jwtAccessTokenConverter = new JwtAccessTokenConverter();
+
+        //对称加密方式
+//        jwtAccessTokenConverter.setSigningKey("jwt_wsm");
+
+        //非对称加密方式
+        Resource resource = new ClassPathResource("publicKey.txt");
+        String publicKey;
+        try {
+            publicKey = new String(FileCopyUtils.copyToByteArray(resource.getInputStream()));
+            System.err.println("publicKey = " + publicKey);
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+        jwtAccessTokenConverter.setVerifierKey(publicKey);
+
+        return jwtAccessTokenConverter;
+    }
+
+    /**
+     * 这个bean要与wsm-oauth服务AuthorizationServerConfig类tokenStore方法相对应
+     *
+     * @return
+     */
+    @Bean
+    public TokenStore tokenStore() {
+//        return new InMemoryTokenStore();
+//        return new RedisTokenStore(redisConnectionFactory);
+//        return new JwtTokenStore(jwtAccessTokenConverter());
+        return new JdbcTokenStore(dataSource);
+    }
 
     @Override
     public void configure(HttpSecurity http) throws Exception {
-        http.csrf().disable();//防csrf攻击
+        http.csrf();//防csrf攻击
+//        http.csrf().disable();//防csrf攻击 禁用
 
         if (!isUseSecurity) {//不启用权限
             http.authorizeRequests().antMatchers("/**").permitAll();//可以访问
@@ -106,8 +151,9 @@ public class ResourceSeverConfig extends ResourceServerConfigurerAdapter {
         }
     }
 
-//    @Override
-//    public void configure(ResourceServerSecurityConfigurer resources) throws Exception {
+    @Override
+    public void configure(ResourceServerSecurityConfigurer resources) {
 //        resources.resourceId("resourcesId").stateless(true);
-//    }
+        resources.tokenStore(tokenStore());
+    }
 }

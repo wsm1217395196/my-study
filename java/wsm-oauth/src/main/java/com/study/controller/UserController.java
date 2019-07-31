@@ -2,6 +2,8 @@ package com.study.controller;
 
 import com.study.result.ResultEnum;
 import com.study.result.ResultView;
+import io.jsonwebtoken.Claims;
+import io.jsonwebtoken.Jwts;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContext;
@@ -14,7 +16,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.io.UnsupportedEncodingException;
 import java.security.Principal;
+import java.util.Date;
 
 @RestController
 @RequestMapping("/user")
@@ -59,9 +63,22 @@ public class UserController {
      * @return
      */
     @GetMapping("/decodeToken")
-    public ResultView decodeToken(@RequestParam String token) {
+    public ResultView decodeToken(@RequestParam String token) throws UnsupportedEncodingException {
+
+        Claims claims = Jwts.parser().setSigningKey("jwt_wsm".getBytes("UTF-8"))
+                .parseClaimsJws(token).getBody();
+        System.err.println(claims);
+
+        Object createTime = claims.get("createTime");
+        System.err.println("创建时间：" + createTime);
+
+        Date expiration = claims.getExpiration();
+        System.err.println("过期时间：" + expiration);
+
+        String author = (String) claims.get("author");
+        System.err.println("作者：" + author);
+
         Jwt decode = JwtHelper.decode(token);
         return ResultView.success(decode);
     }
-
 }

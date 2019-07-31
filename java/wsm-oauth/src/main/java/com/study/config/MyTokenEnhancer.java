@@ -1,11 +1,13 @@
 package com.study.config;
 
+import com.study.utils.DateUtil;
 import org.json.JSONObject;
 import org.springframework.security.oauth2.common.DefaultOAuth2AccessToken;
 import org.springframework.security.oauth2.common.OAuth2AccessToken;
 import org.springframework.security.oauth2.provider.OAuth2Authentication;
 import org.springframework.security.oauth2.provider.token.TokenEnhancer;
 
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -30,6 +32,7 @@ public class MyTokenEnhancer implements TokenEnhancer {
         }
         additionalInfo.put("roles", roles.substring(0, roles.length() - 1));
         additionalInfo.put("author", "wsm");
+        additionalInfo.put("createTime", DateUtil.formatDate(new Date()));
 
         ((DefaultOAuth2AccessToken) accessToken).setAdditionalInformation(additionalInfo);
         return accessToken;

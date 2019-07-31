@@ -40,12 +40,10 @@ public class AuthorizationServerConfig extends AuthorizationServerConfigurerAdap
      */
     @Autowired
     private AuthenticationManager authenticationManager;
-
-
-    @Autowired
-    private DataSource dataSource;
     @Autowired
     private RedisConnectionFactory redisConnectionFactory;
+    @Autowired
+    private DataSource dataSource;
     @Autowired
     private MyClientDetailsService myClientDetailsService;
 
@@ -90,12 +88,12 @@ public class AuthorizationServerConfig extends AuthorizationServerConfigurerAdap
         // 注意：如果不保存access_token，则没法通过access_token取得用户信息
 //        return new InMemoryTokenStore();//存内存
 //        return new RedisTokenStore(redisConnectionFactory);//存redis
-        return new JdbcTokenStore(dataSource);//存数据库
 //        return new JwtTokenStore(jwtAccessTokenConverter()); //jwt存储
+        return new JdbcTokenStore(dataSource);//存数据库
     }
 
     @Override
-    public void configure(AuthorizationServerEndpointsConfigurer endpoints) throws Exception {
+    public void configure(AuthorizationServerEndpointsConfigurer endpoints) {
         //指定认证管理器
         endpoints.authenticationManager(authenticationManager);
         endpoints.allowedTokenEndpointRequestMethods(HttpMethod.GET, HttpMethod.POST);
@@ -135,10 +133,10 @@ public class AuthorizationServerConfig extends AuthorizationServerConfigurerAdap
     }
 
     @Override
-    public void configure(AuthorizationServerSecurityConfigurer oauthServer) throws Exception {
+    public void configure(AuthorizationServerSecurityConfigurer oauthServer) {
         oauthServer
-                .tokenKeyAccess("permitAll()") //url:/oauth/token_key,exposes public key for token verification if using JWT tokens
-                .checkTokenAccess("isAuthenticated()") //url:/oauth/check_token allow check token
+                .tokenKeyAccess("permitAll()")
+                .checkTokenAccess("isAuthenticated()")
                 .allowFormAuthenticationForClients();
     }
 }
