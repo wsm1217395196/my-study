@@ -4,7 +4,6 @@ import com.study.service.MyClientDetailsService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.core.io.ClassPathResource;
 import org.springframework.data.redis.connection.RedisConnectionFactory;
 import org.springframework.http.HttpMethod;
 import org.springframework.security.authentication.AuthenticationManager;
@@ -19,9 +18,8 @@ import org.springframework.security.oauth2.provider.token.DefaultTokenServices;
 import org.springframework.security.oauth2.provider.token.TokenEnhancer;
 import org.springframework.security.oauth2.provider.token.TokenEnhancerChain;
 import org.springframework.security.oauth2.provider.token.TokenStore;
-import org.springframework.security.oauth2.provider.token.store.JdbcTokenStore;
 import org.springframework.security.oauth2.provider.token.store.JwtAccessTokenConverter;
-import org.springframework.security.oauth2.provider.token.store.KeyStoreKeyFactory;
+import org.springframework.security.oauth2.provider.token.store.redis.RedisTokenStore;
 
 import javax.sql.DataSource;
 import java.util.Arrays;
@@ -62,11 +60,11 @@ public class AuthorizationServerConfig extends AuthorizationServerConfigurerAdap
         JwtAccessTokenConverter jwtAccessTokenConverter = new JwtAccessTokenConverter();
 
         //对称加密方式
-//        jwtAccessTokenConverter.setSigningKey("jwt_wsm");
+        jwtAccessTokenConverter.setSigningKey("jwt_wsm");
 
         //非对称加密方式
-        KeyStoreKeyFactory keyStoreKeyFactory = new KeyStoreKeyFactory(new ClassPathResource("mytest.jks"), "mypass".toCharArray());
-        jwtAccessTokenConverter.setKeyPair(keyStoreKeyFactory.getKeyPair("mytest"));
+//        KeyStoreKeyFactory keyStoreKeyFactory = new KeyStoreKeyFactory(new ClassPathResource("mytest.jks"), "mypass".toCharArray());
+//        jwtAccessTokenConverter.setKeyPair(keyStoreKeyFactory.getKeyPair("mytest"));
 
         return jwtAccessTokenConverter;
     }
@@ -87,9 +85,9 @@ public class AuthorizationServerConfig extends AuthorizationServerConfigurerAdap
         // 如果保存在中间件（数据库、Redis），那么资源服务器与认证服务器可以不在同一个工程中。
         // 注意：如果不保存access_token，则没法通过access_token取得用户信息
 //        return new InMemoryTokenStore();//存内存
-//        return new RedisTokenStore(redisConnectionFactory);//存redis
+        return new RedisTokenStore(redisConnectionFactory);//存redis
 //        return new JwtTokenStore(jwtAccessTokenConverter()); //jwt存储
-        return new JdbcTokenStore(dataSource);//存数据库
+//        return new JdbcTokenStore(dataSource);//存数据库
     }
 
     @Override

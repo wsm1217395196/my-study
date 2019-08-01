@@ -7,8 +7,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.core.io.ClassPathResource;
-import org.springframework.core.io.Resource;
 import org.springframework.data.redis.connection.RedisConnectionFactory;
 import org.springframework.security.config.annotation.method.configuration.EnableGlobalMethodSecurity;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
@@ -17,12 +15,10 @@ import org.springframework.security.oauth2.config.annotation.web.configuration.R
 import org.springframework.security.oauth2.config.annotation.web.configurers.ResourceServerSecurityConfigurer;
 import org.springframework.security.oauth2.provider.token.TokenStore;
 import org.springframework.security.oauth2.provider.token.store.JdbcTokenStore;
-import org.springframework.security.oauth2.provider.token.store.JwtAccessTokenConverter;
-import org.springframework.util.FileCopyUtils;
+import org.springframework.security.oauth2.provider.token.store.redis.RedisTokenStore;
 import org.springframework.util.StringUtils;
 
 import javax.sql.DataSource;
-import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -47,30 +43,6 @@ public class ResourceSeverConfig extends ResourceServerConfigurerAdapter {
     private DataSource dataSource;
 
     /**
-     * Jwt的bean配置。也可以使用yml方式
-     */
-//    @Bean
-    public JwtAccessTokenConverter jwtAccessTokenConverter() {
-        JwtAccessTokenConverter jwtAccessTokenConverter = new JwtAccessTokenConverter();
-
-        //对称加密方式
-//        jwtAccessTokenConverter.setSigningKey("jwt_wsm");
-
-        //非对称加密方式
-        Resource resource = new ClassPathResource("publicKey.txt");
-        String publicKey;
-        try {
-            publicKey = new String(FileCopyUtils.copyToByteArray(resource.getInputStream()));
-            System.err.println("publicKey = " + publicKey);
-        } catch (IOException e) {
-            throw new RuntimeException(e);
-        }
-        jwtAccessTokenConverter.setVerifierKey(publicKey);
-
-        return jwtAccessTokenConverter;
-    }
-
-    /**
      * 这个bean要与wsm-oauth服务AuthorizationServerConfig类tokenStore方法相对应
      *
      * @return
@@ -78,9 +50,9 @@ public class ResourceSeverConfig extends ResourceServerConfigurerAdapter {
     @Bean
     public TokenStore tokenStore() {
 //        return new InMemoryTokenStore();
-//        return new RedisTokenStore(redisConnectionFactory);
+        return new RedisTokenStore(redisConnectionFactory);
 //        return new JwtTokenStore(jwtAccessTokenConverter());
-        return new JdbcTokenStore(dataSource);
+//        return new JdbcTokenStore(dataSource);
     }
 
     @Override
