@@ -1,6 +1,8 @@
 package com.study.config;
 
 import com.study.dto.ResourceRoleInfoDto;
+import com.study.exception.MyAccessDeniedHandler;
+import com.study.exception.MyAuthExceptionEntryPoint;
 import com.study.mapper.ResourceRoleMapper;
 import com.study.model.ResourceRoleModel;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,7 +16,6 @@ import org.springframework.security.oauth2.config.annotation.web.configuration.E
 import org.springframework.security.oauth2.config.annotation.web.configuration.ResourceServerConfigurerAdapter;
 import org.springframework.security.oauth2.config.annotation.web.configurers.ResourceServerSecurityConfigurer;
 import org.springframework.security.oauth2.provider.token.TokenStore;
-import org.springframework.security.oauth2.provider.token.store.JdbcTokenStore;
 import org.springframework.security.oauth2.provider.token.store.redis.RedisTokenStore;
 import org.springframework.util.StringUtils;
 
@@ -59,12 +60,16 @@ public class ResourceSeverConfig extends ResourceServerConfigurerAdapter {
     public void configure(ResourceServerSecurityConfigurer resources) {
 //        resources.resourceId("resourcesId").stateless(true);
         resources.tokenStore(tokenStore());
+        //自定义Token异常信息,用于token校验失败返回信息
+        resources.authenticationEntryPoint(new MyAuthExceptionEntryPoint())
+                //授权异常处理
+                .accessDeniedHandler(new MyAccessDeniedHandler());
     }
 
     @Override
     public void configure(HttpSecurity http) throws Exception {
-        http.csrf();//防csrf攻击
-//        http.csrf().disable();//防csrf攻击 禁用
+//        http.csrf();//防csrf攻击
+        http.csrf().disable();//防csrf攻击 禁用
 
         if (!isUseSecurity) {//不启用权限
             http.authorizeRequests().antMatchers("/**").permitAll();//可以访问
