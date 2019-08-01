@@ -36,21 +36,16 @@ mybatis-plus:
     logic-not-delete-value: 1
     sql-injector: com.baomidou.mybatisplus.mapper.LogicSqlInjector
 
-#不使用jwt，单独用oauth2要用
+# 这里的配置好像是（第一种实现）：每次带token的请求都会去wsm-oauth服务(存token的地方)请求对比token是否有效，是否正确（间接的方式）。
+# 第二种实现：在ResourceSeverConfig类configure方法配置resources.tokenStore(tokenStore())，
+#            然后直接请求(存token的地方)对比token（直接的方式）。
+#       *看自己需求用哪种方式。
 #security:
 #  oauth2:
 #    resource:
 #      id: wsm-upms
-#      user-info-uri: http://localhost:8001/wsm-oauth/user/principal?clientname=wsm-upms
+#      user-info-uri: http://localhost:8001/wsm-oauth/user/principal?clientName=${spring.application.name}
 #      prefer-token-info: false
-
-#下面可以忽略
-# key-value跟key-uri：token的验证可以直接在本地（即本服务）完成，不需要连接wsm-oauth服务认证服务器。
-#              注意：如果要使用key-value对称加密方式，
-#                    到wsm-oauth服务AuthorizationServerConfig类JwtAccessTokenConverter方法中使用对称加密方式
-#      jwt:
-#        key-value: jwt_wsm #对称加密方式
-#        key-uri: http://localhost:8001/wsm-oauth/oauth/token_key #非对称加密方式 (获取公钥)
 
 ribbon:
   ReadTimeout: 10000

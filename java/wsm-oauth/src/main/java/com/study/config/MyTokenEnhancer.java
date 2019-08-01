@@ -14,7 +14,7 @@ import java.util.Map;
 
 
 /**
- * token生成携带的信息
+ * 自定义token生成携带的信息
  */
 public class MyTokenEnhancer implements TokenEnhancer {
 

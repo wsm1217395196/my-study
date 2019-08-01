@@ -30,8 +30,8 @@ public class UserController {
      * @return
      */
     @GetMapping("/principal")
-    public Principal user() {
-        System.err.println("调用了principal");
+    public Principal user(@RequestParam(required = false) String clientName) {
+        System.err.println(clientName + ":调用了principal");
         SecurityContext context = SecurityContextHolder.getContext();
         Authentication authentication = context.getAuthentication();
         return authentication;

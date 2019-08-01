@@ -70,7 +70,7 @@ public class AuthorizationServerConfig extends AuthorizationServerConfigurerAdap
     }
 
     /**
-     * 注入自定义token生成方式
+     * 注入自定义token生成方式（jwt）
      *
      * @return
      */
@@ -98,7 +98,7 @@ public class AuthorizationServerConfig extends AuthorizationServerConfigurerAdap
         //指定token存储位置
         endpoints.tokenStore(tokenStore());
 
-        // 自定义token生成方式
+        // 自定义jwt生成token方式(不用这种方式可以注释)
         TokenEnhancerChain tokenEnhancerChain = new TokenEnhancerChain();
         tokenEnhancerChain.setTokenEnhancers(Arrays.asList(myTokenEnhancer(), jwtAccessTokenConverter()));
         endpoints.tokenEnhancer(tokenEnhancerChain);
@@ -127,7 +127,7 @@ public class AuthorizationServerConfig extends AuthorizationServerConfigurerAdap
 //                .authorizedGrantTypes("client_credentials", "password", "refresh_token")
 //                .scopes("scope_wsm")
 //                .accessTokenValiditySeconds(1200)
-//                .refreshTokenValiditySeconds(50000);
+//                .refreshTokenValiditySeconds(1200);
     }
 
     @Override

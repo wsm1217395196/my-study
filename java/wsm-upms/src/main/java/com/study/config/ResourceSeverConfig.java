@@ -56,6 +56,12 @@ public class ResourceSeverConfig extends ResourceServerConfigurerAdapter {
     }
 
     @Override
+    public void configure(ResourceServerSecurityConfigurer resources) {
+//        resources.resourceId("resourcesId").stateless(true);
+        resources.tokenStore(tokenStore());
+    }
+
+    @Override
     public void configure(HttpSecurity http) throws Exception {
         http.csrf();//防csrf攻击
 //        http.csrf().disable();//防csrf攻击 禁用
@@ -121,11 +127,5 @@ public class ResourceSeverConfig extends ResourceServerConfigurerAdapter {
                 }
             }
         }
-    }
-
-    @Override
-    public void configure(ResourceServerSecurityConfigurer resources) {
-//        resources.resourceId("resourcesId").stateless(true);
-        resources.tokenStore(tokenStore());
     }
 }
