@@ -17,7 +17,7 @@
     </properties>
 
     <dependencies>
-        <!--通用依赖-->
+        <!--common-utils-->
         <dependency>
             <groupId>com.study</groupId>
             <artifactId>wsm-common-utils</artifactId>
@@ -100,6 +100,12 @@
             <version>20180813</version>
         </dependency>
 
+        <!--redis-->
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-data-redis</artifactId>
+        </dependency>
+
         <!--  Security oauth2的相关依赖-->
         <dependency>
             <groupId>org.springframework.cloud</groupId>
@@ -113,21 +119,11 @@
             <version>1.0.10.RELEASE</version>
         </dependency>
 
-        <!--redis-->
-        <dependency>
-            <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot-starter-data-redis</artifactId>
-        </dependency>
-        <!--通用依赖结束-->
-
-        <!--本项目依赖-->
         <!--feign(默认集成hystrix熔断器)-->
         <dependency>
             <groupId>org.springframework.cloud</groupId>
             <artifactId>spring-cloud-starter-openfeign</artifactId>
         </dependency>
-
-        <!--本项目依赖结束-->
 
     </dependencies>
 

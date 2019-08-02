@@ -46,7 +46,7 @@ public class UserController {
     }
 
     @ApiOperation(value = "根据id查询", notes = "")
-    @GetMapping("/getById/{id}")
+    @GetMapping("/authority/getById/{id}")
     public ResultView getById(@PathVariable Long id) {
         UserModel model = userService.selectById(id);
         return ResultView.success(model);
@@ -64,7 +64,7 @@ public class UserController {
     }
 
     @ApiOperation(value = "修改", notes = "")
-    @PostMapping("/authority/update")
+    @PostMapping("/authority_button/update")
     public ResultView update(@RequestBody UserModel model) {
         Date date = new Date();
         model.setUpdateTime(date);

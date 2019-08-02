@@ -1,5 +1,6 @@
 package com.study.feign;
 
+import com.study.MyConstant;
 import com.study.result.ResultView;
 import org.springframework.cloud.openfeign.FeignClient;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -11,7 +12,7 @@ import java.util.Map;
 /**
  * feign调用wsm-oauth服务
  */
-@FeignClient(value = "wsm-oauth", fallback = OauthHystrix.class)
+@FeignClient(value = MyConstant.wsm_oauth, fallback = OauthHystrix.class)
 public interface OauthFeign {
 
     /**

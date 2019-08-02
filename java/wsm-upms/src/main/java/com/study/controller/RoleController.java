@@ -7,6 +7,7 @@ import com.study.result.PageResult;
 import com.study.result.ResultView;
 import com.study.service.RoleService;
 import com.study.utils.CreateUtil;
+import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -24,6 +25,7 @@ import java.util.List;
  * @author wsm
  * @since 2019-07-18
  */
+@Api(description = "角色控制器")
 @Controller
 @RequestMapping("/role")
 public class RoleController {
@@ -53,7 +55,7 @@ public class RoleController {
     }
 
     @ApiOperation(value = "新增", notes = "")
-    @PostMapping("/authority/add")
+    @PostMapping("/authority_button/add")
     public ResultView add(@RequestBody RoleModel model) {
         Date date = new Date();
         model.setId(CreateUtil.id());
@@ -64,7 +66,7 @@ public class RoleController {
     }
 
     @ApiOperation(value = "修改", notes = "")
-    @PostMapping("/authority/update")
+    @PostMapping("/authority_button/update")
     public ResultView update(@RequestBody RoleModel model) {
         Date date = new Date();
         model.setUpdateTime(date);

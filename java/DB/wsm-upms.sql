@@ -58,7 +58,7 @@ CREATE TABLE `oauth_client_details` (
 
 /*Data for the table `oauth_client_details` */
 
-insert  into `oauth_client_details`(`client_id`,`resource_ids`,`client_secret`,`scope`,`authorized_grant_types`,`web_server_redirect_uri`,`authorities`,`access_token_validity`,`refresh_token_validity`,`additional_information`,`autoapprove`) values ('client_wsm','','secret_wsm','scope_wsm','client_credentials,authorization_code,password,refresh_token',NULL,NULL,NULL,NULL,NULL,'false');
+insert  into `oauth_client_details`(`client_id`,`resource_ids`,`client_secret`,`scope`,`authorized_grant_types`,`web_server_redirect_uri`,`authorities`,`access_token_validity`,`refresh_token_validity`,`additional_information`,`autoapprove`) values ('client_wsm','','secret_wsm','scope_wsm','client_credentials,authorization_code,password,refresh_token',NULL,NULL,1200,1200,NULL,'false');
 
 /*Table structure for table `oauth_code` */
 
@@ -107,7 +107,7 @@ CREATE TABLE `project` (
 
 /*Data for the table `project` */
 
-insert  into `project`(`id`,`name`,`code`,`region_id`,`create_by`,`create_time`,`update_by`,`update_time`,`is_enabled`,`remark`) values (1,'wsm项目','wsm_project',1,'wsm','2019-07-18 11:36:48',NULL,NULL,1,NULL);
+insert  into `project`(`id`,`name`,`code`,`region_id`,`create_by`,`create_time`,`update_by`,`update_time`,`is_enabled`,`remark`) values (1,'upms项目','wsm_upms',1,'wsm','2019-07-18 11:36:48',NULL,NULL,1,NULL),(2,'work项目','wsm_work',1,'wsm','2019-08-01 17:52:12',NULL,NULL,1,NULL);
 
 /*Table structure for table `region` */
 
@@ -138,7 +138,7 @@ DROP TABLE IF EXISTS `resource`;
 CREATE TABLE `resource` (
   `id` bigint(20) NOT NULL,
   `name` varchar(50) COLLATE utf8_unicode_ci NOT NULL COMMENT '名称',
-  `code` varchar(20) COLLATE utf8_unicode_ci DEFAULT NULL COMMENT '编码',
+  `code` varchar(40) COLLATE utf8_unicode_ci DEFAULT NULL COMMENT '编码',
   `button` varchar(200) COLLATE utf8_unicode_ci DEFAULT NULL COMMENT '按钮（页面要权限控制的按钮,也是后台接口方法名,多个用逗号分隔）',
   `url_pattern` varchar(100) COLLATE utf8_unicode_ci DEFAULT NULL COMMENT '权限API路径匹配(注：即后台控制器名，后面带authority,或者authority_button(对应button字段)代表受权限控制)',
   `project_id` bigint(20) DEFAULT NULL COMMENT '项目id',
@@ -155,7 +155,7 @@ CREATE TABLE `resource` (
 
 /*Data for the table `resource` */
 
-insert  into `resource`(`id`,`name`,`code`,`button`,`url_pattern`,`project_id`,`create_by`,`create_time`,`update_by`,`update_time`,`is_enabled`,`remark`) values (1,'用户管理','user','add,deleteById,deleteByIds','/user',1,'wsm','2019-07-18 13:43:07',NULL,NULL,1,NULL),(2,'角色管理','role','add,update,deleteById','/role',1,'wsm','2019-07-18 17:18:58',NULL,NULL,1,NULL);
+insert  into `resource`(`id`,`name`,`code`,`button`,`url_pattern`,`project_id`,`create_by`,`create_time`,`update_by`,`update_time`,`is_enabled`,`remark`) values (1,'用户管理','upms_user','add,update,deleteById,deleteByIds','/user',1,'wsm','2019-07-18 13:43:07',NULL,NULL,1,NULL),(2,'角色管理','upms_role','add,update,deleteById,deleteByIds','/role',1,'wsm','2019-07-18 17:18:58',NULL,NULL,1,NULL),(3,'域管理','upms_region','add,update,deleteById,deleteByIds','/region',1,'wsm','2019-08-01 17:56:11',NULL,NULL,1,NULL),(4,'项目管理','upms_project','add,update,deleteById,deleteByIds','/project',1,'wsm','2019-08-01 17:55:29',NULL,NULL,1,NULL),(5,'资源管理','upms_resource','add,update,deleteById,deleteByIds','/resource',1,'wsm','2019-08-01 17:57:07',NULL,NULL,1,NULL),(11,'招聘平台管理','work_recruitPlatform','add,update,deleteById,deleteByIds','/recruitPlatform',2,'wsm','2019-08-02 09:20:51',NULL,NULL,1,NULL),(12,'职位管理','work_job','add,update,deleteById,deleteByIds','/job',2,'wsm','2019-08-02 09:22:40',NULL,NULL,1,NULL);
 
 /*Table structure for table `resource_role` */
 
@@ -173,7 +173,7 @@ CREATE TABLE `resource_role` (
 
 /*Data for the table `resource_role` */
 
-insert  into `resource_role`(`resource_id`,`resource_button`,`role_id`) values (1,'add,deleteById,deleteByIds',1),(1,NULL,2);
+insert  into `resource_role`(`resource_id`,`resource_button`,`role_id`) values (1,'add,update,deleteById,deleteByIds',1),(1,NULL,2),(2,'add,update,deleteById,deleteByIds',1),(3,'add,update,deleteById,deleteByIds',1),(4,'add,update,deleteById,deleteByIds',1),(5,'add,update,deleteById,deleteByIds',1),(11,'add,update,deleteById,deleteByIds',1),(12,'add,update,deleteById,deleteByIds',1);
 
 /*Table structure for table `role` */
 
@@ -197,7 +197,7 @@ CREATE TABLE `role` (
 
 /*Data for the table `role` */
 
-insert  into `role`(`id`,`name`,`code`,`project_id`,`create_by`,`create_time`,`update_by`,`update_time`,`is_enabled`,`remark`) values (1,'wsm项目_管理员','wsm_project_manage',1,'wsm','2019-07-18 11:42:24',NULL,NULL,1,NULL),(2,'wsm项目_普通用户','wsm_project_user',1,'wsm','2019-07-18 11:42:26',NULL,NULL,1,NULL);
+insert  into `role`(`id`,`name`,`code`,`project_id`,`create_by`,`create_time`,`update_by`,`update_time`,`is_enabled`,`remark`) values (1,'wsm域_超级管理员','wsm_region_manage',1,'wsm','2019-07-18 11:42:24',NULL,NULL,1,NULL),(2,'upms_管理员','upms_manage',1,'wsm','2019-07-18 11:42:26',NULL,NULL,1,NULL),(3,'work_管理员','work_manage',2,'wsm','2019-08-02 09:25:28',NULL,NULL,1,NULL);
 
 /*Table structure for table `user` */
 

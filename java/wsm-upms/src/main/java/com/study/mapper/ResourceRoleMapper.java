@@ -24,4 +24,5 @@ public interface ResourceRoleMapper extends BaseMapper<ResourceRoleModel> {
      * @return
      */
     List<ResourceRoleInfoDto> getResourceRoleInfo(@Param("projectCode") String projectCode);
+
 }

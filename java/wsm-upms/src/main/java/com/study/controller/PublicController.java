@@ -2,8 +2,10 @@ package com.study.controller;
 
 import com.baomidou.mybatisplus.mapper.EntityWrapper;
 import com.study.MyConstant;
+import com.study.dto.ResourceRoleInfoDto;
 import com.study.exception.MyRuntimeException;
 import com.study.feign.OauthFeign;
+import com.study.mapper.ResourceRoleMapper;
 import com.study.model.OauthClientDetailsModel;
 import com.study.model.UserModel;
 import com.study.result.ResultEnum;
@@ -11,6 +13,7 @@ import com.study.result.ResultView;
 import com.study.service.OauthClientDetailsService;
 import com.study.service.UserService;
 import com.study.utils.CreateUtil;
+import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import org.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,11 +22,13 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.Date;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 /**
  * 公共控制器
  */
+@Api(description = "公共控制器")
 @RestController
 @RequestMapping("/public")
 public class PublicController {
@@ -37,6 +42,8 @@ public class PublicController {
     private OauthClientDetailsService oauthClientDetailsService;
     @Autowired
     private OauthFeign oauthFeign;
+    @Autowired
+    private ResourceRoleMapper resourceRoleMapper;
 
     @ApiOperation(value = "注册", notes = "提交参数：{\"name\":\"wsm666\",\"password\":\"123456\"}")
     @PostMapping("/register")
@@ -104,4 +111,10 @@ public class PublicController {
         return resultView;
     }
 
+    @ApiOperation(value = "查当前项目的资源角色信息")
+    @GetMapping("/getResourceRoleInfo")
+    public List<ResourceRoleInfoDto> getResourceRoleInfo(@RequestParam String projectCode) {
+        List<ResourceRoleInfoDto> resourceRoleInfo = resourceRoleMapper.getResourceRoleInfo(projectCode);
+        return resourceRoleInfo;
+    }
 }

@@ -18,7 +18,7 @@
     </properties>
 
     <dependencies>
-        <!--通用依赖-->
+        <!--common-utils-->
         <dependency>
             <groupId>com.study</groupId>
             <artifactId>wsm-common-utils</artifactId>
@@ -100,9 +100,9 @@
             <artifactId>json</artifactId>
             <version>20180813</version>
         </dependency>
-        <!--通用依赖结束-->
 
-        <!--本项目依赖-->
+
+
         <!--feign(默认集成hystrix熔断器)-->
         <dependency>
             <groupId>org.springframework.cloud</groupId>
@@ -137,7 +137,6 @@
             <scope>provided</scope>
         </dependency>
 
-        <!--本项目依赖结束-->
 
     </dependencies>
 

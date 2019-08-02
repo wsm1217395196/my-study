@@ -1,6 +1,7 @@
 package com.study.controller;
 
 
+import com.study.feign.UpmsFeign;
 import com.study.model.JobModel;
 import com.study.result.PageParam;
 import com.study.result.PageResult;
@@ -31,37 +32,40 @@ public class JobController {
 
     @Autowired
     private JobService jobService;
+    @Autowired
+    private UpmsFeign upmsFeign;
 
     @ApiOperation(value = "测试查询时间段",notes = "")
     @GetMapping("/test")
     public ResultView test(){
+        upmsFeign.getResourceRoleInfo("wsm_work");
         List<JobModel> models = jobService.test();
         return ResultView.success(models);
     }
 
     @ApiOperation(value = "查询全部", notes = "")
-    @GetMapping("/getAll")
+    @GetMapping("/authority/getAll")
     public ResultView getAll() {
         List<JobModel> models = jobService.selectList(null);
         return ResultView.success(models);
     }
 
     @ApiOperation(value = "分页条件查询", notes = "提交参数：{\"pageIndex\":1,\"pageSize\":10,\"sort\":\"name desc\",\"condition\":\"{\'name\':\'\',\'isEnable\':\'\'}\"}")
-    @PostMapping("/getPage")
+    @PostMapping("/authority/getPage")
     public ResultView getPage(@RequestBody PageParam pageParam){
         PageResult pageResult = jobService.getPage(pageParam);
         return ResultView.success(pageResult);
     }
 
     @ApiOperation(value = "根据id查询", notes = "")
-    @GetMapping("/getById/{id}")
+    @GetMapping("/authority/getById/{id}")
     public ResultView getById(@PathVariable Long id) {
         JobModel model = jobService.selectById(id);
         return ResultView.success(model);
     }
 
     @ApiOperation(value = "新增", notes = "")
-    @PostMapping("/add")
+    @PostMapping("/authority_button/add")
     public ResultView add(@RequestBody JobModel model) {
         Date date = new Date();
         model.setId(CreateUtil.id());
@@ -72,7 +76,7 @@ public class JobController {
     }
 
     @ApiOperation(value = "修改", notes = "")
-    @PostMapping("/update")
+    @PostMapping("/authority_button/update")
     public ResultView update(@RequestBody JobModel model) {
         Date date = new Date();
         model.setUpdateTime(date);
@@ -81,14 +85,14 @@ public class JobController {
     }
 
     @ApiOperation(value = "根据id删除", notes = "")
-    @DeleteMapping("/deleteById/{id}")
+    @DeleteMapping("/authority_button/authority_button/deleteById/{id}")
     public ResultView deleteById(@PathVariable Long id) {
         jobService.deleteById(id);
         return ResultView.success();
     }
 
     @ApiOperation(value = "根据ids删除", notes = "")
-    @DeleteMapping("/deleteByIds")
+    @DeleteMapping("/authority_button/deleteByIds")
     public ResultView deleteByIds(@RequestParam Long[] ids) {
         jobService.deleteBatchIds(Arrays.asList(ids));
         return ResultView.success();

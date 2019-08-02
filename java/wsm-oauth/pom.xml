@@ -14,7 +14,7 @@
     <description>oauth服务</description>
 
     <dependencies>
-        <!--通用依赖-->
+        <!--common-utils-->
         <dependency>
             <groupId>com.study</groupId>
             <artifactId>wsm-common-utils</artifactId>
@@ -26,12 +26,6 @@
         <dependency>
             <groupId>org.springframework.cloud</groupId>
             <artifactId>spring-cloud-starter-netflix-eureka-client</artifactId>
-        </dependency>
-
-        <!--cloud oauth2-->
-        <dependency>
-            <groupId>org.springframework.cloud</groupId>
-            <artifactId>spring-cloud-starter-oauth2</artifactId>
         </dependency>
 
         <!--spring boot-->
@@ -96,6 +90,12 @@
             <artifactId>spring-boot-starter-data-redis</artifactId>
         </dependency>
 
+        <!--cloud oauth2-->
+        <dependency>
+            <groupId>org.springframework.cloud</groupId>
+            <artifactId>spring-cloud-starter-oauth2</artifactId>
+        </dependency>
+
         <!--使用security-jwt-->
         <dependency>
             <groupId>org.springframework.security</groupId>
@@ -103,6 +103,7 @@
             <version>1.0.10.RELEASE</version>
         </dependency>
 
+        <!--jwt解析相关-->
         <dependency>
             <groupId>io.jsonwebtoken</groupId>
             <artifactId>jjwt</artifactId>

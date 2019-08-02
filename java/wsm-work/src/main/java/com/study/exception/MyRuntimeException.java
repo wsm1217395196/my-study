@@ -1,6 +1,5 @@
 package com.study.exception;
 
-
 import com.study.result.ResultView;
 
 /**

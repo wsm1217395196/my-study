@@ -33,28 +33,28 @@ public class WorkController {
     private WorkService workService;
 
     @ApiOperation(value = "查询全部", notes = "")
-    @GetMapping("/getAll")
+    @GetMapping("/authority/getAll")
     public ResultView getAll() {
         List<WorkModel> models = workService.selectList(null);
         return ResultView.success(models);
     }
 
     @ApiOperation(value = "分页条件查询", notes = "提交参数：{\"pageIndex\":1,\"pageSize\":10,\"sort\":\"name desc\",\"condition\":\"{\'recruitPlatformId\':\'\',\'jobId\':\'\',\'site\':\'\',\'isEnable\':\'\'}\"}")
-    @PostMapping("/getPage")
+    @PostMapping("/authority/getPage")
     public ResultView getPage(@RequestBody PageParam pageParam) {
         PageResult pageResult = workService.getPage(pageParam);
         return ResultView.success(pageResult);
     }
 
     @ApiOperation(value = "根据id查询", notes = "")
-    @GetMapping("/getById/{id}")
+    @GetMapping("/authority/getById/{id}")
     public ResultView getById(@PathVariable Long id) {
         WorkModel model = workService.selectById(id);
         return ResultView.success(model);
     }
 
     @ApiOperation(value = "新增", notes = "")
-    @PostMapping("/add")
+    @PostMapping("/authority_button/add")
     public ResultView add(@RequestBody WorkModel model) {
         Date date = new Date();
         model.setId(CreateUtil.id());
@@ -65,7 +65,7 @@ public class WorkController {
     }
 
     @ApiOperation(value = "修改", notes = "")
-    @PostMapping("/update")
+    @PostMapping("/authority_button/update")
     public ResultView update(@RequestBody WorkModel model) {
         Date date = new Date();
         model.setUpdateTime(date);
@@ -74,14 +74,14 @@ public class WorkController {
     }
 
     @ApiOperation(value = "根据id删除", notes = "")
-    @DeleteMapping("/deleteById/{id}")
+    @DeleteMapping("/authority_button/deleteById/{id}")
     public ResultView deleteById(@PathVariable Long id) {
         workService.deleteById(id);
         return ResultView.success();
     }
 
     @ApiOperation(value = "根据ids删除", notes = "")
-    @DeleteMapping("/deleteByIds")
+    @DeleteMapping("/authority_button/deleteByIds")
     public ResultView deleteByIds(@RequestParam Long[] ids) {
         workService.deleteBatchIds(Arrays.asList(ids));
         return ResultView.success();

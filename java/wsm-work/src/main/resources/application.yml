@@ -20,18 +20,18 @@ spring:
     password: admin
     url: jdbc:mysql://${eureka.instance.hostname}:3306/wsm-work?characterEncoding=utf-8&useSSL=false&serverTimezone=UTC
 
-  redis:
-    database: 0 #Redis数据库索引（默认为0）
-    timeout: 0ms # 连接超时时间（毫秒）
-    host: 127.0.0.1
-    port: 6379
-    password:  # Redis服务器连接密码（默认为空）
-    jedis:
-      pool:
-        max-active: 8 # 连接池中的最大连接
-        max-wait: -1ms  # 连接池最大阻塞等待时间（使用负值表示没有限制）
-        max-idle: 8  # 连接池中的最大空闲连接
-        min-idle: 0  # 连接池中的最小空闲连接
+redis:
+  database: 0 #Redis数据库索引（默认为0）
+  timeout: 5000ms # 连接超时时间（毫秒）
+  host: 127.0.0.1
+  port: 6379
+  password:  # Redis服务器连接密码（默认为空）
+  jedis:
+    pool:
+      max-active: 8 # 连接池中的最大连接
+      max-wait: -1ms  # 连接池最大阻塞等待时间（使用负值表示没有限制）
+      max-idle: 8  # 连接池中的最大空闲连接
+      min-idle: 0  # 连接池中的最小空闲连接
 
 # 配置mybatis-plus
 mybatis-plus:
@@ -44,3 +44,32 @@ mybatis-plus:
     logic-delete-value: 0
     logic-not-delete-value: 1
     sql-injector: com.baomidou.mybatisplus.mapper.LogicSqlInjector
+
+# 这里的配置好像是（第一种实现）：每次带token的请求都会去wsm-oauth服务(存token的地方)请求对比token是否有效，是否正确（间接的方式）。
+# 第二种实现：在ResourceSeverConfig类configure方法配置resources.tokenStore(tokenStore())，
+#            然后直接请求(存token的地方)对比token（直接的方式）。
+#       *看自己需求用哪种方式。
+#security:
+#  oauth2:
+#    resource:
+#      id: wsm-upms
+#      user-info-uri: http://localhost:8001/wsm-oauth/user/principal?clientName=${spring.application.name}
+#      prefer-token-info: false
+
+ribbon:
+  ReadTimeout: 10000
+  ConnectTimeout: 10000
+  MaxAutoRetries: 1
+  MaxAutoRetriesNextServer: 2
+
+#熔断器开启
+#feign:
+#  hystrix:
+#    enabled: true
+
+myConfig:
+  isUseSecurity: true #是否使用security权限
+  projectCode: wsm_work #项目编码
+  clientId: client_wsm
+
+
