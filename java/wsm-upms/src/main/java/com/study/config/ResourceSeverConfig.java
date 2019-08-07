@@ -131,6 +131,7 @@ public class ResourceSeverConfig extends ResourceServerConfigurerAdapter {
                     }
                 }
             }
+            http.authorizeRequests().antMatchers("/test/**").authenticated();
         }
     }
 }

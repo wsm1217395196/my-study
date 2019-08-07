@@ -11,8 +11,10 @@ import com.study.utils.CreateUtil;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.*;
 
+import javax.servlet.http.HttpServletRequest;
 import java.util.Arrays;
 import java.util.Date;
 import java.util.List;
@@ -35,9 +37,9 @@ public class JobController {
     @Autowired
     private UpmsFeign upmsFeign;
 
-    @ApiOperation(value = "测试查询时间段",notes = "")
+    @ApiOperation(value = "测试查询时间段", notes = "")
     @GetMapping("/test")
-    public ResultView test(){
+    public ResultView test() {
         upmsFeign.getResourceRoleInfo("wsm_work");
         List<JobModel> models = jobService.test();
         return ResultView.success(models);
@@ -52,7 +54,7 @@ public class JobController {
 
     @ApiOperation(value = "分页条件查询", notes = "提交参数：{\"pageIndex\":1,\"pageSize\":10,\"sort\":\"name desc\",\"condition\":\"{\'name\':\'\',\'isEnable\':\'\'}\"}")
     @PostMapping("/authority/getPage")
-    public ResultView getPage(@RequestBody PageParam pageParam){
+    public ResultView getPage(@RequestBody PageParam pageParam) {
         PageResult pageResult = jobService.getPage(pageParam);
         return ResultView.success(pageResult);
     }
@@ -66,12 +68,16 @@ public class JobController {
 
     @ApiOperation(value = "新增", notes = "")
     @PostMapping("/authority_button/add")
-    public ResultView add(@RequestBody JobModel model) {
+    @Transactional
+    public ResultView add(@RequestBody JobModel model, HttpServletRequest request) {
+        String authorization = request.getHeader("Authorization");
+        System.out.println(authorization);
         Date date = new Date();
         model.setId(CreateUtil.id());
         model.setCreateTime(date);
         model.setUpdateTime(date);
         jobService.insert(model);
+        int i = 10 / 0;
         return ResultView.success(model);
     }
 

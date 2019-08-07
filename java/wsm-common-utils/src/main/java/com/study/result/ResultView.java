@@ -110,4 +110,12 @@ public class ResultView {
         this.data = data;
     }
 
+    @Override
+    public String toString() {
+        return "ResultView{" +
+                "code=" + code +
+                ", msg='" + msg + '\'' +
+                ", data=" + data +
+                '}';
+    }
 }

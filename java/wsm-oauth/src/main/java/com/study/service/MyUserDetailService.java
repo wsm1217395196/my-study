@@ -18,6 +18,9 @@ import org.springframework.stereotype.Service;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * Security身份认证之UserDetailsService
+ */
 @Service
 public class MyUserDetailService implements UserDetailsService {
 
@@ -27,21 +30,17 @@ public class MyUserDetailService implements UserDetailsService {
     @Override
     public UserDetails loadUserByUsername(String name) throws UsernameNotFoundException {
         UserModel userModel = publicMapper.getUserByName(name);
-
         if (userModel == null) {
             throw new MyRuntimeException(ResultView.error(ResultEnum.CODE_5));
         }
-
 //        String password = {noop} + userModel.getPassword();
         String password = new BCryptPasswordEncoder().encode(userModel.getPassword());
-
+        //查该用户拥有的角色
         List<BaseDto> roleDtos = publicMapper.getRoleByUserId(userModel.getId());
-
         List<SimpleGrantedAuthority> authorities = new ArrayList<>();
         for (BaseDto roleDto : roleDtos) {
             authorities.add(new SimpleGrantedAuthority("ROLE_" + roleDto.getId()));
         }
-
         User user = new User(name, password, authorities);
         System.err.println("当前登录的用户是：" + name);
         return user;

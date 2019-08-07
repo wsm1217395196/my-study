@@ -10,7 +10,7 @@ import org.springframework.security.config.annotation.web.configuration.WebSecur
 
 /**
  * TODO web安全配置
- * ResourceServerConfig WebSecurityConfig 的优先级低的
+ * ResourceServerConfig比WebSecurityConfig 的优先级低的
  **/
 @Configuration
 @EnableWebSecurity

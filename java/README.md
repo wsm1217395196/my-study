@@ -1,8 +1,10 @@
-## 本项目为：spring cloud、spring security、oauth2、jwt整合项目
+## 本项目为：spring cloud、spring security、oauth2、jwt整合项目,持久层用的mybatis-plus。
+
+请用idea打开parent父文件，他会自动加载其他字模块（服务）。
 
 运行此项目请到DB文件夹导入sql文件到你的本地当中。
 
-有postman测试接口示例文件，导入postman即可。
+DB文件夹有postman测试接口示例文件，导入postman即可。
 
 
 
@@ -34,9 +36,9 @@
 
 3、token的存储方式可以是：内存、数据库、redis、jwt等。根据代码里的注释用哪种即可。
 
-4、有自定义Token异常信息,用于token校验失败返回信息。有资源授权异常处理。
+4、有自定义token异常信息,用于token校验失败返回信息。有资源授权异常处理。
 
-5、根据/oauth/tkoen接口获取的token，携带该token可以请求各服务有security权限的接口。
+5、根据/oauth/token接口获取的token，携带该token可以请求各服务有security权限的接口。
 
 
 
@@ -46,11 +48,15 @@
 
 2、有注册，登录，退出，各控制器等接口。。。
 
+3、mybatis-plus代码生成器。
+
 
 
 ### wsm-work服务（资源服务）
 
-1、配置了资源服务，根据项目code从数据库读取出来的角色，资源url信息（即接口地址）给接口使用security权限。
+1、配置了资源服务，根据项目code从**wsm-upms服务**调用feign读取出来的角色，资源url信息（即接口地址）给接口使用security权限。
+
+2、运行此服务请先运行**wsm-upms服务**。
 
 
 
@@ -66,7 +72,7 @@
 
 1、高可用配置中心，从远程git读取配置文件供其他服务使用。
 
-2、Spring Cloud Bus刷新配置（Rabbitmq），git上的配置有变化不用重启项目就能读取供其他服务使用，**wsm-public服务**(config-client)有读取值的示例。
+2、Spring Cloud Bus刷新配置（使用的Rabbitmq），git上的配置有变化不用重启项目就能读取供其他服务使用，**wsm-public服务**(config-client)有读取值的示例。
 
 
 
