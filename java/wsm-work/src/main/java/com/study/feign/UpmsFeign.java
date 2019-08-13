@@ -22,4 +22,13 @@ public interface UpmsFeign {
      */
     @GetMapping("/public/getResourceRoleInfo")
     List<ResourceRoleInfoDto> getResourceRoleInfo(@RequestParam("projectCode") String projectCode);
+
+    /**
+     * 根据client_id查询客户端resource_ids
+     *
+     * @param clientId
+     * @return
+     */
+    @GetMapping("/public/getResourceIdsByClientId")
+    String getResourceIdsByClientId(@RequestParam("clientId") String clientId);
 }

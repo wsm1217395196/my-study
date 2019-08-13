@@ -67,7 +67,7 @@ feign:
   hystrix:
     enabled: true
 
-#Hystrix的策略,设置这个才可以服务间调用feign传递header携带token，或者使用FeignHystrixConcurrencyStrategyIntellif类
+#Hystrix的策略,设置这个才可以服务间调用feign传递header携带token（第一种实现），或者使用FeignHystrixConcurrencyStrategyIntellif类（第二种实现）
 #hystrix:
 #  command:
 #    default:
@@ -78,6 +78,6 @@ feign:
 myConfig:
   isUseSecurity: true #是否使用security权限
   projectCode: wsm_upms #项目编码
-  clientId: client_wsm
+  clientId: client_upms
 
 

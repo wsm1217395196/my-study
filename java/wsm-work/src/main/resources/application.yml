@@ -70,6 +70,6 @@ ribbon:
 myConfig:
   isUseSecurity: true #是否使用security权限
   projectCode: wsm_work #项目编码
-  clientId: client_wsm
+  clientId: client_work
 
 

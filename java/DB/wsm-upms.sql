@@ -58,7 +58,7 @@ CREATE TABLE `oauth_client_details` (
 
 /*Data for the table `oauth_client_details` */
 
-insert  into `oauth_client_details`(`client_id`,`resource_ids`,`client_secret`,`scope`,`authorized_grant_types`,`web_server_redirect_uri`,`authorities`,`access_token_validity`,`refresh_token_validity`,`additional_information`,`autoapprove`) values ('client_wsm','','secret_wsm','scope_wsm','client_credentials,authorization_code,password,refresh_token',NULL,NULL,1200,1200,NULL,'false');
+insert  into `oauth_client_details`(`client_id`,`resource_ids`,`client_secret`,`scope`,`authorized_grant_types`,`web_server_redirect_uri`,`authorities`,`access_token_validity`,`refresh_token_validity`,`additional_information`,`autoapprove`) values ('client_upms','resource_upms','secret_wsm','scope_wsm','client_credentials,authorization_code,password,refresh_token',NULL,NULL,0,0,NULL,'false'),('client_work','resource_work','secret_wsm','scope_wsm','client_credentials,authorization_code,password,refresh_token',NULL,NULL,0,0,NULL,'false');
 
 /*Table structure for table `oauth_code` */
 

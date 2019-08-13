@@ -36,6 +36,8 @@ public class ResourceSeverConfig extends ResourceServerConfigurerAdapter {
     private boolean isUseSecurity;
     @Value("${myConfig.projectCode}")
     private String projectCode;
+    @Value("${myConfig.clientId}")
+    private String clientId;
     @Autowired
     private UpmsFeign upmsFeign;
     @Autowired
@@ -58,7 +60,9 @@ public class ResourceSeverConfig extends ResourceServerConfigurerAdapter {
 
     @Override
     public void configure(ResourceServerSecurityConfigurer resources) {
-//        resources.resourceId("resourcesId").stateless(true);
+        String resourceIds = upmsFeign.getResourceIdsByClientId(clientId);
+        //设置客户端所能访问的资源id集合
+        resources.resourceId(resourceIds).stateless(true);
         resources.tokenStore(tokenStore());
         //自定义Token异常信息,用于token校验失败返回信息
         resources.authenticationEntryPoint(new MyAuthExceptionEntryPoint())

@@ -6,6 +6,33 @@
 	},
 	"item": [
 		{
+			"name": "测试分布式事务",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJjcmVhdGVUaW1lIjoiMjAxOS0wOC0wNSAxNDoxNzo0NyIsInVzZXJfbmFtZSI6IndzbTEiLCJhdXRob3IiOiJ3c20iLCJzY29wZSI6WyJzY29wZV93c20iXSwicm9sZXMiOiJST0xFXzEiLCJleHAiOjE1NjUwMjkwNjcsImF1dGhvcml0aWVzIjpbIlJPTEVfMSJdLCJqdGkiOiJjMjViZGQyYi02Njc5LTRmYzUtOTZkOS1mOGZhYzNmZDQzOWQiLCJjbGllbnRfaWQiOiJjbGllbnRfd3NtIn0.ImnhqVUWKJOCQhRqZUVqprCbgjP1bBuA4Ch7H7B1hmA"
+					}
+				],
+				"body": {},
+				"url": {
+					"raw": "http://localhost:8001/wsm-upms/test/distributedTransaction",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8001",
+					"path": [
+						"wsm-upms",
+						"test",
+						"distributedTransaction"
+					]
+				}
+			},
+			"response": []
+		},
+		{
 			"name": "oauth-获取token",
 			"request": {
 				"method": "POST",
@@ -27,7 +54,7 @@
 						},
 						{
 							"key": "client_id",
-							"value": "client_wsm",
+							"value": "client_work",
 							"description": "",
 							"type": "text"
 						},
@@ -124,7 +151,7 @@
 				"header": [],
 				"body": {},
 				"url": {
-					"raw": "http://localhost:8001/wsm-oauth/user/decodeToken?token=eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX25hbWUiOiJ3c20xIiwic2NvcGUiOlsic2NvcGVfd3NtIl0sInJvbGVzIjoiUk9MRV8xIiwiZXhwIjoxNTY0NDgxNTEwLCJhdXRob3JpdGllcyI6WyJST0xFXzEiXSwianRpIjoiMWVjYzhiZDEtMzczYS00YzNmLThmNDAtYTA2ODllOWNkY2FiIiwiY2xpZW50X2lkIjoiY2xpZW50X3dzbSJ9.dWxmVfnMh3drH4Yg6kYMottoBoGZ2G8eBYlCUVoeMi5qsF9egYAEcXDnbjY_5-4BWe5gro6RXbHlq14025an5TfrMsEiHJWo-0ZWC9W_BwJYc9l6FT75jNl64fXxjVkXFFWNPkKHOdgmpFVbwIFvVYEKLfrbd4fTgfwOtYr5T_EoqWKWq_LdU5epF9Rhor8ucDPj3Kj_kJIWg2cUIJc1wdthDBBqD-nCbotOXSHcC7C5tQp2d7zjQRGn0wM3CLGnMLql_C__6RGoNFRVv1uu0rol0kTnhj1dkreDnunz4F2yuCbN7GdEaIUPM-QoHx232GjgyvxPKuiWc0Am_9Molg",
+					"raw": "http://localhost:8001/wsm-oauth/user/decodeToken?token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJhdWQiOlsicmVzb3VyY2Vfd29yayJdLCJjcmVhdGVUaW1lIjoiMjAxOS0wOC0xMyAxMDo0MDo0MiIsInVzZXJfbmFtZSI6IndzbTEiLCJhdXRob3IiOiJ3c20iLCJzY29wZSI6WyJzY29wZV93c20iXSwicm9sZXMiOiJST0xFXzEiLCJleHAiOjE1NjU3MDcyNDIsImF1dGhvcml0aWVzIjpbIlJPTEVfMSJdLCJqdGkiOiJlZTI2ZTVmYy01ZWE1LTQyZGUtOTJjMS1jODRiMjFmNTE3MWIiLCJjbGllbnRfaWQiOiJjbGllbnRfd29yayJ9.2FCW_7ZXKyaM8HU1GfrOPNQWd-UlFwMawhRHxP0J_mo",
 					"protocol": "http",
 					"host": [
 						"localhost"
@@ -138,7 +165,7 @@
 					"query": [
 						{
 							"key": "token",
-							"value": "eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX25hbWUiOiJ3c20xIiwic2NvcGUiOlsic2NvcGVfd3NtIl0sInJvbGVzIjoiUk9MRV8xIiwiZXhwIjoxNTY0NDgxNTEwLCJhdXRob3JpdGllcyI6WyJST0xFXzEiXSwianRpIjoiMWVjYzhiZDEtMzczYS00YzNmLThmNDAtYTA2ODllOWNkY2FiIiwiY2xpZW50X2lkIjoiY2xpZW50X3dzbSJ9.dWxmVfnMh3drH4Yg6kYMottoBoGZ2G8eBYlCUVoeMi5qsF9egYAEcXDnbjY_5-4BWe5gro6RXbHlq14025an5TfrMsEiHJWo-0ZWC9W_BwJYc9l6FT75jNl64fXxjVkXFFWNPkKHOdgmpFVbwIFvVYEKLfrbd4fTgfwOtYr5T_EoqWKWq_LdU5epF9Rhor8ucDPj3Kj_kJIWg2cUIJc1wdthDBBqD-nCbotOXSHcC7C5tQp2d7zjQRGn0wM3CLGnMLql_C__6RGoNFRVv1uu0rol0kTnhj1dkreDnunz4F2yuCbN7GdEaIUPM-QoHx232GjgyvxPKuiWc0Am_9Molg"
+							"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJhdWQiOlsicmVzb3VyY2Vfd29yayJdLCJjcmVhdGVUaW1lIjoiMjAxOS0wOC0xMyAxMDo0MDo0MiIsInVzZXJfbmFtZSI6IndzbTEiLCJhdXRob3IiOiJ3c20iLCJzY29wZSI6WyJzY29wZV93c20iXSwicm9sZXMiOiJST0xFXzEiLCJleHAiOjE1NjU3MDcyNDIsImF1dGhvcml0aWVzIjpbIlJPTEVfMSJdLCJqdGkiOiJlZTI2ZTVmYy01ZWE1LTQyZGUtOTJjMS1jODRiMjFmNTE3MWIiLCJjbGllbnRfaWQiOiJjbGllbnRfd29yayJ9.2FCW_7ZXKyaM8HU1GfrOPNQWd-UlFwMawhRHxP0J_mo"
 						}
 					]
 				}
@@ -317,7 +344,7 @@
 				"header": [
 					{
 						"key": "Authorization",
-						"value": " bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJjcmVhdGVUaW1lIjoiMjAxOS0wOC0wMiAxNTozNzozNSIsInVzZXJfbmFtZSI6IndzbTEiLCJhdXRob3IiOiJ3c20iLCJzY29wZSI6WyJzY29wZV93c20iXSwicm9sZXMiOiJST0xFXzEiLCJleHAiOjE1NjQ3MzI2NTUsImF1dGhvcml0aWVzIjpbIlJPTEVfMSJdLCJqdGkiOiJhMGJlMzk1My0zMTJiLTQxYzItOGU1My0zYjJhZTBhOTc5MWMiLCJjbGllbnRfaWQiOiJjbGllbnRfd3NtIn0.MgeAF5Q3LlaEbihM0KKr3ula0dhh1x9QcBUGOfeaPJg"
+						"value": " bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJhdWQiOlsicmVzb3VyY2Vfd29yayJdLCJjcmVhdGVUaW1lIjoiMjAxOS0wOC0xMyAxMDo0MDo0MiIsInVzZXJfbmFtZSI6IndzbTEiLCJhdXRob3IiOiJ3c20iLCJzY29wZSI6WyJzY29wZV93c20iXSwicm9sZXMiOiJST0xFXzEiLCJleHAiOjE1NjU3MDcyNDIsImF1dGhvcml0aWVzIjpbIlJPTEVfMSJdLCJqdGkiOiJlZTI2ZTVmYy01ZWE1LTQyZGUtOTJjMS1jODRiMjFmNTE3MWIiLCJjbGllbnRfaWQiOiJjbGllbnRfd29yayJ9.2FCW_7ZXKyaM8HU1GfrOPNQWd-UlFwMawhRHxP0J_mo"
 					}
 				],
 				"body": {},
@@ -482,7 +509,7 @@
 				"header": [
 					{
 						"key": "Authorization",
-						"value": " bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJjcmVhdGVUaW1lIjoiMjAxOS0wOC0wMiAxNTozNzozNSIsInVzZXJfbmFtZSI6IndzbTEiLCJhdXRob3IiOiJ3c20iLCJzY29wZSI6WyJzY29wZV93c20iXSwicm9sZXMiOiJST0xFXzEiLCJleHAiOjE1NjQ3MzI2NTUsImF1dGhvcml0aWVzIjpbIlJPTEVfMSJdLCJqdGkiOiJhMGJlMzk1My0zMTJiLTQxYzItOGU1My0zYjJhZTBhOTc5MWMiLCJjbGllbnRfaWQiOiJjbGllbnRfd3NtIn0.MgeAF5Q3LlaEbihM0KKr3ula0dhh1x9QcBUGOfeaPJg"
+						"value": " bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJhdWQiOlsicmVzb3VyY2Vfd29yayJdLCJjcmVhdGVUaW1lIjoiMjAxOS0wOC0xMyAxMDo0MDo0MiIsInVzZXJfbmFtZSI6IndzbTEiLCJhdXRob3IiOiJ3c20iLCJzY29wZSI6WyJzY29wZV93c20iXSwicm9sZXMiOiJST0xFXzEiLCJleHAiOjE1NjU3MDcyNDIsImF1dGhvcml0aWVzIjpbIlJPTEVfMSJdLCJqdGkiOiJlZTI2ZTVmYy01ZWE1LTQyZGUtOTJjMS1jODRiMjFmNTE3MWIiLCJjbGllbnRfaWQiOiJjbGllbnRfd29yayJ9.2FCW_7ZXKyaM8HU1GfrOPNQWd-UlFwMawhRHxP0J_mo"
 					}
 				],
 				"body": {},
@@ -526,13 +553,13 @@
 						},
 						{
 							"key": "client_id",
-							"value": "client",
+							"value": "client_upms",
 							"description": "",
 							"type": "text"
 						},
 						{
 							"key": "client_secret",
-							"value": "secret",
+							"value": "secret_wsm",
 							"description": "",
 							"type": "text"
 						},
@@ -544,7 +571,7 @@
 						},
 						{
 							"key": "scope",
-							"value": "scope",
+							"value": "scope_wsm",
 							"description": "",
 							"type": "text"
 						}

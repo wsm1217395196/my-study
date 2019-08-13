@@ -94,7 +94,7 @@ public class PublicController {
 
         //获取token
         Map<String, String> tokenInfo = oauthFeign.getOauthToken(name, password, clientId, oauthClientDetailsModel.getClientSecret(), "password", oauthClientDetailsModel.getScope());
-        if (tokenInfo != null && tokenInfo.containsKey("code")) {
+        if (tokenInfo == null) {
             throw new MyRuntimeException(ResultView.hystrixError(MyConstant.wsm_oauth));
         }
 
@@ -116,5 +116,12 @@ public class PublicController {
     public List<ResourceRoleInfoDto> getResourceRoleInfo(@RequestParam String projectCode) {
         List<ResourceRoleInfoDto> resourceRoleInfo = resourceRoleMapper.getResourceRoleInfo(projectCode);
         return resourceRoleInfo;
+    }
+
+    @ApiOperation(value = "根据client_id查询客户端resource_ids")
+    @GetMapping("getResourceIdsByClientId")
+    public String getResourceIdsByClientId(@RequestParam String clientId) {
+        String resourceIds = oauthClientDetailsService.getResourceIdsByClientId(clientId);
+        return resourceIds;
     }
 }

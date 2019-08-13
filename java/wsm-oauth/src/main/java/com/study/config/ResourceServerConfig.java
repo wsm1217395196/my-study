@@ -25,7 +25,8 @@ public class ResourceServerConfig extends ResourceServerConfigurerAdapter {
 
     @Override
     public void configure(ResourceServerSecurityConfigurer resources) throws Exception {
-//        resources.resourceId("resourcesId").stateless(true);
+        //设置客户端所能访问的资源id集合
+//        resources.resourceId("resource_upms").stateless(true);
         //自定义Token异常信息,用于token校验失败返回信息
         resources.authenticationEntryPoint(new MyAuthExceptionEntryPoint())
                 //授权异常处理

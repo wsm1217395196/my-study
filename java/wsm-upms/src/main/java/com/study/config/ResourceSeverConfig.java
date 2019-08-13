@@ -5,6 +5,7 @@ import com.study.exception.MyAccessDeniedHandler;
 import com.study.exception.MyAuthExceptionEntryPoint;
 import com.study.mapper.ResourceRoleMapper;
 import com.study.model.ResourceRoleModel;
+import com.study.service.OauthClientDetailsService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
@@ -36,8 +37,12 @@ public class ResourceSeverConfig extends ResourceServerConfigurerAdapter {
     private boolean isUseSecurity;
     @Value("${myConfig.projectCode}")
     private String projectCode;
+    @Value("${myConfig.clientId}")
+    private String clientId;
     @Autowired
     private ResourceRoleMapper resourceRoleMapper;
+    @Autowired
+    private OauthClientDetailsService oauthClientDetailsService;
     @Autowired
     private RedisConnectionFactory redisConnectionFactory;
     @Autowired
@@ -58,7 +63,9 @@ public class ResourceSeverConfig extends ResourceServerConfigurerAdapter {
 
     @Override
     public void configure(ResourceServerSecurityConfigurer resources) {
-//        resources.resourceId("resourcesId").stateless(true);
+        String resourceIds = oauthClientDetailsService.getResourceIdsByClientId(clientId);
+        //设置客户端所能访问的资源id集合
+        resources.resourceId(resourceIds).stateless(true);
         resources.tokenStore(tokenStore());
         //自定义Token异常信息,用于token校验失败返回信息
         resources.authenticationEntryPoint(new MyAuthExceptionEntryPoint())
