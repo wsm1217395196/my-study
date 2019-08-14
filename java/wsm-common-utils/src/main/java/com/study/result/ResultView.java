@@ -41,6 +41,15 @@ public class ResultView {
     /**
      * 错误
      *
+     * @return 结果视图
+     */
+    public static ResultView error() {
+        return new ResultView(ResultEnum.CODE_2.getCode(), ResultEnum.CODE_2.getMsg());
+    }
+
+    /**
+     * 错误
+     *
      * @param resultEnum 结果枚举
      * @return 结果视图
      */

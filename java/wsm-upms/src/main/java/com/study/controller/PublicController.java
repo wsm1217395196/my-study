@@ -2,6 +2,7 @@ package com.study.controller;
 
 import com.baomidou.mybatisplus.mapper.EntityWrapper;
 import com.study.MyConstant;
+import com.study.config.MyConfig;
 import com.study.dto.ResourceRoleInfoDto;
 import com.study.exception.MyRuntimeException;
 import com.study.feign.OauthFeign;
@@ -33,9 +34,8 @@ import java.util.Map;
 @RequestMapping("/public")
 public class PublicController {
 
-    @Value("${myConfig.clientId}")
-    private String clientId;
-
+    @Autowired
+    private MyConfig myConfig;
     @Autowired
     private UserService userService;
     @Autowired
@@ -87,13 +87,13 @@ public class PublicController {
         }
 
         //查 OauthClientDetails 信息
-        OauthClientDetailsModel oauthClientDetailsModel = oauthClientDetailsService.selectById(clientId);
+        OauthClientDetailsModel oauthClientDetailsModel = oauthClientDetailsService.selectById(myConfig.getClientId());
         if (oauthClientDetailsModel == null) {
             ResultView.error(ResultEnum.CODE_7);
         }
 
         //获取token
-        Map<String, String> tokenInfo = oauthFeign.getOauthToken(name, password, clientId, oauthClientDetailsModel.getClientSecret(), "password", oauthClientDetailsModel.getScope());
+        Map<String, String> tokenInfo = oauthFeign.getOauthToken(name, password, myConfig.getClientId(), oauthClientDetailsModel.getClientSecret(), "password", oauthClientDetailsModel.getScope());
         if (tokenInfo == null) {
             throw new MyRuntimeException(ResultView.hystrixError(MyConstant.wsm_oauth));
         }

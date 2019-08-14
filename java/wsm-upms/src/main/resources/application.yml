@@ -75,9 +75,13 @@ feign:
 #        isolation:
 #          strategy: SEMAPHORE
 
-myConfig:
+my-config:
   isUseSecurity: true #是否使用security权限
   projectCode: wsm_upms #项目编码
-  clientId: client_upms
+  clientId: client_upms #客户端id
+
+  rocketmq_namesrvAddr: 192.168.199.129:9876 #rocketmq地址
+  rocketmq_producer: transaction_producer #生产者
+  rocketmq_topic: test_transaction #rocketmq主题
 
 

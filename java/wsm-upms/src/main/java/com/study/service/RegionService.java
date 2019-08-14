@@ -4,13 +4,18 @@ import com.baomidou.mybatisplus.mapper.EntityWrapper;
 import com.baomidou.mybatisplus.plugins.Page;
 import com.baomidou.mybatisplus.service.impl.ServiceImpl;
 import com.study.MyConstant;
+import com.study.feign.WorkFeign;
 import com.study.mapper.RegionMapper;
+import com.study.model.JobModel;
 import com.study.model.RegionModel;
 import com.study.result.PageParam;
 import com.study.result.PageResult;
+import com.study.result.ResultView;
+import com.study.utils.CreateUtil;
 import org.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.StringUtils;
 
 import java.util.List;
@@ -28,6 +33,8 @@ public class RegionService extends ServiceImpl<RegionMapper, RegionModel> {
 
     @Autowired
     private RegionMapper regionMapper;
+    @Autowired
+    private WorkFeign workFeign;
 
     public PageResult getPage(PageParam pageParam) {
         int pageIndex = pageParam.getPageIndex();
@@ -66,5 +73,16 @@ public class RegionService extends ServiceImpl<RegionMapper, RegionModel> {
         List records = regionMapper.selectPage(page, ew);
         PageResult pageResult = new PageResult(pageIndex, pageSize, total, records);
         return pageResult;
+    }
+
+    /**
+     * 测试rocketmq分布式事务
+     */
+    public boolean distributedTransaction(String regionName) {
+        RegionModel regionModel = new RegionModel();
+        regionModel.setId(CreateUtil.id());
+        regionModel.setName(regionName);
+        boolean b = insert(regionModel);
+        return b;
     }
 }

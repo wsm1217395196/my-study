@@ -47,7 +47,9 @@ public class JobController {
 
     @ApiOperation(value = "查询全部", notes = "")
     @GetMapping("/authority/getAll")
-    public ResultView getAll() {
+    public ResultView getAll(HttpServletRequest request) {
+        String authorization = request.getHeader("Authorization");
+        System.out.println(authorization);
         List<JobModel> models = jobService.selectList(null);
         return ResultView.success(models);
     }
@@ -69,15 +71,12 @@ public class JobController {
     @ApiOperation(value = "新增", notes = "")
     @PostMapping("/authority_button/add")
     @Transactional
-    public ResultView add(@RequestBody JobModel model, HttpServletRequest request) {
-        String authorization = request.getHeader("Authorization");
-        System.out.println(authorization);
+    public ResultView add(@RequestBody JobModel model) {
         Date date = new Date();
         model.setId(CreateUtil.id());
         model.setCreateTime(date);
         model.setUpdateTime(date);
         jobService.insert(model);
-        int i = 10 / 0;
         return ResultView.success(model);
     }
 

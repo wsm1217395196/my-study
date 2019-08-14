@@ -33,12 +33,8 @@ import java.util.List;
 @EnableGlobalMethodSecurity(prePostEnabled = true)
 public class ResourceSeverConfig extends ResourceServerConfigurerAdapter {
 
-    @Value("${myConfig.isUseSecurity}")
-    private boolean isUseSecurity;
-    @Value("${myConfig.projectCode}")
-    private String projectCode;
-    @Value("${myConfig.clientId}")
-    private String clientId;
+    @Autowired
+    private MyConfig myConfig;
     @Autowired
     private ResourceRoleMapper resourceRoleMapper;
     @Autowired
@@ -63,9 +59,9 @@ public class ResourceSeverConfig extends ResourceServerConfigurerAdapter {
 
     @Override
     public void configure(ResourceServerSecurityConfigurer resources) {
-        String resourceIds = oauthClientDetailsService.getResourceIdsByClientId(clientId);
-        //设置客户端所能访问的资源id集合
-        resources.resourceId(resourceIds).stateless(true);
+        String resourceIds = oauthClientDetailsService.getResourceIdsByClientId(myConfig.getClientId());
+        //设置客户端所能访问的资源id集合(默认取第一个是本服务的资源)
+        resources.resourceId(resourceIds.split(",")[0]).stateless(true);
         resources.tokenStore(tokenStore());
         //自定义Token异常信息,用于token校验失败返回信息
         resources.authenticationEntryPoint(new MyAuthExceptionEntryPoint())
@@ -78,10 +74,10 @@ public class ResourceSeverConfig extends ResourceServerConfigurerAdapter {
 //        http.csrf();//防csrf攻击
         http.csrf().disable();//防csrf攻击 禁用
 
-        if (!isUseSecurity) {//不启用权限
+        if (!myConfig.getIsUseSecurity()) {//不启用权限
             http.authorizeRequests().antMatchers("/**").permitAll();//可以访问
         } else {//启用权限
-            List<ResourceRoleInfoDto> dtos = resourceRoleMapper.getResourceRoleInfo(projectCode);//查当前项目的资源角色信息
+            List<ResourceRoleInfoDto> dtos = resourceRoleMapper.getResourceRoleInfo(myConfig.getProjectCode());//查当前项目的资源角色信息
             for (ResourceRoleInfoDto dto : dtos) {
                 String resourceButton = dto.getButton();//资源里的button
                 //urlPattern1、urlPattern2代表在这路径下的才被security权限管理起来

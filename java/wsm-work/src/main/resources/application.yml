@@ -67,9 +67,13 @@ ribbon:
 #  hystrix:
 #    enabled: true
 
-myConfig:
+my-config:
   isUseSecurity: true #是否使用security权限
   projectCode: wsm_work #项目编码
-  clientId: client_work
+  clientId: client_work #客户端id
+
+  rocketmq_namesrvAddr: 192.168.199.129:9876 #rocketmq地址
+  rocketmq_Consumer: transaction_consumer #消费者
+  rocketmq_topic: test_transaction #rocketmq主题
 
 
