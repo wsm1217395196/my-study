@@ -34,7 +34,7 @@ public class MyClientDetailsService implements ClientDetailsService {
         clientDetails.setClientId(model.getClientId()); //客户端(client)id
         clientDetails.setResourceIds(Arrays.asList(model.getResourceIds().split(",")));//客户端所能访问的资源id集合
         clientDetails.setClientSecret(new BCryptPasswordEncoder().encode(model.getClientSecret()));//客户端(client)的访问密匙
-        clientDetails.setAuthorizedGrantTypes(Arrays.asList(model.getAuthorizedGrantTypes().split(",")));//客户端支持的grant_type
+        clientDetails.setAuthorizedGrantTypes(Arrays.asList(model.getAuthorizedGrantTypes().split(",")));//客户端支持的grant_type授权类型
         clientDetails.setScope(Arrays.asList(model.getScope().split(",")));//客户端申请的权限范围
         Integer accessTokenValidity = model.getAccessTokenValidity();
         if (accessTokenValidity != null && accessTokenValidity > 0) {
