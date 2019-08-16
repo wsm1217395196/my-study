@@ -61,7 +61,7 @@ public class AuthorizationServerConfig extends AuthorizationServerConfigurerAdap
         //对称加密方式
         jwtAccessTokenConverter.setSigningKey("jwt_wsm");
 
-        //非对称加密方式
+        //非对称加密方式(jks文件可能过期，jks文件需要Java keytool工具生成)
 //        KeyStoreKeyFactory keyStoreKeyFactory = new KeyStoreKeyFactory(new ClassPathResource("mytest.jks"), "mypass".toCharArray());
 //        jwtAccessTokenConverter.setKeyPair(keyStoreKeyFactory.getKeyPair("mytest"));
 

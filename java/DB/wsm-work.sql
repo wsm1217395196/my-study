@@ -29,12 +29,13 @@ CREATE TABLE `job` (
   `update_time` datetime DEFAULT NULL COMMENT '更新时间',
   `is_enabled` tinyint(4) NOT NULL DEFAULT '1' COMMENT '是否有效(0无效，1有效)',
   `remark` varchar(200) COLLATE utf8_unicode_ci DEFAULT NULL COMMENT '备注',
-  PRIMARY KEY (`id`)
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `job_name` (`name`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci COMMENT='职位表';
 
 /*Data for the table `job` */
 
-insert  into `job`(`id`,`name`,`create_by`,`create_time`,`update_by`,`update_time`,`is_enabled`,`remark`) values (1,'1','1','2019-02-23 16:21:48',NULL,'2019-02-23 16:21:51',1,NULL);
+insert  into `job`(`id`,`name`,`create_by`,`create_time`,`update_by`,`update_time`,`is_enabled`,`remark`) values (1,'1','1','2019-02-23 16:21:48',NULL,'2019-02-23 16:21:51',1,NULL),(2071920247814162600,'job测试分布式事务185',NULL,NULL,NULL,NULL,1,NULL),(2091908216941662600,'job测试分布式事务825',NULL,NULL,NULL,NULL,1,NULL),(5820180908104163807,'job测试分布式事务428',NULL,NULL,NULL,NULL,1,NULL);
 
 /*Table structure for table `recruit_platform` */
 

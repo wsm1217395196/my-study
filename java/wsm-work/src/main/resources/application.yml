@@ -47,8 +47,12 @@ mybatis-plus:
 
 # 这里的配置好像是（第一种实现）：每次带token的请求都会去wsm-oauth服务(存token的地方)请求对比token是否有效，是否正确（间接的方式）。
 # 第二种实现：在ResourceSeverConfig类configure方法配置resources.tokenStore(tokenStore())，
-#            然后直接请求(存token的地方)对比token（直接的方式）。
+#            然后直接请求(存token的地方)对比token是否有效，是否正确（直接的方式）。
 #       *看自己需求用哪种方式。
+#        1、wsm-oauth服务用oauth2.0原生token的话：
+#           且token存储位置（用数据库或者redis）的IP地址跟本资源服务连接的 `数据库或者redis` 的IP地址一样，资源服务建议用第二种实现，不一样用第一种实现。
+#        2、wsm-oauth服务用jwt生成token的话：资源服务建议用第二种实现，且ResourceSeverConfig类tokenStore方法用return jwt...
+#           但是退出登录原来token还是有用的，直到token过期为止无效。因为jwt是无状态的，可在本服务中解析认证token。
 #security:
 #  oauth2:
 #    resource:

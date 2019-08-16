@@ -15,7 +15,8 @@ import org.springframework.security.oauth2.config.annotation.web.configuration.E
 import org.springframework.security.oauth2.config.annotation.web.configuration.ResourceServerConfigurerAdapter;
 import org.springframework.security.oauth2.config.annotation.web.configurers.ResourceServerSecurityConfigurer;
 import org.springframework.security.oauth2.provider.token.TokenStore;
-import org.springframework.security.oauth2.provider.token.store.redis.RedisTokenStore;
+import org.springframework.security.oauth2.provider.token.store.JwtAccessTokenConverter;
+import org.springframework.security.oauth2.provider.token.store.JwtTokenStore;
 import org.springframework.util.StringUtils;
 
 import javax.sql.DataSource;
@@ -41,15 +42,41 @@ public class ResourceSeverConfig extends ResourceServerConfigurerAdapter {
     private DataSource dataSource;
 
     /**
-     * 这个bean要与wsm-oauth服务AuthorizationServerConfig类tokenStore方法相对应
+     * 对Jwt签名时，增加一个密钥
+     * JwtAccessTokenConverter：对Jwt来进行编码以及解码的类
+     * 这个bean要与wsm-oauth服务AuthorizationServerConfig类JwtAccessTokenConverter方法相对应
+     */
+    @Bean
+    public JwtAccessTokenConverter jwtAccessTokenConverter() {
+
+        JwtAccessTokenConverter jwtAccessTokenConverter = new JwtAccessTokenConverter();
+
+        //对称加密方式
+        jwtAccessTokenConverter.setSigningKey("jwt_wsm");
+
+        //非对称加密方式(jks文件可能过期，jks文件需要Java keytool工具生成)
+//        Resource resource = new ClassPathResource("publicKey.txt");
+//        String publicKey ;
+//        try {
+//            publicKey = new String(FileCopyUtils.copyToByteArray(resource.getInputStream()));
+//        } catch (IOException e) {
+//            throw new RuntimeException(e);
+//        }
+//        jwtAccessTokenConverter.setVerifierKey(publicKey); //设置公钥
+
+        return jwtAccessTokenConverter;
+    }
+
+    /**
+     * application.yml有解释
      *
      * @return
      */
     @Bean
     public TokenStore tokenStore() {
 //        return new InMemoryTokenStore();
-        return new RedisTokenStore(redisConnectionFactory);
-//        return new JwtTokenStore(jwtAccessTokenConverter());
+//        return new RedisTokenStore(redisConnectionFactory);
+        return new JwtTokenStore(jwtAccessTokenConverter());
 //        return new JdbcTokenStore(dataSource);
     }
 

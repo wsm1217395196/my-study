@@ -58,7 +58,7 @@ CREATE TABLE `oauth_client_details` (
 
 /*Data for the table `oauth_client_details` */
 
-insert  into `oauth_client_details`(`client_id`,`resource_ids`,`client_secret`,`scope`,`authorized_grant_types`,`web_server_redirect_uri`,`authorities`,`access_token_validity`,`refresh_token_validity`,`additional_information`,`autoapprove`) values ('client_upms','resource_upms','secret_wsm','scope_wsm','client_credentials,authorization_code,password,refresh_token',NULL,NULL,0,0,NULL,'false'),('client_work','resource_work','secret_wsm','scope_wsm','client_credentials,authorization_code,password,refresh_token',NULL,NULL,0,0,NULL,'false');
+insert  into `oauth_client_details`(`client_id`,`resource_ids`,`client_secret`,`scope`,`authorized_grant_types`,`web_server_redirect_uri`,`authorities`,`access_token_validity`,`refresh_token_validity`,`additional_information`,`autoapprove`) values ('client_oauth','resource_oauth','secret_wsm','scope_wsm','client_credentials,authorization_code,password,refresh_token',NULL,NULL,0,0,NULL,'false'),('client_upms','resource_upms,resource_oauth,resource_work','secret_wsm','scope_wsm','client_credentials,authorization_code,password,refresh_token',NULL,NULL,0,0,NULL,'false'),('client_work','resource_work,resource_oauth','secret_wsm','scope_wsm','client_credentials,authorization_code,password,refresh_token',NULL,NULL,0,0,NULL,'false');
 
 /*Table structure for table `oauth_code` */
 
@@ -124,12 +124,13 @@ CREATE TABLE `region` (
   `update_time` datetime DEFAULT NULL COMMENT '更新时间',
   `is_enabled` tinyint(4) DEFAULT '1' COMMENT '是否有效(0无效，1有效)',
   `remark` varchar(200) COLLATE utf8_unicode_ci DEFAULT NULL COMMENT '备注',
-  PRIMARY KEY (`id`)
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `region_name` (`name`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci COMMENT='域（如一个公司）';
 
 /*Data for the table `region` */
 
-insert  into `region`(`id`,`name`,`code`,`parent_id`,`create_by`,`create_time`,`update_by`,`update_time`,`is_enabled`,`remark`) values (1,'wsm域','666',NULL,'wsm','2019-07-18 11:35:49',NULL,NULL,1,NULL);
+insert  into `region`(`id`,`name`,`code`,`parent_id`,`create_by`,`create_time`,`update_by`,`update_time`,`is_enabled`,`remark`) values (1,'wsm域','666',NULL,'wsm','2019-07-18 11:35:49',NULL,NULL,1,NULL),(2019454404814163051,'region测试分布式事务813',NULL,NULL,NULL,NULL,NULL,NULL,1,NULL),(6201907986014162412,'region测试分布式事务787',NULL,NULL,NULL,NULL,NULL,NULL,1,NULL),(9201908199048161258,'region测试分布式事务824',NULL,NULL,NULL,NULL,NULL,NULL,1,NULL);
 
 /*Table structure for table `resource` */
 

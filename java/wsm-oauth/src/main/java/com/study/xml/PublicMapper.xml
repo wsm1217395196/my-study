@@ -58,4 +58,8 @@
         SELECT * FROM `oauth_client_details` WHERE `client_id` = #{clientId}
     </select>
 
+    <select id="getResourceIdsByClientId" parameterType="string" resultType="string">
+        SELECT resource_ids FROM `oauth_client_details` WHERE `client_id` = #{clientId}
+    </select>
+
 </mapper>

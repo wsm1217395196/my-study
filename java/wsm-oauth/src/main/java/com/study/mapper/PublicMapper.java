@@ -16,4 +16,6 @@ public interface PublicMapper {
     List<BaseDto> getRoleByUserId(Long userId);
 
     OauthClientDetailsModel getOauthClientDetailsByClientId(String clientId);
+
+    String getResourceIdsByClientId(String clientId);
 }

@@ -36,3 +36,6 @@ redis:
 mybatis:
   mapper-locations: classpath:/com/study/xml/*Mapper.xml
 
+my-config:
+  clientId: client_oauth
+
