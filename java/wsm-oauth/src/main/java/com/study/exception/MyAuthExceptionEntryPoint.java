@@ -1,6 +1,7 @@
 package com.study.exception;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.study.result.ResultEnum;
 import org.springframework.security.core.AuthenticationException;
 import org.springframework.security.web.AuthenticationEntryPoint;
 
@@ -17,9 +18,10 @@ public class MyAuthExceptionEntryPoint implements AuthenticationEntryPoint {
 
     @Override
     public void commence(HttpServletRequest request, HttpServletResponse response, AuthenticationException authException) throws ServletException {
+        ResultEnum resultEnum = ResultEnum.CODE_401;
         Map map = new HashMap();
-        map.put("code", "401");
-        map.put("msg", "授权无效,禁止访问!");
+        map.put("code", resultEnum.getCode());
+        map.put("msg", resultEnum.getMsg());
         response.setContentType("application/json");
         response.setStatus(HttpServletResponse.SC_UNAUTHORIZED);
         try {

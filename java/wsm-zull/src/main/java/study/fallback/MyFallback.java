@@ -54,7 +54,7 @@ public class MyFallback implements FallbackProvider {
 
             @Override
             public InputStream getBody() throws IOException {
-                ResultEnum resultEnum = ResultEnum.CODE_3;
+                ResultEnum resultEnum = ResultEnum.CODE_504;
                 String data = "";
                 JSONObject jsonObject = new JSONObject();
                 jsonObject.put("code", resultEnum.getCode());
