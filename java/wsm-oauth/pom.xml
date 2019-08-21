@@ -14,14 +14,6 @@
     <description>oauth服务</description>
 
     <dependencies>
-        <!--common-utils-->
-        <dependency>
-            <groupId>com.study</groupId>
-            <artifactId>wsm-common-utils</artifactId>
-            <version>0.0.1-SNAPSHOT</version>
-            <scope>compile</scope>
-        </dependency>
-
         <!--spring cloud-->
         <dependency>
             <groupId>org.springframework.cloud</groupId>
@@ -37,13 +29,6 @@
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-test</artifactId>
             <scope>test</scope>
-        </dependency>
-
-        <!--热部署-->
-        <dependency>
-            <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot-devtools</artifactId>
-            <scope>runtime</scope>
         </dependency>
 
         <!--swagger-->
@@ -75,13 +60,6 @@
             <groupId>org.mybatis.spring.boot</groupId>
             <artifactId>mybatis-spring-boot-starter</artifactId>
             <version>2.0.1</version>
-        </dependency>
-
-        <!--org.json-->
-        <dependency>
-            <groupId>org.json</groupId>
-            <artifactId>json</artifactId>
-            <version>20180813</version>
         </dependency>
 
         <!--redis-->

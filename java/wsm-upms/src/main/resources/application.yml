@@ -36,7 +36,7 @@ redis:
 # 配置mybatis-plus
 mybatis-plus:
   # 配置扫描xml
-  mapper-locations: classpath:/com/study/xml/*Mapper.xml
+  mapper-locations: classpath:/mapper/*Mapper.xml
   # 实体扫描，多个package用逗号或者分号分隔
   type-aliases-package: com.study.model
   global-config:

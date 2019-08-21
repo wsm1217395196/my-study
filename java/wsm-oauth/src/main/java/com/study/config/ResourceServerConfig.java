@@ -1,5 +1,7 @@
 package com.study.config;
 
+import com.study.exception.MyAccessDeniedHandler;
+import com.study.exception.MyAuthExceptionEntryPoint;
 import com.study.mapper.PublicMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;

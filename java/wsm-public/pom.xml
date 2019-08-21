@@ -18,13 +18,6 @@
     </properties>
 
     <dependencies>
-        <!--common-utils-->
-        <dependency>
-            <groupId>com.study</groupId>
-            <artifactId>wsm-common-utils</artifactId>
-            <version>0.0.1-SNAPSHOT</version>
-            <scope>compile</scope>
-        </dependency>
 
         <!--spring cloud-->
         <dependency>
@@ -41,13 +34,6 @@
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-test</artifactId>
             <scope>test</scope>
-        </dependency>
-
-        <!--热部署-->
-        <dependency>
-            <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot-devtools</artifactId>
-            <scope>runtime</scope>
         </dependency>
 
         <!--swagger-->

@@ -75,7 +75,7 @@ public class CodeGeneration {
         pc.setServiceImpl("service");
         pc.setMapper("mapper");
         pc.setEntity("model");
-        pc.setXml("xml");
+        pc.setXml("mapper");
         mpg.setPackageInfo(pc);
 
         // 执行生成

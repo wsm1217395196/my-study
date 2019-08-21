@@ -38,6 +38,42 @@
 
     <!--子项目可直接用-->
     <dependencies>
+        <!--common-utils-->
+        <dependency>
+            <groupId>com.study</groupId>
+            <artifactId>wsm-common-utils</artifactId>
+            <version>0.0.1-SNAPSHOT</version>
+            <scope>compile</scope>
+        </dependency>
+
+<!--        <dependency>-->
+<!--            <groupId>wsm.common</groupId>-->
+<!--            <artifactId>wsm-common-utils</artifactId>-->
+<!--            <version>1.0-SNAPSHOT</version>-->
+<!--            <type>jar</type>-->
+<!--        </dependency>-->
+
+        <!--热部署-->
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-devtools</artifactId>
+            <scope>runtime</scope>
+        </dependency>
+
+        <!--org.json-->
+        <dependency>
+            <groupId>org.json</groupId>
+            <artifactId>json</artifactId>
+            <version>20180813</version>
+        </dependency>
+
+        <!--对象 json转换-->
+        <dependency>
+            <groupId>com.alibaba</groupId>
+            <artifactId>fastjson</artifactId>
+            <version>1.2.59</version>
+        </dependency>
+
     </dependencies>
 
     <!--子项目要引入依赖（填写groupId，artifactId）才可以用-->
@@ -50,13 +86,6 @@
                 <version>${spring-cloud.version}</version>
                 <type>pom</type>
                 <scope>import</scope>
-            </dependency>
-
-            <dependency>
-                <groupId>com.study</groupId>
-                <artifactId>wsm-public</artifactId>
-                <version>0.0.1-SNAPSHOT</version>
-                <scope>compile</scope>
             </dependency>
 
             <!--版本冲突检测-->
@@ -84,6 +113,9 @@
             <id>spring-milestones</id>
             <name>Spring Milestones</name>
             <url>https://repo.spring.io/milestone</url>
+<!--            <snapshots>-->
+<!--                <enabled>false</enabled>-->
+<!--            </snapshots>-->
         </repository>
     </repositories>
 

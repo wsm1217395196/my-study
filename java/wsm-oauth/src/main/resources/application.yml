@@ -34,7 +34,7 @@ redis:
       min-idle: 0  # 连接池中的最小空闲连接
 
 mybatis:
-  mapper-locations: classpath:/com/study/xml/*Mapper.xml
+  mapper-locations: classpath:/mapper/*Mapper.xml
 
 my-config:
   clientId: client_oauth

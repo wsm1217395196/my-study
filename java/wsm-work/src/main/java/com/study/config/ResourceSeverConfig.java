@@ -1,6 +1,8 @@
 package com.study.config;
 
 import com.study.dto.ResourceRoleInfoDto;
+import com.study.exception.MyAccessDeniedHandler;
+import com.study.exception.MyAuthExceptionEntryPoint;
 import com.study.feign.UpmsFeign;
 import com.study.model.ResourceRoleModel;
 import org.springframework.beans.factory.annotation.Autowired;
