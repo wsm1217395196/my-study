@@ -1,7 +1,9 @@
 package com.study.mapper;
 
-import com.study.model.RegionModel;
 import com.baomidou.mybatisplus.mapper.BaseMapper;
+import com.study.model.RegionModel;
+
+import java.util.List;
 
 /**
  * <p>
@@ -12,5 +14,7 @@ import com.baomidou.mybatisplus.mapper.BaseMapper;
  * @since 2019-07-16
  */
 public interface RegionMapper extends BaseMapper<RegionModel> {
+
+    int batchAdd(List<RegionModel> models);
 
 }

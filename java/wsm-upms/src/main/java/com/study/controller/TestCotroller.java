@@ -3,7 +3,10 @@ package com.study.controller;
 import com.alibaba.fastjson.JSONObject;
 import com.study.config.MyConfig;
 import com.study.feign.WorkFeign;
+import com.study.mapper.RegionMapper;
+import com.study.model.RegionModel;
 import com.study.result.ResultView;
+import com.study.service.RegionService;
 import com.study.service.TransactionProducer;
 import com.study.utils.CreateUtil;
 import io.swagger.annotations.ApiOperation;
@@ -15,7 +18,12 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
+
+import java.util.ArrayList;
+import java.util.Date;
+import java.util.List;
 
 /**
  * 测试控制器
@@ -30,6 +38,11 @@ public class TestCotroller {
     private TransactionProducer transactionProducer;
     @Autowired
     private WorkFeign workFeign;
+    @Autowired
+    private RegionService regionService;
+    @Autowired
+    private RegionMapper regionMapper;
+
 
     /**
      * 测试rocketmq分布式事务
@@ -71,5 +84,91 @@ public class TestCotroller {
         return resultView;
     }
 
+    @GetMapping("/testSinglehread")
+    @Transactional
+    public ResultView testSinglehread(@RequestParam int modelSize) {
+        long startTime = System.currentTimeMillis();
+        List<RegionModel> models = new ArrayList<>();
+        for (int i = -1; i < modelSize; i++) {
+            if (i == 1) {
+                continue;
+            }
+            RegionModel model = new RegionModel();
+            model.setId(Long.valueOf(Integer.toString(i)));
+            model.setName("域" + i);
+            model.setCode("code" + i);
+            model.setParentId(1L);
+            model.setCreateBy("wsm");
+            model.setCreateTime(new Date());
+            models.add(model);
+        }
+//        regionService.insertBatch(models);
+        regionMapper.batchAdd(models);
+        long entTime = System.currentTimeMillis();
+        return ResultView.success("单线程为：" + (entTime - startTime) + "毫秒");
+    }
+
+
+    @GetMapping("/testMultithread")
+    @Transactional
+    public ResultView testMultithreading(@RequestParam int modelSize, @RequestParam int threadSzie) {
+        long startTime = System.currentTimeMillis();
+        int size1 = -1;
+        int size2 = modelSize / threadSzie;
+        for (int i = 0; i < threadSzie; i++) {
+            String thredName = "线程" + i;
+            MyThread myThread = new MyThread(startTime, thredName, size1, size2, regionMapper);
+            myThread.start();
+
+            size1 = size2;
+            size2 += modelSize / threadSzie;
+        }
+        long entTime = System.currentTimeMillis();
+        return ResultView.success("多线程为：" + (entTime - startTime) + "毫秒");
+    }
+
+    class MyThread extends Thread {
+        long startTime;
+        private int size1;
+        private int size2;
+        private RegionMapper regionMapper;
+        private String thredName1;
+
+        public MyThread(long startTime, String thredName, int size1, int size2, @Autowired RegionMapper regionMapper) {
+            this.startTime = startTime;
+            this.thredName1 = thredName;
+            this.size1 = size1;
+            this.size2 = size2;
+            this.regionMapper = regionMapper;
+            this.setName(thredName);
+        }
+
+        @Override
+        public void run() {
+            List<RegionModel> models = new ArrayList<>();
+            for (int i = size1; i < size2; i++) {
+                if (i == 1) {
+                    continue;
+                }
+//                if (i == 8) {
+//                    int b = 10 / 0;
+//                }
+                RegionModel model = new RegionModel();
+                model.setId(Long.valueOf(Integer.toString(i)));
+                model.setName("域" + i);
+                model.setCode("code" + i);
+                model.setParentId(1L);
+                model.setCreateBy("wsm");
+                model.setCreateTime(new Date());
+                models.add(model);
+            }
+            int i = regionMapper.batchAdd(models);
+            if (i == models.size()) {
+                long entTime = System.currentTimeMillis();
+                System.err.println(thredName1 + ":" + (entTime - startTime) + "毫秒");
+            }
+
+        }
+    }
 
 }
