@@ -11,6 +11,7 @@ import org.springframework.cloud.openfeign.EnableFeignClients;
 @SpringBootApplication
 @EnableDiscoveryClient
 @EnableFeignClients
+//@EnableDistributedTransaction
 public class UpmsStart {
 
     public static void main(String[] args) {

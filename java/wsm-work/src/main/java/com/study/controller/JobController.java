@@ -1,7 +1,6 @@
 package com.study.controller;
 
 
-import com.study.feign.UpmsFeign;
 import com.study.model.JobModel;
 import com.study.result.PageParam;
 import com.study.result.PageResult;
@@ -17,6 +16,7 @@ import org.springframework.web.bind.annotation.*;
 import javax.servlet.http.HttpServletRequest;
 import java.util.Arrays;
 import java.util.Date;
+import java.util.Enumeration;
 import java.util.List;
 
 /**
@@ -34,13 +34,10 @@ public class JobController {
 
     @Autowired
     private JobService jobService;
-    @Autowired
-    private UpmsFeign upmsFeign;
 
     @ApiOperation(value = "测试查询时间段", notes = "")
     @GetMapping("/test")
     public ResultView test() {
-        upmsFeign.getResourceRoleInfo("wsm_work");
         List<JobModel> models = jobService.test();
         return ResultView.success(models);
     }
@@ -49,7 +46,7 @@ public class JobController {
     @GetMapping("/authority/getAll")
     public ResultView getAll(HttpServletRequest request) {
         String authorization = request.getHeader("Authorization");
-        System.out.println(authorization);
+        System.err.println(authorization);
         List<JobModel> models = jobService.selectList(null);
         return ResultView.success(models);
     }
@@ -69,15 +66,22 @@ public class JobController {
     }
 
     @ApiOperation(value = "新增", notes = "")
-    @PostMapping("/authority_button/add")
+//    @LcnTransaction(propagation = DTXPropagation.SUPPORTS)
+//    @TccTransaction(propagation = DTXPropagation.SUPPORTS)
+//    @TxcTransaction(propagation = DTXPropagation.SUPPORTS)
     @Transactional
-    public ResultView add(@RequestBody JobModel model) {
+    @PostMapping("/authority_button/add")
+    public ResultView add(@RequestBody JobModel model, HttpServletRequest request) {
+        Enumeration<String> headerNames = request.getHeaderNames();
         Date date = new Date();
         model.setId(CreateUtil.id());
         model.setCreateTime(date);
         model.setUpdateTime(date);
         jobService.insert(model);
-        return ResultView.success(model);
+
+        int i = 10 / 0;
+
+        return ResultView.success();
     }
 
     @ApiOperation(value = "修改", notes = "")

@@ -4,6 +4,7 @@ import com.alibaba.fastjson.JSONObject;
 import com.study.config.MyConfig;
 import com.study.feign.WorkFeign;
 import com.study.mapper.RegionMapper;
+import com.study.model.JobModel;
 import com.study.model.RegionModel;
 import com.study.result.ResultView;
 import com.study.service.RegionService;
@@ -51,14 +52,14 @@ public class TestCotroller {
      * @return
      */
     @ApiOperation(value = "测试rocketmq分布式事务（最终一致性）")
-    @GetMapping("/distributedTransaction")
+    @GetMapping("/testRocketmqTransaction")
     @Transactional
-    public ResultView distributedTransaction() throws MQClientException {
+    public ResultView testRocketmqTransaction() throws MQClientException {
 
         //封装消息
         JSONObject jsonObject = new JSONObject();
-        jsonObject.put("regionName", "region测试分布式事务" + CreateUtil.validateCode(3));
-        jsonObject.put("jobName", "job测试分布式事务" + CreateUtil.validateCode(3));
+        jsonObject.put("regionName", "（rocketmq）region测试分布式事务" + CreateUtil.validateCode(3));
+        jsonObject.put("jobName", "（rocketmq）job测试分布式事务" + CreateUtil.validateCode(3));
         String jsonString = jsonObject.toJSONString();
 
         //封装消息实体
@@ -73,6 +74,34 @@ public class TestCotroller {
     }
 
     /**
+     * 测试lcn分布式事务
+     * 注：lcn传递token未解决，事务发起方异常时全部可回滚，事务参与方异常时发起方不回滚。
+     * 有关lcn的代码已注释。
+     *
+     * @return
+     */
+    @ApiOperation(value = "测试lcn分布式事务")
+//    @LcnTransaction
+    @Transactional
+    @GetMapping("/testLcnTransaction")
+    public ResultView testLcnTransaction() {
+
+        RegionModel regionModel = new RegionModel();
+        regionModel.setId(CreateUtil.id());
+        regionModel.setName("（lcn）region测试分布式事务" + CreateUtil.validateCode(3));
+        regionService.insert(regionModel);
+
+        JobModel jobModel = new JobModel();
+        jobModel.setId(CreateUtil.id());
+        jobModel.setName("（lcn）job测试分布式事务" + CreateUtil.validateCode(3));
+        ResultView resultView = workFeign.add_job(jobModel);
+
+//        int i = 10 / 0;
+
+        return resultView;
+    }
+
+    /**
      * 测试传递token到wsm-work服务中
      *
      * @return
@@ -84,6 +113,13 @@ public class TestCotroller {
         return resultView;
     }
 
+
+    /**
+     * 单线程插入
+     *
+     * @param modelSize
+     * @return
+     */
     @GetMapping("/testSinglehread")
     @Transactional
     public ResultView testSinglehread(@RequestParam int modelSize) {
@@ -109,6 +145,13 @@ public class TestCotroller {
     }
 
 
+    /**
+     * 多线程插入
+     *
+     * @param modelSize
+     * @param threadSzie
+     * @return
+     */
     @GetMapping("/testMultithread")
     @Transactional
     public ResultView testMultithreading(@RequestParam int modelSize, @RequestParam int threadSzie) {

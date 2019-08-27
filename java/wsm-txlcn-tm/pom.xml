@@ -13,8 +13,14 @@
     <artifactId>wsm-txlcn-tm</artifactId>
     <description>lcn分布式事务框架manager</description>
 
-    <!--LCN分布式框架tm-->
     <dependencies>
+        <!--spring cloud-->
+        <dependency>
+            <groupId>org.springframework.cloud</groupId>
+            <artifactId>spring-cloud-starter-netflix-eureka-client</artifactId>
+        </dependency>
+
+        <!--LCN分布式框架tm-->
         <dependency>
             <groupId>com.codingapi.txlcn</groupId>
             <artifactId>txlcn-tm</artifactId>

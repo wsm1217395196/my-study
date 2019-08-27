@@ -15,16 +15,21 @@ import javax.servlet.http.HttpServletRequest;
 public class FeignRequestInterceptorConfig implements RequestInterceptor {
 
     @Override
-    public void apply(RequestTemplate template) {
-        System.err.println("调用feign传递header携带token");
-        ServletRequestAttributes attributes = (ServletRequestAttributes) RequestContextHolder
-                .getRequestAttributes();
+    public void apply(RequestTemplate requestTemplate) {
+
+        ServletRequestAttributes attributes = (ServletRequestAttributes) RequestContextHolder.getRequestAttributes();
         HttpServletRequest request = attributes.getRequest();
 
         if (request != null) {
+            System.err.println("调用feign传递header携带token");
+//            System.out.println("lcn组：" + TracingContext.tracing().groupId());
+
 //        只携带token
             String authorization = request.getHeader("Authorization");
-            template.header("Authorization", authorization);
+            requestTemplate.header("Authorization", authorization);
+//            Tracings.transmit((x$0, xva$1) -> {
+//            requestTemplate.header(x$0, new String[]{xva$1});
+//        });
 
 //        携带全部
 //            Enumeration<String> headerNames = request.getHeaderNames();
@@ -32,11 +37,20 @@ public class FeignRequestInterceptorConfig implements RequestInterceptor {
 //                while (headerNames.hasMoreElements()) {
 //                    String name = headerNames.nextElement();
 //                    String values = request.getHeader(name);
-//                    template.header(name, values);
+//                    requestTemplate.header(name, values);
 //                }
 //            }
 
         }
+
+
+//        lcn测试
+//        System.err.println("调用feign传递header携带token");
+//        System.out.println("lcn组：" + TracingContext.tracing().groupId());
+//        requestTemplate.header("Authorization", "bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJhdWQiOlsicmVzb3VyY2Vfb2F1dGgiLCJyZXNvdXJjZV91cG1zIiwicmVzb3VyY2Vfd29yayJdLCJjcmVhdGVUaW1lIjoiMjAxOS0wOC0yNyAxMDowNDo1MyIsInVzZXJfbmFtZSI6IndzbTEiLCJhdXRob3IiOiJ3c20iLCJzY29wZSI6WyJzY29wZV93c20iXSwicm9sZXMiOiJST0xFXzEiLCJleHAiOjE1NjY5MTQ2OTIsImF1dGhvcml0aWVzIjpbIlJPTEVfMSJdLCJqdGkiOiJjYzdiM2E4Zi05YWI4LTRmZDktYTY5Yy1kZjA3MTA3YWI2YjgiLCJjbGllbnRfaWQiOiJjbGllbnRfdXBtcyJ9.6T4nvbqPt4wtFgHqNzNkNkdSBOpKWPpDmRcMHf7rnTU");
+//        Tracings.transmit((x$0, xva$1) -> {
+//            requestTemplate.header(x$0, new String[]{xva$1});
+//        });
     }
 
 }
