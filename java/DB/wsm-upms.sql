@@ -130,7 +130,7 @@ CREATE TABLE `region` (
 
 /*Data for the table `region` */
 
-insert  into `region`(`id`,`name`,`code`,`parent_id`,`create_by`,`create_time`,`update_by`,`update_time`,`is_enabled`,`remark`) values (1,'wsm域','666',NULL,'wsm','2019-07-18 11:35:49',NULL,NULL,1,NULL),(2019454404814163051,'region测试分布式事务813',NULL,NULL,NULL,NULL,NULL,NULL,1,NULL),(6201907986014162412,'region测试分布式事务787',NULL,NULL,NULL,NULL,NULL,NULL,1,NULL),(9201908199048161258,'region测试分布式事务824',NULL,NULL,NULL,NULL,NULL,NULL,1,NULL);
+insert  into `region`(`id`,`name`,`code`,`parent_id`,`create_by`,`create_time`,`update_by`,`update_time`,`is_enabled`,`remark`) values (1,'wsm域','666',NULL,'wsm','2019-07-18 11:35:49',NULL,NULL,1,NULL),(3205163090830180738,'（seata）region测试分布式事务062',NULL,NULL,NULL,NULL,NULL,NULL,1,NULL);
 
 /*Table structure for table `resource` */
 

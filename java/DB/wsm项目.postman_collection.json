@@ -6,33 +6,6 @@
 	},
 	"item": [
 		{
-			"name": "测试分布式事务",
-			"request": {
-				"method": "GET",
-				"header": [
-					{
-						"key": "Authorization",
-						"value": "bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJjcmVhdGVUaW1lIjoiMjAxOS0wOC0wNSAxNDoxNzo0NyIsInVzZXJfbmFtZSI6IndzbTEiLCJhdXRob3IiOiJ3c20iLCJzY29wZSI6WyJzY29wZV93c20iXSwicm9sZXMiOiJST0xFXzEiLCJleHAiOjE1NjUwMjkwNjcsImF1dGhvcml0aWVzIjpbIlJPTEVfMSJdLCJqdGkiOiJjMjViZGQyYi02Njc5LTRmYzUtOTZkOS1mOGZhYzNmZDQzOWQiLCJjbGllbnRfaWQiOiJjbGllbnRfd3NtIn0.ImnhqVUWKJOCQhRqZUVqprCbgjP1bBuA4Ch7H7B1hmA"
-					}
-				],
-				"body": {},
-				"url": {
-					"raw": "http://localhost:8001/wsm-upms/test/distributedTransaction",
-					"protocol": "http",
-					"host": [
-						"localhost"
-					],
-					"port": "8001",
-					"path": [
-						"wsm-upms",
-						"test",
-						"distributedTransaction"
-					]
-				}
-			},
-			"response": []
-		},
-		{
 			"name": "oauth-获取token",
 			"request": {
 				"method": "POST",
@@ -54,7 +27,7 @@
 						},
 						{
 							"key": "client_id",
-							"value": "client_work",
+							"value": "client_upms",
 							"description": "",
 							"type": "text"
 						},
@@ -89,6 +62,87 @@
 						"wsm-oauth",
 						"oauth",
 						"token"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "测试（seata）分布式事务",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJhdWQiOlsicmVzb3VyY2Vfb2F1dGgiLCJyZXNvdXJjZV91cG1zIiwicmVzb3VyY2Vfd29yayJdLCJjcmVhdGVUaW1lIjoiMjAxOS0wOC0yNyAxMDowNDo1MyIsInVzZXJfbmFtZSI6IndzbTEiLCJhdXRob3IiOiJ3c20iLCJzY29wZSI6WyJzY29wZV93c20iXSwicm9sZXMiOiJST0xFXzEiLCJleHAiOjE1NjY5MTQ2OTIsImF1dGhvcml0aWVzIjpbIlJPTEVfMSJdLCJqdGkiOiJjYzdiM2E4Zi05YWI4LTRmZDktYTY5Yy1kZjA3MTA3YWI2YjgiLCJjbGllbnRfaWQiOiJjbGllbnRfdXBtcyJ9.6T4nvbqPt4wtFgHqNzNkNkdSBOpKWPpDmRcMHf7rnTU"
+					}
+				],
+				"body": {},
+				"url": {
+					"raw": "http://localhost:8001/wsm-upms/test/testSeataTransaction",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8001",
+					"path": [
+						"wsm-upms",
+						"test",
+						"testSeataTransaction"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "测试（rocketmq）分布式事务",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJhdWQiOlsicmVzb3VyY2VfdXBtcyIsInJlc291cmNlX3dvcmsiXSwiY3JlYXRlVGltZSI6IjIwMTktMDgtMTQgMTE6MjU6MDEiLCJ1c2VyX25hbWUiOiJ3c20xIiwiYXV0aG9yIjoid3NtIiwic2NvcGUiOlsic2NvcGVfd3NtIl0sInJvbGVzIjoiUk9MRV8xIiwiZXhwIjoxNTY1Nzk2MzAxLCJhdXRob3JpdGllcyI6WyJST0xFXzEiXSwianRpIjoiODhlZWViYTctNTRjNy00ZmU4LWJhMzctMzM1YjhmOWM2NzhkIiwiY2xpZW50X2lkIjoiY2xpZW50X3VwbXMifQ.BPOVAAjR_nLA-iKFYmbhbe6GyeivN3cYmqjnF7YnPHo"
+					}
+				],
+				"body": {},
+				"url": {
+					"raw": "http://localhost:8001/wsm-upms/test/testRocketmqTransaction",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8001",
+					"path": [
+						"wsm-upms",
+						"test",
+						"testRocketmqTransaction"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "测试（lcn）分布式事务",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJhdWQiOlsicmVzb3VyY2Vfb2F1dGgiLCJyZXNvdXJjZV91cG1zIiwicmVzb3VyY2Vfd29yayJdLCJjcmVhdGVUaW1lIjoiMjAxOS0wOC0yNyAxMDowNDo1MyIsInVzZXJfbmFtZSI6IndzbTEiLCJhdXRob3IiOiJ3c20iLCJzY29wZSI6WyJzY29wZV93c20iXSwicm9sZXMiOiJST0xFXzEiLCJleHAiOjE1NjY5MTQ2OTIsImF1dGhvcml0aWVzIjpbIlJPTEVfMSJdLCJqdGkiOiJjYzdiM2E4Zi05YWI4LTRmZDktYTY5Yy1kZjA3MTA3YWI2YjgiLCJjbGllbnRfaWQiOiJjbGllbnRfdXBtcyJ9.6T4nvbqPt4wtFgHqNzNkNkdSBOpKWPpDmRcMHf7rnTU"
+					}
+				],
+				"body": {},
+				"url": {
+					"raw": "http://localhost:8001/wsm-upms/test/testLcnTransaction",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8001",
+					"path": [
+						"wsm-upms",
+						"test",
+						"testLcnTransaction"
 					]
 				}
 			},
@@ -344,7 +398,7 @@
 				"header": [
 					{
 						"key": "Authorization",
-						"value": " bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJhdWQiOlsicmVzb3VyY2Vfd29yayJdLCJjcmVhdGVUaW1lIjoiMjAxOS0wOC0xMyAxMDo0MDo0MiIsInVzZXJfbmFtZSI6IndzbTEiLCJhdXRob3IiOiJ3c20iLCJzY29wZSI6WyJzY29wZV93c20iXSwicm9sZXMiOiJST0xFXzEiLCJleHAiOjE1NjU3MDcyNDIsImF1dGhvcml0aWVzIjpbIlJPTEVfMSJdLCJqdGkiOiJlZTI2ZTVmYy01ZWE1LTQyZGUtOTJjMS1jODRiMjFmNTE3MWIiLCJjbGllbnRfaWQiOiJjbGllbnRfd29yayJ9.2FCW_7ZXKyaM8HU1GfrOPNQWd-UlFwMawhRHxP0J_mo"
+						"value": " bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJhdWQiOlsicmVzb3VyY2Vfb2F1dGgiLCJyZXNvdXJjZV91cG1zIiwicmVzb3VyY2Vfd29yayJdLCJjcmVhdGVUaW1lIjoiMjAxOS0wOC0yNiAxMDo0MzowMiIsInVzZXJfbmFtZSI6IndzbTEiLCJhdXRob3IiOiJ3c20iLCJzY29wZSI6WyJzY29wZV93c20iXSwicm9sZXMiOiJST0xFXzEiLCJleHAiOjE1NjY4MzA1ODIsImF1dGhvcml0aWVzIjpbIlJPTEVfMSJdLCJqdGkiOiI1NDU0NWEwYS00MzgxLTQ5N2YtODNiZi0zZWMwOTJkYjU5ZDgiLCJjbGllbnRfaWQiOiJjbGllbnRfdXBtcyJ9.vLlTuc3H6x1UALOLcr13VQSBIvE4eZT6_3hJsnVkYBM"
 					}
 				],
 				"body": {},
@@ -509,7 +563,7 @@
 				"header": [
 					{
 						"key": "Authorization",
-						"value": " bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJhdWQiOlsicmVzb3VyY2Vfd29yayJdLCJjcmVhdGVUaW1lIjoiMjAxOS0wOC0xMyAxMDo0MDo0MiIsInVzZXJfbmFtZSI6IndzbTEiLCJhdXRob3IiOiJ3c20iLCJzY29wZSI6WyJzY29wZV93c20iXSwicm9sZXMiOiJST0xFXzEiLCJleHAiOjE1NjU3MDcyNDIsImF1dGhvcml0aWVzIjpbIlJPTEVfMSJdLCJqdGkiOiJlZTI2ZTVmYy01ZWE1LTQyZGUtOTJjMS1jODRiMjFmNTE3MWIiLCJjbGllbnRfaWQiOiJjbGllbnRfd29yayJ9.2FCW_7ZXKyaM8HU1GfrOPNQWd-UlFwMawhRHxP0J_mo"
+						"value": " bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJhdWQiOlsicmVzb3VyY2Vfb2F1dGgiLCJyZXNvdXJjZV91cG1zIiwicmVzb3VyY2Vfd29yayJdLCJjcmVhdGVUaW1lIjoiMjAxOS0wOC0yNiAxMDo0MzowMiIsInVzZXJfbmFtZSI6IndzbTEiLCJhdXRob3IiOiJ3c20iLCJzY29wZSI6WyJzY29wZV93c20iXSwicm9sZXMiOiJST0xFXzEiLCJleHAiOjE1NjY4MzA1ODIsImF1dGhvcml0aWVzIjpbIlJPTEVfMSJdLCJqdGkiOiI1NDU0NWEwYS00MzgxLTQ5N2YtODNiZi0zZWMwOTJkYjU5ZDgiLCJjbGllbnRfaWQiOiJjbGllbnRfdXBtcyJ9.vLlTuc3H6x1UALOLcr13VQSBIvE4eZT6_3hJsnVkYBM"
 					}
 				],
 				"body": {},
@@ -613,6 +667,76 @@
 					"path": [
 						"user",
 						"principal"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "测试单线程",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJhdWQiOlsicmVzb3VyY2Vfb2F1dGgiLCJyZXNvdXJjZV91cG1zIiwicmVzb3VyY2Vfd29yayJdLCJjcmVhdGVUaW1lIjoiMjAxOS0wOC0yMiAxNjo0NDowNCIsInVzZXJfbmFtZSI6IndzbTEiLCJhdXRob3IiOiJ3c20iLCJzY29wZSI6WyJzY29wZV93c20iXSwicm9sZXMiOiJST0xFXzEiLCJleHAiOjE1NjY1MDY2NDQsImF1dGhvcml0aWVzIjpbIlJPTEVfMSJdLCJqdGkiOiJkZTNkM2Q3NS0zYTVhLTQ4NGQtOTgwNy02OTM5Y2ZjMDA1ZGQiLCJjbGllbnRfaWQiOiJjbGllbnRfdXBtcyJ9.krsTAxGRtrhxZROBj6WG7V-wMeNBiTfvqGNZo6_YEkI"
+					}
+				],
+				"body": {},
+				"url": {
+					"raw": "http://localhost:8001/wsm-upms/test/testSinglehread?modelSize=10000",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8001",
+					"path": [
+						"wsm-upms",
+						"test",
+						"testSinglehread"
+					],
+					"query": [
+						{
+							"key": "modelSize",
+							"value": "10000"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "测试多线程",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJhdWQiOlsicmVzb3VyY2Vfb2F1dGgiLCJyZXNvdXJjZV91cG1zIiwicmVzb3VyY2Vfd29yayJdLCJjcmVhdGVUaW1lIjoiMjAxOS0wOC0yMiAxNjo0NDowNCIsInVzZXJfbmFtZSI6IndzbTEiLCJhdXRob3IiOiJ3c20iLCJzY29wZSI6WyJzY29wZV93c20iXSwicm9sZXMiOiJST0xFXzEiLCJleHAiOjE1NjY1MDY2NDQsImF1dGhvcml0aWVzIjpbIlJPTEVfMSJdLCJqdGkiOiJkZTNkM2Q3NS0zYTVhLTQ4NGQtOTgwNy02OTM5Y2ZjMDA1ZGQiLCJjbGllbnRfaWQiOiJjbGllbnRfdXBtcyJ9.krsTAxGRtrhxZROBj6WG7V-wMeNBiTfvqGNZo6_YEkI"
+					}
+				],
+				"body": {},
+				"url": {
+					"raw": "http://localhost:8001/wsm-upms/test/testMultithread?modelSize=10000&threadSzie=5",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8001",
+					"path": [
+						"wsm-upms",
+						"test",
+						"testMultithread"
+					],
+					"query": [
+						{
+							"key": "modelSize",
+							"value": "10000"
+						},
+						{
+							"key": "threadSzie",
+							"value": "5"
+						}
 					]
 				}
 			},

@@ -35,7 +35,7 @@ CREATE TABLE `job` (
 
 /*Data for the table `job` */
 
-insert  into `job`(`id`,`name`,`create_by`,`create_time`,`update_by`,`update_time`,`is_enabled`,`remark`) values (1,'1','1','2019-02-23 16:21:48',NULL,'2019-02-23 16:21:51',1,NULL),(2071920247814162600,'job测试分布式事务185',NULL,NULL,NULL,NULL,1,NULL),(2091908216941662600,'job测试分布式事务825',NULL,NULL,NULL,NULL,1,NULL),(5820180908104163807,'job测试分布式事务428',NULL,NULL,NULL,NULL,1,NULL);
+insert  into `job`(`id`,`name`,`create_by`,`create_time`,`update_by`,`update_time`,`is_enabled`,`remark`) values (1,'1','1','2019-02-23 16:21:48',NULL,'2019-02-23 16:21:51',1,NULL),(2620619105830180738,'（seata）job测试分布式事务482',NULL,'2019-08-30 10:07:39',NULL,'2019-08-30 10:07:39',1,NULL);
 
 /*Table structure for table `recruit_platform` */
 
