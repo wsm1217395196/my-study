@@ -10,7 +10,6 @@ import com.study.utils.CreateUtil;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletRequest;
@@ -69,7 +68,7 @@ public class JobController {
 //    @LcnTransaction(propagation = DTXPropagation.SUPPORTS)
 //    @TccTransaction(propagation = DTXPropagation.SUPPORTS)
 //    @TxcTransaction(propagation = DTXPropagation.SUPPORTS)
-    @Transactional
+//    @Transactional
     @PostMapping("/authority_button/add")
     public ResultView add(@RequestBody JobModel model, HttpServletRequest request) {
         Enumeration<String> headerNames = request.getHeaderNames();
@@ -79,7 +78,7 @@ public class JobController {
         model.setUpdateTime(date);
         jobService.insert(model);
 
-        int i = 10 / 0;
+//        int i = 10 / 0;
 
         return ResultView.success();
     }

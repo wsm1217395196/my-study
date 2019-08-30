@@ -34,8 +34,9 @@
     <properties>
         <java.version>1.8</java.version>
         <spring-cloud.version>Greenwich.RELEASE</spring-cloud.version>
-        <codingapi.txlcn.version>5.0.2.RELEASE</codingapi.txlcn.version>
+
         <platform-bom.version>Cairo-RELEASE</platform-bom.version>
+        <codingapi.txlcn.version>5.0.2.RELEASE</codingapi.txlcn.version>
     </properties>
 
     <!--子项目可直接用-->
@@ -51,10 +52,10 @@
         <!--common-utils 打jar用这个-->
         <!--可把本项目中wsm-common-utils的代码放到utils文件夹wsm-common-utils项目中，然后打jar包放到maven本地仓库中-->
         <!--<dependency>-->
-            <!--<groupId>wsm.common</groupId>-->
-            <!--<artifactId>wsm-common-utils</artifactId>-->
-            <!--<version>1.0-SNAPSHOT</version>-->
-            <!--<type>jar</type>-->
+        <!--<groupId>wsm.common</groupId>-->
+        <!--<artifactId>wsm-common-utils</artifactId>-->
+        <!--<version>1.0-SNAPSHOT</version>-->
+        <!--<type>jar</type>-->
         <!--</dependency>-->
 
         <!--热部署-->
@@ -109,6 +110,19 @@
                 <version>${codingapi.txlcn.version}</version>
             </dependency>
 
+            <!--阿里seata分布式框架-->
+            <dependency>
+                <groupId>com.alibaba.cloud</groupId>
+                <artifactId>spring-cloud-alibaba-seata</artifactId>
+                <version>2.1.0.RELEASE</version>
+            </dependency>
+            <dependency>
+                <groupId>io.seata</groupId>
+                <artifactId>seata-all</artifactId>
+                <version>0.8.0</version>
+            </dependency>
+
+
             <!--版本冲突检测-->
             <!--<dependency>-->
             <!--<groupId>io.spring.platform</groupId>-->
@@ -134,9 +148,9 @@
             <id>spring-milestones</id>
             <name>Spring Milestones</name>
             <url>https://repo.spring.io/milestone</url>
-<!--            <snapshots>-->
-<!--                <enabled>false</enabled>-->
-<!--            </snapshots>-->
+            <!--            <snapshots>-->
+            <!--                <enabled>false</enabled>-->
+            <!--            </snapshots>-->
         </repository>
     </repositories>
 

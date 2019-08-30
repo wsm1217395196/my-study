@@ -121,6 +121,16 @@
             <!--<artifactId>txlcn-txmsg-netty</artifactId>-->
         <!--</dependency>-->
 
+        <!--阿里seata分布式框架-->
+        <dependency>
+            <groupId>com.alibaba.cloud</groupId>
+            <artifactId>spring-cloud-alibaba-seata</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>io.seata</groupId>
+            <artifactId>seata-all</artifactId>
+        </dependency>
+
     </dependencies>
 
     <build>

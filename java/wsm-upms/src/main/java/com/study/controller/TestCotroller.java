@@ -10,6 +10,7 @@ import com.study.result.ResultView;
 import com.study.service.RegionService;
 import com.study.service.TransactionProducer;
 import com.study.utils.CreateUtil;
+import io.seata.spring.annotation.GlobalTransactional;
 import io.swagger.annotations.ApiOperation;
 import org.apache.rocketmq.client.exception.MQClientException;
 import org.apache.rocketmq.client.producer.SendStatus;
@@ -74,6 +75,31 @@ public class TestCotroller {
     }
 
     /**
+     * 测试阿里seata分布式事务
+     *
+     * @return
+     */
+    @ApiOperation(value = "测试阿里seata分布式事务")
+    @GlobalTransactional
+    @GetMapping("/testSeataTransaction")
+    public ResultView testSeataTransaction() {
+
+        RegionModel regionModel = new RegionModel();
+        regionModel.setId(CreateUtil.id());
+        regionModel.setName("（seata）region测试分布式事务" + CreateUtil.validateCode(3));
+        regionService.insert(regionModel);
+
+        JobModel jobModel = new JobModel();
+        jobModel.setId(CreateUtil.id());
+        jobModel.setName("（seata）job测试分布式事务" + CreateUtil.validateCode(3));
+        ResultView resultView = workFeign.add_job(jobModel);
+
+        int i = 10 / 0;
+
+        return resultView;
+    }
+
+    /**
      * 测试lcn分布式事务
      * 注：lcn传递token未解决，事务发起方异常时全部可回滚，事务参与方异常时发起方不回滚。
      * 有关lcn的代码已注释。
@@ -100,6 +126,7 @@ public class TestCotroller {
 
         return resultView;
     }
+
 
     /**
      * 测试传递token到wsm-work服务中

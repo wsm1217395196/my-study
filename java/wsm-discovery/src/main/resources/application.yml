@@ -5,6 +5,7 @@ server:
 eureka:
   instance:
     hostname: localhost #地址
+    prefer-ip-address: true
   client:
     fetch-registry: false
     register-with-eureka: false
