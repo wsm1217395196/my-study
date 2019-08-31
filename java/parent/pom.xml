@@ -34,9 +34,10 @@
     <properties>
         <java.version>1.8</java.version>
         <spring-cloud.version>Greenwich.RELEASE</spring-cloud.version>
-
         <platform-bom.version>Cairo-RELEASE</platform-bom.version>
+
         <codingapi.txlcn.version>5.0.2.RELEASE</codingapi.txlcn.version>
+        <swagger.version>2.9.2</swagger.version>
     </properties>
 
     <!--子项目可直接用-->
@@ -93,6 +94,58 @@
                 <scope>import</scope>
             </dependency>
 
+            <!--swagger-->
+            <dependency>
+                <groupId>io.springfox</groupId>
+                <artifactId>springfox-swagger2</artifactId>
+                <version>${swagger.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>io.springfox</groupId>
+                <artifactId>springfox-swagger-ui</artifactId>
+                <version>${swagger.version}</version>
+            </dependency>
+
+            <!-- mybatisplus与springboot整合 -->
+            <dependency>
+                <groupId>com.baomidou</groupId>
+                <artifactId>mybatis-plus-boot-starter</artifactId>
+                <version>2.3.3</version>
+            </dependency>
+            <!-- MP 核心库 -->
+            <dependency>
+                <groupId>com.baomidou</groupId>
+                <artifactId>mybatis-plus</artifactId>
+                <version>2.3.3</version>
+            </dependency>
+            <!-- 模板引擎 -->
+            <dependency>
+                <groupId>org.apache.velocity</groupId>
+                <artifactId>velocity-engine-core</artifactId>
+                <version>2.1</version>
+            </dependency>
+            <!-- springboot整合mybatis（核心就这一个） -->
+            <!-- 注意顺序，这个一定要放在最下面 -->
+            <dependency>
+                <groupId>org.mybatis.spring.boot</groupId>
+                <artifactId>mybatis-spring-boot-starter</artifactId>
+                <version>2.0.1</version>
+            </dependency>
+
+            <!--使用security-jwt-->
+            <dependency>
+                <groupId>org.springframework.security</groupId>
+                <artifactId>spring-security-jwt</artifactId>
+                <version>1.0.10.RELEASE</version>
+            </dependency>
+
+            <!--RocketMQ-->
+            <dependency>
+                <groupId>org.apache.rocketmq</groupId>
+                <artifactId>rocketmq-client</artifactId>
+                <version>4.5.1</version>
+            </dependency>
+
             <!--分布式框架LCN-->
             <dependency>
                 <groupId>com.codingapi.txlcn</groupId>
@@ -120,6 +173,12 @@
                 <groupId>io.seata</groupId>
                 <artifactId>seata-all</artifactId>
                 <version>0.8.0</version>
+            </dependency>
+
+            <dependency>
+                <groupId>com.alibaba</groupId>
+                <artifactId>druid-spring-boot-starter</artifactId>
+                <version>1.1.20</version>
             </dependency>
 
 

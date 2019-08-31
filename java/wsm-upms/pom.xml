@@ -38,12 +38,10 @@
         <dependency>
             <groupId>io.springfox</groupId>
             <artifactId>springfox-swagger2</artifactId>
-            <version>2.9.2</version>
         </dependency>
         <dependency>
             <groupId>io.springfox</groupId>
             <artifactId>springfox-swagger-ui</artifactId>
-            <version>2.9.2</version>
         </dependency>
 
         <!--mysql-->
@@ -56,26 +54,22 @@
         <dependency>
             <groupId>com.baomidou</groupId>
             <artifactId>mybatis-plus-boot-starter</artifactId>
-            <version>2.3.3</version>
         </dependency>
         <!-- MP 核心库 -->
         <dependency>
             <groupId>com.baomidou</groupId>
             <artifactId>mybatis-plus</artifactId>
-            <version>2.3.3</version>
         </dependency>
         <!-- 模板引擎 -->
         <dependency>
             <groupId>org.apache.velocity</groupId>
             <artifactId>velocity-engine-core</artifactId>
-            <version>2.1</version>
         </dependency>
         <!-- springboot整合mybatis（核心就这一个） -->
         <!-- 注意顺序，这个一定要放在最下面 -->
         <dependency>
             <groupId>org.mybatis.spring.boot</groupId>
             <artifactId>mybatis-spring-boot-starter</artifactId>
-            <version>2.0.1</version>
         </dependency>
 
         <!--redis-->
@@ -94,7 +88,6 @@
         <dependency>
             <groupId>org.springframework.security</groupId>
             <artifactId>spring-security-jwt</artifactId>
-            <version>1.0.10.RELEASE</version>
         </dependency>
 
         <!--feign(默认集成hystrix熔断器)-->
@@ -107,7 +100,21 @@
         <dependency>
             <groupId>org.apache.rocketmq</groupId>
             <artifactId>rocketmq-client</artifactId>
-            <version>4.5.1</version>
+        </dependency>
+
+        <!--阿里seata分布式框架-->
+        <dependency>
+            <groupId>com.alibaba.cloud</groupId>
+            <artifactId>spring-cloud-alibaba-seata</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>io.seata</groupId>
+            <artifactId>seata-all</artifactId>
+        </dependency>
+
+        <dependency>
+            <groupId>com.alibaba</groupId>
+            <artifactId>druid-spring-boot-starter</artifactId>
         </dependency>
 
         <!--LCN分布式框架-->
@@ -120,15 +127,6 @@
             <!--<artifactId>txlcn-txmsg-netty</artifactId>-->
         <!--</dependency>-->
 
-        <!--阿里seata分布式框架-->
-        <dependency>
-            <groupId>com.alibaba.cloud</groupId>
-            <artifactId>spring-cloud-alibaba-seata</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>io.seata</groupId>
-            <artifactId>seata-all</artifactId>
-        </dependency>
 
     </dependencies>
 

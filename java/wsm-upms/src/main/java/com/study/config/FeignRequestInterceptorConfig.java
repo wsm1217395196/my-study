@@ -28,14 +28,7 @@ public class FeignRequestInterceptorConfig implements RequestInterceptor {
 //        只携带token
 //            String authorization = request.getHeader("Authorization");
 //            requestTemplate.header("Authorization", authorization);
-//
-//            String xid = RootContext.getXID();
-//            if (StringUtils.isNotBlank(xid)) {
-//                System.out.println("xid：" + xid);
-//                requestTemplate.header("Xid_Header", xid);
-//            }
-
-            //lcn
+//            //lcn
 //            Tracings.transmit((x$0, xva$1) -> {
 //            requestTemplate.header(x$0, new String[]{xva$1});
 //        });

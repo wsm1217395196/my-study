@@ -12,7 +12,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 /**
  * feign调用wsm-work服务
  */
-@FeignClient(value = MyConstant.wsm_work, fallback = WorkHystrix.class, configuration = FeignRequestInterceptorConfig.class)
+@FeignClient(value = MyConstant.wsm_work, fallback = WorkHystrix.class)
 public interface WorkFeign {
 
     @GetMapping("/job/authority/getAll")

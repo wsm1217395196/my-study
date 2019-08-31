@@ -81,6 +81,7 @@ public class TestCotroller {
      */
     @ApiOperation(value = "测试阿里seata分布式事务")
     @GlobalTransactional
+    @Transactional
     @GetMapping("/testSeataTransaction")
     public ResultView testSeataTransaction() {
 
