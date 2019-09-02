@@ -24,11 +24,6 @@ public class WorkHystrix implements WorkFeign {
 
     @Override
     public ResultView add_job(JobModel model) {
-
-//        lcn回滚
-//        DTXUserControls.rollbackGroup(TracingContext.tracing().groupId());
-//        System.out.println("lcn组：" + TracingContext.tracing().groupId());
-
         System.err.println("调用wsm-work服务add_job方法失败!");
         logger.error("调用wsm-work服务add_job方法失败!");
         return ResultView.hystrixError(MyConstant.wsm_work);

@@ -26,8 +26,8 @@ public class TestController {
     @ApiOperation("测试读取git配置中的值")
     @GetMapping("/getGitConfigValue")
     public String getGitConfigValue() {
-        System.out.println(wsmName);
-        System.out.println(wsmAge);
+        System.err.println(wsmName);
+        System.err.println(wsmAge);
         return wsmName;
     }
 }

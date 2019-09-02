@@ -116,18 +116,7 @@
             <groupId>com.alibaba</groupId>
             <artifactId>druid-spring-boot-starter</artifactId>
         </dependency>
-
-        <!--LCN分布式框架-->
-        <!--<dependency>-->
-            <!--<groupId>com.codingapi.txlcn</groupId>-->
-            <!--<artifactId>txlcn-tc</artifactId>-->
-        <!--</dependency>-->
-        <!--<dependency>-->
-            <!--<groupId>com.codingapi.txlcn</groupId>-->
-            <!--<artifactId>txlcn-txmsg-netty</artifactId>-->
-        <!--</dependency>-->
-
-
+        
     </dependencies>
 
     <build>

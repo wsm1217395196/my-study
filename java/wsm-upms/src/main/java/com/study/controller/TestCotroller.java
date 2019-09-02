@@ -1,7 +1,9 @@
 package com.study.controller;
 
 import com.alibaba.fastjson.JSONObject;
+import com.study.MyConstant;
 import com.study.config.MyConfig;
+import com.study.exception.MyRuntimeException;
 import com.study.feign.WorkFeign;
 import com.study.mapper.RegionMapper;
 import com.study.model.JobModel;
@@ -81,7 +83,6 @@ public class TestCotroller {
      */
     @ApiOperation(value = "测试阿里seata分布式事务")
     @GlobalTransactional
-    @Transactional
     @GetMapping("/testSeataTransaction")
     public ResultView testSeataTransaction() {
 
@@ -95,39 +96,14 @@ public class TestCotroller {
         jobModel.setName("（seata）job测试分布式事务" + CreateUtil.validateCode(3));
         ResultView resultView = workFeign.add_job(jobModel);
 
+        if (resultView.getCode() != MyConstant.One) {
+            throw new MyRuntimeException(resultView);
+        }
+
         int i = 10 / 0;
 
         return resultView;
     }
-
-    /**
-     * 测试lcn分布式事务
-     * 注：lcn传递token未解决，事务发起方异常时全部可回滚，事务参与方异常时发起方不回滚。
-     * 有关lcn的代码已注释。
-     *
-     * @return
-     */
-    @ApiOperation(value = "测试lcn分布式事务")
-//    @LcnTransaction
-    @Transactional
-    @GetMapping("/testLcnTransaction")
-    public ResultView testLcnTransaction() {
-
-        RegionModel regionModel = new RegionModel();
-        regionModel.setId(CreateUtil.id());
-        regionModel.setName("（lcn）region测试分布式事务" + CreateUtil.validateCode(3));
-        regionService.insert(regionModel);
-
-        JobModel jobModel = new JobModel();
-        jobModel.setId(CreateUtil.id());
-        jobModel.setName("（lcn）job测试分布式事务" + CreateUtil.validateCode(3));
-        ResultView resultView = workFeign.add_job(jobModel);
-
-//        int i = 10 / 0;
-
-        return resultView;
-    }
-
 
     /**
      * 测试传递token到wsm-work服务中

@@ -54,7 +54,7 @@ public class SmsController {
         request.putQueryParameter("OutId", "OutId");
 
         CommonResponse response = client.getCommonResponse(request);
-        System.out.println(response.getData());
+        System.err.println(response.getData());
 
         return ResultView.success();
     }

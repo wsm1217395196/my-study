@@ -16,6 +16,6 @@ public class TestClass {
         list.add(TestModel2);
 
         list.stream().filter(x -> !x.getName().contains("1")).collect(Collectors.toList()).forEach(System.out::println);
-        list.forEach((x) -> System.out.println("name：" + x.getName()));
+        list.forEach((x) -> System.err.println("name：" + x.getName()));
     }
 }

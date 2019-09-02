@@ -21,7 +21,6 @@
         <module>../wsm-gateway</module>
         <module>../wsm-oauth</module>
         <module>../wsm-zull</module>
-        <module>../wsm-txlcn-tm</module>
     </modules>
 
     <groupId>com.study</groupId>
@@ -36,7 +35,6 @@
         <spring-cloud.version>Greenwich.RELEASE</spring-cloud.version>
         <platform-bom.version>Cairo-RELEASE</platform-bom.version>
 
-        <codingapi.txlcn.version>5.0.2.RELEASE</codingapi.txlcn.version>
         <swagger.version>2.9.2</swagger.version>
     </properties>
 
@@ -144,23 +142,6 @@
                 <groupId>org.apache.rocketmq</groupId>
                 <artifactId>rocketmq-client</artifactId>
                 <version>4.5.1</version>
-            </dependency>
-
-            <!--分布式框架LCN-->
-            <dependency>
-                <groupId>com.codingapi.txlcn</groupId>
-                <artifactId>txlcn-tm</artifactId>
-                <version>${codingapi.txlcn.version}</version>
-            </dependency>
-            <dependency>
-                <groupId>com.codingapi.txlcn</groupId>
-                <artifactId>txlcn-tc</artifactId>
-                <version>${codingapi.txlcn.version}</version>
-            </dependency>
-            <dependency>
-                <groupId>com.codingapi.txlcn</groupId>
-                <artifactId>txlcn-txmsg-netty</artifactId>
-                <version>${codingapi.txlcn.version}</version>
             </dependency>
 
             <!--阿里seata分布式框架-->

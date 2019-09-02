@@ -65,10 +65,6 @@ public class JobController {
     }
 
     @ApiOperation(value = "新增", notes = "")
-//    @LcnTransaction(propagation = DTXPropagation.SUPPORTS)
-//    @TccTransaction(propagation = DTXPropagation.SUPPORTS)
-//    @TxcTransaction(propagation = DTXPropagation.SUPPORTS)
-//    @Transactional
     @PostMapping("/authority_button/add")
     public ResultView add(@RequestBody JobModel model, HttpServletRequest request) {
         Enumeration<String> headerNames = request.getHeaderNames();

@@ -77,15 +77,6 @@ ribbon:
 #  hystrix:
 #    enabled: true
 
-#lcn配置
-#tx-lcn:
-#  client:
-#    manager-address: ${eureka.instance.hostname}:8070
-#  springcloud:
-#    loadbalance:
-#      enabled: true #微服务集群且用到 LCN事务模式时，为保证性能请开启TX-LCN重写的负载策略。
-
-
 my-config:
   isUseSecurity: true #是否使用security权限
   projectCode: wsm_work #项目编码
