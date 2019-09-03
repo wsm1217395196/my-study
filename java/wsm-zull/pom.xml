@@ -26,7 +26,7 @@
             <artifactId>spring-cloud-starter-netflix-zuul</artifactId>
         </dependency>
 
-        <!--security和oauth2  备注：gateway暂时好像不能使用oauth-->
+        <!--security和oauth2-->
         <dependency>
             <groupId>org.springframework.cloud</groupId>
             <artifactId>spring-cloud-starter-oauth2</artifactId>
