@@ -1,10 +1,12 @@
-## 本项目为：spring cloud、spring security、oauth2、jwt整合项目,持久层用的mybatis-plus。
+## 本项目为：spring cloud、zull/gateway、oauth2、jwt整合项目,持久层用的mybatis-plus。
 
 请用idea打开parent父文件，他会自动加载其他子模块（服务）。
 
 运行此项目请到DB文件夹导入sql文件到你的本地当中。
 
 DB文件夹有postman测试接口示例文件，导入postman即可。
+
+***这个项目会时不时会更新一些示例，如果解决了你的问题麻烦点个星星哟***😘😘😘
 
 
 
@@ -50,7 +52,7 @@ DB文件夹有postman测试接口示例文件，导入postman即可。
 
 3、mybatis-plus代码生成器。
 
-4、测试rocketmq分布式事务最终一致性（rocketmq版本4.5.1）。要测试请先下载rocketmq安装并运行。注：本人windos上安装运行了，测试rocketmq接口时可能会报啥啥啥错误，到linux上安装好了。
+4、测试rocketmq分布式事务最终一致性（rocketmq版本4.5.1）。要测试请先下载rocketmq安装并运行。注：本人windos上安装运行了，测试rocketmq接口时可能会报啥啥啥错误，到linux上安装就好了。
 
 5、测试阿里seata分布式事务（seata版本0.8.0）。要测试请到我的github上下载seata（seata server），然后到server文件夹下运行server即可。或者到github上下载阿里官方的seata（seata server）也可以，不过需要修改file.conf跟registry.conf的配置才能运行。注：运行wsm-upms服务可能会报注册不上seata server，然后seata server也可能会报OutOfDirectMemoryError异常，等他个几分钟就好了。
 
@@ -64,7 +66,11 @@ DB文件夹有postman测试接口示例文件，导入postman即可。
 
 
 
------------------------------------------------------**运行上面几个服务即可，下面可以忽略**-------------------------------------------------
+
+
+-----------------------------------------------------**运行上面几个服务即可，下面可以忽略**------------------------------------------
+
+
 
 
 
