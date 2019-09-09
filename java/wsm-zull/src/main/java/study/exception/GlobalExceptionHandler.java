@@ -1,5 +1,6 @@
-package com.study.exception;
+package study.exception;
 
+import com.study.exception.MyRuntimeException;
 import com.study.result.ResultEnum;
 import com.study.result.ResultView;
 import org.slf4j.Logger;

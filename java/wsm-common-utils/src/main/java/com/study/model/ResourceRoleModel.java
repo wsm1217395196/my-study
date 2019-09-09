@@ -23,7 +23,7 @@ public class ResourceRoleModel implements Serializable {
      */
     private String resourceButton;
     /**
-     * 用户组id
+     * 角色id
      */
     private Long roleId;
 

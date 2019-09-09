@@ -26,11 +26,6 @@ spring:
 #  mapper-locations: classpath:/com/study/xml/*Mapper.xml
 #  # 实体扫描，多个package用逗号或者分号分隔
 #  type-aliases-package: com.study.model
-#  global-config:
-#    # 逻辑删除配置
-#    logic-delete-value: 0
-#    logic-not-delete-value: 1
-#    sql-injector: com.baomidou.mybatisplus.mapper.LogicSqlInjector
 
 #熔断器开启
 feign:

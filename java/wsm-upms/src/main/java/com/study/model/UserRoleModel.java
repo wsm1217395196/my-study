@@ -23,7 +23,7 @@ public class UserRoleModel implements Serializable {
     @TableField("user_id")
     private Long userId;
     /**
-     * 用户组id
+     * 角色id
      */
     @TableField("role_id")
     private Long roleId;

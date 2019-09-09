@@ -24,7 +24,7 @@ spring:
   cloud:
     alibaba:
       seata:
-        tx-service-group: wsm-work-seata-group
+        tx-service-group: wsm-work-seata-group #阿里seata 服务组
 
 redis:
   database: 0 #Redis数据库索引（默认为0）
@@ -45,11 +45,6 @@ mybatis-plus:
   mapper-locations: classpath:/mapper/*Mapper.xml
   # 实体扫描，多个package用逗号或者分号分隔
   type-aliases-package: com.study.model
-  global-config:
-    # 逻辑删除配置
-    logic-delete-value: 0
-    logic-not-delete-value: 1
-    sql-injector: com.baomidou.mybatisplus.mapper.LogicSqlInjector
 
 # 这里的配置好像是（第一种实现）：每次带token的请求都会去wsm-oauth服务(存token的地方)请求对比token是否有效，是否正确（间接的方式）。
 # 第二种实现：在ResourceSeverConfig类configure方法配置resources.tokenStore(tokenStore())，

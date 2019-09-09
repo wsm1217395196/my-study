@@ -28,7 +28,7 @@ public class ResourceRoleModel implements Serializable {
     @TableField("resource_button")
     private String resourceButton;
     /**
-     * 用户组id
+     * 角色id
      */
     @TableField("role_id")
     private Long roleId;

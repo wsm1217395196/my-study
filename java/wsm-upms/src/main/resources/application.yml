@@ -8,13 +8,13 @@ eureka:
     prefer-ip-address: true
   client:
     service-url:
-#      向注册中心注册服务
+      # 向注册中心注册服务
       defaultZone: http://wsm:1@${eureka.instance.hostname}:8000/eureka
 
 spring:
   application:
     name: wsm-upms #服务名
-#  mysql配置
+  # mysql配置
   datasource:
     driver-class-name: com.mysql.jdbc.Driver
     username: admin
@@ -24,7 +24,16 @@ spring:
   cloud:
     alibaba:
       seata:
-        tx-service-group: wsm-upms-seata-group
+        tx-service-group: wsm-upms-seata-group #阿里seata 服务组
+
+  servlet:
+    multipart:
+      max-file-size: 100MB #设置文件最大数据大小
+      max-request-size: 100MB #设置总上传数据大小
+      location: d:/wsm-upload-cache #设置临时缓存目录
+
+  resources:
+    static-locations: file:${my-config.upload-folder} #静态资源访问
 
 redis:
   database: 0 #Redis数据库索引（默认为0）
@@ -45,11 +54,6 @@ mybatis-plus:
   mapper-locations: classpath:/mapper/*Mapper.xml
   # 实体扫描，多个package用逗号或者分号分隔
   type-aliases-package: com.study.model
-  global-config:
-    # 逻辑删除配置
-    logic-delete-value: 0
-    logic-not-delete-value: 1
-    sql-injector: com.baomidou.mybatisplus.mapper.LogicSqlInjector
 
 # 这里的配置好像是（第一种实现）：每次带token的请求都会去wsm-oauth服务(存token的地方)请求对比token是否有效，是否正确（间接的方式）。
 # 第二种实现：在ResourceSeverConfig类configure方法配置resources.tokenStore(tokenStore())，
@@ -94,4 +98,5 @@ my-config:
   rocketmq_producer: transaction_producer #生产者
   rocketmq_topic: test_transaction #rocketmq主题
 
+  upload-folder: d:/wsm-upload #指定上传文件夹
 

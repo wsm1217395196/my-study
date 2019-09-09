@@ -15,6 +15,12 @@ spring:
   application:
     name: wsm-zull #服务名
 
+  servlet:
+    multipart:
+      max-file-size: 100MB #设置文件最大数据大小
+      max-request-size: 100MB #设置总上传数据大小
+      location: d:/wsm-upload-cache #设置临时缓存目录
+
 #网关路由
 zuul:
   routes:

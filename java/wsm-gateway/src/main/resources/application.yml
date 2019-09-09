@@ -15,6 +15,12 @@ spring:
   application:
     name: wsm-gateway #服务名
 
+  servlet:
+    multipart:
+      max-file-size: 100MB #设置文件最大数据大小
+      max-request-size: 100MB #设置总上传数据大小
+      location: d:/wsm-upload-cache #设置临时缓存目录
+
 #网关路由有两种方式：1、bean方式，2、yml配置文件方式
   cloud:
     gateway:
