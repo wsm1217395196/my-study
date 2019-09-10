@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.study.mapper.PublicMapper">
+
+    <!-- 通用查询映射结果 -->
+
+    <resultMap id="UserMap" type="com.study.model.UserModel">
+        <id column="id" property="id"/>
+        <result column="name" property="name"/>
+        <result column="nickname" property="nickname"/>
+        <result column="password" property="password"/>
+        <result column="photo" property="photo"/>
+        <result column="sex" property="sex"/>
+        <result column="birthday" property="birthday"/>
+        <result column="phone" property="phone"/>
+        <result column="mail" property="mail"/>
+        <result column="address" property="address"/>
+        <result column="explain" property="explain"/>
+        <result column="user_source" property="userSource"/>
+        <result column="status" property="status"/>
+        <result column="create_by" property="createBy"/>
+        <result column="create_time" property="createTime"/>
+        <result column="update_by" property="updateBy"/>
+        <result column="update_time" property="updateTime"/>
+        <result column="remark" property="remark"/>
+    </resultMap>
+
+    <resultMap id="OauthClientDetailsMap" type="com.study.model.OauthClientDetailsModel">
+        <id column="client_id" property="clientId"/>
+        <result column="resource_ids" property="resourceIds"/>
+        <result column="client_secret" property="clientSecret"/>
+        <result column="scope" property="scope"/>
+        <result column="authorized_grant_types" property="authorizedGrantTypes"/>
+        <result column="web_server_redirect_uri" property="webServerRedirectUri"/>
+        <result column="authorities" property="authorities"/>
+        <result column="access_token_validity" property="accessTokenValidity"/>
+        <result column="refresh_token_validity" property="refreshTokenValidity"/>
+        <result column="additional_information" property="additionalInformation"/>
+        <result column="autoapprove" property="autoapprove"/>
+    </resultMap>
+
+    <resultMap id="BaseDtoMap" type="com.study.dto.BaseDto">
+        <id column="id" property="id"/>
+        <result column="name" property="name"/>
+    </resultMap>
+
+    <select id="getUserByName" resultMap="UserMap">
+        SELECT id,`name`,password FROM `user` WHERE `name` = #{name}
+    </select>
+
+    <select id="getRoleByUserId" resultMap="BaseDtoMap">
+        SELECT t3.id,t3.name FROM `user` t1,user_role t2,role t3
+        WHERE  t1.`id` = t2.`user_id`
+        AND t2.`role_id` = t3.`id` AND t1.`id` = #{userId};
+    </select>
+
+    <select id="getOauthClientDetailsByClientId" resultMap="OauthClientDetailsMap">
+        SELECT * FROM `oauth_client_details` WHERE `client_id` = #{clientId}
+    </select>
+
+    <select id="getResourceIdsByClientId" parameterType="string" resultType="string">
+        SELECT resource_ids FROM `oauth_client_details` WHERE `client_id` = #{clientId}
+    </select>
+
+</mapper>

@@ -7,3 +7,4 @@ mvnw
 mvnw.cmd
 /java/logs
 *.iml
+logs
