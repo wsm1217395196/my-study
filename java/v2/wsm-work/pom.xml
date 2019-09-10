@@ -112,7 +112,7 @@
             <groupId>io.seata</groupId>
             <artifactId>seata-all</artifactId>
         </dependency>
-
+        <!--druid-spring-boot-starter-->
         <dependency>
             <groupId>com.alibaba</groupId>
             <artifactId>druid-spring-boot-starter</artifactId>

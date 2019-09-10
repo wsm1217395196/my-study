@@ -12,8 +12,7 @@ import org.springframework.jdbc.core.JdbcTemplate;
 import javax.sql.DataSource;
 
 /**
- * @author jimin.jm@alibaba-inc.com
- * @date 2019/06/14
+ * 配置阿里druid,来支持阿里seata分布式事务
  */
 @Configuration
 public class DataSourceConfig {
@@ -27,7 +26,6 @@ public class DataSourceConfig {
 
     /**
      * 需要将 DataSourceProxy 设置为主数据源，否则事务无法回滚
-     *
      */
     @Primary
     @Bean("dataSourceProxy")

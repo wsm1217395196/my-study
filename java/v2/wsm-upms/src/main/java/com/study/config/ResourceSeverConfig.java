@@ -83,6 +83,10 @@ public class ResourceSeverConfig extends ResourceServerConfigurerAdapter {
 //        return new JdbcTokenStore(dataSource);
     }
 
+    /**
+     * 根据client_id设置资源id
+     * 设置自定义授权异常信息
+     */
     @Override
     public void configure(ResourceServerSecurityConfigurer resources) {
         String resourceIds = oauthClientDetailsService.getResourceIdsByClientId(myConfig.getClientId());
@@ -95,6 +99,10 @@ public class ResourceSeverConfig extends ResourceServerConfigurerAdapter {
                 .accessDeniedHandler(new MyAccessDeniedHandler());
     }
 
+    /**
+     * 配置资源服务，根据项目code从数据库读取出来的角色，资源url信息（即接口地址）给接口使用security权限。
+     * 如哪些不需要授权能访问，哪些需要登录授权后能访问，哪些需要用户拥有这些角色才能访问。
+     */
     @Override
     public void configure(HttpSecurity http) throws Exception {
 //        http.csrf();//防csrf攻击

@@ -27,6 +27,7 @@ import java.util.Arrays;
 
 /**
  * TODO Oauth2认证服务配置
+ * 指定认证中心，指定客户端， 指定token的存储方式等。
  **/
 @Configuration
 @EnableAuthorizationServer
@@ -89,7 +90,7 @@ public class AuthorizationServerConfig extends AuthorizationServerConfigurerAdap
 //        return new JdbcTokenStore(dataSource);//存数据库
     }
 
-//    配置授权服务器端点
+    //    配置授权服务器端点
     @Override
     public void configure(AuthorizationServerEndpointsConfigurer endpoints) {
         //指定认证管理器
@@ -117,7 +118,7 @@ public class AuthorizationServerConfig extends AuthorizationServerConfigurerAdap
         endpoints.tokenServices(tokenServices);
     }
 
-//      配置客户端详情信息，客户端详情信息在这里进行初始化，通过数据库来存储调取详情信息
+    //      配置客户端详情信息，客户端详情信息在这里进行初始化，通过数据库来存储调取详情信息
     @Override
     public void configure(ClientDetailsServiceConfigurer clients) throws Exception {
         clients.withClientDetails(myClientDetailsService);

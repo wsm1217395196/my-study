@@ -155,7 +155,7 @@
                 <artifactId>seata-all</artifactId>
                 <version>0.8.0</version>
             </dependency>
-
+            <!--druid-spring-boot-starter-->
             <dependency>
                 <groupId>com.alibaba</groupId>
                 <artifactId>druid-spring-boot-starter</artifactId>

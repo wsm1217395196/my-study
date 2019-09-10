@@ -13,6 +13,8 @@ import org.springframework.security.oauth2.config.annotation.web.configurers.Res
 
 /**
  * TODO  资源访问权限配置
+ * 给接口地址让security管理起来，如哪些不需要授权能访问，
+ * 哪些需要登录授权后能访问，哪些需要用户拥有这些角色才能访问。
  **/
 @Configuration
 @EnableResourceServer
@@ -31,6 +33,10 @@ public class ResourceServerConfig extends ResourceServerConfigurerAdapter {
                 .anyRequest().denyAll();
     }
 
+    /**
+     * 根据client_id设置资源id
+     * 设置自定义授权异常信息
+     */
     @Override
     public void configure(ResourceServerSecurityConfigurer resources) throws Exception {
         String resourceIds = publicMapper.getResourceIdsByClientId(clientId);
