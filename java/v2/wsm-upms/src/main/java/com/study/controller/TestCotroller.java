@@ -13,6 +13,7 @@ import com.study.service.RegionService;
 import com.study.service.TransactionProducer;
 import com.study.utils.CreateUtil;
 import io.seata.spring.annotation.GlobalTransactional;
+import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import org.apache.rocketmq.client.exception.MQClientException;
 import org.apache.rocketmq.client.producer.SendStatus;
@@ -32,6 +33,7 @@ import java.util.List;
 /**
  * 测试控制器
  */
+@Api(description = "测试控制器")
 @RestController
 @RequestMapping("/test")
 public class TestCotroller {
