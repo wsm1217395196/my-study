@@ -6,16 +6,13 @@ import com.baomidou.mybatisplus.service.impl.ServiceImpl;
 import com.study.MyConstant;
 import com.study.feign.WorkFeign;
 import com.study.mapper.RegionMapper;
-import com.study.model.JobModel;
 import com.study.model.RegionModel;
 import com.study.result.PageParam;
 import com.study.result.PageResult;
-import com.study.result.ResultView;
 import com.study.utils.CreateUtil;
 import org.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.StringUtils;
 
 import java.util.List;
@@ -84,5 +81,20 @@ public class RegionService extends ServiceImpl<RegionMapper, RegionModel> {
         regionModel.setName(regionName);
         boolean b = insert(regionModel);
         return b;
+    }
+
+    /**
+     * 查父级域
+     *
+     * @return
+     */
+    public List<RegionModel> getTopRegion() {
+        //查父级域
+        EntityWrapper ew = new EntityWrapper();
+        ew.setSqlSelect("name");
+        ew.eq("parent_id", MyConstant.Zero);
+        ew.setSqlSelect("id,name");
+        List<RegionModel> models = this.selectList(ew);
+        return models;
     }
 }

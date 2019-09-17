@@ -25,7 +25,6 @@ public class GlobalExceptionHandler {
     @ExceptionHandler(value = MyRuntimeException.class)
     public ResultView defaultErrorHandler(MyRuntimeException e) {
         e.printStackTrace();
-        createLogger(e);
         return e.getResultView();
     }
 

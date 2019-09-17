@@ -5,6 +5,8 @@ import com.alibaba.excel.annotation.ExcelProperty;
 import com.alibaba.excel.annotation.write.style.ColumnWidth;
 import com.baomidou.mybatisplus.annotations.TableField;
 import com.baomidou.mybatisplus.annotations.TableName;
+import com.study.config.Easyexcel.CustomDateConverter;
+import com.study.config.Easyexcel.CustomIntegerConverter;
 
 import java.io.Serializable;
 import java.util.Date;
@@ -17,8 +19,8 @@ import java.util.Date;
  * @author wsm
  * @since 2019-07-16
  */
-@ColumnWidth(25)
 @TableName("region")
+@ColumnWidth(25)
 public class RegionModel implements Serializable {
 
     @ExcelIgnore
@@ -34,48 +36,54 @@ public class RegionModel implements Serializable {
     /**
      * 编码
      */
-    @ExcelProperty("编码")
+    @ExcelProperty(value = "编码")
     private String code;
     /**
      * 父级id
      */
-    @ExcelProperty("父级域")
+    @ExcelIgnore
     @TableField("parent_id")
     private Long parentId;
     /**
+     * 父级名称
+     */
+    @ExcelProperty(value = "父级域")
+    @TableField(exist = false)
+    private String parentName;
+    /**
      * 创建人
      */
-    @ExcelIgnore
+    @ExcelProperty(value = "创建人")
     @TableField("create_by")
     private String createBy;
     /**
      * 创建时间
      */
-    @ExcelIgnore
+    @ExcelProperty(value = "创建时间", converter = CustomDateConverter.class)
     @TableField("create_time")
     private Date createTime;
     /**
      * 更新人
      */
-    @ExcelIgnore
+    @ExcelProperty(value = "更新人")
     @TableField("update_by")
     private String updateBy;
     /**
      * 更新时间
      */
-    @ExcelIgnore
+    @ExcelProperty(value = "更新时间", converter = CustomDateConverter.class)
     @TableField("update_time")
     private Date updateTime;
     /**
      * 是否有效(0无效，1有效)
      */
-    @ExcelProperty("是否有效")
+    @ExcelProperty(value = "是否有效", converter = CustomIntegerConverter.class)
     @TableField("is_enabled")
     private Integer isEnabled;
     /**
      * 备注
      */
-    @ExcelProperty("备注")
+    @ExcelProperty(value = "备注")
     private String remark;
 
 
@@ -109,6 +117,14 @@ public class RegionModel implements Serializable {
 
     public void setParentId(Long parentId) {
         this.parentId = parentId;
+    }
+
+    public String getParentName() {
+        return parentName;
+    }
+
+    public void setParentName(String parentName) {
+        this.parentName = parentName;
     }
 
     public String getCreateBy() {
@@ -162,16 +178,17 @@ public class RegionModel implements Serializable {
     @Override
     public String toString() {
         return "RegionModel{" +
-                ", id=" + id +
-                ", name=" + name +
-                ", code=" + code +
+                "id=" + id +
+                ", name='" + name + '\'' +
+                ", code='" + code + '\'' +
                 ", parentId=" + parentId +
-                ", createBy=" + createBy +
+                ", parentName='" + parentName + '\'' +
+                ", createBy='" + createBy + '\'' +
                 ", createTime=" + createTime +
-                ", updateBy=" + updateBy +
+                ", updateBy='" + updateBy + '\'' +
                 ", updateTime=" + updateTime +
                 ", isEnabled=" + isEnabled +
-                ", remark=" + remark +
-                "}";
+                ", remark='" + remark + '\'' +
+                '}';
     }
 }
