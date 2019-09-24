@@ -57,6 +57,8 @@ DB文件夹有postman测试接口示例文件，导入postman即可。
 > 5、测试阿里seata分布式事务（seata版本0.8.0）。要测试请到我的github上下载seata（seata server），然后到server文件夹下运行server即可。或者到github上下载阿里官方的seata（seata server）也可以，不过需要修改file.conf跟registry.conf的配置才能运行。注：运行wsm-upms服务可能会报注册不上seata server，然后seata server也可能会报OutOfDirectMemoryError异常，等他个几分钟就好了。
 >
 > 6、多文件上传，下载，删除文件等示例。
+>
+> 7、阿里easyexcel导入数据，导出数据，生成模板（供导入数据用）的实现。
 
 
 

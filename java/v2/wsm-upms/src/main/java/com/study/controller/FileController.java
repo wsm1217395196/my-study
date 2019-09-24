@@ -24,6 +24,9 @@ import java.util.stream.Stream;
 @RequestMapping("/file")
 public class FileController {
 
+    /**
+     * 指定上传文件夹，如：d:/wsm-upload
+     */
     @Value("${my-config.upload-folder}")
     private String uploadFolder;
 
@@ -77,6 +80,7 @@ public class FileController {
         }
 
         fileNames = fileNames.substring(1);
+        //返回文件存储路径
         return ResultView.success(fileNames);
     }
 
