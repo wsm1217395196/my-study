@@ -154,15 +154,16 @@
         </plugins>
     </build>
 
-<!--    <repositories>-->
-<!--        <repository>-->
-<!--            <id>spring-milestones</id>-->
-<!--            <name>Spring Milestones</name>-->
-<!--            <url>https://repo.spring.io/milestone</url>-->
-<!--            &lt;!&ndash;            <snapshots>&ndash;&gt;-->
-<!--            &lt;!&ndash;                <enabled>false</enabled>&ndash;&gt;-->
-<!--            &lt;!&ndash;            </snapshots>&ndash;&gt;-->
-<!--        </repository>-->
-<!--    </repositories>-->
+    <!-- 有些依赖可能下载不到，用这个地址试下 -->
+    <repositories>
+        <repository>
+            <id>spring-milestones</id>
+            <name>Spring Milestones</name>
+            <url>https://repo.spring.io/milestone</url>
+            <!--            <snapshots>-->
+            <!--                <enabled>false</enabled>-->
+            <!--            </snapshots>-->
+        </repository>
+    </repositories>
 
 </project>

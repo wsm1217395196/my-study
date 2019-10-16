@@ -190,6 +190,7 @@
         </plugins>
     </build>
 
+    <!-- 有些依赖可能下载不到，用这个地址试下 -->
     <repositories>
         <repository>
             <id>spring-milestones</id>
