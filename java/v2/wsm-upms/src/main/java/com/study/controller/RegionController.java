@@ -10,11 +10,10 @@ import com.study.utils.CreateUtil;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
+import java.time.LocalDateTime;
 import java.util.Arrays;
-import java.util.Date;
 import java.util.List;
 
 /**
@@ -26,7 +25,7 @@ import java.util.List;
  * @since 2019-07-16
  */
 @Api(description = "域控制器")
-@Controller
+@RestController
 @RequestMapping("/region")
 public class RegionController {
 
@@ -36,7 +35,7 @@ public class RegionController {
     @ApiOperation(value = "查询全部", notes = "")
     @GetMapping("/authority/getAll")
     public ResultView getAll() {
-        List<RegionModel> models = regionService.selectList(null);
+        List<RegionModel> models = regionService.list();
         return ResultView.success(models);
     }
 
@@ -50,25 +49,25 @@ public class RegionController {
     @ApiOperation(value = "根据id查询", notes = "")
     @GetMapping("/authority/getById/{id}")
     public ResultView getById(@PathVariable Long id) {
-        RegionModel model = regionService.selectById(id);
+        RegionModel model = regionService.getById(id);
         return ResultView.success(model);
     }
 
     @ApiOperation(value = "新增", notes = "")
     @PostMapping("/authority_button/add")
     public ResultView add(@RequestBody RegionModel model) {
-        Date date = new Date();
+        LocalDateTime date = LocalDateTime.now();
         model.setId(CreateUtil.id());
         model.setCreateTime(date);
         model.setUpdateTime(date);
-        regionService.insert(model);
+        regionService.save(model);
         return ResultView.success(model);
     }
 
     @ApiOperation(value = "修改", notes = "")
     @PostMapping("/authority_button/update")
     public ResultView update(@RequestBody RegionModel model) {
-        Date date = new Date();
+        LocalDateTime date = LocalDateTime.now();
         model.setUpdateTime(date);
         regionService.updateById(model);
         return ResultView.success(model);
@@ -77,14 +76,14 @@ public class RegionController {
     @ApiOperation(value = "根据id删除", notes = "")
     @DeleteMapping("/authority_button/deleteById")
     public ResultView deleteById(@RequestParam Long id) {
-        regionService.deleteById(id);
+        regionService.removeById(id);
         return ResultView.success();
     }
 
     @ApiOperation(value = "根据ids删除", notes = "")
     @DeleteMapping("/authority_button/deleteByIds")
     public ResultView deleteByIds(@RequestParam Long[] ids) {
-        regionService.deleteBatchIds(Arrays.asList(ids));
+        regionService.removeByIds(Arrays.asList(ids));
         return ResultView.success();
     }
 }

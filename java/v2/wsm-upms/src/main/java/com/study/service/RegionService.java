@@ -1,8 +1,8 @@
 package com.study.service;
 
-import com.baomidou.mybatisplus.mapper.EntityWrapper;
-import com.baomidou.mybatisplus.plugins.Page;
-import com.baomidou.mybatisplus.service.impl.ServiceImpl;
+import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
+import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
+import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.study.MyConstant;
 import com.study.feign.WorkFeign;
 import com.study.mapper.RegionMapper;
@@ -44,30 +44,30 @@ public class RegionService extends ServiceImpl<RegionMapper, RegionModel> {
         String parentId = object.getString("parentId");
         String isEnable = object.getString("isEnable");
 
-        EntityWrapper ew = new EntityWrapper();
+        QueryWrapper qw = new QueryWrapper();
         if (!StringUtils.isEmpty(name)) {
-            ew.like("name", name);
+            qw.like("name", name);
         }
         if (!StringUtils.isEmpty(code)) {
-            ew.eq("code", code);
+            qw.eq("code", code);
         }
         if (!StringUtils.isEmpty(parentId)) {
-            ew.eq("parent_id", parentId);
+            qw.eq("parent_id", parentId);
         }
         if (!StringUtils.isEmpty(isEnable)) {
-            ew.eq("isEnable", isEnable);
+            qw.eq("isEnable", isEnable);
         }
-        if (!StringUtils.isEmpty(sort)) {
-            ew.orderBy(sort);
-        }
+//        if (!StringUtils.isEmpty(sort)) {
+//            qw.orderBy(sort);
+//        }
 
         Page page = new Page();
         int total = 0;
         if (pageIndex != MyConstant.Zero && pageSize != MyConstant.Zero) {
             page = new Page(pageIndex, pageSize);
-            total = regionMapper.selectCount(ew);
+            total = regionMapper.selectCount(qw);
         }
-        List records = regionMapper.selectPage(page, ew);
+        List records = regionMapper.selectPage(page, qw).getRecords();
         PageResult pageResult = new PageResult(pageIndex, pageSize, total, records);
         return pageResult;
     }
@@ -79,7 +79,7 @@ public class RegionService extends ServiceImpl<RegionMapper, RegionModel> {
         RegionModel regionModel = new RegionModel();
         regionModel.setId(CreateUtil.id());
         regionModel.setName(regionName);
-        boolean b = insert(regionModel);
+        boolean b = save(regionModel);
         return b;
     }
 
@@ -90,11 +90,10 @@ public class RegionService extends ServiceImpl<RegionMapper, RegionModel> {
      */
     public List<RegionModel> getTopRegion() {
         //查父级域
-        EntityWrapper ew = new EntityWrapper();
-        ew.setSqlSelect("name");
-        ew.eq("parent_id", MyConstant.Zero);
-        ew.setSqlSelect("id,name");
-        List<RegionModel> models = this.selectList(ew);
+        QueryWrapper qw = new QueryWrapper();
+        qw.eq("parent_id", MyConstant.Zero);
+        qw.select("id,name");
+        List<RegionModel> models = this.list(qw);
         return models;
     }
 }

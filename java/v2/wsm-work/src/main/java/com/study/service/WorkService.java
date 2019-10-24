@@ -1,9 +1,9 @@
 package com.study.service;
 
-import com.baomidou.mybatisplus.mapper.EntityWrapper;
-import com.baomidou.mybatisplus.plugins.Page;
-import com.baomidou.mybatisplus.service.IService;
-import com.baomidou.mybatisplus.service.impl.ServiceImpl;
+import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
+import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
+import com.baomidou.mybatisplus.extension.service.IService;
+import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.study.MyConstant;
 import com.study.mapper.WorkMapper;
 import com.study.model.WorkModel;
@@ -41,30 +41,30 @@ public class WorkService extends ServiceImpl<WorkMapper, WorkModel> implements I
         String site = object.getString("site").trim();
         String isEnable = object.getString("isEnable");
 
-        EntityWrapper ew = new EntityWrapper();
+        QueryWrapper qw = new QueryWrapper();
         if (!StringUtils.isEmpty(recruitPlatformId)) {
-            ew.eq("recruit_platform_id", recruitPlatformId);
+            qw.eq("recruit_platform_id", recruitPlatformId);
         }
         if (!StringUtils.isEmpty(jobId)) {
-            ew.eq("job_id", jobId);
+            qw.eq("job_id", jobId);
         }
         if (!StringUtils.isEmpty(site)) {
-            ew.like("site", site);
+            qw.like("site", site);
         }
         if (!StringUtils.isEmpty(isEnable)) {
-            ew.eq("isEnable", isEnable);
+            qw.eq("isEnable", isEnable);
         }
-        if (!StringUtils.isEmpty(sort)) {
-            ew.orderBy(sort);
-        }
+//        if (!StringUtils.isEmpty(sort)) {
+//            qw.orderBy(sort);
+//        }
 
         Page page = new Page();
         int total = 0;
         if (pageIndex != MyConstant.Zero && pageSize != MyConstant.Zero) {
             page = new Page(pageIndex, pageSize);
-            total = workMapper.selectCount(ew);
+            total = workMapper.selectCount(qw);
         }
-        List records = workMapper.selectPage(page, ew);
+        List records = workMapper.selectPage(page, qw).getRecords();
         PageResult pageResult = new PageResult(pageIndex, pageSize, total, records);
         return pageResult;
     }

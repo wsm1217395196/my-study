@@ -48,7 +48,7 @@ public class TransactionConsumer {
             try {
 //                int i = 10 / 0;
                 // 插入数据
-                jobService.insert(jobModel);
+                jobService.save(jobModel);
 
 //                1、MessageListenerConcurrently
                 System.err.println("分布式事务消费端：消费成功");

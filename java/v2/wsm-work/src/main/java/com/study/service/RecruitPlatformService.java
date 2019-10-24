@@ -1,9 +1,10 @@
 package com.study.service;
 
-import com.baomidou.mybatisplus.mapper.EntityWrapper;
-import com.baomidou.mybatisplus.plugins.Page;
-import com.baomidou.mybatisplus.service.IService;
-import com.baomidou.mybatisplus.service.impl.ServiceImpl;
+
+import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
+import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
+import com.baomidou.mybatisplus.extension.service.IService;
+import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.study.MyConstant;
 import com.study.mapper.RecruitPlatformMapper;
 import com.study.model.RecruitPlatformModel;
@@ -39,24 +40,24 @@ public class RecruitPlatformService extends ServiceImpl<RecruitPlatformMapper, R
         String name = object.getString("name").trim();
         String isEnable = object.getString("isEnable");
 
-        EntityWrapper ew = new EntityWrapper();
+        QueryWrapper qw = new QueryWrapper();
         if (!StringUtils.isEmpty(name)) {
-            ew.like("name", name);
+            qw.like("name", name);
         }
         if (!StringUtils.isEmpty(isEnable)) {
-            ew.eq("isEnable", isEnable);
+            qw.eq("isEnable", isEnable);
         }
-        if (!StringUtils.isEmpty(sort)) {
-            ew.orderBy(sort);
-        }
+//        if (!StringUtils.isEmpty(sort)) {
+//            ew.orderBy(sort);
+//        }
 
         Page page = new Page();
         int total = 0;
         if (pageIndex != MyConstant.Zero && pageSize != MyConstant.Zero) {
             page = new Page(pageIndex, pageSize);
-            total = recruitPlatformMapper.selectCount(ew);
+            total = recruitPlatformMapper.selectCount(qw);
         }
-        List records = recruitPlatformMapper.selectPage(page, ew);
+        List records = recruitPlatformMapper.selectPage(page, qw).getRecords();
         PageResult pageResult = new PageResult(pageIndex, pageSize, total, records);
         return pageResult;
     }

@@ -1,5 +1,9 @@
 package com.study.model;
 
+import lombok.Getter;
+import lombok.Setter;
+import lombok.ToString;
+
 import java.io.Serializable;
 
 /**
@@ -10,6 +14,9 @@ import java.io.Serializable;
  * @author wsm
  * @since 2019-07-24
  */
+@Getter
+@Setter
+@ToString
 public class ResourceRoleModel implements Serializable {
 
     private static final long serialVersionUID = 1L;
@@ -27,37 +34,4 @@ public class ResourceRoleModel implements Serializable {
      */
     private Long roleId;
 
-
-    public Long getResourceId() {
-        return resourceId;
-    }
-
-    public void setResourceId(Long resourceId) {
-        this.resourceId = resourceId;
-    }
-
-    public String getResourceButton() {
-        return resourceButton;
-    }
-
-    public void setResourceButton(String resourceButton) {
-        this.resourceButton = resourceButton;
-    }
-
-    public Long getRoleId() {
-        return roleId;
-    }
-
-    public void setRoleId(Long roleId) {
-        this.roleId = roleId;
-    }
-
-    @Override
-    public String toString() {
-        return "ResourceRoleModel{" +
-                ", resourceId=" + resourceId +
-                ", resourceButton=" + resourceButton +
-                ", roleId=" + roleId +
-                "}";
-    }
 }

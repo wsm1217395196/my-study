@@ -1,7 +1,6 @@
 package com.study.feign;
 
 import com.study.MyConstant;
-import com.study.config.FeignRequestInterceptorConfig;
 import com.study.model.JobModel;
 import com.study.result.ResultView;
 import org.springframework.cloud.openfeign.FeignClient;

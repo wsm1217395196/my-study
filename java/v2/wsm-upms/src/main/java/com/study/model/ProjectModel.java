@@ -1,10 +1,14 @@
 package com.study.model;
 
-import com.baomidou.mybatisplus.annotations.TableField;
-import com.baomidou.mybatisplus.annotations.TableName;
+import com.baomidou.mybatisplus.annotation.TableName;
+import io.swagger.annotations.ApiModel;
+import io.swagger.annotations.ApiModelProperty;
+import lombok.Getter;
+import lombok.Setter;
+import lombok.ToString;
 
 import java.io.Serializable;
-import java.util.Date;
+import java.time.LocalDateTime;
 
 /**
  * <p>
@@ -12,151 +16,45 @@ import java.util.Date;
  * </p>
  *
  * @author wsm
- * @since 2019-07-16
+ * @since 2019-10-24
  */
+@Getter
+@Setter
+@ToString
 @TableName("project")
+@ApiModel(value="ProjectModel对象", description="项目（如公司里某个项目）")
 public class ProjectModel implements Serializable {
 
     private static final long serialVersionUID = 1L;
 
     private Long id;
-    /**
-     * 名称
-     */
+
+    @ApiModelProperty(value = "名称")
     private String name;
-    /**
-     * 编码
-     */
+
+    @ApiModelProperty(value = "编码")
     private String code;
-    /**
-     * 域id
-     */
-    @TableField("region_id")
+
+    @ApiModelProperty(value = "域id")
     private Long regionId;
-    /**
-     * 创建人
-     */
-    @TableField("create_by")
+
+    @ApiModelProperty(value = "创建人")
     private String createBy;
-    /**
-     * 创建时间
-     */
-    @TableField("create_time")
-    private Date createTime;
-    /**
-     * 更新人
-     */
-    @TableField("update_by")
+
+    @ApiModelProperty(value = "创建时间")
+    private LocalDateTime createTime;
+
+    @ApiModelProperty(value = "更新人")
     private String updateBy;
-    /**
-     * 更新时间
-     */
-    @TableField("update_time")
-    private Date updateTime;
-    /**
-     * 是否有效(0无效，1有效)
-     */
-    @TableField("is_enabled")
+
+    @ApiModelProperty(value = "更新时间")
+    private LocalDateTime updateTime;
+
+    @ApiModelProperty(value = "是否有效(0无效，1有效)")
     private Integer isEnabled;
-    /**
-     * 备注
-     */
+
+    @ApiModelProperty(value = "备注")
     private String remark;
 
 
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    public String getCode() {
-        return code;
-    }
-
-    public void setCode(String code) {
-        this.code = code;
-    }
-
-    public Long getRegionId() {
-        return regionId;
-    }
-
-    public void setRegionId(Long regionId) {
-        this.regionId = regionId;
-    }
-
-    public String getCreateBy() {
-        return createBy;
-    }
-
-    public void setCreateBy(String createBy) {
-        this.createBy = createBy;
-    }
-
-    public Date getCreateTime() {
-        return createTime;
-    }
-
-    public void setCreateTime(Date createTime) {
-        this.createTime = createTime;
-    }
-
-    public String getUpdateBy() {
-        return updateBy;
-    }
-
-    public void setUpdateBy(String updateBy) {
-        this.updateBy = updateBy;
-    }
-
-    public Date getUpdateTime() {
-        return updateTime;
-    }
-
-    public void setUpdateTime(Date updateTime) {
-        this.updateTime = updateTime;
-    }
-
-    public Integer getIsEnabled() {
-        return isEnabled;
-    }
-
-    public void setIsEnabled(Integer isEnabled) {
-        this.isEnabled = isEnabled;
-    }
-
-    public String getRemark() {
-        return remark;
-    }
-
-    public void setRemark(String remark) {
-        this.remark = remark;
-    }
-
-    @Override
-    public String toString() {
-        return "ProjectModel{" +
-        ", id=" + id +
-        ", name=" + name +
-        ", code=" + code +
-        ", regionId=" + regionId +
-        ", createBy=" + createBy +
-        ", createTime=" + createTime +
-        ", updateBy=" + updateBy +
-        ", updateTime=" + updateTime +
-        ", isEnabled=" + isEnabled +
-        ", remark=" + remark +
-        "}";
-    }
 }

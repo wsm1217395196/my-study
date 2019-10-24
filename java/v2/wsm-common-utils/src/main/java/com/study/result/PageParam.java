@@ -1,8 +1,15 @@
 package com.study.result;
 
+import lombok.Getter;
+import lombok.Setter;
+import lombok.ToString;
+
 /**
  * 分页参数类
  */
+@Getter
+@Setter
+@ToString
 public class PageParam {
     /**
      * 当前页
@@ -35,22 +42,6 @@ public class PageParam {
         this.condition = condition;
     }
 
-    public String getSort() {
-        return sort;
-    }
-
-    public void setSort(String sort) {
-        this.sort = sort;
-    }
-
-    public String getSqlColumns() {
-        return sqlColumns;
-    }
-
-    public void setSqlColumns(String sqlColumns) {
-        this.sqlColumns = sqlColumns;
-    }
-
     public int getPageStart() {
         if (pageIndex > 0) {
             return (pageIndex - 1) * pageSize;
@@ -58,27 +49,4 @@ public class PageParam {
         return pageIndex;
     }
 
-    public int getPageIndex() {
-        return pageIndex;
-    }
-
-    public void setPageIndex(int pageIndex) {
-        this.pageIndex = pageIndex;
-    }
-
-    public int getPageSize() {
-        return pageSize;
-    }
-
-    public void setPageSize(int pageSize) {
-        this.pageSize = pageSize;
-    }
-
-    public String getCondition() {
-        return condition;
-    }
-
-    public void setCondition(String condition) {
-        this.condition = condition;
-    }
 }

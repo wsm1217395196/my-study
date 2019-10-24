@@ -1,8 +1,8 @@
 package com.study.service;
 
-import com.baomidou.mybatisplus.mapper.EntityWrapper;
-import com.baomidou.mybatisplus.plugins.Page;
-import com.baomidou.mybatisplus.service.impl.ServiceImpl;
+import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
+import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
+import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.study.MyConstant;
 import com.study.mapper.RoleMapper;
 import com.study.model.RoleModel;
@@ -40,30 +40,30 @@ public class RoleService extends ServiceImpl<RoleMapper, RoleModel> {
         String projectId = object.getString("projectId");
         String isEnable = object.getString("isEnable");
 
-        EntityWrapper ew = new EntityWrapper();
+        QueryWrapper qw = new QueryWrapper();
         if (!StringUtils.isEmpty(name)) {
-            ew.like("name", name);
+            qw.like("name", name);
         }
         if (!StringUtils.isEmpty(code)) {
-            ew.eq("code", code);
+            qw.eq("code", code);
         }
         if (!StringUtils.isEmpty(projectId)) {
-            ew.eq("project_id", projectId);
+            qw.eq("project_id", projectId);
         }
         if (!StringUtils.isEmpty(isEnable)) {
-            ew.eq("isEnable", isEnable);
+            qw.eq("isEnable", isEnable);
         }
-        if (!StringUtils.isEmpty(sort)) {
-            ew.orderBy(sort);
-        }
+//        if (!StringUtils.isEmpty(sort)) {
+//            qw.orderBy(sort);
+//        }
 
         Page page = new Page();
         int total = 0;
         if (pageIndex != MyConstant.Zero && pageSize != MyConstant.Zero) {
             page = new Page(pageIndex, pageSize);
-            total = roleMapper.selectCount(ew);
+            total = roleMapper.selectCount(qw);
         }
-        List records = roleMapper.selectPage(page, ew);
+        List records = roleMapper.selectPage(page, qw).getRecords();
         PageResult pageResult = new PageResult(pageIndex, pageSize, total, records);
         return pageResult;
     }

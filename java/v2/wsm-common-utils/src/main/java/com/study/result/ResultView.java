@@ -1,8 +1,11 @@
 package com.study.result;
 
+import lombok.Data;
+
 /**
  * 结果视图类
  */
+@Data
 public class ResultView {
     /**
      * 状态码
@@ -95,36 +98,4 @@ public class ResultView {
         this.msg = msg;
     }
 
-    public Integer getCode() {
-        return code;
-    }
-
-    public void setCode(Integer code) {
-        this.code = code;
-    }
-
-    public String getMsg() {
-        return msg;
-    }
-
-    public void setMsg(String msg) {
-        this.msg = msg;
-    }
-
-    public Object getData() {
-        return data;
-    }
-
-    public void setData(Object data) {
-        this.data = data;
-    }
-
-    @Override
-    public String toString() {
-        return "ResultView{" +
-                "code=" + code +
-                ", msg='" + msg + '\'' +
-                ", data=" + data +
-                '}';
-    }
 }

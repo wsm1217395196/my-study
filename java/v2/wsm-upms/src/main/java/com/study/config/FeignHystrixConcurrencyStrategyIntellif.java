@@ -21,7 +21,7 @@ import java.util.concurrent.BlockingQueue;
 import java.util.concurrent.Callable;
 import java.util.concurrent.ThreadPoolExecutor;
 import java.util.concurrent.TimeUnit;
- 
+
 /**
  * 自定义Feign的隔离策略:
  *   在转发Feign的请求头的时候, 如果开启了Hystrix, 

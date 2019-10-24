@@ -12,8 +12,8 @@ import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import java.time.LocalDateTime;
 import java.util.Arrays;
-import java.util.Date;
 import java.util.List;
 
 /**
@@ -35,7 +35,7 @@ public class RecruitPlatformController {
     @ApiOperation(value = "查询全部", notes = "")
     @GetMapping("/authority/getAll")
     public ResultView getAll() {
-        List<RecruitPlatformModel> models = recruitPlatformService.selectList(null);
+        List<RecruitPlatformModel> models = recruitPlatformService.list();
         return ResultView.success(models);
     }
 
@@ -49,25 +49,25 @@ public class RecruitPlatformController {
     @ApiOperation(value = "根据id查询", notes = "")
     @GetMapping("/authority/getById/{id}")
     public ResultView getById(@PathVariable Long id) {
-        RecruitPlatformModel model = recruitPlatformService.selectById(id);
+        RecruitPlatformModel model = recruitPlatformService.getById(id);
         return ResultView.success(model);
     }
 
     @ApiOperation(value = "新增", notes = "")
     @PostMapping("/authority_button/add")
     public ResultView add(@RequestBody RecruitPlatformModel model) {
-        Date date = new Date();
+        LocalDateTime date = LocalDateTime.now();
         model.setId(CreateUtil.id());
         model.setCreateTime(date);
         model.setUpdateTime(date);
-        recruitPlatformService.insert(model);
+        recruitPlatformService.save(model);
         return ResultView.success(model);
     }
 
     @ApiOperation(value = "修改", notes = "")
     @PostMapping("/authority_button/update")
     public ResultView update(@RequestBody RecruitPlatformModel model) {
-        Date date = new Date();
+        LocalDateTime date = LocalDateTime.now();
         model.setUpdateTime(date);
         recruitPlatformService.updateById(model);
         return ResultView.success(model);
@@ -76,14 +76,14 @@ public class RecruitPlatformController {
     @ApiOperation(value = "根据id删除", notes = "")
     @DeleteMapping("/authority_button/deleteById/{id}")
     public ResultView deleteById(@PathVariable Long id) {
-        recruitPlatformService.deleteById(id);
+        recruitPlatformService.removeById(id);
         return ResultView.success();
     }
 
     @ApiOperation(value = "根据ids删除", notes = "")
     @DeleteMapping("/authority_button/deleteByIds")
     public ResultView deleteByIds(@RequestParam Long[] ids) {
-        recruitPlatformService.deleteBatchIds(Arrays.asList(ids));
+        recruitPlatformService.removeByIds(Arrays.asList(ids));
         return ResultView.success();
     }
 }

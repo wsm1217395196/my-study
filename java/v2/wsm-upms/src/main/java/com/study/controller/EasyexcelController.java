@@ -76,7 +76,7 @@ public class EasyexcelController {
      * @return
      */
     private List<RegionModel> data() {
-        List<RegionModel> models = regionService.selectList(null);
+        List<RegionModel> models = regionService.list();
         List<RegionModel> topRegions = regionService.getTopRegion();
 
         //设置父级域名称

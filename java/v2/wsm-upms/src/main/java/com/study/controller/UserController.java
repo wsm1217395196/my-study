@@ -11,8 +11,8 @@ import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import java.time.LocalDateTime;
 import java.util.Arrays;
-import java.util.Date;
 import java.util.List;
 
 /**
@@ -34,7 +34,7 @@ public class UserController {
     @ApiOperation(value = "查询全部", notes = "")
     @GetMapping("/authority/getAll")
     public ResultView getAll() {
-        List<UserModel> models = userService.selectList(null);
+        List<UserModel> models = userService.list();
         return ResultView.success(models);
     }
 
@@ -48,25 +48,25 @@ public class UserController {
     @ApiOperation(value = "根据id查询", notes = "")
     @GetMapping("/authority/getById/{id}")
     public ResultView getById(@PathVariable Long id) {
-        UserModel model = userService.selectById(id);
+        UserModel model = userService.getById(id);
         return ResultView.success(model);
     }
 
     @ApiOperation(value = "新增", notes = "")
     @PostMapping("/authority_button/add")
     public ResultView add(@RequestBody UserModel model) {
-        Date date = new Date();
+        LocalDateTime date = LocalDateTime.now();
         model.setId(CreateUtil.id());
         model.setCreateTime(date);
         model.setUpdateTime(date);
-        userService.insert(model);
+        userService.save(model);
         return ResultView.success(model);
     }
 
     @ApiOperation(value = "修改", notes = "")
     @PostMapping("/authority_button/update")
     public ResultView update(@RequestBody UserModel model) {
-        Date date = new Date();
+        LocalDateTime date = LocalDateTime.now();
         model.setUpdateTime(date);
         userService.updateById(model);
         return ResultView.success(model);
@@ -75,14 +75,14 @@ public class UserController {
     @ApiOperation(value = "根据id删除", notes = "")
     @DeleteMapping("/authority_button/deleteById")
     public ResultView deleteById(@RequestParam Long id) {
-        userService.deleteById(id);
+        userService.removeById(id);
         return ResultView.success();
     }
 
     @ApiOperation(value = "根据ids删除", notes = "")
     @DeleteMapping("/authority_button/deleteByIds")
     public ResultView deleteByIds(@RequestParam Long[] ids) {
-        userService.deleteBatchIds(Arrays.asList(ids));
+        userService.removeByIds(Arrays.asList(ids));
         return ResultView.success();
     }
 

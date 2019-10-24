@@ -1,6 +1,9 @@
 package com.study.dto;
 
 import com.study.model.ResourceRoleModel;
+import lombok.Getter;
+import lombok.Setter;
+import lombok.ToString;
 
 import java.util.List;
 
@@ -10,6 +13,9 @@ import java.util.List;
  * @author wsm
  * @since 2019-07-24
  */
+@Getter
+@Setter
+@ToString
 public class ResourceRoleInfoDto {
 
     /**
@@ -26,27 +32,4 @@ public class ResourceRoleInfoDto {
      */
     private List<ResourceRoleModel> resourceRoleModels;
 
-    public String getUrlPattern() {
-        return urlPattern;
-    }
-
-    public void setUrlPattern(String urlPattern) {
-        this.urlPattern = urlPattern;
-    }
-
-    public String getButton() {
-        return button;
-    }
-
-    public void setButton(String button) {
-        this.button = button;
-    }
-
-    public List<ResourceRoleModel> getResourceRoleModels() {
-        return resourceRoleModels;
-    }
-
-    public void setResourceRoleModels(List<ResourceRoleModel> resourceRoleModels) {
-        this.resourceRoleModels = resourceRoleModels;
-    }
 }

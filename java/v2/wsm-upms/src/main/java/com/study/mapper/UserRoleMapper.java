@@ -1,7 +1,7 @@
 package com.study.mapper;
 
+import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 import com.study.model.UserRoleModel;
-import com.baomidou.mybatisplus.mapper.BaseMapper;
 
 /**
  * <p>

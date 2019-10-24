@@ -1,6 +1,6 @@
 package com.study.controller;
 
-import com.baomidou.mybatisplus.mapper.EntityWrapper;
+import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.study.MyConstant;
 import com.study.config.MyConfig;
 import com.study.dto.ResourceRoleInfoDto;
@@ -20,7 +20,7 @@ import org.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.Date;
+import java.time.LocalDateTime;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -52,9 +52,9 @@ public class PublicController {
         String password = jsonObject.getString("password");
 
         //查账号是否存在
-        EntityWrapper ew = new EntityWrapper();
-        ew.eq("name", name);
-        int count = userService.selectCount(ew);
+        QueryWrapper qw = new QueryWrapper();
+        qw.eq("name", name);
+        int count = userService.count(qw);
         if (count > 0) {
             return ResultView.error(ResultEnum.CODE_6);
         }
@@ -64,8 +64,8 @@ public class PublicController {
         model.setId(CreateUtil.id());
         model.setName(name);
         model.setPassword(password);
-        model.setCreateTime(new Date());
-        userService.insert(model);
+        model.setCreateTime(LocalDateTime.now());
+        userService.save(model);
         return ResultView.success();
     }
 
@@ -77,16 +77,16 @@ public class PublicController {
         String password = jsonObject.getString("password");
 
         //查账号是否存在
-        EntityWrapper ew = new EntityWrapper();
-        ew.eq("name", name);
-        ew.eq("password", password);
-        UserModel userModel = userService.selectOne(ew);
+        QueryWrapper qw = new QueryWrapper();
+        qw.eq("name", name);
+        qw.eq("password", password);
+        UserModel userModel = userService.getOne(qw);
         if (userModel == null) {
             return ResultView.error(ResultEnum.CODE_5);
         }
 
         //查 OauthClientDetails 信息
-        OauthClientDetailsModel oauthClientDetailsModel = oauthClientDetailsService.selectById(myConfig.getClientId());
+        OauthClientDetailsModel oauthClientDetailsModel = oauthClientDetailsService.getById(myConfig.getClientId());
         if (oauthClientDetailsModel == null) {
             ResultView.error(ResultEnum.CODE_7);
         }

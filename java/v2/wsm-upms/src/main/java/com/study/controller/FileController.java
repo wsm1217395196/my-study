@@ -91,7 +91,7 @@ public class FileController {
         File file = new File(uploadFolder + fileName);
         fileName = fileName.substring(fileName.lastIndexOf("/") + 1);
         if (!file.exists()) {
-            throw new MyRuntimeException(ResultView.error(ResultEnum.CODE_11));
+            throw new MyRuntimeException(ResultEnum.CODE_11);
         }
 
         try {

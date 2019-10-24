@@ -5,7 +5,6 @@ import com.study.exception.MyRuntimeException;
 import com.study.mapper.PublicMapper;
 import com.study.model.UserModel;
 import com.study.result.ResultEnum;
-import com.study.result.ResultView;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.User;
@@ -37,7 +36,7 @@ public class MyUserDetailService implements UserDetailsService {
     public UserDetails loadUserByUsername(String name) throws UsernameNotFoundException {
         UserModel userModel = publicMapper.getUserByName(name);
         if (userModel == null) {
-            throw new MyRuntimeException(ResultView.error(ResultEnum.CODE_5));
+            throw new MyRuntimeException(ResultEnum.CODE_5);
         }
 //        String password = {noop} + userModel.getPassword();
         String password = new BCryptPasswordEncoder().encode(userModel.getPassword());

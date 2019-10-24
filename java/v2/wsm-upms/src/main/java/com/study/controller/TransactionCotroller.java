@@ -26,17 +26,17 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.time.LocalDateTime;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 
 /**
- * 测试控制器
+ * 分布式事务相关控制器
  */
 @Api(description = "测试控制器")
 @RestController
 @RequestMapping("/test")
-public class TestCotroller {
+public class TransactionCotroller {
 
     @Autowired
     private MyConfig myConfig;
@@ -91,7 +91,7 @@ public class TestCotroller {
         RegionModel regionModel = new RegionModel();
         regionModel.setId(CreateUtil.id());
         regionModel.setName("（seata）region测试分布式事务" + CreateUtil.validateCode(3));
-        regionService.insert(regionModel);
+        regionService.save(regionModel);
 
         JobModel jobModel = new JobModel();
         jobModel.setId(CreateUtil.id());
@@ -141,7 +141,7 @@ public class TestCotroller {
             model.setCode("code" + i);
             model.setParentId(1L);
             model.setCreateBy("wsm");
-            model.setCreateTime(new Date());
+            model.setCreateTime(LocalDateTime.now());
             models.add(model);
         }
 //        regionService.insertBatch(models);
@@ -208,7 +208,7 @@ public class TestCotroller {
                 model.setCode("code" + i);
                 model.setParentId(1L);
                 model.setCreateBy("wsm");
-                model.setCreateTime(new Date());
+                model.setCreateTime(LocalDateTime.now());
                 models.add(model);
             }
             int i = regionMapper.batchAdd(models);

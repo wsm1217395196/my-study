@@ -1,8 +1,8 @@
 package com.study.service;
 
-import com.baomidou.mybatisplus.mapper.EntityWrapper;
-import com.baomidou.mybatisplus.plugins.Page;
-import com.baomidou.mybatisplus.service.impl.ServiceImpl;
+import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
+import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
+import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.study.MyConstant;
 import com.study.mapper.UserMapper;
 import com.study.model.UserModel;
@@ -42,33 +42,33 @@ public class UserService extends ServiceImpl<UserMapper, UserModel> {
         String sex = object.getString("sex");
         String isEnable = object.getString("isEnable");
 
-        EntityWrapper ew = new EntityWrapper();
+        QueryWrapper qw = new QueryWrapper();
         if (!StringUtils.isEmpty(name)) {
-            ew.like("name", name);
+            qw.like("name", name);
         }
         if (!StringUtils.isEmpty(nickname)) {
-            ew.like("nickname", nickname);
+            qw.like("nickname", nickname);
         }
         if (!StringUtils.isEmpty(phone)) {
-            ew.like("phone", phone);
+            qw.like("phone", phone);
         }
         if (!StringUtils.isEmpty(sex)) {
-            ew.eq("sex", sex);
+            qw.eq("sex", sex);
         }
         if (!StringUtils.isEmpty(isEnable)) {
-            ew.eq("isEnable", isEnable);
+            qw.eq("isEnable", isEnable);
         }
-        if (!StringUtils.isEmpty(sort)) {
-            ew.orderBy(sort);
-        }
+//        if (!StringUtils.isEmpty(sort)) {
+//            qw.orderBy(sort);
+//        }
 
         Page page = new Page();
         int total = 0;
         if (pageIndex != MyConstant.Zero && pageSize != MyConstant.Zero) {
             page = new Page(pageIndex, pageSize);
-            total = userMapper.selectCount(ew);
+            total = userMapper.selectCount(qw);
         }
-        List records = userMapper.selectPage(page, ew);
+        List records = userMapper.selectPage(page, qw).getRecords();
         PageResult pageResult = new PageResult(pageIndex, pageSize, total, records);
         return pageResult;
     }

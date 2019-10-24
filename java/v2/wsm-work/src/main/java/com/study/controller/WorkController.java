@@ -12,8 +12,8 @@ import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import java.time.LocalDateTime;
 import java.util.Arrays;
-import java.util.Date;
 import java.util.List;
 
 /**
@@ -35,7 +35,7 @@ public class WorkController {
     @ApiOperation(value = "查询全部", notes = "")
     @GetMapping("/authority/getAll")
     public ResultView getAll() {
-        List<WorkModel> models = workService.selectList(null);
+        List<WorkModel> models = workService.list();
         return ResultView.success(models);
     }
 
@@ -49,25 +49,25 @@ public class WorkController {
     @ApiOperation(value = "根据id查询", notes = "")
     @GetMapping("/authority/getById/{id}")
     public ResultView getById(@PathVariable Long id) {
-        WorkModel model = workService.selectById(id);
+        WorkModel model = workService.getById(id);
         return ResultView.success(model);
     }
 
     @ApiOperation(value = "新增", notes = "")
     @PostMapping("/authority_button/add")
     public ResultView add(@RequestBody WorkModel model) {
-        Date date = new Date();
+        LocalDateTime date = LocalDateTime.now();
         model.setId(CreateUtil.id());
         model.setCreateTime(date);
         model.setUpdateTime(date);
-        workService.insert(model);
+        workService.save(model);
         return ResultView.success(model);
     }
 
     @ApiOperation(value = "修改", notes = "")
     @PostMapping("/authority_button/update")
     public ResultView update(@RequestBody WorkModel model) {
-        Date date = new Date();
+        LocalDateTime date = LocalDateTime.now();
         model.setUpdateTime(date);
         workService.updateById(model);
         return ResultView.success(model);
@@ -76,14 +76,14 @@ public class WorkController {
     @ApiOperation(value = "根据id删除", notes = "")
     @DeleteMapping("/authority_button/deleteById/{id}")
     public ResultView deleteById(@PathVariable Long id) {
-        workService.deleteById(id);
+        workService.removeById(id);
         return ResultView.success();
     }
 
     @ApiOperation(value = "根据ids删除", notes = "")
     @DeleteMapping("/authority_button/deleteByIds")
     public ResultView deleteByIds(@RequestParam Long[] ids) {
-        workService.deleteBatchIds(Arrays.asList(ids));
+        workService.removeByIds(Arrays.asList(ids));
         return ResultView.success();
     }
 }

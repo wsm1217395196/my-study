@@ -1,10 +1,17 @@
 package com.study.result;
 
+import lombok.Getter;
+import lombok.Setter;
+import lombok.ToString;
+
 import java.util.List;
 
 /**
  * 分页结果
  */
+@Getter
+@Setter
+@ToString
 public class PageResult {
 
     /**
@@ -34,35 +41,4 @@ public class PageResult {
         this.records = records;
     }
 
-    public Integer getPageIndex() {
-        return pageIndex;
-    }
-
-    public void setPageIndex(Integer pageIndex) {
-        this.pageIndex = pageIndex;
-    }
-
-    public Integer getPageSize() {
-        return pageSize;
-    }
-
-    public void setPageSize(Integer pageSize) {
-        this.pageSize = pageSize;
-    }
-
-    public Integer getTotal() {
-        return total;
-    }
-
-    public void setTotal(Integer total) {
-        this.total = total;
-    }
-
-    public List getRecords() {
-        return records;
-    }
-
-    public void setRecords(List records) {
-        this.records = records;
-    }
 }
