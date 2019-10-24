@@ -26,7 +26,7 @@ import java.util.List;
  * @since 2019-07-16
  */
 @Api(description = "项目控制器")
-@Controller
+@RestController
 @RequestMapping("/project")
 public class ProjectController {
 
