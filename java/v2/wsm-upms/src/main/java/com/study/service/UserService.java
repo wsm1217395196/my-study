@@ -8,10 +8,10 @@ import com.study.mapper.UserMapper;
 import com.study.model.UserModel;
 import com.study.result.PageParam;
 import com.study.result.PageResult;
+import com.study.utils.MybatisPlusUtil;
 import org.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import org.springframework.util.StringUtils;
 
 import java.util.List;
 
@@ -33,34 +33,13 @@ public class UserService extends ServiceImpl<UserMapper, UserModel> {
     public PageResult getPage(PageParam pageParam) {
         int pageIndex = pageParam.getPageIndex();
         int pageSize = pageParam.getPageSize();
-//        int pageStart = pageParam.getPageStart();
         String sort = pageParam.getSort();
         JSONObject object = new JSONObject(pageParam.getCondition());
-        String name = object.getString("name").trim();
-        String nickname = object.getString("nickname").trim();
-        String phone = object.getString("phone").trim();
-        String sex = object.getString("sex");
-        String isEnable = object.getString("isEnable");
 
         QueryWrapper qw = new QueryWrapper();
-        if (!StringUtils.isEmpty(name)) {
-            qw.like("name", name);
-        }
-        if (!StringUtils.isEmpty(nickname)) {
-            qw.like("nickname", nickname);
-        }
-        if (!StringUtils.isEmpty(phone)) {
-            qw.like("phone", phone);
-        }
-        if (!StringUtils.isEmpty(sex)) {
-            qw.eq("sex", sex);
-        }
-        if (!StringUtils.isEmpty(isEnable)) {
-            qw.eq("isEnable", isEnable);
-        }
-//        if (!StringUtils.isEmpty(sort)) {
-//            qw.orderBy(sort);
-//        }
+        MybatisPlusUtil.eqUtil(qw, object, new String[]{"sex", "status"});
+        MybatisPlusUtil.likeUtil(qw, object, new String[]{"name", "nickname", "phone"});
+        MybatisPlusUtil.sortUtil(qw, sort);
 
         Page page = new Page();
         int total = 0;

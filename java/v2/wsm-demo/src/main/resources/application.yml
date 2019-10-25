@@ -14,11 +14,11 @@ spring:
   application:
     name: wsm-demo #服务名
 #  mysql配置
-#  datasource:
-#    driver-class-name: com.mysql.jdbc.Driver
-#    username: admin
-#    password: admin
-#    url: jdbc:mysql://${eureka.instance.hostname}:3306/wsm-upms?characterEncoding=utf-8&useSSL=false&serverTimezone=UTC
+  datasource:
+    driver-class-name: com.mysql.jdbc.Driver
+    username: admin
+    password: admin
+    url: jdbc:mysql://${eureka.instance.hostname}:3306/wsm-upms?characterEncoding=utf-8&useSSL=false&serverTimezone=UTC
 
 # 配置mybatis-plus
 #mybatis-plus:

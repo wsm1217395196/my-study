@@ -10,10 +10,10 @@ import com.study.mapper.RecruitPlatformMapper;
 import com.study.model.RecruitPlatformModel;
 import com.study.result.PageParam;
 import com.study.result.PageResult;
+import com.study.utils.MybatisPlusUtil;
 import org.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import org.springframework.util.StringUtils;
 
 import java.util.List;
 
@@ -34,22 +34,13 @@ public class RecruitPlatformService extends ServiceImpl<RecruitPlatformMapper, R
     public PageResult getPage(PageParam pageParam) {
         int pageIndex = pageParam.getPageIndex();
         int pageSize = pageParam.getPageSize();
-//        int pageStart = pageParam.getPageStart();
         String sort = pageParam.getSort();
         JSONObject object = new JSONObject(pageParam.getCondition());
-        String name = object.getString("name").trim();
-        String isEnable = object.getString("isEnable");
 
         QueryWrapper qw = new QueryWrapper();
-        if (!StringUtils.isEmpty(name)) {
-            qw.like("name", name);
-        }
-        if (!StringUtils.isEmpty(isEnable)) {
-            qw.eq("isEnable", isEnable);
-        }
-//        if (!StringUtils.isEmpty(sort)) {
-//            ew.orderBy(sort);
-//        }
+        MybatisPlusUtil.eqUtil(qw, object, new String[]{"isEnabled"});
+        MybatisPlusUtil.likeUtil(qw, object, new String[]{"name"});
+        MybatisPlusUtil.sortUtil(qw, sort);
 
         Page page = new Page();
         int total = 0;

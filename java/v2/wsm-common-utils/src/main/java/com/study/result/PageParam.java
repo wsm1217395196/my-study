@@ -1,5 +1,7 @@
 package com.study.result;
 
+import io.swagger.annotations.ApiModel;
+import io.swagger.annotations.ApiModelProperty;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
@@ -10,26 +12,32 @@ import lombok.ToString;
 @Getter
 @Setter
 @ToString
+@ApiModel(value = "PageParam对象", description = "分页参数类")
 public class PageParam {
     /**
-     * 当前页
+     * 要查第几页？
      */
+    @ApiModelProperty(value = "要查第几页？")
     private int pageIndex;
     /**
-     * 当前页有多少数据
+     * 要查一页多少数据？
      */
+    @ApiModelProperty(value = "要查一页多少数据？")
     private int pageSize;
     /**
-     * 要查的字段(别名=model属性名)
+     * 要查的字段（注意：别名对应model属性名）
      */
+    @ApiModelProperty(value = "要查的字段（注意：别名对应model属性名）")
     private String sqlColumns;
     /**
-     * 排序
+     * 排序字段（如 update_time-desc,name-asc）
      */
+    @ApiModelProperty(value = "排序字段（如 update_time-desc,name-asc）")
     private String sort;
     /**
-     * 条件
+     * 条件(json格式："{'name':'wsm','isEnable':'1'}")
      */
+    @ApiModelProperty(value = "条件(json格式：\"{'name':'wsm','isEnable':'1'}\")")
     private String condition;
 
     public PageParam() {

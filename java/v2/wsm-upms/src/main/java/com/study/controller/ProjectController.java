@@ -39,7 +39,7 @@ public class ProjectController {
         return ResultView.success(models);
     }
 
-    @ApiOperation(value = "分页条件查询", notes = "提交参数：{\"pageIndex\":1,\"pageSize\":10,\"sort\":\"name desc\",\"condition\":\"{\'name\':\'\',\'code\':\'\',\'regionId\':\'\',\'isEnable\':\'\'}\"}")
+    @ApiOperation(value = "分页条件查询", notes = "提交参数：{\"pageIndex\":1,\"pageSize\":10,\"sort\":\"name-desc\",\"condition\":\"{\'name\':\'\',\'code\':\'\',\'regionId\':\'\',\'isEnabled\':\'\'}\"}")
     @PostMapping("/authority/getPage")
     public ResultView getPage(@RequestBody PageParam pageParam) {
         PageResult pageResult = projectService.getPage(pageParam);

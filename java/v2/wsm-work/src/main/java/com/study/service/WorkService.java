@@ -9,10 +9,10 @@ import com.study.mapper.WorkMapper;
 import com.study.model.WorkModel;
 import com.study.result.PageParam;
 import com.study.result.PageResult;
+import com.study.utils.MybatisPlusUtil;
 import org.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import org.springframework.util.StringUtils;
 
 import java.util.List;
 
@@ -33,30 +33,13 @@ public class WorkService extends ServiceImpl<WorkMapper, WorkModel> implements I
     public PageResult getPage(PageParam pageParam) {
         int pageIndex = pageParam.getPageIndex();
         int pageSize = pageParam.getPageSize();
-//        int pageStart = pageParam.getPageStart();
         String sort = pageParam.getSort();
         JSONObject object = new JSONObject(pageParam.getCondition());
-        Long recruitPlatformId = object.getLong("recruitPlatformId");
-        Long jobId = object.getLong("jobId");
-        String site = object.getString("site").trim();
-        String isEnable = object.getString("isEnable");
 
         QueryWrapper qw = new QueryWrapper();
-        if (!StringUtils.isEmpty(recruitPlatformId)) {
-            qw.eq("recruit_platform_id", recruitPlatformId);
-        }
-        if (!StringUtils.isEmpty(jobId)) {
-            qw.eq("job_id", jobId);
-        }
-        if (!StringUtils.isEmpty(site)) {
-            qw.like("site", site);
-        }
-        if (!StringUtils.isEmpty(isEnable)) {
-            qw.eq("isEnable", isEnable);
-        }
-//        if (!StringUtils.isEmpty(sort)) {
-//            qw.orderBy(sort);
-//        }
+        MybatisPlusUtil.eqUtil(qw, object, new String[]{"recruitPlatformId", "jobId", "isEnabled",});
+        MybatisPlusUtil.likeUtil(qw, object, new String[]{"site"});
+        MybatisPlusUtil.sortUtil(qw, sort);
 
         Page page = new Page();
         int total = 0;

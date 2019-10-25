@@ -8,10 +8,10 @@ import com.study.mapper.ProjectMapper;
 import com.study.model.ProjectModel;
 import com.study.result.PageParam;
 import com.study.result.PageResult;
+import com.study.utils.MybatisPlusUtil;
 import org.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import org.springframework.util.StringUtils;
 
 import java.util.List;
 
@@ -32,30 +32,13 @@ public class ProjectService extends ServiceImpl<ProjectMapper, ProjectModel> {
     public PageResult getPage(PageParam pageParam) {
         int pageIndex = pageParam.getPageIndex();
         int pageSize = pageParam.getPageSize();
-//        int pageStart = pageParam.getPageStart();
         String sort = pageParam.getSort();
         JSONObject object = new JSONObject(pageParam.getCondition());
-        String name = object.getString("name").trim();
-        String code = object.getString("code");
-        String regionId = object.getString("regionId");
-        String isEnable = object.getString("isEnable");
 
         QueryWrapper qw = new QueryWrapper();
-        if (!StringUtils.isEmpty(name)) {
-            qw.like("name", name);
-        }
-        if (!StringUtils.isEmpty(code)) {
-            qw.eq("code", code);
-        }
-        if (!StringUtils.isEmpty(regionId)) {
-            qw.eq("region_id", regionId);
-        }
-        if (!StringUtils.isEmpty(isEnable)) {
-            qw.eq("isEnable", isEnable);
-        }
-//        if (!StringUtils.isEmpty(sort)) {
-//            qw.orderBy(sort,false);
-//        }
+        MybatisPlusUtil.eqUtil(qw, object, new String[]{"code", "regionId", "isEnabled"});
+        MybatisPlusUtil.likeUtil(qw, object, new String[]{"name"});
+        MybatisPlusUtil.sortUtil(qw, sort);
 
         Page page = new Page();
         int total = 0;
