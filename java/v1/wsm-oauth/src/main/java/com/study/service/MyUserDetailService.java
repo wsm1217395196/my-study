@@ -35,20 +35,28 @@ public class MyUserDetailService implements UserDetailsService {
 
     @Override
     public UserDetails loadUserByUsername(String name) throws UsernameNotFoundException {
+        //查用户
         UserModel userModel = publicMapper.getUserByName(name);
         if (userModel == null) {
             throw new MyRuntimeException(ResultView.error(ResultEnum.CODE_5));
         }
-//        String password = {noop} + userModel.getPassword();
-        String password = new BCryptPasswordEncoder().encode(userModel.getPassword());
+        System.err.println("当前登录的用户是：" + name);
+
         //查该用户拥有的角色
         List<BaseDto> roleDtos = publicMapper.getRoleByUserId(userModel.getId());
         List<SimpleGrantedAuthority> authorities = new ArrayList<>();
-        for (BaseDto roleDto : roleDtos) {
-            authorities.add(new SimpleGrantedAuthority("ROLE_" + roleDto.getId()));
+        if (roleDtos.size() == 0) {
+            authorities.add(new SimpleGrantedAuthority("ROLE_NoRole"));
+            System.err.println(name + "：用户没有角色！");
+        } else {
+            for (BaseDto roleDto : roleDtos) {
+                authorities.add(new SimpleGrantedAuthority("ROLE_" + roleDto.getId()));
+            }
         }
+
+//        String password = {noop} + userModel.getPassword();
+        String password = new BCryptPasswordEncoder().encode(userModel.getPassword());
         User user = new User(name, password, authorities);
-        System.err.println("当前登录的用户是：" + name);
         return user;
     }
 }

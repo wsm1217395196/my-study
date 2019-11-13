@@ -3,6 +3,7 @@ package com.study.controller;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.study.MyConstant;
 import com.study.config.MyConfig;
+import com.study.config.MySecurityMetadataSource;
 import com.study.dto.ResourceRoleInfoDto;
 import com.study.exception.MyRuntimeException;
 import com.study.feign.OauthFeign;
@@ -16,9 +17,12 @@ import com.study.service.UserService;
 import com.study.utils.CreateUtil;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
+import io.swagger.annotations.ApiParam;
 import org.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.client.RestClientException;
+import org.springframework.web.client.RestTemplate;
 
 import java.time.LocalDateTime;
 import java.util.HashMap;
@@ -43,6 +47,10 @@ public class PublicController {
     private OauthFeign oauthFeign;
     @Autowired
     private ResourceRoleMapper resourceRoleMapper;
+    @Autowired
+    private RestTemplate restTemplate;
+    @Autowired
+    private MySecurityMetadataSource mySecurityMetadataSource;
 
     @ApiOperation(value = "注册", notes = "提交参数：{\"name\":\"wsm666\",\"password\":\"123456\"}")
     @PostMapping("/register")
@@ -118,9 +126,30 @@ public class PublicController {
     }
 
     @ApiOperation(value = "根据client_id查询客户端resource_ids")
-    @GetMapping("getResourceIdsByClientId")
+    @GetMapping("/getResourceIdsByClientId")
     public String getResourceIdsByClientId(@RequestParam String clientId) {
         String resourceIds = oauthClientDetailsService.getResourceIdsByClientId(clientId);
         return resourceIds;
+    }
+
+    @ApiOperation(value = "根据地址刷新各服务权限")
+    @GetMapping("/loadResourceDefine")
+    public ResultView loadResourceDefine(@ApiParam("服务器地址,默认为localhost") @RequestParam(required = false, defaultValue = "localhost") String serverUrl, @ApiParam("服务名,多个用逗号隔开") @RequestParam String[] serverNames) {
+        if (serverNames.length == 0) {
+            return ResultView.error("请填写服务名！");
+        }
+        for (String serverName : serverNames) {
+            if (serverName.equals(MyConstant.wsm_upms)) {
+                mySecurityMetadataSource.loadResourceDefine();
+            } else {
+                try {
+                    String url = "http://" + serverUrl + ":8001/" + serverName + "/public/loadResourceDefine";
+                    restTemplate.getForEntity(url, ResultView.class);
+                } catch (RestClientException e) {
+                    return ResultView.error("请填写正确的地址和服务名！");
+                }
+            }
+        }
+        return ResultView.success();
     }
 }

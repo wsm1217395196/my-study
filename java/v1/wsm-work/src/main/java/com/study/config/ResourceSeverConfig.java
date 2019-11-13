@@ -9,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.data.redis.connection.RedisConnectionFactory;
+import org.springframework.security.config.annotation.ObjectPostProcessor;
 import org.springframework.security.config.annotation.method.configuration.EnableGlobalMethodSecurity;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.oauth2.config.annotation.web.configuration.EnableResourceServer;
@@ -17,6 +18,7 @@ import org.springframework.security.oauth2.config.annotation.web.configurers.Res
 import org.springframework.security.oauth2.provider.token.TokenStore;
 import org.springframework.security.oauth2.provider.token.store.JwtAccessTokenConverter;
 import org.springframework.security.oauth2.provider.token.store.JwtTokenStore;
+import org.springframework.security.web.access.intercept.FilterSecurityInterceptor;
 import org.springframework.util.StringUtils;
 
 import javax.sql.DataSource;
@@ -40,6 +42,10 @@ public class ResourceSeverConfig extends ResourceServerConfigurerAdapter {
     private RedisConnectionFactory redisConnectionFactory;
     @Autowired
     private DataSource dataSource;
+    @Autowired
+    private MySecurityMetadataSource mySecurityMetadataSource;
+    @Autowired
+    private MyAccessDecisionManager myAccessDecisionManager;
 
     /**
      * 对Jwt签名时，增加一个密钥
@@ -102,69 +108,81 @@ public class ResourceSeverConfig extends ResourceServerConfigurerAdapter {
      */
     @Override
     public void configure(HttpSecurity http) throws Exception {
-//        http.csrf();//防csrf攻击
         http.csrf().disable();//防csrf攻击 禁用
+        http.authorizeRequests().antMatchers("/public/**").permitAll();//可以访问
 
-        if (!myConfig.getIsUseSecurity()) {//不启用权限
-            http.authorizeRequests().antMatchers("/**").permitAll();//可以访问
-        } else {//启用权限
-            List<ResourceRoleInfoDto> dtos = upmsFeign.getResourceRoleInfo(myConfig.getProjectCode());//查当前项目的资源角色信息
-            for (ResourceRoleInfoDto dto : dtos) {
-                String resourceButton = dto.getButton();//资源里的button
-                //urlPattern1、urlPattern2代表在这路径下的才被security权限管理起来
-                String urlPattern1 = dto.getUrlPattern() + "/authority/**";
-                String urlPattern2 = dto.getUrlPattern() + "/authority_button/**";
+        //启用权限
+        if (myConfig.getIsUseSecurity()) {
+            http.authorizeRequests().antMatchers("/test/**").authenticated();
 
-                //判断资源url有无角色信息
-                if (dto.getResourceRoleModels().size() == 0) {
-                    http.authorizeRequests().antMatchers(urlPattern1, urlPattern2).denyAll();
-                    System.err.println(urlPattern1 + "、" + urlPattern2 + " 路径下所有用户不能访问！");
-                } else {
-                    String roleIds = ""; //urlPattern1的角色id
-
-                    List<String> apiUrls = new ArrayList<>();//资源button里对应的api接口名
-                    List<String> apiUrlRoleIds = new ArrayList<>();//资源button里对应的api接口名 ——对应的角色id
-                    for (String button : resourceButton.split(",")) {
-                        String apiUrl = dto.getUrlPattern() + "/authority_button/" + button;
-                        apiUrls.add(apiUrl);
-                        apiUrlRoleIds.add("");
-                    }
-                    for (ResourceRoleModel model : dto.getResourceRoleModels()) {
-                        roleIds += "," + model.getRoleId();
-                        //判断有无资源角色关系里的Button
-                        String resourceRoleButton = model.getResourceButton();
-                        if (!StringUtils.isEmpty(model.getResourceButton())) {
-                            for (String roleButton : resourceRoleButton.split(",")) {
-                                //在apiUrls集合中找到了资源角色里的button与之对应的api接口名，就添加角色id到apiUrlRoleIds集合中
-                                int index = apiUrls.indexOf(dto.getUrlPattern() + "/authority_button/" + roleButton);
-                                if (index != -1) {
-                                    String apiUrlRoleIds_ = apiUrlRoleIds.get(index) + "," + model.getRoleId();
-                                    apiUrlRoleIds.set(index, apiUrlRoleIds_);
-                                }
-                            }
-                        }
-                    }
-
-                    //下面是 给某路径下 某角色赋予权限
-                    roleIds = roleIds.substring(1, roleIds.length());
-                    http.authorizeRequests().antMatchers(urlPattern1).hasAnyRole(roleIds.split(","));
-                    System.err.println(urlPattern1 + " 路径下用户拥有这些角色id [" + roleIds + "] 才可以访问！");
-
-                    for (int i = 0; i < apiUrls.size(); i++) {
-                        String apiUrlRoleIdStr = apiUrlRoleIds.get(i);
-                        if (!StringUtils.isEmpty(apiUrlRoleIdStr)) {
-                            apiUrlRoleIdStr = apiUrlRoleIdStr.substring(1, apiUrlRoleIdStr.length());
-                            String[] apiUrlRoleIds_ = apiUrlRoleIdStr.split(",");
-                            http.authorizeRequests().antMatchers(apiUrls.get(i)).hasAnyRole(apiUrlRoleIds_);
-                            System.err.println(apiUrls.get(i) + " 路径下用户拥有这些角色id " + Arrays.toString(apiUrlRoleIds_) + " 才可以访问！");
-                        } else {
-                            //这里看他是拥有 denyAll角色 能访问，实则不能访问（上面54行）（注：数据库的roleId不能是denyAll，要做限制）
-                            http.authorizeRequests().antMatchers(apiUrls.get(i)).hasRole("denyAll");
-                            System.err.println(apiUrls.get(i) + " 路径下所有用户不能访问");
-                        }
-                    }
+            //权限配置1（第一种实现：动态、修改了权限不需要重启项目，只需调用mySecurityMetadataSource类loadResourceDefine方法刷新权限，重新登陆获取token即可生效）
+            http.authorizeRequests().withObjectPostProcessor(new ObjectPostProcessor<FilterSecurityInterceptor>() {
+                @Override
+                public <O extends FilterSecurityInterceptor> O postProcess(O o) {
+                    o.setSecurityMetadataSource(mySecurityMetadataSource); //动态获取url权限配置
+                    o.setAccessDecisionManager(myAccessDecisionManager); //权限判断
+                    return o;
                 }
-            }
+            });
+
+            //权限配置2（第二种实现：修改了资源权限需要重启项目）
+//            List<ResourceRoleInfoDto> dtos = upmsFeign.getResourceRoleInfo(myConfig.getProjectCode());//查当前项目的资源角色信息
+//            for (ResourceRoleInfoDto dto : dtos) {
+//                String resourceButton = dto.getButton();//资源里的button
+//                //urlPattern1、urlPattern2代表在这路径下的才被security权限管理起来
+//                String urlPattern1 = dto.getUrlPattern() + "/authority/**";
+//                String urlPattern2 = dto.getUrlPattern() + "/authority_button/**";
+//
+//                //判断资源url有无角色信息
+//                if (dto.getResourceRoleModels().size() == 0) {
+//                    http.authorizeRequests().antMatchers(urlPattern1, urlPattern2).denyAll();
+//                    System.err.println(urlPattern1 + "、" + urlPattern2 + " --- 路径下所有用户不能访问！");
+//                } else {
+//                    String roleIds = ""; //urlPattern1的角色id
+//
+//                    List<String> apiUrls = new ArrayList<>();//资源button里对应的api接口名
+//                    List<String> apiUrlRoleIds = new ArrayList<>();//资源button里对应的api接口名 ——对应的角色id
+//                    for (String button : resourceButton.split(",")) {
+//                        String apiUrl = dto.getUrlPattern() + "/authority_button/" + button;
+//                        apiUrls.add(apiUrl);
+//                        apiUrlRoleIds.add("");
+//                    }
+//                    for (ResourceRoleModel model : dto.getResourceRoleModels()) {
+//                        roleIds += "," + model.getRoleId();
+//                        //判断有无资源角色关系里的Button
+//                        String resourceRoleButton = model.getResourceButton();
+//                        if (!StringUtils.isEmpty(model.getResourceButton())) {
+//                            for (String roleButton : resourceRoleButton.split(",")) {
+//                                //在apiUrls集合中找到了资源角色里的button与之对应的api接口名，就添加角色id到apiUrlRoleIds集合中
+//                                int index = apiUrls.indexOf(dto.getUrlPattern() + "/authority_button/" + roleButton);
+//                                if (index != -1) {
+//                                    String apiUrlRoleIds_ = apiUrlRoleIds.get(index) + "," + model.getRoleId();
+//                                    apiUrlRoleIds.set(index, apiUrlRoleIds_);
+//                                }
+//                            }
+//                        }
+//                    }
+//
+//                    //下面是 给某路径下 某角色赋予权限
+//                    roleIds = roleIds.substring(1, roleIds.length());
+//                    http.authorizeRequests().antMatchers(urlPattern1).hasAnyRole(roleIds.split(","));
+//                    System.err.println(urlPattern1 + " --- 路径下用户拥有这些角色id [" + roleIds + "] 才可以访问！");
+//
+//                    for (int i = 0; i < apiUrls.size(); i++) {
+//                        String apiUrlRoleIdStr = apiUrlRoleIds.get(i);
+//                        if (!StringUtils.isEmpty(apiUrlRoleIdStr)) {
+//                            apiUrlRoleIdStr = apiUrlRoleIdStr.substring(1, apiUrlRoleIdStr.length());
+//                            String[] apiUrlRoleIds_ = apiUrlRoleIdStr.split(",");
+//                            http.authorizeRequests().antMatchers(apiUrls.get(i)).hasAnyRole(apiUrlRoleIds_);
+//                            System.err.println(apiUrls.get(i) + " --- 路径下用户拥有这些角色id " + Arrays.toString(apiUrlRoleIds_) + " 才可以访问！");
+//                        } else {
+//                            http.authorizeRequests().antMatchers(apiUrls.get(i)).denyAll();
+//                            System.err.println(apiUrls.get(i) + " --- 路径下所有用户不能访问");
+//                        }
+//                    }
+//                }
+//            }
+
         }
     }
 }

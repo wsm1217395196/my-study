@@ -1,16 +1,15 @@
 {
 	"info": {
-		"_postman_id": "aa740706-8efa-4598-887f-e9b3a2b56d36",
-		"name": "wsm项目",
+		"_postman_id": "182f8757-f584-457e-a9ee-d86b86fc339c",
+		"name": "wsm项目 copy",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
 	},
 	"item": [
 		{
 			"name": "oauth",
-			"description": "",
 			"item": [
 				{
-					"name": "oauth-获取token",
+					"name": "获取token",
 					"request": {
 						"method": "POST",
 						"header": [],
@@ -20,37 +19,31 @@
 								{
 									"key": "username",
 									"value": "wsm1",
-									"description": "",
 									"type": "text"
 								},
 								{
 									"key": "password",
 									"value": "123456",
-									"description": "",
 									"type": "text"
 								},
 								{
 									"key": "client_id",
 									"value": "client_upms",
-									"description": "",
 									"type": "text"
 								},
 								{
 									"key": "client_secret",
 									"value": "secret_wsm",
-									"description": "",
 									"type": "text"
 								},
 								{
 									"key": "grant_type",
 									"value": "password",
-									"description": "",
 									"type": "text"
 								},
 								{
 									"key": "scope",
 									"value": "scope_wsm",
-									"description": "",
 									"type": "text"
 								}
 							]
@@ -72,7 +65,7 @@
 					"response": []
 				},
 				{
-					"name": "oauth-刷新token",
+					"name": "刷新token",
 					"request": {
 						"method": "POST",
 						"header": [],
@@ -82,25 +75,21 @@
 								{
 									"key": "client_id",
 									"value": "client_wsm",
-									"description": "",
 									"type": "text"
 								},
 								{
 									"key": "client_secret",
 									"value": "secret_wsm",
-									"description": "",
 									"type": "text"
 								},
 								{
 									"key": "grant_type",
 									"value": "refresh_token",
-									"description": "",
 									"type": "text"
 								},
 								{
 									"key": "refresh_token",
 									"value": "eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCJ9.eyJjcmVhdGVUaW1lIjoiMjAxOS0wNy0zMSAxNzowMDo1MCIsInVzZXJfbmFtZSI6IndzbTEiLCJhdXRob3IiOiJ3c20iLCJzY29wZSI6WyJzY29wZV93c20iXSwicm9sZXMiOiJST0xFXzEiLCJhdGkiOiIzNGM0MDdjYi0wYTA4LTRmZjctYTExNy0yZGFkMjljYTFiNTciLCJleHAiOjE1NjQ1NjQ4NTAsImF1dGhvcml0aWVzIjpbIlJPTEVfMSJdLCJqdGkiOiJjZGU5YzM0OS1kNDI5LTQ4MmYtYTBhOS0wZmM4OTM5NThkZDMiLCJjbGllbnRfaWQiOiJjbGllbnRfd3NtIn0.ENBvBey-qgDlEMsw2AqMzzQj7IVjRxOmGSeZlo9Xn67VOWEPgP5Tom6bVMEM4gnhGx9Og8MOnU-UoF2Ssx_-dRBvGVnhIp1d5BkXzBSgsubW0rplXrR1wBApL1WNGQdxcqFb7HCRdLIBQfj_W2iqoDxJ7gOBxsFqKGeePQTG_TxA5OGNywjX6S9bRBLj0vp0A_QfL3eQAVG5BXR-FqRred84PRrTay1ScGwznwYTWCt3-DrIhAbP-risSCOCeRBtzi7_YiNXkSFuo-TxgBFV8UedYO_4f3ID_ZGZBZ-EVdN2Sn7i13CPkHexAhnkZQinkMV-Nimcc56qF6Yb-EQySw",
-									"description": "",
 									"type": "text"
 								}
 							]
@@ -122,11 +111,14 @@
 					"response": []
 				},
 				{
-					"name": "oauth-解析token",
+					"name": "解析token",
 					"request": {
 						"method": "GET",
 						"header": [],
-						"body": {},
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
 						"url": {
 							"raw": "http://localhost:8001/wsm-oauth/user/decodeToken?token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJhdWQiOlsicmVzb3VyY2Vfd29yayJdLCJjcmVhdGVUaW1lIjoiMjAxOS0wOC0xMyAxMDo0MDo0MiIsInVzZXJfbmFtZSI6IndzbTEiLCJhdXRob3IiOiJ3c20iLCJzY29wZSI6WyJzY29wZV93c20iXSwicm9sZXMiOiJST0xFXzEiLCJleHAiOjE1NjU3MDcyNDIsImF1dGhvcml0aWVzIjpbIlJPTEVfMSJdLCJqdGkiOiJlZTI2ZTVmYy01ZWE1LTQyZGUtOTJjMS1jODRiMjFmNTE3MWIiLCJjbGllbnRfaWQiOiJjbGllbnRfd29yayJ9.2FCW_7ZXKyaM8HU1GfrOPNQWd-UlFwMawhRHxP0J_mo",
 							"protocol": "http",
@@ -150,7 +142,7 @@
 					"response": []
 				},
 				{
-					"name": "oauth-test（登录后可访问）",
+					"name": "test（登录后可访问）",
 					"request": {
 						"method": "GET",
 						"header": [
@@ -159,7 +151,10 @@
 								"value": "bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX25hbWUiOiJ3c20xIiwiYXV0aG9yIjoid3NtIiwic2NvcGUiOlsic2NvcGVfd3NtIl0sInJvbGVzIjoiUk9MRV8xIiwiZXhwIjoxNTY0NTU2OTY4LCJhdXRob3JpdGllcyI6WyJST0xFXzEiXSwianRpIjoiYzNkMmM3YTUtMWI1ZS00MDdkLWE4ZWYtOTY1YTk3MjAxNGYwIiwiY2xpZW50X2lkIjoiY2xpZW50X3dzbSJ9.2B5qv4jJemjECVY5K_tVEzE5c3AFi-fuegerK17XvD0"
 							}
 						],
-						"body": {},
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
 						"url": {
 							"raw": "http://localhost:8001/wsm-oauth/test/getName",
 							"protocol": "http",
@@ -177,11 +172,14 @@
 					"response": []
 				},
 				{
-					"name": "oauth-清除token（注销登录）",
+					"name": "清除token（注销登录）",
 					"request": {
 						"method": "GET",
 						"header": [],
-						"body": {},
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
 						"url": {
 							"raw": "http://localhost:8001/wsm-oauth/user/logout?token=0ee95e80-5038-4b14-8508-419ab1fceb27",
 							"protocol": "http",
@@ -205,7 +203,7 @@
 					"response": []
 				},
 				{
-					"name": "oauth-根据token用户principal",
+					"name": "根据token用户principal",
 					"request": {
 						"method": "GET",
 						"header": [
@@ -214,7 +212,10 @@
 								"value": "bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX25hbWUiOiJ3c20xIiwic2NvcGUiOlsic2NvcGVfd3NtIl0sImV4cCI6MTU2NDQzNjgxNCwibmFtZTEiOiI2NjYiLCJhdXRob3JpdGllcyI6WyJST0xFXzEiXSwianRpIjoiODU5YjdkOWYtMDNlYy00ZWEwLWJlN2ItZjc0MDRjZDQ3ZjQxIiwiY2xpZW50X2lkIjoiY2xpZW50X3dzbSJ9.ULLu2OIgMCjNgKjbWyv17hQE2W-BgrNwqMGqoZBxiWw"
 							}
 						],
-						"body": {},
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
 						"url": {
 							"raw": "http://localhost:8001/wsm-oauth/user/principal",
 							"protocol": "http",
@@ -232,11 +233,14 @@
 					"response": []
 				},
 				{
-					"name": "oauth-获取jwt非对称加密公钥",
+					"name": "获取jwt非对称加密公钥",
 					"request": {
 						"method": "GET",
 						"header": [],
-						"body": {},
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
 						"url": {
 							"raw": "http://localhost:8001/wsm-oauth/oauth/token_key",
 							"protocol": "http",
@@ -264,37 +268,31 @@
 								{
 									"key": "username",
 									"value": "wsm1",
-									"description": "",
 									"type": "text"
 								},
 								{
 									"key": "password",
 									"value": "123456",
-									"description": "",
 									"type": "text"
 								},
 								{
 									"key": "client_id",
 									"value": "client_upms",
-									"description": "",
 									"type": "text"
 								},
 								{
 									"key": "client_secret",
 									"value": "secret_wsm",
-									"description": "",
 									"type": "text"
 								},
 								{
 									"key": "grant_type",
 									"value": "password",
-									"description": "",
 									"type": "text"
 								},
 								{
 									"key": "scope",
 									"value": "scope_wsm",
-									"description": "",
 									"type": "text"
 								}
 							]
@@ -324,7 +322,10 @@
 								"value": "bearer a09c53da-0a76-4fa2-b1ee-9a3a3db72464"
 							}
 						],
-						"body": {},
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
 						"url": {
 							"raw": "http://localhost:8002/user/principal",
 							"protocol": "http",
@@ -344,10 +345,9 @@
 		},
 		{
 			"name": "upms",
-			"description": "",
 			"item": [
 				{
-					"name": "upms-public-login（登录）",
+					"name": "public-login（登录）",
 					"request": {
 						"method": "POST",
 						"header": [
@@ -377,13 +377,13 @@
 					"response": []
 				},
 				{
-					"name": "upms-public-logout（注销登录）",
+					"name": "public-logout（注销登录）",
 					"request": {
 						"method": "GET",
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\"name\":\"wsm1\",\"password\":\"123456\"}"
+							"raw": ""
 						},
 						"url": {
 							"raw": "http://localhost:8001/wsm-upms/public/logout?token=eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX25hbWUiOiJ3c20xIiwic2NvcGUiOlsic2NvcGVfd3NtIl0sInJvbGVzIjoiUk9MRV8xIiwiZXhwIjoxNTY0NTEwMzE2LCJhdXRob3JpdGllcyI6WyJST0xFXzEiXSwianRpIjoiZTc4ZGRlNGYtMjg5ZS00NWNlLTliMTktOWQwMzg5YjI3ZGUzIiwiY2xpZW50X2lkIjoiY2xpZW50X3dzbSJ9.XcywYNUEsWN7fuD19jef7JCFKXNaLLtoWvSXia99aEiEYEc1rIbANJs6dnnyTmt3OB9ljcv7E6b8F8J6kIE0hQ12XSCOasv9jZ4457yR5cJuje3-NRj6I3ty6OBveiET7ah-RlEvifL-ALlB6Y5BH330pIxkAKecavAGvgZdO7B2vWTqP3VnAMBpUxEOxIUtEoDtQtfMPwe7vabmbREUebVq6nC6mwYeHHFD6MiZRCSgLzB7nWhLCCcAJevA0l4TqaOhLmmlPpFZMrTWgMmi82bTDEMzrVLg1FUX2MO740L0aOe7tyiR5r1ge_YxUzoYU3SzN0LS20OomJS2Ericdw",
@@ -408,7 +408,42 @@
 					"response": []
 				},
 				{
-					"name": "upms-user-getById",
+					"name": "根据地址刷新各服务权限",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "http://localhost:8001/wsm-upms/public/loadResourceDefine?serverUrl=localhost&serverNames=wsm-upms,wsm-work",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8001",
+							"path": [
+								"wsm-upms",
+								"public",
+								"loadResourceDefine"
+							],
+							"query": [
+								{
+									"key": "serverUrl",
+									"value": "localhost"
+								},
+								{
+									"key": "serverNames",
+									"value": "wsm-upms,wsm-work"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "user-getById",
 					"request": {
 						"method": "GET",
 						"header": [
@@ -417,7 +452,10 @@
 								"value": " bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJhdWQiOlsicmVzb3VyY2Vfb2F1dGgiLCJyZXNvdXJjZV91cG1zIiwicmVzb3VyY2Vfd29yayJdLCJjcmVhdGVUaW1lIjoiMjAxOS0wOC0yNiAxMDo0MzowMiIsInVzZXJfbmFtZSI6IndzbTEiLCJhdXRob3IiOiJ3c20iLCJzY29wZSI6WyJzY29wZV93c20iXSwicm9sZXMiOiJST0xFXzEiLCJleHAiOjE1NjY4MzA1ODIsImF1dGhvcml0aWVzIjpbIlJPTEVfMSJdLCJqdGkiOiI1NDU0NWEwYS00MzgxLTQ5N2YtODNiZi0zZWMwOTJkYjU5ZDgiLCJjbGllbnRfaWQiOiJjbGllbnRfdXBtcyJ9.vLlTuc3H6x1UALOLcr13VQSBIvE4eZT6_3hJsnVkYBM"
 							}
 						],
-						"body": {},
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
 						"url": {
 							"raw": "http://localhost:8001/wsm-upms/user/authority/getById/1",
 							"protocol": "http",
@@ -437,7 +475,7 @@
 					"response": []
 				},
 				{
-					"name": "upms-user-getAll",
+					"name": "user-getAll",
 					"request": {
 						"method": "GET",
 						"header": [
@@ -446,7 +484,10 @@
 								"value": "bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX25hbWUiOiJ3c20xIiwiYXV0aG9yIjoid3NtIiwic2NvcGUiOlsic2NvcGVfd3NtIl0sInJvbGVzIjoiUk9MRV8xIiwiZXhwIjoxNTY0NTUyNDAzLCJhdXRob3JpdGllcyI6WyJST0xFXzEiXSwianRpIjoiZTgwNTA2YmEtYWEzOC00Mjc5LWE3NzktN2QwYjk0NmU1NTRkIiwiY2xpZW50X2lkIjoiY2xpZW50X3dzbSJ9.4kH1wX-zmdzKga1iBKInVXD0EOY9TqGKAmB_5ZnHMXI"
 							}
 						],
-						"body": {},
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
 						"url": {
 							"raw": "http://localhost:8001/wsm-upms/user/authority/getAll",
 							"protocol": "http",
@@ -465,7 +506,7 @@
 					"response": []
 				},
 				{
-					"name": "upms-user-add",
+					"name": "user-add",
 					"request": {
 						"method": "POST",
 						"header": [
@@ -500,7 +541,7 @@
 					"response": []
 				},
 				{
-					"name": "upms-user-update",
+					"name": "user-update",
 					"request": {
 						"method": "POST",
 						"header": [
@@ -535,7 +576,7 @@
 					"response": []
 				},
 				{
-					"name": "upms-user-deleteById",
+					"name": "user-deleteById",
 					"request": {
 						"method": "DELETE",
 						"header": [
@@ -550,7 +591,6 @@
 								{
 									"key": "id",
 									"value": "666",
-									"description": "",
 									"type": "text"
 								}
 							]
@@ -571,15 +611,83 @@
 						}
 					},
 					"response": []
+				},
+				{
+					"name": "user-getPage",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": " bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJhdWQiOlsicmVzb3VyY2Vfb2F1dGgiLCJyZXNvdXJjZV91cG1zIiwicmVzb3VyY2Vfd29yayJdLCJjcmVhdGVUaW1lIjoiMjAxOS0xMC0yNSAxMTowNzo0NCIsInVzZXJfbmFtZSI6IndzbTEiLCJhdXRob3IiOiJ3c20iLCJzY29wZSI6WyJzY29wZV93c20iXSwicm9sZXMiOiJST0xFXzEiLCJleHAiOjE1NzIwMTYwNjQsImF1dGhvcml0aWVzIjpbIlJPTEVfMSJdLCJqdGkiOiIxNTgxOTEzZS1hZGI5LTRjMDctYWJmYy0wMjNlYTE0ODc1MmIiLCJjbGllbnRfaWQiOiJjbGllbnRfdXBtcyJ9.rhK2MsXlUGsZVQXbzdRf4bEK5pS_-sRutVGSU4DvCmo"
+							},
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\"pageIndex\":1,\"pageSize\":10,\"sort\":\"update_time-desc\",\"condition\":\"{'name':'wsm','nickname':'','phone':'','sex':'','status':'1'}\"}"
+						},
+						"url": {
+							"raw": "http://localhost:8001/wsm-upms/user/authority/getPage",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8001",
+							"path": [
+								"wsm-upms",
+								"user",
+								"authority",
+								"getPage"
+							]
+						}
+					},
+					"response": []
 				}
 			]
 		},
 		{
 			"name": "work",
-			"description": "",
 			"item": [
 				{
-					"name": "work-work-getById",
+					"name": "job-getById",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": " bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJhdWQiOlsicmVzb3VyY2Vfb2F1dGgiLCJyZXNvdXJjZV91cG1zIiwicmVzb3VyY2Vfd29yayJdLCJjcmVhdGVUaW1lIjoiMjAxOS0xMS0xMyAxNDo0OTo1MCIsInVzZXJfbmFtZSI6IndzbTEiLCJhdXRob3IiOiJ3c20iLCJzY29wZSI6WyJzY29wZV93c20iXSwicm9sZXMiOiJST0xFXzEiLCJleHAiOjE1NzM2NzA5OTAsImF1dGhvcml0aWVzIjpbIlJPTEVfMSJdLCJqdGkiOiJmNjMxOTQ3Ni1jYjM3LTQ4MzEtYTI5OC1mZDJlYWMyMmRjMGQiLCJjbGllbnRfaWQiOiJjbGllbnRfdXBtcyJ9.jRnZVMKM0dlw4eTlPQDOkgVR46zINrXMJY7_bPPJ23w"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "http://localhost:8001/wsm-work/job/authority/getById/1",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8001",
+							"path": [
+								"wsm-work",
+								"job",
+								"authority",
+								"getById",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "work-getById",
 					"request": {
 						"method": "GET",
 						"header": [
@@ -588,7 +696,10 @@
 								"value": " bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJhdWQiOlsicmVzb3VyY2Vfb2F1dGgiLCJyZXNvdXJjZV91cG1zIiwicmVzb3VyY2Vfd29yayJdLCJjcmVhdGVUaW1lIjoiMjAxOS0wOC0yNiAxMDo0MzowMiIsInVzZXJfbmFtZSI6IndzbTEiLCJhdXRob3IiOiJ3c20iLCJzY29wZSI6WyJzY29wZV93c20iXSwicm9sZXMiOiJST0xFXzEiLCJleHAiOjE1NjY4MzA1ODIsImF1dGhvcml0aWVzIjpbIlJPTEVfMSJdLCJqdGkiOiI1NDU0NWEwYS00MzgxLTQ5N2YtODNiZi0zZWMwOTJkYjU5ZDgiLCJjbGllbnRfaWQiOiJjbGllbnRfdXBtcyJ9.vLlTuc3H6x1UALOLcr13VQSBIvE4eZT6_3hJsnVkYBM"
 							}
 						],
-						"body": {},
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
 						"url": {
 							"raw": "http://localhost:8001/wsm-work/work/authority/getById/1",
 							"protocol": "http",

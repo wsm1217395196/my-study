@@ -9,7 +9,7 @@
 			"name": "oauth",
 			"item": [
 				{
-					"name": "oauth-获取token",
+					"name": "获取token",
 					"request": {
 						"method": "POST",
 						"header": [],
@@ -65,7 +65,7 @@
 					"response": []
 				},
 				{
-					"name": "oauth-刷新token",
+					"name": "刷新token",
 					"request": {
 						"method": "POST",
 						"header": [],
@@ -111,7 +111,7 @@
 					"response": []
 				},
 				{
-					"name": "oauth-解析token",
+					"name": "解析token",
 					"request": {
 						"method": "GET",
 						"header": [],
@@ -142,7 +142,7 @@
 					"response": []
 				},
 				{
-					"name": "oauth-test（登录后可访问）",
+					"name": "test（登录后可访问）",
 					"request": {
 						"method": "GET",
 						"header": [
@@ -172,7 +172,7 @@
 					"response": []
 				},
 				{
-					"name": "oauth-清除token（注销登录）",
+					"name": "清除token（注销登录）",
 					"request": {
 						"method": "GET",
 						"header": [],
@@ -203,7 +203,7 @@
 					"response": []
 				},
 				{
-					"name": "oauth-根据token用户principal",
+					"name": "根据token用户principal",
 					"request": {
 						"method": "GET",
 						"header": [
@@ -233,7 +233,7 @@
 					"response": []
 				},
 				{
-					"name": "oauth-获取jwt非对称加密公钥",
+					"name": "获取jwt非对称加密公钥",
 					"request": {
 						"method": "GET",
 						"header": [],
@@ -347,7 +347,7 @@
 			"name": "upms",
 			"item": [
 				{
-					"name": "upms-public-login（登录）",
+					"name": "public-login（登录）",
 					"request": {
 						"method": "POST",
 						"header": [
@@ -377,7 +377,7 @@
 					"response": []
 				},
 				{
-					"name": "upms-public-logout（注销登录）",
+					"name": "public-logout（注销登录）",
 					"request": {
 						"method": "GET",
 						"header": [],
@@ -408,7 +408,42 @@
 					"response": []
 				},
 				{
-					"name": "upms-user-getById",
+					"name": "根据地址刷新各服务权限",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "http://localhost:8001/wsm-upms/public/loadResourceDefine?serverUrl=localhost&serverNames=wsm-upms,wsm-work",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8001",
+							"path": [
+								"wsm-upms",
+								"public",
+								"loadResourceDefine"
+							],
+							"query": [
+								{
+									"key": "serverUrl",
+									"value": "localhost"
+								},
+								{
+									"key": "serverNames",
+									"value": "wsm-upms,wsm-work"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "user-getById",
 					"request": {
 						"method": "GET",
 						"header": [
@@ -440,7 +475,7 @@
 					"response": []
 				},
 				{
-					"name": "upms-user-getAll",
+					"name": "user-getAll",
 					"request": {
 						"method": "GET",
 						"header": [
@@ -471,7 +506,7 @@
 					"response": []
 				},
 				{
-					"name": "upms-user-add",
+					"name": "user-add",
 					"request": {
 						"method": "POST",
 						"header": [
@@ -506,7 +541,7 @@
 					"response": []
 				},
 				{
-					"name": "upms-user-update",
+					"name": "user-update",
 					"request": {
 						"method": "POST",
 						"header": [
@@ -541,7 +576,7 @@
 					"response": []
 				},
 				{
-					"name": "upms-user-deleteById",
+					"name": "user-deleteById",
 					"request": {
 						"method": "DELETE",
 						"header": [
@@ -578,7 +613,7 @@
 					"response": []
 				},
 				{
-					"name": "upms-user-getPage",
+					"name": "user-getPage",
 					"request": {
 						"method": "POST",
 						"header": [
@@ -620,7 +655,39 @@
 			"name": "work",
 			"item": [
 				{
-					"name": "work-work-getById",
+					"name": "job-getById",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": " bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJhdWQiOlsicmVzb3VyY2Vfb2F1dGgiLCJyZXNvdXJjZV91cG1zIiwicmVzb3VyY2Vfd29yayJdLCJjcmVhdGVUaW1lIjoiMjAxOS0xMS0xMyAxNDo0OTo1MCIsInVzZXJfbmFtZSI6IndzbTEiLCJhdXRob3IiOiJ3c20iLCJzY29wZSI6WyJzY29wZV93c20iXSwicm9sZXMiOiJST0xFXzEiLCJleHAiOjE1NzM2NzA5OTAsImF1dGhvcml0aWVzIjpbIlJPTEVfMSJdLCJqdGkiOiJmNjMxOTQ3Ni1jYjM3LTQ4MzEtYTI5OC1mZDJlYWMyMmRjMGQiLCJjbGllbnRfaWQiOiJjbGllbnRfdXBtcyJ9.jRnZVMKM0dlw4eTlPQDOkgVR46zINrXMJY7_bPPJ23w"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "http://localhost:8001/wsm-work/job/authority/getById/1",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8001",
+							"path": [
+								"wsm-work",
+								"job",
+								"authority",
+								"getById",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "work-getById",
 					"request": {
 						"method": "GET",
 						"header": [
@@ -967,93 +1034,6 @@
 					"response": []
 				}
 			]
-		},
-		{
-			"name": "oauth-获取token",
-			"request": {
-				"method": "POST",
-				"header": [],
-				"body": {
-					"mode": "formdata",
-					"formdata": [
-						{
-							"key": "username",
-							"value": "wsm1",
-							"type": "text"
-						},
-						{
-							"key": "password",
-							"value": "123456",
-							"type": "text"
-						},
-						{
-							"key": "client_id",
-							"value": "client_upms",
-							"type": "text"
-						},
-						{
-							"key": "client_secret",
-							"value": "secret_wsm",
-							"type": "text"
-						},
-						{
-							"key": "grant_type",
-							"value": "password",
-							"type": "text"
-						},
-						{
-							"key": "scope",
-							"value": "scope_wsm",
-							"type": "text"
-						}
-					]
-				},
-				"url": {
-					"raw": "http://localhost:8001/wsm-oauth/oauth/token",
-					"protocol": "http",
-					"host": [
-						"localhost"
-					],
-					"port": "8001",
-					"path": [
-						"wsm-oauth",
-						"oauth",
-						"token"
-					]
-				}
-			},
-			"response": []
-		},
-		{
-			"name": "upms-user-getAll",
-			"request": {
-				"method": "GET",
-				"header": [
-					{
-						"key": "Authorization",
-						"value": "bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX25hbWUiOiJ3c20xIiwiYXV0aG9yIjoid3NtIiwic2NvcGUiOlsic2NvcGVfd3NtIl0sInJvbGVzIjoiUk9MRV8xIiwiZXhwIjoxNTY0NTUyNDAzLCJhdXRob3JpdGllcyI6WyJST0xFXzEiXSwianRpIjoiZTgwNTA2YmEtYWEzOC00Mjc5LWE3NzktN2QwYjk0NmU1NTRkIiwiY2xpZW50X2lkIjoiY2xpZW50X3dzbSJ9.4kH1wX-zmdzKga1iBKInVXD0EOY9TqGKAmB_5ZnHMXI"
-					}
-				],
-				"body": {
-					"mode": "raw",
-					"raw": ""
-				},
-				"url": {
-					"raw": "http://localhost:8001/wsm-upms/user/authority/getAll",
-					"protocol": "http",
-					"host": [
-						"localhost"
-					],
-					"port": "8001",
-					"path": [
-						"wsm-upms",
-						"user",
-						"authority",
-						"getAll"
-					]
-				}
-			},
-			"response": []
 		}
 	]
 }

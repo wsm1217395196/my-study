@@ -22,20 +22,20 @@ DROP TABLE IF EXISTS `job`;
 
 CREATE TABLE `job` (
   `id` bigint(20) NOT NULL,
-  `name` varchar(50) COLLATE utf8_unicode_ci NOT NULL COMMENT '名称',
-  `create_by` varchar(50) COLLATE utf8_unicode_ci DEFAULT NULL COMMENT '创建人',
+  `name` varchar(50) COLLATE utf8_unicode_ci NOT NULL DEFAULT '' COMMENT '名称',
+  `create_by` varchar(50) COLLATE utf8_unicode_ci DEFAULT '' COMMENT '创建人',
   `create_time` datetime DEFAULT NULL COMMENT '创建时间',
-  `update_by` varchar(50) COLLATE utf8_unicode_ci DEFAULT NULL COMMENT '更新人',
+  `update_by` varchar(50) COLLATE utf8_unicode_ci DEFAULT '' COMMENT '更新人',
   `update_time` datetime DEFAULT NULL COMMENT '更新时间',
   `is_enabled` tinyint(4) NOT NULL DEFAULT '1' COMMENT '是否有效(0无效，1有效)',
-  `remark` varchar(200) COLLATE utf8_unicode_ci DEFAULT NULL COMMENT '备注',
+  `remark` varchar(200) COLLATE utf8_unicode_ci DEFAULT '' COMMENT '备注',
   PRIMARY KEY (`id`),
   UNIQUE KEY `job_name` (`name`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci COMMENT='职位表';
 
 /*Data for the table `job` */
 
-insert  into `job`(`id`,`name`,`create_by`,`create_time`,`update_by`,`update_time`,`is_enabled`,`remark`) values (1,'1','1','2019-02-23 16:21:48',NULL,'2019-02-23 16:21:51',1,NULL),(2620619105830180738,'（seata）job测试分布式事务482',NULL,'2019-08-30 10:07:39',NULL,'2019-08-30 10:07:39',1,NULL);
+insert  into `job`(`id`,`name`,`create_by`,`create_time`,`update_by`,`update_time`,`is_enabled`,`remark`) values (1,'1','1','2019-02-23 16:21:48',NULL,'2019-02-23 16:21:51',1,NULL);
 
 /*Table structure for table `recruit_platform` */
 
@@ -43,19 +43,39 @@ DROP TABLE IF EXISTS `recruit_platform`;
 
 CREATE TABLE `recruit_platform` (
   `id` bigint(20) NOT NULL,
-  `name` varchar(50) COLLATE utf8_unicode_ci NOT NULL COMMENT '名称',
-  `create_by` varchar(50) COLLATE utf8_unicode_ci DEFAULT NULL COMMENT '创建人',
+  `name` varchar(50) COLLATE utf8_unicode_ci NOT NULL DEFAULT '' COMMENT '名称',
+  `create_by` varchar(50) COLLATE utf8_unicode_ci DEFAULT '' COMMENT '创建人',
   `create_time` datetime DEFAULT NULL COMMENT '创建时间',
-  `update_by` varchar(50) COLLATE utf8_unicode_ci DEFAULT NULL COMMENT '更新人',
+  `update_by` varchar(50) COLLATE utf8_unicode_ci DEFAULT '' COMMENT '更新人',
   `update_time` datetime DEFAULT NULL COMMENT '更新时间',
   `is_enabled` tinyint(4) NOT NULL DEFAULT '1' COMMENT '是否有效(0无效，1有效)',
-  `remark` varchar(200) COLLATE utf8_unicode_ci DEFAULT NULL COMMENT '备注',
+  `remark` varchar(200) COLLATE utf8_unicode_ci DEFAULT '' COMMENT '备注',
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci COMMENT='招聘平台表';
 
 /*Data for the table `recruit_platform` */
 
 insert  into `recruit_platform`(`id`,`name`,`create_by`,`create_time`,`update_by`,`update_time`,`is_enabled`,`remark`) values (1,'1',NULL,NULL,NULL,NULL,1,NULL);
+
+/*Table structure for table `undo_log` */
+
+DROP TABLE IF EXISTS `undo_log`;
+
+CREATE TABLE `undo_log` (
+  `id` bigint(20) NOT NULL AUTO_INCREMENT,
+  `branch_id` bigint(20) NOT NULL,
+  `xid` varchar(100) NOT NULL,
+  `context` varchar(128) NOT NULL,
+  `rollback_info` longblob NOT NULL,
+  `log_status` int(11) NOT NULL,
+  `log_created` datetime NOT NULL,
+  `log_modified` datetime NOT NULL,
+  `ext` varchar(100) DEFAULT NULL,
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `ux_undo_log` (`xid`,`branch_id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+/*Data for the table `undo_log` */
 
 /*Table structure for table `work` */
 
@@ -65,16 +85,16 @@ CREATE TABLE `work` (
   `id` bigint(20) NOT NULL,
   `recruit_platform_id` bigint(20) NOT NULL COMMENT '招聘平台id',
   `job_id` bigint(20) NOT NULL COMMENT '职位id',
-  `site` varchar(50) COLLATE utf8_unicode_ci DEFAULT NULL COMMENT '地点',
+  `site` varchar(50) COLLATE utf8_unicode_ci DEFAULT '' COMMENT '地点',
   `date` date DEFAULT NULL COMMENT '日期',
-  `condition` varchar(100) COLLATE utf8_unicode_ci DEFAULT NULL COMMENT '条件',
+  `condition` varchar(100) COLLATE utf8_unicode_ci DEFAULT '' COMMENT '条件',
   `job_number` int(11) DEFAULT NULL COMMENT '职位条数',
-  `create_by` varchar(50) COLLATE utf8_unicode_ci DEFAULT NULL COMMENT '创建人',
+  `create_by` varchar(50) COLLATE utf8_unicode_ci DEFAULT '' COMMENT '创建人',
   `create_time` datetime DEFAULT NULL COMMENT '创建时间',
-  `update_by` varchar(50) COLLATE utf8_unicode_ci DEFAULT NULL COMMENT '更新人',
+  `update_by` varchar(50) COLLATE utf8_unicode_ci DEFAULT '' COMMENT '更新人',
   `update_time` datetime DEFAULT NULL COMMENT '更新时间',
   `is_enabled` tinyint(4) NOT NULL DEFAULT '1' COMMENT '是否有效(0无效，1有效)',
-  `remark` varchar(200) COLLATE utf8_unicode_ci DEFAULT NULL COMMENT '备注',
+  `remark` varchar(200) COLLATE utf8_unicode_ci DEFAULT '' COMMENT '备注',
   PRIMARY KEY (`id`),
   KEY `recruit_platform_id` (`recruit_platform_id`),
   KEY `job_id` (`job_id`),
