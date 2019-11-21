@@ -33,7 +33,7 @@ public class MySecurityMetadataSource implements FilterInvocationSecurityMetadat
      * 加载权限表中所有操作请求权限
      */
     public void loadResourceDefine() {
-        map = new LinkedHashMap<>();
+        LinkedHashMap<String, Collection<ConfigAttribute>> linkedHashMap = new LinkedHashMap<>();
         //查当前项目的资源角色信息
         List<ResourceRoleInfoDto> dtos = upmsFeign.getResourceRoleInfo(myConfig.getProjectCode());
         for (ResourceRoleInfoDto dto : dtos) {
@@ -49,8 +49,8 @@ public class MySecurityMetadataSource implements FilterInvocationSecurityMetadat
             //判断资源url里有无角色信息
             List<ResourceRoleModel> resourceRoleModels = dto.getResourceRoleModels();
             if (resourceRoleModels.size() == 0) {
-                map.put(urlPattern1, configAttributes1);
-                map.put(urlPattern2, configAttributes1);
+                linkedHashMap.put(urlPattern1, configAttributes1);
+                linkedHashMap.put(urlPattern2, configAttributes1);
                 System.err.println(urlPattern1 + "、" + urlPattern2 + " 路径下所有用户不能访问！");
             } else {
                 for (ResourceRoleModel model : resourceRoleModels) {
@@ -67,25 +67,26 @@ public class MySecurityMetadataSource implements FilterInvocationSecurityMetadat
                             //角色信息2（对应urlPattern2）
                             Collection<ConfigAttribute> configAttributes2 = new ArrayList<>();
                             configAttributes2.add(securityConfig);
-                            if (!map.containsKey(urlPatternButton)) {
-                                map.put(urlPatternButton, configAttributes2);
+                            if (!linkedHashMap.containsKey(urlPatternButton)) {
+                                linkedHashMap.put(urlPatternButton, configAttributes2);
                             } else {
-                                map.get(urlPatternButton).add(securityConfig);
+                                linkedHashMap.get(urlPatternButton).add(securityConfig);
                             }
                         } else {
-                            if (!map.containsKey(urlPatternButton)) {
-                                map.put(urlPatternButton, new ArrayList<>());
+                            if (!linkedHashMap.containsKey(urlPatternButton)) {
+                                linkedHashMap.put(urlPatternButton, new ArrayList<>());
                             }
                         }
                     }
                 }
                 //给urlPattern1路径下 赋予某角色权限
-                map.put(urlPattern1, configAttributes1);
+                linkedHashMap.put(urlPattern1, configAttributes1);
             }
         }
+        map = linkedHashMap;
 
         //下面是打印
-        Iterator<Map.Entry<String, Collection<ConfigAttribute>>> iterator = map.entrySet().iterator();
+        Iterator<Map.Entry<String, Collection<ConfigAttribute>>> iterator = linkedHashMap.entrySet().iterator();
         while (iterator.hasNext()) {
             Map.Entry<String, Collection<ConfigAttribute>> next = iterator.next();
             String key = next.getKey();
@@ -110,10 +111,6 @@ public class MySecurityMetadataSource implements FilterInvocationSecurityMetadat
      */
     @Override
     public Collection<ConfigAttribute> getAttributes(Object o) throws IllegalArgumentException {
-        if (map == null) {
-            loadResourceDefine();
-        }
-
         //Object中包含用户请求request url
         String resUrl = ((FilterInvocation) o).getRequestUrl();
 

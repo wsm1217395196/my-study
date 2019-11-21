@@ -120,6 +120,7 @@ public class ResourceSeverConfig extends ResourceServerConfigurerAdapter {
             http.authorizeRequests().antMatchers("/test/**").authenticated();
 
             //权限配置1（第一种实现：动态、修改了权限不需要重启项目，只需调用mySecurityMetadataSource类loadResourceDefine方法刷新权限，重新登陆获取token即可生效）
+            mySecurityMetadataSource.loadResourceDefine();//加载权限表中所有操作请求权限
             http.authorizeRequests().withObjectPostProcessor(new ObjectPostProcessor<FilterSecurityInterceptor>() {
                 @Override
                 public <O extends FilterSecurityInterceptor> O postProcess(O o) {
