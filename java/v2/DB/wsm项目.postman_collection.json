@@ -955,6 +955,67 @@
 			]
 		},
 		{
+			"name": "测试分布式锁",
+			"item": [
+				{
+					"name": "设置count",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "http://localhost:8001/wsm-upms/distributedLock/setCount?count=100",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8001",
+							"path": [
+								"wsm-upms",
+								"distributedLock",
+								"setCount"
+							],
+							"query": [
+								{
+									"key": "count",
+									"value": "100"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "操作count",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "http://localhost:8001/wsm-upms/distributedLock/updateCount1",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8001",
+							"path": [
+								"wsm-upms",
+								"distributedLock",
+								"updateCount1"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
 			"name": "线程相关",
 			"item": [
 				{
