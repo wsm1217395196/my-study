@@ -1,5 +1,6 @@
 package com.study.controller;
 
+import com.study.config.RedisLock;
 import com.study.result.ResultView;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.redis.core.RedisTemplate;
@@ -7,7 +8,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import java.util.concurrent.TimeUnit;
+import java.util.UUID;
 import java.util.concurrent.atomic.AtomicInteger;
 import java.util.concurrent.locks.Lock;
 import java.util.concurrent.locks.ReentrantLock;
@@ -21,8 +22,63 @@ import java.util.concurrent.locks.ReentrantLock;
 public class DistributedLockController {
 
     public final String key = "count";//redis的key
+    private final static String lock_key = "lock";
 
-    //单机的
+    @Autowired
+    private RedisTemplate redisTemplate;
+    @Autowired
+    private RedisLock redisLock;
+
+    /**
+     * 初始化initCount存入redis中
+     *
+     * @param initCount
+     * @return
+     */
+    @GetMapping("/initCount")
+    public ResultView initCount(int initCount) {
+
+        int count = (int) redisTemplate.opsForValue().get(key);
+        System.err.println("上次的count = " + count + "  ——  本次设置的count = " + initCount);
+
+        redisTemplate.opsForValue().set(key, initCount);
+
+        account = new AtomicInteger(initCount);
+        return ResultView.success(initCount);
+    }
+
+//分布式的
+
+    /**
+     * 分布式锁操作（基于redis的锁）
+     * 并发请求大于等于上面初始化initCount次数，看是否最后initCount等于0。
+     *
+     * @return
+     */
+    @GetMapping("/updateCount")
+    public ResultView updateCount() {
+        String uuid = UUID.randomUUID().toString();
+        boolean lock = redisLock.lock(lock_key, uuid, 2000L);
+        int count = 0;
+        if (lock) {
+            try {
+                count = (int) redisTemplate.opsForValue().get(key);
+                if (count > 0) {
+                    count--;
+                    redisTemplate.opsForValue().set(key, count);
+                    System.err.println("count = " + count);
+                }
+            } finally {
+                redisLock.unlock(lock_key, uuid);
+            }
+        } else {
+            System.err.println("没有抢到锁！");
+        }
+        return ResultView.success(count);
+    }
+
+
+//单机的
     /**
      * 在JavaSE5.0中新增了一个java.util.concurrent包来支持同步。ReentrantLock类是可重入、互斥、实现了Lock接口的锁，
      * 它与使用synchronized方法和块具有相同的基本行为和语义，并且扩展了其能力
@@ -43,73 +99,6 @@ public class DistributedLockController {
      * set（）：设置给定初始值
      */
     private AtomicInteger account = null;
-
-    //分布式的
-    private final static String LOCK_ID = "wsm";
-
-    @Autowired
-    private RedisTemplate redisTemplate;
-
-    /**
-     * 获得锁
-     */
-    public boolean getLock(String lockId, long millisecond) {
-        Boolean success = redisTemplate.opsForValue().setIfAbsent(lockId, "lock",
-                millisecond, TimeUnit.MILLISECONDS);
-        return success != null && success;
-    }
-
-    /**
-     * 释放锁
-     *
-     * @param lockId
-     */
-    public void releaseLock(String lockId) {
-        redisTemplate.delete(lockId);
-    }
-
-    /**
-     * 初始化initCount存入redis中
-     *
-     * @param initCount
-     * @return
-     */
-    @GetMapping("/setCount")
-    public ResultView setCount(int initCount) {
-
-        int count = (int) redisTemplate.opsForValue().get(key);
-        System.err.println("上次的count = " + count + "  ——  本次设置的count = " + initCount);
-
-        redisTemplate.opsForValue().set(key, initCount);
-
-        account = new AtomicInteger(initCount);
-
-        return ResultView.success(initCount);
-    }
-
-    /**
-     * 分布式锁操作（基于redis的锁）
-     * 并发请求大于等于上面初始化initCount次数，看是否最后initCount等于0。
-     *
-     * @return
-     */
-    @GetMapping("/updateCount6")
-    public ResultView updateCount6() {
-        boolean lock = getLock(LOCK_ID, 2000);
-        int count = 0;
-        if (lock) {
-            count = (int) redisTemplate.opsForValue().get(key);
-            if (count > 0) {
-                count--;
-                redisTemplate.opsForValue().set(key, count);
-            }
-            releaseLock(LOCK_ID);
-            System.err.println("count = " + count);
-        } else {
-            System.err.println("没有抢到锁！");
-        }
-        return ResultView.success(count);
-    }
 
     /**
      * 单机操作，不同步。
