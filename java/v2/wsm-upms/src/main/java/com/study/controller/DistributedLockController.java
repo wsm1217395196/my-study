@@ -67,14 +67,18 @@ public class DistributedLockController {
                     count--;
                     redisTemplate.opsForValue().set(key, count);
                     System.err.println("count = " + count);
+                    return ResultView.success();
+                } else {
+                    System.err.println("已减完，count = " + count);
+                    return ResultView.error("已减完，count = " + count);
                 }
             } finally {
                 redisLock.unlock(lock_key, uuid);
             }
         } else {
-            System.err.println("没有抢到锁！");
+            System.err.println("没有抢到锁，请求的人太多，请稍后再试！");
+            return ResultView.error("没有抢到锁，请求的人太多，请稍后再试！");
         }
-        return ResultView.success(count);
     }
 
 
