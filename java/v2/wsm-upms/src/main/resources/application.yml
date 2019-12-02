@@ -15,14 +15,14 @@ spring:
   application:
     name: wsm-upms #服务名
 
-# mysql配置
+  # mysql配置
   datasource:
     driver-class-name: com.mysql.jdbc.Driver
     username: admin
     password: admin
     url: jdbc:mysql://${eureka.instance.hostname}:3306/wsm-upms?characterEncoding=utf-8&useSSL=false&serverTimezone=UTC
 
-# redis配置
+  # redis配置
   redis:
     database: 0 #Redis数据库索引（默认为0）
     timeout: 5000ms # 连接超时时间（毫秒）
@@ -41,11 +41,18 @@ spring:
       seata:
         tx-service-group: wsm-upms-seata-group #阿里seata 服务组
 
+  # Rabbitmq配置
+  rabbitmq:
+    host: ${eureka.instance.hostname}
+    port: 5672
+    username: guest
+    password: guest
+
   servlet:
     multipart:
       max-file-size: 100MB #设置文件最大数据大小
       max-request-size: 100MB #设置总上传数据大小
-#      location: d:/wsm-upload-cache #设置临时缓存目录
+  #      location: d:/wsm-upload-cache #设置临时缓存目录
 
   resources:
     static-locations: file:${my-config.upload-folder} #静态资源访问
@@ -101,4 +108,6 @@ my-config:
   rocketmq_topic: test_transaction #rocketmq主题
 
   upload-folder: d:/wsm-upload #指定上传文件夹
+
+  loadResourceDefineQueue: ${spring.application.name}-queue1 #刷新权限的队列，集群下这个要不一样，RabbitConsumerService也要改。
 

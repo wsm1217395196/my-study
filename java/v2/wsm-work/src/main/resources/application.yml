@@ -8,21 +8,21 @@ eureka:
     prefer-ip-address: true
   client:
     service-url:
-#      向注册中心注册服务
+      #      向注册中心注册服务
       defaultZone: http://wsm:1@${eureka.instance.hostname}:8000/eureka
 
 spring:
   application:
     name: wsm-work #服务名
 
-# mysql配置
+  # mysql配置
   datasource:
     driver-class-name: com.mysql.jdbc.Driver
     username: admin
     password: admin
     url: jdbc:mysql://${eureka.instance.hostname}:3306/wsm-work?characterEncoding=utf-8&useSSL=false&serverTimezone=UTC
 
-# redis配置
+  # redis配置
   redis:
     database: 0 #Redis数据库索引（默认为0）
     timeout: 5000ms # 连接超时时间（毫秒）
@@ -40,6 +40,13 @@ spring:
     alibaba:
       seata:
         tx-service-group: wsm-work-seata-group #阿里seata 服务组
+
+  # Rabbitmq配置
+  rabbitmq:
+    host: ${eureka.instance.hostname}
+    port: 5672
+    username: guest
+    password: guest
 
 # 配置mybatis-plus
 mybatis-plus:
@@ -82,3 +89,5 @@ my-config:
   rocketmq_namesrvAddr: 192.168.199.129:9876 #rocketmq地址
   rocketmq_Consumer: transaction_consumer #消费者
   rocketmq_topic: test_transaction #rocketmq主题
+
+  loadResourceDefineQueue: ${spring.application.name}-queue1 #刷新权限的队列，集群下这个要不一样，RabbitConsumerService也要改。
