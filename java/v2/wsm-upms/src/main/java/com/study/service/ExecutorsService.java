@@ -12,7 +12,7 @@ import java.util.Random;
 import java.util.concurrent.CountDownLatch;
 
 @Service
-public class ExecutorService {
+public class ExecutorsService {
 
     @Autowired
     private RegionMapper regionMapper;

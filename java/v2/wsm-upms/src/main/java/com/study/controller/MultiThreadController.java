@@ -3,7 +3,7 @@ package com.study.controller;
 import com.study.mapper.RegionMapper;
 import com.study.model.RegionModel;
 import com.study.result.ResultView;
-import com.study.service.ExecutorService;
+import com.study.service.ExecutorsService;
 import com.study.utils.CreateUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.task.TaskExecutor;
@@ -32,7 +32,7 @@ public class MultiThreadController {
     @Autowired
     private ThreadPoolExecutor threadPoolExecutor;
     @Autowired
-    private ExecutorService executorService;
+    private ExecutorsService executorsService;
 
     /**
      * 使用java threadPoolExecutor线程池 插入数据 异常会回滚 有返回结果
@@ -62,7 +62,7 @@ public class MultiThreadController {
                     toIndex = modelSize;
                 }
                 //执行线程任务
-                Future threadResult = threadPoolExecutor.submit(new MyThread(models.subList(fromIndex, toIndex), startTime, countDownLatch, executorService));
+                Future threadResult = threadPoolExecutor.submit(new MyThread(models.subList(fromIndex, toIndex), startTime, countDownLatch, executorsService));
                 threadResults.add(threadResult.get());
                 fromIndex += addSize;
                 toIndex += addSize;
@@ -106,7 +106,7 @@ public class MultiThreadController {
                     toIndex = modelSize;
                 }
                 //执行线程任务
-                executorService.testTaskExecutor(models.subList(fromIndex, toIndex), startTime, countDownLatch);
+                executorsService.testTaskExecutor(models.subList(fromIndex, toIndex), startTime, countDownLatch);
                 fromIndex += addSize;
                 toIndex += addSize;
             }
@@ -167,7 +167,7 @@ public class MultiThreadController {
                 if ((modelSize - toIndex) < addSize) {
                     toIndex = modelSize;
                 }
-                MyThread myThread = new MyThread(models.subList(fromIndex, toIndex), startTime, countDownLatch, executorService);
+                MyThread myThread = new MyThread(models.subList(fromIndex, toIndex), startTime, countDownLatch, executorsService);
                 Object threadResult = myThread.call();//执行线程任务
                 threadResults.add(threadResult);
                 fromIndex += addSize;
@@ -191,18 +191,18 @@ public class MultiThreadController {
         List<RegionModel> models;
         long startTime;
         private CountDownLatch countDownLatch;
-        private ExecutorService executorService;
+        private ExecutorsService executorsService;
 
-        public MyThread(List<RegionModel> models, long startTime, CountDownLatch countDownLatch, @Autowired ExecutorService executorService) {
+        public MyThread(List<RegionModel> models, long startTime, CountDownLatch countDownLatch, @Autowired ExecutorsService executorsService) {
             this.models = models;
             this.startTime = startTime;
             this.countDownLatch = countDownLatch;
-            this.executorService = executorService;
+            this.executorsService = executorsService;
         }
 
         @Override
         public Object call() throws Exception {
-            return executorService.regionBatchAdd(models, startTime, countDownLatch);
+            return executorsService.regionBatchAdd(models, startTime, countDownLatch);
         }
     }
 
