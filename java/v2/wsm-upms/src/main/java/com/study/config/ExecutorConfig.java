@@ -44,7 +44,7 @@ public class ExecutorConfig {
     public ThreadPoolExecutor threadPoolExecutor() {
         ThreadPoolExecutor threadPoolExecutor = new ThreadPoolExecutor(10,
                 20, 60L, TimeUnit.SECONDS,
-                new ArrayBlockingQueue<>(100), new ThreadPoolExecutor.DiscardPolicy());
+                new ArrayBlockingQueue<>(100), new ThreadPoolExecutor.CallerRunsPolicy());
         return threadPoolExecutor;
     }
 }

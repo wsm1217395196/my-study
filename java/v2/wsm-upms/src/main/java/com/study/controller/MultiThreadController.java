@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.RestController;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Random;
 import java.util.concurrent.*;
 
 /**
@@ -54,20 +55,26 @@ public class MultiThreadController {
             int fromIndex = 0;
             int addSize = modelSize / threadSzie;
             int toIndex = addSize;
-            //1、等待多线程完成的CountDownLatch。2、或者用同步屏障CyclicBarrier也可以。
-            CountDownLatch countDownLatch = new CountDownLatch(threadSzie);
-            List<Object> threadResults = new ArrayList<>();
+
+            //FutureTask可用于异步获取执行结果
+            List<FutureTask<String>> futureTasks = new ArrayList<>();
+            List<String> threadResults = new ArrayList<>();
             for (int i = 0; i < threadSzie; i++) {
                 if ((modelSize - toIndex) < addSize) {
                     toIndex = modelSize;
                 }
                 //执行线程任务
-                Future threadResult = threadPoolExecutor.submit(new MyThread(models.subList(fromIndex, toIndex), startTime, countDownLatch, executorsService));
-                threadResults.add(threadResult.get());
+                FutureTask<String> futureTask = new FutureTask<>(regionBatchAddCallable(models.subList(fromIndex, toIndex), startTime));
+                futureTasks.add(futureTask);
+                threadPoolExecutor.submit(futureTask);
                 fromIndex += addSize;
                 toIndex += addSize;
             }
-            countDownLatch.await();
+            //获取线程所有放回结果
+            for (FutureTask<String> futureTask : futureTasks) {
+                String s = futureTask.get();
+                threadResults.add(s);
+            }
             System.err.println("所有线程结果：" + threadResults);
         } else {
             //使用单线程
@@ -99,18 +106,38 @@ public class MultiThreadController {
             int fromIndex = 0;
             int addSize = modelSize / threadSzie;
             int toIndex = addSize;
+
             //1、等待多线程完成的CountDownLatch。2、或者用同步屏障CyclicBarrier也可以。
-            CountDownLatch countDownLatch = new CountDownLatch(threadSzie);
+            CountDownLatch countDownLatch = null;
+            CyclicBarrier cyclicBarrier = null;
+            if (new Random().nextBoolean() == true) {
+                countDownLatch = new CountDownLatch(threadSzie);
+            } else {
+                cyclicBarrier = new CyclicBarrier(threadSzie);
+            }
+
             for (int i = 0; i < threadSzie; i++) {
                 if ((modelSize - toIndex) < addSize) {
                     toIndex = modelSize;
                 }
                 //执行线程任务
-                executorsService.testTaskExecutor(models.subList(fromIndex, toIndex), startTime, countDownLatch);
+                executorsService.testTaskExecutor(models.subList(fromIndex, toIndex), startTime, countDownLatch, cyclicBarrier);
                 fromIndex += addSize;
                 toIndex += addSize;
             }
-            countDownLatch.await();
+
+            if (countDownLatch != null) {
+                countDownLatch.await();
+                System.err.println("使用CountDownLatch：主线程等待所有子线程完成才执行。");
+            }
+            if (cyclicBarrier != null) {
+                try {
+                    cyclicBarrier.await();
+                } catch (BrokenBarrierException e) {
+                    e.printStackTrace();
+                }
+                System.err.println("使用同步屏障CyclicBarrier：主线程等待所有子线程完成才执行。");
+            }
         } else {
             //使用单线程
             regionMapper.batchAdd(models);
@@ -140,70 +167,20 @@ public class MultiThreadController {
         return ResultView.success("单线程为：" + (entTime - startTime) + "毫秒");
     }
 
-
     /**
-     * 多线程 实现Callable 插入数据 异常会回滚 有返回结果
-     * 注：好像是同一线程跑的
+     * 批量添加线程Callable
      *
-     * @param modelSize  插入数据数量
-     * @param threadSzie 线程数
+     * @param models
+     * @param startTime
      * @return
      */
-    @GetMapping("/testCallable")
-    @Transactional
-    public ResultView testCallable(@RequestParam int modelSize, @RequestParam int threadSzie) throws Exception {
-        long startTime = System.currentTimeMillis();
-        List<RegionModel> models = getRegionModels(modelSize);
-
-        if (modelSize > 5000) {
-            //使用多线程 每个线程插入数据为addSize,或者addSize-2*addSize之间
-            int fromIndex = 0;
-            int addSize = modelSize / threadSzie;
-            int toIndex = addSize;
-            //1、等待多线程完成的CountDownLatch。2、或者用同步屏障CyclicBarrier也可以。
-            CountDownLatch countDownLatch = new CountDownLatch(threadSzie);
-            List<Object> threadResults = new ArrayList<>();
-            for (int i = 0; i < threadSzie; i++) {
-                if ((modelSize - toIndex) < addSize) {
-                    toIndex = modelSize;
-                }
-                MyThread myThread = new MyThread(models.subList(fromIndex, toIndex), startTime, countDownLatch, executorsService);
-                Object threadResult = myThread.call();//执行线程任务
-                threadResults.add(threadResult);
-                fromIndex += addSize;
-                toIndex += addSize;
+    private Callable<String> regionBatchAddCallable(List<RegionModel> models, long startTime) {
+        return new Callable<String>() {
+            @Override
+            public String call() throws Exception {
+                return executorsService.regionBatchAdd(models, startTime);
             }
-            countDownLatch.await();
-            System.err.println("所有线程结果：" + threadResults);
-        } else {
-            //使用单线程
-            regionMapper.batchAdd(models);
-        }
-        long entTime = System.currentTimeMillis();
-        System.err.println("主线程为：" + (entTime - startTime) + "毫秒");
-        return ResultView.success("主线程为：" + (entTime - startTime) + "毫秒");
-    }
-
-    /**
-     * 实现Callable的线程
-     */
-    class MyThread implements Callable {
-        List<RegionModel> models;
-        long startTime;
-        private CountDownLatch countDownLatch;
-        private ExecutorsService executorsService;
-
-        public MyThread(List<RegionModel> models, long startTime, CountDownLatch countDownLatch, @Autowired ExecutorsService executorsService) {
-            this.models = models;
-            this.startTime = startTime;
-            this.countDownLatch = countDownLatch;
-            this.executorsService = executorsService;
-        }
-
-        @Override
-        public Object call() throws Exception {
-            return executorsService.regionBatchAdd(models, startTime, countDownLatch);
-        }
+        };
     }
 
     /**

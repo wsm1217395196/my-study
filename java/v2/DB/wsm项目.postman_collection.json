@@ -74,7 +74,7 @@
 							"formdata": [
 								{
 									"key": "client_id",
-									"value": "client_wsm",
+									"value": "client_upms",
 									"type": "text"
 								},
 								{
@@ -89,7 +89,7 @@
 								},
 								{
 									"key": "refresh_token",
-									"value": "eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCJ9.eyJjcmVhdGVUaW1lIjoiMjAxOS0wNy0zMSAxNzowMDo1MCIsInVzZXJfbmFtZSI6IndzbTEiLCJhdXRob3IiOiJ3c20iLCJzY29wZSI6WyJzY29wZV93c20iXSwicm9sZXMiOiJST0xFXzEiLCJhdGkiOiIzNGM0MDdjYi0wYTA4LTRmZjctYTExNy0yZGFkMjljYTFiNTciLCJleHAiOjE1NjQ1NjQ4NTAsImF1dGhvcml0aWVzIjpbIlJPTEVfMSJdLCJqdGkiOiJjZGU5YzM0OS1kNDI5LTQ4MmYtYTBhOS0wZmM4OTM5NThkZDMiLCJjbGllbnRfaWQiOiJjbGllbnRfd3NtIn0.ENBvBey-qgDlEMsw2AqMzzQj7IVjRxOmGSeZlo9Xn67VOWEPgP5Tom6bVMEM4gnhGx9Og8MOnU-UoF2Ssx_-dRBvGVnhIp1d5BkXzBSgsubW0rplXrR1wBApL1WNGQdxcqFb7HCRdLIBQfj_W2iqoDxJ7gOBxsFqKGeePQTG_TxA5OGNywjX6S9bRBLj0vp0A_QfL3eQAVG5BXR-FqRred84PRrTay1ScGwznwYTWCt3-DrIhAbP-risSCOCeRBtzi7_YiNXkSFuo-TxgBFV8UedYO_4f3ID_ZGZBZ-EVdN2Sn7i13CPkHexAhnkZQinkMV-Nimcc56qF6Yb-EQySw",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJhdWQiOlsicmVzb3VyY2Vfb2F1dGgiLCJyZXNvdXJjZV91cG1zIiwicmVzb3VyY2Vfd29yayJdLCJjcmVhdGVUaW1lIjoiMjAyMC0wMS0wNiAxNDoxOTo1MiIsInVzZXJfbmFtZSI6IndzbTEiLCJhdXRob3IiOiJ3c20iLCJzY29wZSI6WyJzY29wZV93c20iXSwicm9sZXMiOiJST0xFXzEiLCJhdGkiOiJmNjgyZmFiZC01ZjczLTRhYTktYjQzNC05Y2MyNWRiNDYxYjUiLCJleHAiOjE1ODA4ODM1OTIsImF1dGhvcml0aWVzIjpbIlJPTEVfMSJdLCJqdGkiOiIwYmVjYjVjZS1hYjZlLTQxMzAtOGYyMi04NDA2OGYxZWQ5ZWYiLCJjbGllbnRfaWQiOiJjbGllbnRfdXBtcyJ9.n0MpGgH_tefNwmUwkYqFfRsYIO6pHYFTIugP6oFR93Q",
 									"type": "text"
 								}
 							]
@@ -401,6 +401,37 @@
 								{
 									"key": "token",
 									"value": "eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX25hbWUiOiJ3c20xIiwic2NvcGUiOlsic2NvcGVfd3NtIl0sInJvbGVzIjoiUk9MRV8xIiwiZXhwIjoxNTY0NTEwMzE2LCJhdXRob3JpdGllcyI6WyJST0xFXzEiXSwianRpIjoiZTc4ZGRlNGYtMjg5ZS00NWNlLTliMTktOWQwMzg5YjI3ZGUzIiwiY2xpZW50X2lkIjoiY2xpZW50X3dzbSJ9.XcywYNUEsWN7fuD19jef7JCFKXNaLLtoWvSXia99aEiEYEc1rIbANJs6dnnyTmt3OB9ljcv7E6b8F8J6kIE0hQ12XSCOasv9jZ4457yR5cJuje3-NRj6I3ty6OBveiET7ah-RlEvifL-ALlB6Y5BH330pIxkAKecavAGvgZdO7B2vWTqP3VnAMBpUxEOxIUtEoDtQtfMPwe7vabmbREUebVq6nC6mwYeHHFD6MiZRCSgLzB7nWhLCCcAJevA0l4TqaOhLmmlPpFZMrTWgMmi82bTDEMzrVLg1FUX2MO740L0aOe7tyiR5r1ge_YxUzoYU3SzN0LS20OomJS2Ericdw"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "刷新各服务权限（rabbitmq）",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "http://localhost:8001/wsm-upms/rabbitProducer/loadResourceDefine?serverNames=wsm-upms,wsm-work",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8001",
+							"path": [
+								"wsm-upms",
+								"rabbitProducer",
+								"loadResourceDefine"
+							],
+							"query": [
+								{
+									"key": "serverNames",
+									"value": "wsm-upms,wsm-work"
 								}
 							]
 						}
@@ -967,7 +998,7 @@
 							"raw": ""
 						},
 						"url": {
-							"raw": "http://localhost:8001/wsm-upms/distributedLock/setCount?count=100",
+							"raw": "http://localhost:8001/wsm-upms/distributedLock/initCount?initCount=300",
 							"protocol": "http",
 							"host": [
 								"localhost"
@@ -976,12 +1007,12 @@
 							"path": [
 								"wsm-upms",
 								"distributedLock",
-								"setCount"
+								"initCount"
 							],
 							"query": [
 								{
-									"key": "count",
-									"value": "100"
+									"key": "initCount",
+									"value": "300"
 								}
 							]
 						}
@@ -998,7 +1029,7 @@
 							"raw": ""
 						},
 						"url": {
-							"raw": "http://localhost:8001/wsm-upms/distributedLock/updateCount1",
+							"raw": "http://localhost:8001/wsm-upms/distributedLock/updateCount",
 							"protocol": "http",
 							"host": [
 								"localhost"
@@ -1007,7 +1038,7 @@
 							"path": [
 								"wsm-upms",
 								"distributedLock",
-								"updateCount1"
+								"updateCount"
 							]
 						}
 					},
@@ -1019,13 +1050,14 @@
 			"name": "线程相关",
 			"item": [
 				{
-					"name": "测试单线程",
+					"name": "ThreadPoolExecutor线程池（插入数据）",
 					"request": {
 						"method": "GET",
 						"header": [
 							{
 								"key": "Authorization",
-								"value": "bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJhdWQiOlsicmVzb3VyY2Vfb2F1dGgiLCJyZXNvdXJjZV91cG1zIiwicmVzb3VyY2Vfd29yayJdLCJjcmVhdGVUaW1lIjoiMjAxOS0wOC0yMiAxNjo0NDowNCIsInVzZXJfbmFtZSI6IndzbTEiLCJhdXRob3IiOiJ3c20iLCJzY29wZSI6WyJzY29wZV93c20iXSwicm9sZXMiOiJST0xFXzEiLCJleHAiOjE1NjY1MDY2NDQsImF1dGhvcml0aWVzIjpbIlJPTEVfMSJdLCJqdGkiOiJkZTNkM2Q3NS0zYTVhLTQ4NGQtOTgwNy02OTM5Y2ZjMDA1ZGQiLCJjbGllbnRfaWQiOiJjbGllbnRfdXBtcyJ9.krsTAxGRtrhxZROBj6WG7V-wMeNBiTfvqGNZo6_YEkI"
+								"value": "bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJhdWQiOlsicmVzb3VyY2Vfb2F1dGgiLCJyZXNvdXJjZV91cG1zIiwicmVzb3VyY2Vfd29yayJdLCJjcmVhdGVUaW1lIjoiMjAxOS0xMS0yNyAwOTo1MjoyOSIsInVzZXJfbmFtZSI6IndzbTEiLCJhdXRob3IiOiJ3c20iLCJzY29wZSI6WyJzY29wZV93c20iXSwicm9sZXMiOiJST0xFXzEiLCJleHAiOjE1NzQ4NjI3NDksImF1dGhvcml0aWVzIjpbIlJPTEVfMSJdLCJqdGkiOiJmZDFjMTNjZS03ZTZjLTQxNDAtOGI4Ny05ZDc4MGMyNjAyZjgiLCJjbGllbnRfaWQiOiJjbGllbnRfdXBtcyJ9.y0JwC70_tjPr75FGtEA_Py3uKh6AWruJV1WQouoCswU",
+								"disabled": true
 							}
 						],
 						"body": {
@@ -1033,21 +1065,24 @@
 							"raw": ""
 						},
 						"url": {
-							"raw": "http://localhost:8001/wsm-upms/test/testSinglehread?modelSize=10000",
+							"raw": "http://localhost:8011/MultiThread/testThreadPoolExecutor?modelSize=20000&threadSzie=5",
 							"protocol": "http",
 							"host": [
 								"localhost"
 							],
-							"port": "8001",
+							"port": "8011",
 							"path": [
-								"wsm-upms",
-								"test",
-								"testSinglehread"
+								"MultiThread",
+								"testThreadPoolExecutor"
 							],
 							"query": [
 								{
 									"key": "modelSize",
-									"value": "10000"
+									"value": "20000"
+								},
+								{
+									"key": "threadSzie",
+									"value": "5"
 								}
 							]
 						}
@@ -1055,13 +1090,14 @@
 					"response": []
 				},
 				{
-					"name": "测试多线程",
+					"name": "TaskExecutor线程池（插入数据）",
 					"request": {
 						"method": "GET",
 						"header": [
 							{
 								"key": "Authorization",
-								"value": "bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJhdWQiOlsicmVzb3VyY2Vfb2F1dGgiLCJyZXNvdXJjZV91cG1zIiwicmVzb3VyY2Vfd29yayJdLCJjcmVhdGVUaW1lIjoiMjAxOS0wOC0yMiAxNjo0NDowNCIsInVzZXJfbmFtZSI6IndzbTEiLCJhdXRob3IiOiJ3c20iLCJzY29wZSI6WyJzY29wZV93c20iXSwicm9sZXMiOiJST0xFXzEiLCJleHAiOjE1NjY1MDY2NDQsImF1dGhvcml0aWVzIjpbIlJPTEVfMSJdLCJqdGkiOiJkZTNkM2Q3NS0zYTVhLTQ4NGQtOTgwNy02OTM5Y2ZjMDA1ZGQiLCJjbGllbnRfaWQiOiJjbGllbnRfdXBtcyJ9.krsTAxGRtrhxZROBj6WG7V-wMeNBiTfvqGNZo6_YEkI"
+								"value": "bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJhdWQiOlsicmVzb3VyY2Vfb2F1dGgiLCJyZXNvdXJjZV91cG1zIiwicmVzb3VyY2Vfd29yayJdLCJjcmVhdGVUaW1lIjoiMjAxOS0xMS0yNyAwOTo1MjoyOSIsInVzZXJfbmFtZSI6IndzbTEiLCJhdXRob3IiOiJ3c20iLCJzY29wZSI6WyJzY29wZV93c20iXSwicm9sZXMiOiJST0xFXzEiLCJleHAiOjE1NzQ4NjI3NDksImF1dGhvcml0aWVzIjpbIlJPTEVfMSJdLCJqdGkiOiJmZDFjMTNjZS03ZTZjLTQxNDAtOGI4Ny05ZDc4MGMyNjAyZjgiLCJjbGllbnRfaWQiOiJjbGllbnRfdXBtcyJ9.y0JwC70_tjPr75FGtEA_Py3uKh6AWruJV1WQouoCswU",
+								"disabled": true
 							}
 						],
 						"body": {
@@ -1069,25 +1105,60 @@
 							"raw": ""
 						},
 						"url": {
-							"raw": "http://localhost:8001/wsm-upms/test/testMultithread?modelSize=10000&threadSzie=5",
+							"raw": "http://localhost:8011/MultiThread/testTaskExecutor?modelSize=20000&threadSzie=5",
 							"protocol": "http",
 							"host": [
 								"localhost"
 							],
-							"port": "8001",
+							"port": "8011",
 							"path": [
-								"wsm-upms",
-								"test",
-								"testMultithread"
+								"MultiThread",
+								"testTaskExecutor"
 							],
 							"query": [
 								{
 									"key": "modelSize",
-									"value": "10000"
+									"value": "20000"
 								},
 								{
 									"key": "threadSzie",
 									"value": "5"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "测试单线程（插入数据）",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJhdWQiOlsicmVzb3VyY2Vfb2F1dGgiLCJyZXNvdXJjZV91cG1zIiwicmVzb3VyY2Vfd29yayJdLCJjcmVhdGVUaW1lIjoiMjAxOS0xMS0yNiAwOTo1ODoxOCIsInVzZXJfbmFtZSI6IndzbTEiLCJhdXRob3IiOiJ3c20iLCJzY29wZSI6WyJzY29wZV93c20iXSwicm9sZXMiOiJST0xFXzEiLCJleHAiOjE1NzQ3NzY2OTgsImF1dGhvcml0aWVzIjpbIlJPTEVfMSJdLCJqdGkiOiJlMDdmMWZiMS1kMTRjLTQ4NmYtOGE0Mi1kNGYwZWU2OWNmMmUiLCJjbGllbnRfaWQiOiJjbGllbnRfdXBtcyJ9.D0QyQ0f4lMVcL-hlrOfwJTRcUSZlsmUlonliWMPSInI",
+								"disabled": true
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "http://localhost:8011/MultiThread/testSingleThread?modelSize=20000",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8011",
+							"path": [
+								"MultiThread",
+								"testSingleThread"
+							],
+							"query": [
+								{
+									"key": "modelSize",
+									"value": "20000"
 								}
 							]
 						}

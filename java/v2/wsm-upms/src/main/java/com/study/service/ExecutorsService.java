@@ -9,7 +9,9 @@ import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 import java.util.Random;
+import java.util.concurrent.BrokenBarrierException;
 import java.util.concurrent.CountDownLatch;
+import java.util.concurrent.CyclicBarrier;
 
 @Service
 public class ExecutorsService {
@@ -18,13 +20,27 @@ public class ExecutorsService {
     private RegionMapper regionMapper;
 
     @Async("taskExecutor")
-    public void testTaskExecutor(List<RegionModel> models, long startTime, CountDownLatch countDownLatch) {
-        regionBatchAdd(models, startTime, countDownLatch);
+    public void testTaskExecutor(List<RegionModel> models, long startTime, CountDownLatch countDownLatch, CyclicBarrier cyclicBarrier) {
+        try {
+            regionBatchAdd(models, startTime);
+        } finally {
+            if (countDownLatch != null) {
+                countDownLatch.countDown();
+            }
+            if (cyclicBarrier != null) {
+                try {
+                    cyclicBarrier.await();
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                } catch (BrokenBarrierException e) {
+                    e.printStackTrace();
+                }
+            }
+        }
     }
 
     @Transactional
-    public String regionBatchAdd(List<RegionModel> models, long startTime, CountDownLatch countDownLatch) {
-        String thredName = Thread.currentThread().getName();
+    public String regionBatchAdd(List<RegionModel> models, long startTime) {
         try {
             int modelsSize = models.size();
             int addSize = 1000;
@@ -44,16 +60,17 @@ public class ExecutorsService {
             } else {
                 regionMapper.batchAdd(models);
             }
+
+            String thredName = Thread.currentThread().getName();
             long entTime = System.currentTimeMillis();
             System.err.println("子线程" + thredName + ":" + (entTime - startTime) + "毫秒");
             if (new Random().nextInt(9) == 6) {
                 int i = 10 / 0;
             }
+
             return thredName + "：" + true;
         } catch (Exception e) {
             throw new RuntimeException(e);
-        } finally {
-            countDownLatch.countDown();
         }
     }
 }
