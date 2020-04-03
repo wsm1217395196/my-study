@@ -1,0 +1,41 @@
+#端口号
+server:
+  port: 8011
+
+eureka:
+  instance:
+    hostname: localhost #地址
+    prefer-ip-address: true
+  client:
+    service-url:
+      # 向注册中心注册服务
+      defaultZone: http://wsm:1@${eureka.instance.hostname}:8000/eureka
+
+spring:
+  application:
+    name: wsm-upms #服务名
+  # mysql配置
+  datasource:
+    driver-class-name: com.mysql.jdbc.Driver
+    username: admin
+    password: admin
+    url: jdbc:mysql://${eureka.instance.hostname}:3306/wsm-upms?characterEncoding=utf-8&useSSL=false&serverTimezone=UTC
+
+# 配置mybatis-plus
+mybatis-plus:
+  # 配置扫描xml
+  mapper-locations: classpath:/mapper/*Mapper.xml
+  # 实体扫描，多个package用逗号或者分号分隔
+  type-aliases-package: com.study.model
+
+ribbon:
+  ReadTimeout: 10000
+  ConnectTimeout: 10000
+  MaxAutoRetries: 1
+  MaxAutoRetriesNextServer: 2
+
+#熔断器开启
+feign:
+  hystrix:
+    enabled: true
+

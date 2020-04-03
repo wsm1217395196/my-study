@@ -1,0 +1,116 @@
+#端口号
+server:
+  port: 8001
+
+eureka:
+  instance:
+    hostname: localhost #地址
+
+  client:
+    service-url:
+      #      向注册中心注册服务
+      defaultZone: http://wsm:1@${eureka.instance.hostname}:8000/eureka
+
+spring:
+  application:
+    name: wsm-gateway #服务名
+  # mysql配置
+  datasource:
+    driver-class-name: com.mysql.jdbc.Driver
+    username: admin
+    password: admin
+    url: jdbc:mysql://${eureka.instance.hostname}:3306/wsm-upms?characterEncoding=utf-8&useSSL=false&serverTimezone=UTC
+
+  #网关路由有两种方式：1、bean方式，2、yml配置文件方式
+  cloud:
+    gateway:
+      globalcors:
+        corsConfigurations:
+          '[/**]':
+            allowedOrigins: "*"   # 允许跨域请求的域名或服务器IP,多个用逗号分隔，*为允许所有
+            allowedMethods:       # 允许跨域的请求方法
+              - GET
+              - POST
+              - PUT
+              - DELETE
+      routes:
+        - id: route-wsm-oauth
+          uri: lb://wsm-oauth # uri以lb://开头（后面接的服务名称)
+          predicates:
+            - Path=/wsm-oauth/**
+          filters:
+            - StripPrefix=1 # 表示路由整个项目，不加只能路由一个控制器
+            - name: Hystrix
+              args:
+                name: oauth-hystrix
+                fallbackUri: forward:/common/fallback #设置熔断器
+
+        - id: route-wsm-upms
+          uri: lb://wsm-upms
+          predicates:
+            - Path=/wsm-upms/**
+          filters:
+            - StripPrefix=1
+            - name: Hystrix
+              args:
+                name: upms-hystrix
+                fallbackUri: forward:/common/fallback
+
+        - id: route-wsm-work
+          uri: lb://wsm-work
+          predicates:
+            - Path=/wsm-work/**
+          filters:
+            - StripPrefix=1
+            - name: Hystrix
+              args:
+                name: work-hystrix
+                fallbackUri: forward:/common/fallback
+
+redis:
+  database: 0 #Redis数据库索引（默认为0）
+  timeout: 5000ms # 连接超时时间（毫秒）
+  host: 127.0.0.1
+  port: 6379
+  password:  # Redis服务器连接密码（默认为空）
+  jedis:
+    pool:
+      max-active: 8 # 连接池中的最大连接
+      max-wait: -1ms  # 连接池最大阻塞等待时间（使用负值表示没有限制）
+      max-idle: 8  # 连接池中的最大空闲连接
+      min-idle: 0  # 连接池中的最小空闲连接
+
+# 配置mybatis-plus
+mybatis-plus:
+  # 配置扫描xml
+  mapper-locations: classpath:/mapper/*Mapper.xml
+  # 实体扫描，多个package用逗号或者分号分隔
+  type-aliases-package: com.study.model
+
+#ribbon:
+#  ReadTimeout: 10000 #请求处理的超时时间
+#  ConnectTimeout: 5000 #请求连接的超时时间
+#  MaxAutoRetries: 1 #对当前实例的重试次数
+#  MaxAutoRetriesNextServer: 2 #切换实例的重试次数
+#  eureka:
+#    enabled: true
+
+hystrix:
+  command:
+    default:
+      execution:
+        isolation:
+          thread:
+            timeoutInMilliseconds: 10000 #请求处理的超时时间
+
+my-config:
+  isUseSecurity: true #是否使用security权限
+  regionCode: wsm-region #域编码
+
+
+
+
+
+
+
+
