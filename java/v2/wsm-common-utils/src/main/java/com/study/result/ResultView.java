@@ -1,31 +1,22 @@
 package com.study.result;
 
-import io.swagger.annotations.ApiModel;
-import io.swagger.annotations.ApiModelProperty;
-import lombok.Data;
-
 /**
- * 通用结果视图类
+ * 结果视图类
  */
-@Data
-@ApiModel(value = "ResultView对象", description = "通用结果视图类")
 public class ResultView {
     /**
      * 状态码
      */
-    @ApiModelProperty(value = "状态码")
     private Integer code;
 
     /**
      * 消息
      */
-    @ApiModelProperty(value = "消息")
     private String msg;
 
     /**
      * 数据
      */
-    @ApiModelProperty(value = "数据")
     private Object data;
 
     /**
@@ -104,4 +95,36 @@ public class ResultView {
         this.msg = msg;
     }
 
+    public Integer getCode() {
+        return code;
+    }
+
+    public void setCode(Integer code) {
+        this.code = code;
+    }
+
+    public String getMsg() {
+        return msg;
+    }
+
+    public void setMsg(String msg) {
+        this.msg = msg;
+    }
+
+    public Object getData() {
+        return data;
+    }
+
+    public void setData(Object data) {
+        this.data = data;
+    }
+
+    @Override
+    public String toString() {
+        return "ResultView{" +
+                "code=" + code +
+                ", msg='" + msg + '\'' +
+                ", data=" + data +
+                '}';
+    }
 }

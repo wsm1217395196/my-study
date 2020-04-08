@@ -10,10 +10,11 @@ import com.study.utils.CreateUtil;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
-import java.time.LocalDateTime;
 import java.util.Arrays;
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -35,11 +36,11 @@ public class ProjectController {
     @ApiOperation(value = "查询全部", notes = "")
     @GetMapping("/authority/getAll")
     public ResultView getAll() {
-        List<ProjectModel> models = projectService.list();
+        List<ProjectModel> models = projectService.selectList(null);
         return ResultView.success(models);
     }
 
-    @ApiOperation(value = "分页条件查询", notes = "提交参数：{\"pageIndex\":1,\"pageSize\":10,\"sort\":\"name-desc\",\"condition\":\"{\'name\':\'\',\'code\':\'\',\'regionId\':\'\',\'isEnabled\':\'\'}\"}")
+    @ApiOperation(value = "分页条件查询", notes = "提交参数：{\"pageIndex\":1,\"pageSize\":10,\"sort\":\"name desc\",\"condition\":\"{\'name\':\'\',\'code\':\'\',\'regionId\':\'\',\'isEnable\':\'\'}\"}")
     @PostMapping("/authority/getPage")
     public ResultView getPage(@RequestBody PageParam pageParam) {
         PageResult pageResult = projectService.getPage(pageParam);
@@ -49,25 +50,25 @@ public class ProjectController {
     @ApiOperation(value = "根据id查询", notes = "")
     @GetMapping("/authority/getById/{id}")
     public ResultView getById(@PathVariable Long id) {
-        ProjectModel model = projectService.getById(id);
+        ProjectModel model = projectService.selectById(id);
         return ResultView.success(model);
     }
 
     @ApiOperation(value = "新增", notes = "")
     @PostMapping("/authority_button/add")
     public ResultView add(@RequestBody ProjectModel model) {
-        LocalDateTime date = LocalDateTime.now();
+        Date date = new Date();
         model.setId(CreateUtil.id());
         model.setCreateTime(date);
         model.setUpdateTime(date);
-        projectService.save(model);
+        projectService.insert(model);
         return ResultView.success(model);
     }
 
     @ApiOperation(value = "修改", notes = "")
     @PostMapping("/authority_button/update")
     public ResultView update(@RequestBody ProjectModel model) {
-        LocalDateTime date = LocalDateTime.now();
+        Date date = new Date();
         model.setUpdateTime(date);
         projectService.updateById(model);
         return ResultView.success(model);
@@ -76,14 +77,14 @@ public class ProjectController {
     @ApiOperation(value = "根据id删除", notes = "")
     @DeleteMapping("/authority_button/deleteById")
     public ResultView deleteById(@RequestParam Long id) {
-        projectService.removeById(id);
+        projectService.deleteById(id);
         return ResultView.success();
     }
 
     @ApiOperation(value = "根据ids删除", notes = "")
     @DeleteMapping("/authority_button/deleteByIds")
     public ResultView deleteByIds(@RequestParam Long[] ids) {
-        projectService.removeByIds(Arrays.asList(ids));
+        projectService.deleteBatchIds(Arrays.asList(ids));
         return ResultView.success();
     }
 }

@@ -1,6 +1,6 @@
 package com.study.service;
 
-import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
+import com.baomidou.mybatisplus.service.impl.ServiceImpl;
 import com.study.mapper.UserRoleMapper;
 import com.study.model.UserRoleModel;
 import org.springframework.stereotype.Service;

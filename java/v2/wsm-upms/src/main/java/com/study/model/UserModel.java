@@ -1,16 +1,10 @@
 package com.study.model;
 
-import com.baomidou.mybatisplus.annotation.TableField;
-import com.baomidou.mybatisplus.annotation.TableName;
-import io.swagger.annotations.ApiModel;
-import io.swagger.annotations.ApiModelProperty;
-import lombok.Getter;
-import lombok.Setter;
-import lombok.ToString;
+import com.baomidou.mybatisplus.annotations.TableField;
+import com.baomidou.mybatisplus.annotations.TableName;
 
 import java.io.Serializable;
-import java.time.LocalDate;
-import java.time.LocalDateTime;
+import java.util.Date;
 
 /**
  * <p>
@@ -18,70 +12,254 @@ import java.time.LocalDateTime;
  * </p>
  *
  * @author wsm
- * @since 2019-10-24
+ * @since 2019-07-16
  */
-@Getter
-@Setter
-@ToString
 @TableName("user")
-@ApiModel(value="UserModel对象", description="用户表")
 public class UserModel implements Serializable {
 
     private static final long serialVersionUID = 1L;
 
     private Long id;
-
-    @ApiModelProperty(value = "用户名")
+    /**
+     * 用户名
+     */
     private String name;
-
-    @ApiModelProperty(value = "昵称")
+    /**
+     * 昵称
+     */
     private String nickname;
-
-    @ApiModelProperty(value = "密码")
+    /**
+     * 密码
+     */
     private String password;
-
-    @ApiModelProperty(value = "头像")
+    /**
+     * 头像
+     */
     private String photo;
-
-    @ApiModelProperty(value = "性别(0女,1男)")
+    /**
+     * 性别(0女,1男)
+     */
     private Integer sex;
-
-    @ApiModelProperty(value = "生日")
-    private LocalDate birthday;
-
-    @ApiModelProperty(value = "手机号")
+    /**
+     * 生日
+     */
+    private Date birthday;
+    /**
+     * 手机号
+     */
     private String phone;
-
-    @ApiModelProperty(value = "邮箱")
+    /**
+     * 邮箱
+     */
     private String mail;
-
-    @ApiModelProperty(value = "地址")
+    /**
+     * 地址
+     */
     private String address;
-
-    @ApiModelProperty(value = "个人说明")
-    @TableField("`explain`")
+    /**
+     * 个人说明
+     */
     private String explain;
-
-    @ApiModelProperty(value = "用户来源")
+    /**
+     * 用户来源
+     */
+    @TableField("user_source")
     private Integer userSource;
-
-    @ApiModelProperty(value = "用户状态（1：正常，2：异常，3：禁用）")
+    /**
+     * 用户状态（1：正常，2：异常，3：禁用）
+     */
     private Integer status;
-
-    @ApiModelProperty(value = "创建人")
+    /**
+     * 创建人
+     */
+    @TableField("create_by")
     private String createBy;
-
-    @ApiModelProperty(value = "创建时间")
-    private LocalDateTime createTime;
-
-    @ApiModelProperty(value = "更新人")
+    /**
+     * 创建时间
+     */
+    @TableField("create_time")
+    private Date createTime;
+    /**
+     * 更新人
+     */
+    @TableField("update_by")
     private String updateBy;
-
-    @ApiModelProperty(value = "更新时间")
-    private LocalDateTime updateTime;
-
-    @ApiModelProperty(value = "备注")
+    /**
+     * 更新时间
+     */
+    @TableField("update_time")
+    private Date updateTime;
+    /**
+     * 备注
+     */
     private String remark;
 
 
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public String getNickname() {
+        return nickname;
+    }
+
+    public void setNickname(String nickname) {
+        this.nickname = nickname;
+    }
+
+    public String getPassword() {
+        return password;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
+    }
+
+    public String getPhoto() {
+        return photo;
+    }
+
+    public void setPhoto(String photo) {
+        this.photo = photo;
+    }
+
+    public Integer getSex() {
+        return sex;
+    }
+
+    public void setSex(Integer sex) {
+        this.sex = sex;
+    }
+
+    public Date getBirthday() {
+        return birthday;
+    }
+
+    public void setBirthday(Date birthday) {
+        this.birthday = birthday;
+    }
+
+    public String getPhone() {
+        return phone;
+    }
+
+    public void setPhone(String phone) {
+        this.phone = phone;
+    }
+
+    public String getMail() {
+        return mail;
+    }
+
+    public void setMail(String mail) {
+        this.mail = mail;
+    }
+
+    public String getAddress() {
+        return address;
+    }
+
+    public void setAddress(String address) {
+        this.address = address;
+    }
+
+    public String getExplain() {
+        return explain;
+    }
+
+    public void setExplain(String explain) {
+        this.explain = explain;
+    }
+
+    public Integer getUserSource() {
+        return userSource;
+    }
+
+    public void setUserSource(Integer userSource) {
+        this.userSource = userSource;
+    }
+
+    public Integer getStatus() {
+        return status;
+    }
+
+    public void setStatus(Integer status) {
+        this.status = status;
+    }
+
+    public String getCreateBy() {
+        return createBy;
+    }
+
+    public void setCreateBy(String createBy) {
+        this.createBy = createBy;
+    }
+
+    public Date getCreateTime() {
+        return createTime;
+    }
+
+    public void setCreateTime(Date createTime) {
+        this.createTime = createTime;
+    }
+
+    public String getUpdateBy() {
+        return updateBy;
+    }
+
+    public void setUpdateBy(String updateBy) {
+        this.updateBy = updateBy;
+    }
+
+    public Date getUpdateTime() {
+        return updateTime;
+    }
+
+    public void setUpdateTime(Date updateTime) {
+        this.updateTime = updateTime;
+    }
+
+    public String getRemark() {
+        return remark;
+    }
+
+    public void setRemark(String remark) {
+        this.remark = remark;
+    }
+
+    @Override
+    public String toString() {
+        return "UserModel{" +
+        ", id=" + id +
+        ", name=" + name +
+        ", nickname=" + nickname +
+        ", password=" + password +
+        ", photo=" + photo +
+        ", sex=" + sex +
+        ", birthday=" + birthday +
+        ", phone=" + phone +
+        ", mail=" + mail +
+        ", address=" + address +
+        ", explain=" + explain +
+        ", userSource=" + userSource +
+        ", status=" + status +
+        ", createBy=" + createBy +
+        ", createTime=" + createTime +
+        ", updateBy=" + updateBy +
+        ", updateTime=" + updateTime +
+        ", remark=" + remark +
+        "}";
+    }
 }

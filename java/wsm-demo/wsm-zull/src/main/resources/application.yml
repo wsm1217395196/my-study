@@ -1,0 +1,81 @@
+#端口号
+server:
+  port: 8001
+
+eureka:
+  instance:
+    hostname: localhost #地址
+
+  client:
+    service-url:
+#      向注册中心注册服务
+      defaultZone: http://wsm:1@${eureka.instance.hostname}:8000/eureka
+
+spring:
+  application:
+    name: wsm-zull #服务名
+
+  servlet:
+    multipart:
+      max-file-size: 100MB #设置文件最大数据大小
+      max-request-size: 100MB #设置总上传数据大小
+#      location: d:/wsm-upload-cache #设置临时缓存目录
+
+#网关路由
+zuul:
+  routes:
+    wsm-oauth:
+      path: /wsm-oauth/**
+      sensitiveHeaders:
+      serviceId : wsm-oauth
+    wsm-public:
+      path: /wsm-public/**
+      sensitiveHeaders:
+      serviceId : wsm-public
+    wsm-upms:
+      path: /wsm-upms/**
+      sensitiveHeaders:
+      serviceId : wsm-upms
+    wsm-work:
+      path: /wsm-work/**
+      sensitiveHeaders:
+      serviceId : wsm-work
+    wsm-demo:
+      path: /wsm-demo/**
+      sensitiveHeaders:
+      serviceId : wsm-demo
+
+security:
+  oauth2:
+    client:
+      access-token-uri: http://localhost:8001/wsm-oauth/oauth/token
+      user-authorization-uri: http://localhost:8001/wsm-oauth/oauth/authorize
+      client-id: client_wsm
+#      client-secret: secret
+    resource:
+      user-info-uri: http://localhost:8001/wsm-oauth/user/principal
+      prefer-token-info: false
+
+#下面可以忽略没啥用
+# key-value跟key-uri：token的验证可以直接在本地（即本服务）完成，不需要连接wsm-oauth服务认证服务器。
+#              注意：如果要使用key-value对称加密方式，
+#                    到wsm-oauth服务AuthorizationServerConfig类JwtAccessTokenConverter方法中使用对称加密方式
+#    jwt:
+#      key-value: jwt_wsm #对称加密方式
+#      key-uri: http://localhost:8001/wsm-oauth/oauth/token_key #非对称加密方式 (获取公钥)
+
+ribbon:
+  ReadTimeout: 10000 #请求处理的超时时间
+  ConnectTimeout: 5000 #请求连接的超时时间
+  MaxAutoRetries: 1 #对当前实例的重试次数
+  MaxAutoRetriesNextServer: 2 #切换实例的重试次数
+  eureka:
+    enabled: true
+
+
+
+
+
+
+
+

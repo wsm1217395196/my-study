@@ -1,15 +1,9 @@
 package com.study.model;
 
-import com.baomidou.mybatisplus.annotation.TableField;
-import com.baomidou.mybatisplus.annotation.TableName;
-import io.swagger.annotations.ApiModel;
-import io.swagger.annotations.ApiModelProperty;
-import lombok.Getter;
-import lombok.Setter;
-import lombok.ToString;
-
+import java.util.Date;
+import com.baomidou.mybatisplus.annotations.TableField;
+import com.baomidou.mybatisplus.annotations.TableName;
 import java.io.Serializable;
-import java.time.LocalDateTime;
 
 /**
  * <p>
@@ -17,49 +11,151 @@ import java.time.LocalDateTime;
  * </p>
  *
  * @author wsm
- * @since 2019-10-24
+ * @since 2019-07-16
  */
-@Getter
-@Setter
-@ToString
 @TableName("region")
-@ApiModel(value="RegionModel对象", description="域（如一个公司）")
 public class RegionModel implements Serializable {
 
     private static final long serialVersionUID = 1L;
 
     private Long id;
-
-    @ApiModelProperty(value = "名称")
+    /**
+     * 名称
+     */
     private String name;
-
-    @ApiModelProperty(value = "编码")
+    /**
+     * 编码
+     */
     private String code;
-
-    @ApiModelProperty(value = "父级id")
+    /**
+     * 父级id
+     */
+    @TableField("parent_id")
     private Long parentId;
-
-    @ApiModelProperty(value = "父级名称")
-    @TableField(exist = false)
-    private String parentName;
-
-    @ApiModelProperty(value = "创建人")
+    /**
+     * 创建人
+     */
+    @TableField("create_by")
     private String createBy;
-
-    @ApiModelProperty(value = "创建时间")
-    private LocalDateTime createTime;
-
-    @ApiModelProperty(value = "更新人")
+    /**
+     * 创建时间
+     */
+    @TableField("create_time")
+    private Date createTime;
+    /**
+     * 更新人
+     */
+    @TableField("update_by")
     private String updateBy;
-
-    @ApiModelProperty(value = "更新时间")
-    private LocalDateTime updateTime;
-
-    @ApiModelProperty(value = "是否有效(0无效，1有效)")
+    /**
+     * 更新时间
+     */
+    @TableField("update_time")
+    private Date updateTime;
+    /**
+     * 是否有效(0无效，1有效)
+     */
+    @TableField("is_enabled")
     private Integer isEnabled;
-
-    @ApiModelProperty(value = "备注")
+    /**
+     * 备注
+     */
     private String remark;
 
 
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public String getCode() {
+        return code;
+    }
+
+    public void setCode(String code) {
+        this.code = code;
+    }
+
+    public Long getParentId() {
+        return parentId;
+    }
+
+    public void setParentId(Long parentId) {
+        this.parentId = parentId;
+    }
+
+    public String getCreateBy() {
+        return createBy;
+    }
+
+    public void setCreateBy(String createBy) {
+        this.createBy = createBy;
+    }
+
+    public Date getCreateTime() {
+        return createTime;
+    }
+
+    public void setCreateTime(Date createTime) {
+        this.createTime = createTime;
+    }
+
+    public String getUpdateBy() {
+        return updateBy;
+    }
+
+    public void setUpdateBy(String updateBy) {
+        this.updateBy = updateBy;
+    }
+
+    public Date getUpdateTime() {
+        return updateTime;
+    }
+
+    public void setUpdateTime(Date updateTime) {
+        this.updateTime = updateTime;
+    }
+
+    public Integer getIsEnabled() {
+        return isEnabled;
+    }
+
+    public void setIsEnabled(Integer isEnabled) {
+        this.isEnabled = isEnabled;
+    }
+
+    public String getRemark() {
+        return remark;
+    }
+
+    public void setRemark(String remark) {
+        this.remark = remark;
+    }
+
+    @Override
+    public String toString() {
+        return "RegionModel{" +
+        ", id=" + id +
+        ", name=" + name +
+        ", code=" + code +
+        ", parentId=" + parentId +
+        ", createBy=" + createBy +
+        ", createTime=" + createTime +
+        ", updateBy=" + updateBy +
+        ", updateTime=" + updateTime +
+        ", isEnabled=" + isEnabled +
+        ", remark=" + remark +
+        "}";
+    }
 }

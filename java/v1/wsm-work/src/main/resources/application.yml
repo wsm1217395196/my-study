@@ -69,5 +69,5 @@ ribbon:
 
 my-config:
   isUseSecurity: true #是否使用security权限
-  projectCode: wsm_work #项目编码
+  projectCode: wsm-work #项目编码
   clientId: client_work #客户端id

@@ -12,8 +12,8 @@ import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
-import java.time.LocalDateTime;
 import java.util.Arrays;
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -35,11 +35,11 @@ public class WorkController {
     @ApiOperation(value = "查询全部", notes = "")
     @GetMapping("/authority/getAll")
     public ResultView getAll() {
-        List<WorkModel> models = workService.list();
+        List<WorkModel> models = workService.selectList(null);
         return ResultView.success(models);
     }
 
-    @ApiOperation(value = "分页条件查询", notes = "提交参数：{\"pageIndex\":1,\"pageSize\":10,\"sort\":\"name-desc\",\"condition\":\"{\'recruitPlatformId\':\'\',\'jobId\':\'\',\'site\':\'\',\'isEnabled\':\'\'}\"}")
+    @ApiOperation(value = "分页条件查询", notes = "提交参数：{\"pageIndex\":1,\"pageSize\":10,\"sort\":\"name desc\",\"condition\":\"{\'recruitPlatformId\':\'\',\'jobId\':\'\',\'site\':\'\',\'isEnable\':\'\'}\"}")
     @PostMapping("/authority/getPage")
     public ResultView getPage(@RequestBody PageParam pageParam) {
         PageResult pageResult = workService.getPage(pageParam);
@@ -49,25 +49,25 @@ public class WorkController {
     @ApiOperation(value = "根据id查询", notes = "")
     @GetMapping("/authority/getById/{id}")
     public ResultView getById(@PathVariable Long id) {
-        WorkModel model = workService.getById(id);
+        WorkModel model = workService.selectById(id);
         return ResultView.success(model);
     }
 
     @ApiOperation(value = "新增", notes = "")
     @PostMapping("/authority_button/add")
     public ResultView add(@RequestBody WorkModel model) {
-        LocalDateTime date = LocalDateTime.now();
+        Date date = new Date();
         model.setId(CreateUtil.id());
         model.setCreateTime(date);
         model.setUpdateTime(date);
-        workService.save(model);
+        workService.insert(model);
         return ResultView.success(model);
     }
 
     @ApiOperation(value = "修改", notes = "")
     @PostMapping("/authority_button/update")
     public ResultView update(@RequestBody WorkModel model) {
-        LocalDateTime date = LocalDateTime.now();
+        Date date = new Date();
         model.setUpdateTime(date);
         workService.updateById(model);
         return ResultView.success(model);
@@ -76,14 +76,14 @@ public class WorkController {
     @ApiOperation(value = "根据id删除", notes = "")
     @DeleteMapping("/authority_button/deleteById/{id}")
     public ResultView deleteById(@PathVariable Long id) {
-        workService.removeById(id);
+        workService.deleteById(id);
         return ResultView.success();
     }
 
     @ApiOperation(value = "根据ids删除", notes = "")
     @DeleteMapping("/authority_button/deleteByIds")
     public ResultView deleteByIds(@RequestParam Long[] ids) {
-        workService.removeByIds(Arrays.asList(ids));
+        workService.deleteBatchIds(Arrays.asList(ids));
         return ResultView.success();
     }
 }

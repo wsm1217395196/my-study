@@ -10,43 +10,26 @@ import java.util.Random;
  */
 public class CreateUtil {
 
-    private static Format format = new SimpleDateFormat("yyMMddHHmm");
-    private static Random random = new Random();
-    private static int numValue = 0;
-    private static int maxValue = 990000;
-
     /**
      * 生成id
      *
      * @return
      */
     public static Long id() {
-        String value = format.format(new Date()) + random.nextInt(9) + random.nextInt(9) + random.nextInt(9);
-        if (numValue > maxValue) {
-            numValue = 0;
-        }
-        numValue++;
-        value = value + String.format("%06d", numValue);//前面补0
-        long id = Long.parseLong(value);
-        return id;
-    }
-
-
-    /**
-     * 生成id(9个线程以内)
-     *
-     * @param threadNum 第几个线程
-     * @return
-     */
-    public static Long id(int threadNum) {
-        String value = format.format(new Date()) + random.nextInt(9) + random.nextInt(9) + threadNum;
-        if (numValue > maxValue) {
-            numValue = 0;
-        }
-        numValue++;
-        value = value + String.format("%06d", numValue);//前面补0
-        long id = Long.parseLong(value);
-        return id;
+        Format format = new SimpleDateFormat("yyyyMMddHHmmss");
+        int a = (int) (Math.random() * 10.0D);
+        int b = (int) (Math.random() * 10.0D);
+        int c = (int) (Math.random() * 10.0D);
+        int d = (int) (Math.random() * 10.0D);
+        String date = format.format(new Date());
+        StringBuffer sb = new StringBuffer();
+        sb.append(date).insert(a, b);
+        sb.insert(b, c);
+        sb.insert(c, d);
+        sb.insert(d, a);
+        sb.insert(d, b);
+        String createdId = sb.toString();
+        return Long.parseLong(createdId);
     }
 
     /**
@@ -57,9 +40,11 @@ public class CreateUtil {
      */
     public static String validateCode(int length) {
         String validateCode = "";
+        Random random = new Random();
         for (int i = 0; i < length; i++) {
             validateCode += random.nextInt(9);
         }
         return validateCode;
     }
+
 }

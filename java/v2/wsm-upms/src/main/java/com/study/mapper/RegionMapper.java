@@ -1,6 +1,6 @@
 package com.study.mapper;
 
-import com.baomidou.mybatisplus.core.mapper.BaseMapper;
+import com.baomidou.mybatisplus.mapper.BaseMapper;
 import com.study.model.RegionModel;
 
 import java.util.List;

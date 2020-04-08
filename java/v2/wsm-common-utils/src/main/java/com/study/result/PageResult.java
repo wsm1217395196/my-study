@@ -1,46 +1,27 @@
 package com.study.result;
 
-import io.swagger.annotations.ApiModel;
-import io.swagger.annotations.ApiModelProperty;
-import lombok.Getter;
-import lombok.Setter;
-import lombok.ToString;
-
 import java.util.List;
 
 /**
  * 分页结果
  */
-@Getter
-@Setter
-@ToString
-@ApiModel(value = "PageResult对象", description = "分页结果")
 public class PageResult {
 
     /**
-     * 要查第几页？
+     * 当前页
      */
-    @ApiModelProperty(value = "要查第几页？")
-    private int pageIndex;
+    private Integer pageIndex;
     /**
-     * 要查一页多少数据？
+     * 当前页多少数据
      */
-    @ApiModelProperty(value = "要查一页多少数据？")
-    private int pageSize;
-    /**
-     * 总页数
-     */
-    @ApiModelProperty(value = "总页数")
-    private int totalPage;
+    private Integer pageSize;
     /**
      * 总记录数
      */
-    @ApiModelProperty(value = "总记录数")
-    private int total;
+    private Integer total;
     /**
      * 记录
      */
-    @ApiModelProperty(value = "记录")
     private List records;
 
     public PageResult() {
@@ -51,12 +32,37 @@ public class PageResult {
         this.pageSize = pageSize;
         this.total = total;
         this.records = records;
-        if (pageIndex >= 0 && pageSize != 0 && total != 0) {
-            this.totalPage = total / pageSize;
-            if (total % pageSize > 0) {
-                this.totalPage++;
-            }
-        }
     }
 
+    public Integer getPageIndex() {
+        return pageIndex;
+    }
+
+    public void setPageIndex(Integer pageIndex) {
+        this.pageIndex = pageIndex;
+    }
+
+    public Integer getPageSize() {
+        return pageSize;
+    }
+
+    public void setPageSize(Integer pageSize) {
+        this.pageSize = pageSize;
+    }
+
+    public Integer getTotal() {
+        return total;
+    }
+
+    public void setTotal(Integer total) {
+        this.total = total;
+    }
+
+    public List getRecords() {
+        return records;
+    }
+
+    public void setRecords(List records) {
+        this.records = records;
+    }
 }

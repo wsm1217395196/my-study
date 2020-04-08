@@ -77,6 +77,6 @@ feign:
 
 my-config:
   isUseSecurity: true #是否使用security权限
-  projectCode: wsm_upms #项目编码
+  projectCode: wsm-upms #项目编码
   clientId: client_upms #客户端id
 

@@ -4,7 +4,7 @@
     <parent>
         <groupId>org.springframework.boot</groupId>
         <artifactId>spring-boot-starter-parent</artifactId>
-        <version>2.1.2.RELEASE</version>
+        <version>2.2.2.RELEASE</version>
         <relativePath/> <!-- lookup parent from repository -->
     </parent>
 
@@ -12,15 +12,12 @@
     <packaging>pom</packaging>
     <modules>
         <module>../wsm-discovery</module>
+        <module>../wsm-gateway</module>
+        <module>../wsm-zull</module>
+        <module>../wsm-oauth</module>
         <module>../wsm-upms</module>
         <module>../wsm-work</module>
-        <module>../wsm-demo</module>
-        <module>../wsm-public</module>
-        <module>../wsm-config-server</module>
         <module>../wsm-common-utils</module>
-        <module>../wsm-gateway</module>
-        <module>../wsm-oauth</module>
-        <module>../wsm-zull</module>
     </modules>
 
     <groupId>com.study</groupId>
@@ -32,11 +29,10 @@
     <!--版本-->
     <properties>
         <java.version>1.8</java.version>
-        <spring-cloud.version>Greenwich.RELEASE</spring-cloud.version>
+        <spring-cloud.version>Hoxton.RELEASE</spring-cloud.version>
         <platform-bom.version>Cairo-RELEASE</platform-bom.version>
 
         <swagger.version>2.9.2</swagger.version>
-        <mybatis-plus.version>3.1.0</mybatis-plus.version>
     </properties>
 
     <!--子项目可直接用-->
@@ -79,14 +75,6 @@
             <version>1.2.59</version>
         </dependency>
 
-        <!--lombok插件-->
-        <dependency>
-            <groupId>org.projectlombok</groupId>
-            <artifactId>lombok</artifactId>
-            <version>1.18.10</version>
-            <scope>provided</scope>
-        </dependency>
-
     </dependencies>
 
     <!--子项目要引入依赖（填写groupId，artifactId）才可以用-->
@@ -117,13 +105,7 @@
             <dependency>
                 <groupId>com.baomidou</groupId>
                 <artifactId>mybatis-plus-boot-starter</artifactId>
-                <version>${mybatis-plus.version}</version>
-            </dependency>
-            <!-- 代码生成器 依赖-->
-            <dependency>
-                <groupId>com.baomidou</groupId>
-                <artifactId>mybatis-plus-generator</artifactId>
-                <version>${mybatis-plus.version}</version>
+                <version>2.3.3</version>
             </dependency>
             <!-- 模板引擎 -->
             <dependency>
@@ -145,39 +127,6 @@
                 <artifactId>spring-security-jwt</artifactId>
                 <version>1.0.10.RELEASE</version>
             </dependency>
-
-            <!--RocketMQ-->
-            <dependency>
-                <groupId>org.apache.rocketmq</groupId>
-                <artifactId>rocketmq-client</artifactId>
-                <version>4.5.1</version>
-            </dependency>
-
-            <!--阿里seata分布式框架-->
-            <dependency>
-                <groupId>com.alibaba.cloud</groupId>
-                <artifactId>spring-cloud-alibaba-seata</artifactId>
-                <version>2.1.0.RELEASE</version>
-            </dependency>
-            <dependency>
-                <groupId>io.seata</groupId>
-                <artifactId>seata-all</artifactId>
-                <version>0.8.0</version>
-            </dependency>
-            <!--druid-spring-boot-starter-->
-            <dependency>
-                <groupId>com.alibaba</groupId>
-                <artifactId>druid-spring-boot-starter</artifactId>
-                <version>1.1.20</version>
-            </dependency>
-
-            <!--阿里easyexcel-->
-            <dependency>
-                <groupId>com.alibaba</groupId>
-                <artifactId>easyexcel</artifactId>
-                <version>2.0.0-beta6</version>
-            </dependency>
-
 
             <!--版本冲突检测-->
             <!--<dependency>-->

@@ -1,12 +1,7 @@
 package com.study.model;
 
-import com.baomidou.mybatisplus.annotation.TableName;
-import io.swagger.annotations.ApiModel;
-import io.swagger.annotations.ApiModelProperty;
-import lombok.Getter;
-import lombok.Setter;
-import lombok.ToString;
-
+import com.baomidou.mybatisplus.annotations.TableField;
+import com.baomidou.mybatisplus.annotations.TableName;
 import java.io.Serializable;
 
 /**
@@ -15,25 +10,60 @@ import java.io.Serializable;
  * </p>
  *
  * @author wsm
- * @since 2019-10-24
+ * @since 2019-07-18
  */
-@Getter
-@Setter
-@ToString
 @TableName("resource_role")
-@ApiModel(value="ResourceRoleModel对象", description="资源-角色-关系表")
 public class ResourceRoleModel implements Serializable {
 
     private static final long serialVersionUID = 1L;
 
-    @ApiModelProperty(value = "资源id")
+    /**
+     * 资源id
+     */
+    @TableField("resource_id")
     private Long resourceId;
-
-    @ApiModelProperty(value = "资源按钮（页面要权限控制的按钮,也是后台接口方法名,多个用逗号分隔）")
+    /**
+     * 资源按钮（页面要权限控制的按钮,也是后台接口方法名,多个用逗号分隔）
+     */
+    @TableField("resource_button")
     private String resourceButton;
-
-    @ApiModelProperty(value = "角色id")
+    /**
+     * 角色id
+     */
+    @TableField("role_id")
     private Long roleId;
 
 
+    public Long getResourceId() {
+        return resourceId;
+    }
+
+    public void setResourceId(Long resourceId) {
+        this.resourceId = resourceId;
+    }
+
+    public String getResourceButton() {
+        return resourceButton;
+    }
+
+    public void setResourceButton(String resourceButton) {
+        this.resourceButton = resourceButton;
+    }
+
+    public Long getRoleId() {
+        return roleId;
+    }
+
+    public void setRoleId(Long roleId) {
+        this.roleId = roleId;
+    }
+
+    @Override
+    public String toString() {
+        return "ResourceRoleModel{" +
+        ", resourceId=" + resourceId +
+        ", resourceButton=" + resourceButton +
+        ", roleId=" + roleId +
+        "}";
+    }
 }

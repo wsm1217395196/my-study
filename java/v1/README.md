@@ -1,4 +1,4 @@
-## 本项目为：spring cloud、zull/gateway、oauth2、jwt整合项目,持久层用的mybatis-plus。
+## 本项目为：spring cloud、zull/gateway、security、oauth2、jwt角色权限整合项目
 
 请用idea打开parent父文件，他会自动加载其他子模块（服务）。
 
@@ -6,9 +6,11 @@
 
 DB文件夹有postman测试接口示例文件，导入postman即可。
 
-***如果解决了你的问题麻烦点个星星哟***😘😘😘
+**v1文件夹 在下游服务进行token权限验证**
 
-**v2文件夹中时不时会更新一些示例，有需要的可以看一下。**
+**v2文件夹 升级在网关进行token权限验证**
+
+***如果解决了你的问题麻烦点个星星哟***😘😘😘
 
 
 

@@ -1,18 +1,18 @@
 package com.study.service;
 
-import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
-import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
-import com.baomidou.mybatisplus.extension.service.IService;
-import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
+import com.baomidou.mybatisplus.mapper.EntityWrapper;
+import com.baomidou.mybatisplus.plugins.Page;
+import com.baomidou.mybatisplus.service.IService;
+import com.baomidou.mybatisplus.service.impl.ServiceImpl;
 import com.study.MyConstant;
 import com.study.mapper.WorkMapper;
 import com.study.model.WorkModel;
 import com.study.result.PageParam;
 import com.study.result.PageResult;
-import com.study.utils.MybatisPlusUtil;
 import org.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.util.StringUtils;
 
 import java.util.List;
 
@@ -33,21 +33,38 @@ public class WorkService extends ServiceImpl<WorkMapper, WorkModel> implements I
     public PageResult getPage(PageParam pageParam) {
         int pageIndex = pageParam.getPageIndex();
         int pageSize = pageParam.getPageSize();
+//        int pageStart = pageParam.getPageStart();
         String sort = pageParam.getSort();
         JSONObject object = new JSONObject(pageParam.getCondition());
+        Long recruitPlatformId = object.getLong("recruitPlatformId");
+        Long jobId = object.getLong("jobId");
+        String site = object.getString("site").trim();
+        String isEnable = object.getString("isEnable");
 
-        QueryWrapper qw = new QueryWrapper();
-        MybatisPlusUtil.eqUtil(qw, object, new String[]{"recruitPlatformId", "jobId", "isEnabled",});
-        MybatisPlusUtil.likeUtil(qw, object, new String[]{"site"});
-        MybatisPlusUtil.sortUtil(qw, sort);
+        EntityWrapper ew = new EntityWrapper();
+        if (!StringUtils.isEmpty(recruitPlatformId)) {
+            ew.eq("recruit_platform_id", recruitPlatformId);
+        }
+        if (!StringUtils.isEmpty(jobId)) {
+            ew.eq("job_id", jobId);
+        }
+        if (!StringUtils.isEmpty(site)) {
+            ew.like("site", site);
+        }
+        if (!StringUtils.isEmpty(isEnable)) {
+            ew.eq("isEnable", isEnable);
+        }
+        if (!StringUtils.isEmpty(sort)) {
+            ew.orderBy(sort);
+        }
 
         Page page = new Page();
         int total = 0;
         if (pageIndex != MyConstant.Zero && pageSize != MyConstant.Zero) {
             page = new Page(pageIndex, pageSize);
-            total = workMapper.selectCount(qw);
+            total = workMapper.selectCount(ew);
         }
-        List records = workMapper.selectPage(page, qw).getRecords();
+        List records = workMapper.selectPage(page, ew);
         PageResult pageResult = new PageResult(pageIndex, pageSize, total, records);
         return pageResult;
     }

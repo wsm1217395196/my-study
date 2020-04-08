@@ -1,0 +1,93 @@
+#端口号
+server:
+  port: 8012
+
+eureka:
+  instance:
+    hostname: localhost #地址
+    prefer-ip-address: true
+  client:
+    service-url:
+      #      向注册中心注册服务
+      defaultZone: http://wsm:1@${eureka.instance.hostname}:8000/eureka
+
+spring:
+  application:
+    name: wsm-work #服务名
+
+  # mysql配置
+  datasource:
+    driver-class-name: com.mysql.jdbc.Driver
+    username: admin
+    password: admin
+    url: jdbc:mysql://${eureka.instance.hostname}:3306/wsm-work?characterEncoding=utf-8&useSSL=false&serverTimezone=UTC
+
+  # redis配置
+  redis:
+    database: 0 #Redis数据库索引（默认为0）
+    timeout: 5000ms # 连接超时时间（毫秒）
+    host: 127.0.0.1
+    port: 6379
+    password:  # Redis服务器连接密码（默认为空）
+    jedis:
+      pool:
+        max-active: 8 # 连接池中的最大连接
+        max-wait: -1ms  # 连接池最大阻塞等待时间（使用负值表示没有限制）
+        max-idle: 8  # 连接池中的最大空闲连接
+        min-idle: 0  # 连接池中的最小空闲连接
+
+  cloud:
+    alibaba:
+      seata:
+        tx-service-group: wsm-work-seata-group #阿里seata 服务组
+
+  # Rabbitmq配置
+  rabbitmq:
+    host: ${eureka.instance.hostname}
+    port: 5672
+    username: guest
+    password: guest
+
+# 配置mybatis-plus
+mybatis-plus:
+  # 配置扫描xml
+  mapper-locations: classpath:/mapper/*Mapper.xml
+  # 实体扫描，多个package用逗号或者分号分隔
+  type-aliases-package: com.study.model
+
+# 这里的配置好像是（第一种实现）：每次带token的请求都会去wsm-oauth服务(存token的地方)请求对比token是否有效，是否正确（间接的方式）。
+# 第二种实现：在ResourceSeverConfig类configure方法配置resources.tokenStore(tokenStore())，
+#            然后直接请求(存token的地方)对比token是否有效，是否正确（直接的方式）。
+#       *看自己需求用哪种方式。
+#        1、wsm-oauth服务用oauth2.0原生token的话：
+#           且token存储位置（用数据库或者redis）的IP地址跟本资源服务连接的 `数据库或者redis` 的IP地址一样，资源服务建议用第二种实现，不一样用第一种实现。
+#        2、wsm-oauth服务用jwt生成token的话：资源服务建议用第二种实现，且ResourceSeverConfig类tokenStore方法用return jwt...
+#           但是退出登录原来token还是有用的，直到token过期为止无效。因为jwt是无状态的，可在本服务中解析认证token。
+#security:
+#  oauth2:
+#    resource:
+#      id: wsm-upms
+#      user-info-uri: http://localhost:8001/wsm-oauth/user/principal?clientName=${spring.application.name}
+#      prefer-token-info: false
+
+ribbon:
+  ReadTimeout: 10000
+  ConnectTimeout: 10000
+  MaxAutoRetries: 1
+  MaxAutoRetriesNextServer: 2
+
+#熔断器开启
+#feign:
+#  hystrix:
+#    enabled: true
+
+my-config:
+  isUseSecurity: true #是否使用security权限
+  projectCode: wsm-work #项目编码
+  clientId: client_work #客户端id
+
+  rocketmq_namesrvAddr: 192.168.199.129:9876 #rocketmq地址
+  rocketmq_Consumer: transaction_consumer #消费者
+  rocketmq_topic: test_transaction #rocketmq主题
+
+  loadResourceDefineQueue: ${spring.application.name}-queue1 #刷新权限的队列，集群下这个要不一样，RabbitConsumerService也要改。

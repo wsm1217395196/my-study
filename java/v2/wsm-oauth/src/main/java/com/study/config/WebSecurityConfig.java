@@ -22,7 +22,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 //        http.csrf();//防csrf攻击
         http.csrf().disable();//防csrf攻击 禁用
         http.authorizeRequests()
-                .antMatchers("/oauth/**").permitAll();
+                .antMatchers("/**").permitAll();
     }
 
     /**

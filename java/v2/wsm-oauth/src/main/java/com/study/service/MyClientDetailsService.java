@@ -4,6 +4,7 @@ import com.study.exception.MyRuntimeException;
 import com.study.mapper.PublicMapper;
 import com.study.model.OauthClientDetailsModel;
 import com.study.result.ResultEnum;
+import com.study.result.ResultView;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.oauth2.provider.ClientDetails;
@@ -33,7 +34,7 @@ public class MyClientDetailsService implements ClientDetailsService {
     public ClientDetails loadClientByClientId(String clientId) throws ClientRegistrationException {
         OauthClientDetailsModel model = publicMapper.getOauthClientDetailsByClientId(clientId);
         if (model == null) {
-            throw new MyRuntimeException(ResultEnum.CODE_7);
+            throw new MyRuntimeException(ResultView.error(ResultEnum.CODE_7));
         }
         BaseClientDetails clientDetails = new BaseClientDetails();
         clientDetails.setClientId(model.getClientId()); //客户端(client)id

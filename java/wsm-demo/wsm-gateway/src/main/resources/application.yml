@@ -1,0 +1,114 @@
+#端口号
+server:
+  port: 8001
+
+eureka:
+  instance:
+    hostname: localhost #地址
+
+  client:
+    service-url:
+#      向注册中心注册服务
+      defaultZone: http://wsm:1@${eureka.instance.hostname}:8000/eureka
+
+spring:
+  application:
+    name: wsm-gateway #服务名
+
+  servlet:
+    multipart:
+      max-file-size: 100MB #设置文件最大数据大小
+      max-request-size: 100MB #设置总上传数据大小
+#      location: d:/wsm-upload-cache #设置临时缓存目录
+
+#网关路由有两种方式：1、bean方式，2、yml配置文件方式
+  cloud:
+    gateway:
+      globalcors:
+        corsConfigurations:
+          '[/**]':
+            allowedOrigins: "*"   # 允许跨域请求的域名或服务器IP,多个用逗号分隔，*为允许所有
+            allowedMethods:       # 允许跨域的请求方法
+            - GET
+            - POST
+            - PUT
+            - DELETE
+      routes:
+      - id: route-wsm-public
+        uri: lb://wsm-public # uri以lb://开头（后面接的服务名称)
+        predicates:
+        - Path=/wsm-public/**
+        filters:
+        - StripPrefix=1 # 表示路由整个项目，不加只能路由一个控制器
+        - name: Hystrix
+          args:
+            name: public-hystrix
+            fallbackUri: forward:/common/fallback #设置熔断器
+
+      - id: route-wsm-upms
+        uri: lb://wsm-upms
+        predicates:
+        - Path=/wsm-upms/**
+        filters:
+        - StripPrefix=1
+        - name: Hystrix
+          args:
+            name: upms-hystrix
+            fallbackUri: forward:/common/fallback
+
+      - id: route-wsm-work
+        uri: lb://wsm-work
+        predicates:
+        - Path=/wsm-work/**
+        filters:
+        - StripPrefix=1
+        - name: Hystrix
+          args:
+            name: work-hystrix
+            fallbackUri: forward:/common/fallback
+
+      - id: route-wsm-oauth
+        uri: lb://wsm-oauth
+        predicates:
+        - Path=/wsm-oauth/**
+        filters:
+        - StripPrefix=1
+        - name: Hystrix
+          args:
+            name: oauth-hystrix
+            fallbackUri: forward:/common/fallback
+
+      - id: route-wsm-demo
+        uri: lb://wsm-demo
+        predicates:
+        - Path=/wsm-demo/**
+        filters:
+        - StripPrefix=1
+        - name: Hystrix
+          args:
+            name: demo-hystrix
+            fallbackUri: forward:/common/fallback
+
+#ribbon:
+#  ReadTimeout: 10000 #请求处理的超时时间
+#  ConnectTimeout: 5000 #请求连接的超时时间
+#  MaxAutoRetries: 1 #对当前实例的重试次数
+#  MaxAutoRetriesNextServer: 2 #切换实例的重试次数
+#  eureka:
+#    enabled: true
+
+hystrix:
+  command:
+    default:
+      execution:
+        isolation:
+          thread:
+            timeoutInMilliseconds: 10000 #请求处理的超时时间
+
+
+
+
+
+
+
+

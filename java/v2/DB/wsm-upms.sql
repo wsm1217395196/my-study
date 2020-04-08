@@ -14,8 +14,6 @@ MySQL - 5.7.22 : Database - wsm-upms
 /*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
 CREATE DATABASE /*!32312 IF NOT EXISTS*/`wsm-upms` /*!40100 DEFAULT CHARACTER SET utf8 COLLATE utf8_unicode_ci */;
 
-USE `wsm-upms`;
-
 /*Table structure for table `oauth_access_token` */
 
 DROP TABLE IF EXISTS `oauth_access_token`;
@@ -92,7 +90,7 @@ DROP TABLE IF EXISTS `project`;
 CREATE TABLE `project` (
   `id` bigint(20) NOT NULL,
   `name` varchar(50) COLLATE utf8_unicode_ci NOT NULL DEFAULT '' COMMENT '名称',
-  `code` varchar(20) COLLATE utf8_unicode_ci NOT NULL DEFAULT '' COMMENT '编码',
+  `code` varchar(20) COLLATE utf8_unicode_ci NOT NULL DEFAULT '' COMMENT '编码（网关前缀）',
   `region_id` bigint(20) DEFAULT NULL COMMENT '域id',
   `create_by` varchar(50) COLLATE utf8_unicode_ci DEFAULT '' COMMENT '创建人',
   `create_time` datetime DEFAULT NULL COMMENT '创建时间',
@@ -107,7 +105,7 @@ CREATE TABLE `project` (
 
 /*Data for the table `project` */
 
-insert  into `project`(`id`,`name`,`code`,`region_id`,`create_by`,`create_time`,`update_by`,`update_time`,`is_enabled`,`remark`) values (1,'upms项目','wsm_upms',1,'wsm','2019-07-18 11:36:48',NULL,NULL,1,NULL),(2,'work项目','wsm_work',1,'wsm','2019-08-01 17:52:12',NULL,NULL,1,NULL);
+insert  into `project`(`id`,`name`,`code`,`region_id`,`create_by`,`create_time`,`update_by`,`update_time`,`is_enabled`,`remark`) values (1,'upms服务','wsm-upms',1,'wsm','2019-07-18 11:36:48',NULL,NULL,1,NULL),(2,'work服务','wsm-work',1,'wsm','2019-08-01 17:52:12',NULL,NULL,1,NULL);
 
 /*Table structure for table `region` */
 
@@ -131,7 +129,7 @@ CREATE TABLE `region` (
 
 /*Data for the table `region` */
 
-insert  into `region`(`id`,`name`,`code`,`parent_id`,`create_by`,`create_time`,`update_by`,`update_time`,`is_enabled`,`remark`) values (1,'wsm域','666',0,'wsm','2019-07-18 11:35:49',NULL,NULL,1,NULL);
+insert  into `region`(`id`,`name`,`code`,`parent_id`,`create_by`,`create_time`,`update_by`,`update_time`,`is_enabled`,`remark`) values (1,'wsm域','wsm-region',0,'wsm','2019-07-18 11:35:49',NULL,NULL,1,NULL);
 
 /*Table structure for table `resource` */
 

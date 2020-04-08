@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.study.mapper.ResourceRoleMapper">
+
+    <!-- 通用查询映射结果 -->
+    <resultMap id="BaseResultMap" type="com.study.model.ResourceRoleModel">
+        <result column="resource_id" property="resourceId"/>
+        <result column="resource_button" property="resourceButton"/>
+        <result column="role_id" property="roleId"/>
+    </resultMap>
+
+    <resultMap id="ResourceRoleInfoDtoMap" type="com.study.dto.ResourceRoleInfoDto">
+        <result column="url_pattern" property="urlPattern"/>
+        <result column="button" property="button"/>
+        <collection property="resourceRoleModels" ofType="com.study.model.ResourceRoleModel">
+            <!--<result column="resource_id" property="resourceId"/>-->
+            <result column="resource_button" property="resourceButton"/>
+            <result column="role_id" property="roleId"/>
+        </collection>
+    </resultMap>
+
+    <select id="getResourceRoleInfo" resultMap="ResourceRoleInfoDtoMap">
+        SELECT t1.`url_pattern`,t1.`button`,t3.role_id,t3.resource_button
+        FROM resource t1 LEFT JOIN project t2 ON t1.`project_id` = t2.`id`
+        LEFT JOIN resource_role t3 ON t1.`id` = t3.`resource_id`
+        WHERE t2.`code` = #{projectCode}
+    </select>
+
+</mapper>

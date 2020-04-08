@@ -1,8 +1,7 @@
 package com.study.mapper;
 
-import com.baomidou.mybatisplus.core.mapper.BaseMapper;
+import com.baomidou.mybatisplus.mapper.BaseMapper;
 import com.study.model.UserModel;
-import org.apache.ibatis.annotations.Mapper;
 
 /**
  * <p>
@@ -12,7 +11,6 @@ import org.apache.ibatis.annotations.Mapper;
  * @author wsm
  * @since 2019-01-28
  */
-@Mapper
 public interface UserMapper extends BaseMapper<UserModel> {
 
 }

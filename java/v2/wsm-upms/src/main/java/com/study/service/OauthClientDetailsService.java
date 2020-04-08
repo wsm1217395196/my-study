@@ -1,8 +1,7 @@
 package com.study.service;
 
-
-import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
-import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
+import com.baomidou.mybatisplus.mapper.EntityWrapper;
+import com.baomidou.mybatisplus.service.impl.ServiceImpl;
 import com.study.mapper.OauthClientDetailsMapper;
 import com.study.model.OauthClientDetailsModel;
 import org.springframework.stereotype.Service;
@@ -25,10 +24,10 @@ public class OauthClientDetailsService extends ServiceImpl<OauthClientDetailsMap
      * @return
      */
     public String getResourceIdsByClientId(String clientId) {
-        QueryWrapper qw = new QueryWrapper();
-        qw.eq("client_id", clientId);
-        qw.select("resource_ids resourceIds");
-        OauthClientDetailsModel model = this.getOne(qw);
+        EntityWrapper ew = new EntityWrapper();
+        ew.eq("client_id", clientId);
+        ew.setSqlSelect("resource_ids resourceIds");
+        OauthClientDetailsModel model = this.selectOne(ew);
         return model.getResourceIds();
     }
 }
