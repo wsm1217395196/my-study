@@ -36,6 +36,7 @@
         <platform-bom.version>Cairo-RELEASE</platform-bom.version>
 
         <swagger.version>2.9.2</swagger.version>
+        <knife4j.version>2.0.2</knife4j.version>
         <mybatis-plus.version>3.1.0</mybatis-plus.version>
     </properties>
 
@@ -59,11 +60,11 @@
         <!--</dependency>-->
 
         <!--热部署-->
-        <dependency>
-            <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot-devtools</artifactId>
-            <scope>runtime</scope>
-        </dependency>
+<!--        <dependency>-->
+<!--            <groupId>org.springframework.boot</groupId>-->
+<!--            <artifactId>spring-boot-devtools</artifactId>-->
+<!--            <scope>runtime</scope>-->
+<!--        </dependency>-->
 
         <!--org.json-->
         <dependency>
@@ -111,6 +112,19 @@
                 <groupId>io.springfox</groupId>
                 <artifactId>springfox-swagger-ui</artifactId>
                 <version>${swagger.version}</version>
+            </dependency>
+
+            <!--knife4j-->
+            <dependency>
+                <groupId>com.github.xiaoymin</groupId>
+                <artifactId>knife4j-micro-spring-boot-starter</artifactId>
+                <version>${knife4j.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>com.github.xiaoymin</groupId>
+                <artifactId>knife4j-spring-boot-starter</artifactId>
+                <version>${knife4j.version}</version>
             </dependency>
 
             <!-- mybatisplus与springboot整合 -->

@@ -2,6 +2,7 @@ package com.study.controller;
 
 import com.study.config.RedisLock;
 import com.study.result.ResultView;
+import io.swagger.annotations.Api;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -17,6 +18,7 @@ import java.util.concurrent.locks.ReentrantLock;
  * 测试单机同步，分布式锁相关控制器
  * 初始化initCount存入redis中，并发请求大于等于initCount次数，看是否最后initCount等于0。
  */
+@Api(tags = "测试单机同步，分布式锁相关控制器")
 @RestController
 @RequestMapping("/distributedLock")
 public class DistributedLockController {

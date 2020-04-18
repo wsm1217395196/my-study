@@ -34,7 +34,7 @@ spring:
             - PUT
             - DELETE
       routes:
-      - id: route-wsm-public
+      - id: wsm-public
         uri: lb://wsm-public # uri以lb://开头（后面接的服务名称)
         predicates:
         - Path=/wsm-public/**
@@ -45,7 +45,7 @@ spring:
             name: public-hystrix
             fallbackUri: forward:/common/fallback #设置熔断器
 
-      - id: route-wsm-upms
+      - id: wsm-upms
         uri: lb://wsm-upms
         predicates:
         - Path=/wsm-upms/**
@@ -56,7 +56,7 @@ spring:
             name: upms-hystrix
             fallbackUri: forward:/common/fallback
 
-      - id: route-wsm-work
+      - id: wsm-work
         uri: lb://wsm-work
         predicates:
         - Path=/wsm-work/**
@@ -67,7 +67,7 @@ spring:
             name: work-hystrix
             fallbackUri: forward:/common/fallback
 
-      - id: route-wsm-oauth
+      - id: wsm-oauth
         uri: lb://wsm-oauth
         predicates:
         - Path=/wsm-oauth/**
@@ -78,7 +78,7 @@ spring:
             name: oauth-hystrix
             fallbackUri: forward:/common/fallback
 
-      - id: route-wsm-demo
+      - id: wsm-demo
         uri: lb://wsm-demo
         predicates:
         - Path=/wsm-demo/**

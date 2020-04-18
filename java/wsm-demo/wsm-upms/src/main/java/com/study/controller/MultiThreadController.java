@@ -5,6 +5,7 @@ import com.study.model.RegionModel;
 import com.study.result.ResultView;
 import com.study.service.ExecutorsService;
 import com.study.utils.CreateUtil;
+import io.swagger.annotations.Api;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.task.TaskExecutor;
 import org.springframework.transaction.annotation.Transactional;
@@ -22,6 +23,7 @@ import java.util.concurrent.*;
 /**
  * 多线程处理相关
  */
+@Api(tags = "多线程处理相关")
 @RestController
 @RequestMapping("MultiThread")
 public class MultiThreadController {

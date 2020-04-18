@@ -24,7 +24,7 @@ import java.util.List;
  * @author wsm123
  * @since 2019-02-28
  */
-@Api(description = "招聘平台控制器")
+@Api(tags = "招聘平台控制器")
 @RestController
 @RequestMapping("/recruitPlatform")
 public class RecruitPlatformController {

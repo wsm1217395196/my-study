@@ -1,5 +1,6 @@
 package com.study.controller;
 
+import com.study.dto.UserAddDTO;
 import com.study.model.UserModel;
 import com.study.result.PageParam;
 import com.study.result.PageResult;
@@ -8,9 +9,12 @@ import com.study.service.UserService;
 import com.study.utils.CreateUtil;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
+import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
+import javax.validation.Valid;
 import java.time.LocalDateTime;
 import java.util.Arrays;
 import java.util.List;
@@ -23,7 +27,7 @@ import java.util.List;
  * @author wsm
  * @since 2019-01-28
  */
-@Api(description = "用户控制器")
+@Api(tags = "用户控制器")
 @RestController
 @RequestMapping("/user")
 public class UserController {
@@ -53,13 +57,20 @@ public class UserController {
     }
 
     @ApiOperation(value = "新增", notes = "")
-    @PostMapping("/authority_button/add")
-    public ResultView add(@RequestBody UserModel model) {
-        LocalDateTime date = LocalDateTime.now();
-        model.setId(CreateUtil.id());
-        model.setCreateTime(date);
-        model.setUpdateTime(date);
+    @PostMapping("/add")
+    public ResultView add(@RequestBody @Valid UserAddDTO dto) {
+        UserModel model = new UserModel();
+        BeanUtils.copyProperties(dto, model);
         userService.save(model);
+        return ResultView.success(model);
+    }
+
+    @ApiOperation(value = "新增1", notes = "")
+    @PostMapping("/add1")
+    public ResultView add1(@RequestBody UserModel model) {
+        UserAddDTO dto = new UserAddDTO();
+        BeanUtils.copyProperties(model, dto);
+        model = userService.add(dto);
         return ResultView.success(model);
     }
 

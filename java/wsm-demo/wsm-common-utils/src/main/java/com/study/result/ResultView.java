@@ -88,6 +88,16 @@ public class ResultView {
         return new ResultView(ResultEnum.CODE_2.getCode(), msg);
     }
 
+    /**
+     * 参数错误
+     *
+     * @param msg 错误消息
+     * @return 结果视图
+     */
+    public static ResultView validError(String msg) {
+        return new ResultView(ResultEnum.CODE_400.getCode(), msg);
+    }
+
     private ResultView() {
         this.code = ResultEnum.CODE_1.getCode();
         this.msg = ResultEnum.CODE_1.getMsg();

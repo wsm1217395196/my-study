@@ -24,7 +24,7 @@ import java.util.List;
  * @author wsm
  * @since 2019-07-16
  */
-@Api(description = "项目控制器")
+@Api(tags = "项目控制器")
 @RestController
 @RequestMapping("/project")
 public class ProjectController {

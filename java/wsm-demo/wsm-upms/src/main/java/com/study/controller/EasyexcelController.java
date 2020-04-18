@@ -28,7 +28,7 @@ import java.util.List;
 /**
  * easyexcel控制器
  */
-@Api(description = "easyexcel控制器")
+@Api(tags = "easyexcel控制器")
 @RestController
 @RequestMapping("/easyexcel")
 public class EasyexcelController {

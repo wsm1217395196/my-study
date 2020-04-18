@@ -26,7 +26,7 @@ import java.util.List;
  * @author wsm123
  * @since 2019-02-28
  */
-@Api(description = "职位控制器")
+@Api(tags = "职位控制器")
 @RestController
 @RequestMapping("/job")
 public class JobController {

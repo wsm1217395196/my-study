@@ -53,6 +53,10 @@ public enum ResultEnum {
 
 
     /**
+     * 请求参数不合法
+     */
+    CODE_400(400, "请求参数不合法"),
+    /**
      * token无效！
      */
     CODE_401(401, "token无效！"),

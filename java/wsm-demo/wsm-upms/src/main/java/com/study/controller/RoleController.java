@@ -24,7 +24,7 @@ import java.util.List;
  * @author wsm
  * @since 2019-07-18
  */
-@Api(description = "角色控制器")
+@Api(tags = "角色控制器")
 @RestController
 @RequestMapping("/role")
 public class RoleController {

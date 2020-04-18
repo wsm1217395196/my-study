@@ -24,7 +24,7 @@ import java.util.List;
  * @author wsm123
  * @since 2019-02-28
  */
-@Api(description = "职业信息控制器")
+@Api(tags = "职业信息控制器")
 @RestController
 @RequestMapping("/work")
 public class WorkController {

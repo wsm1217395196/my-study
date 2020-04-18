@@ -27,7 +27,7 @@ import org.springframework.web.bind.annotation.RestController;
 /**
  * 分布式事务相关控制器
  */
-@Api(description = "测试控制器")
+@Api(tags = "测试控制器")
 @RestController
 @RequestMapping("/test")
 public class TransactionCotroller {

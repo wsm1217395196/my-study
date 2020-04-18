@@ -4,15 +4,21 @@ import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.study.MyConstant;
+import com.study.dto.UserAddDTO;
 import com.study.mapper.UserMapper;
 import com.study.model.UserModel;
 import com.study.result.PageParam;
 import com.study.result.PageResult;
+import com.study.utils.CreateUtil;
 import com.study.utils.MybatisPlusUtil;
 import org.json.JSONObject;
+import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.validation.annotation.Validated;
 
+import javax.validation.Valid;
+import java.time.LocalDateTime;
 import java.util.List;
 
 
@@ -25,6 +31,7 @@ import java.util.List;
  * @since 2019-01-28
  */
 @Service
+@Validated
 public class UserService extends ServiceImpl<UserMapper, UserModel> {
 
     @Autowired
@@ -50,5 +57,16 @@ public class UserService extends ServiceImpl<UserMapper, UserModel> {
         List records = userMapper.selectPage(page, qw).getRecords();
         PageResult pageResult = new PageResult(pageIndex, pageSize, total, records);
         return pageResult;
+    }
+
+    public UserModel add(@Valid UserAddDTO dto) {
+        UserModel model = new UserModel();
+        BeanUtils.copyProperties(dto, model);
+        LocalDateTime date = LocalDateTime.now();
+        model.setId(CreateUtil.id());
+        model.setCreateTime(date);
+        model.setUpdateTime(date);
+        this.save(model);
+        return model;
     }
 }

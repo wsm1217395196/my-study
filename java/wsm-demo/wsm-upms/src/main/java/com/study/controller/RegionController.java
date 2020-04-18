@@ -24,7 +24,7 @@ import java.util.List;
  * @author wsm
  * @since 2019-07-16
  */
-@Api(description = "域控制器")
+@Api(tags = "域控制器")
 @RestController
 @RequestMapping("/region")
 public class RegionController {

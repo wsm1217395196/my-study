@@ -32,7 +32,7 @@ import java.util.Map;
 /**
  * 公共控制器
  */
-@Api(description = "公共控制器")
+@Api(tags = "公共控制器")
 @RestController
 @RequestMapping("/public")
 public class PublicController {

@@ -19,7 +19,7 @@ import java.net.URLEncoder;
 import java.util.concurrent.atomic.AtomicBoolean;
 import java.util.stream.Stream;
 
-@Api(description = "文件相关操作控制器")
+@Api(tags = "文件相关操作控制器")
 @RestController
 @RequestMapping("/file")
 public class FileController {

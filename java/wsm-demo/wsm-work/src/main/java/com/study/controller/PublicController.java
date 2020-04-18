@@ -13,7 +13,7 @@ import org.springframework.web.bind.annotation.RestController;
 /**
  * 公共控制器
  */
-@Api(description = "公共控制器")
+@Api(tags = "公共控制器")
 @RestController
 @RequestMapping("/public")
 public class PublicController {

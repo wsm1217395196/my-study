@@ -1,6 +1,7 @@
 package com.study.controller;
 
 import com.study.result.ResultView;
+import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiParam;
 import org.springframework.amqp.core.AmqpTemplate;
@@ -13,6 +14,7 @@ import org.springframework.web.bind.annotation.RestController;
 /**
  * rabbitmq生产者
  */
+@Api(tags = "rabbitmq生产者")
 @RestController
 @RequestMapping("/rabbitProducer")
 public class RabbitProducerController {

@@ -7,7 +7,12 @@ import io.swagger.annotations.ApiModelProperty;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
+import org.hibernate.validator.constraints.Length;
+import org.hibernate.validator.constraints.Range;
 
+import javax.validation.constraints.Digits;
+import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.NotNull;
 import java.io.Serializable;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
@@ -24,7 +29,7 @@ import java.time.LocalDateTime;
 @Setter
 @ToString
 @TableName("user")
-@ApiModel(value="UserModel对象", description="用户表")
+@ApiModel(value = "UserModel对象", description = "用户表")
 public class UserModel implements Serializable {
 
     private static final long serialVersionUID = 1L;
