@@ -1,5 +1,6 @@
 package com.study.exception;
 
+import com.alibaba.csp.sentinel.slots.block.BlockException;
 import com.study.result.ResultEnum;
 import com.study.result.ResultView;
 import org.slf4j.Logger;
@@ -93,6 +94,12 @@ public class GlobalExceptionHandler {
         // 包装结果
         return ResultView.validError(ResultEnum.CODE_400.getMsg() + "：" + detailMessage);
     }
+
+    @ExceptionHandler(value = BlockException.class)
+    public ResultView blockExceptionHandler(BlockException e) {
+        return ResultView.error("请求被拦截，拦截类型为 " + e.getClass().getSimpleName());
+    }
+
 
     /**
      * 打印关键log信息
