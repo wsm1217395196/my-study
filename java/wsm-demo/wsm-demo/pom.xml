@@ -111,6 +111,17 @@
             <artifactId>spring-boot-starter-cache</artifactId>
         </dependency>
 
+        <!--数据库版本管理-->
+        <dependency>
+            <groupId>org.flywaydb</groupId>
+            <artifactId>flyway-core</artifactId>
+        </dependency>
+        <!-- 同时，spring-boot-starter-jdbc 支持 Flyway 的自动化配置 -->
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-jdbc</artifactId>
+        </dependency>
+
     </dependencies>
 
     <build>

@@ -119,6 +119,7 @@
             <artifactId>spring-boot-starter-amqp</artifactId>
         </dependency>
 
+        <!--服务容错 Sentinel功能（Sentinel可以配置好几种降级限流规则）-->
         <dependency>
             <groupId>com.alibaba.cloud</groupId>
             <artifactId>spring-cloud-starter-alibaba-sentinel</artifactId>

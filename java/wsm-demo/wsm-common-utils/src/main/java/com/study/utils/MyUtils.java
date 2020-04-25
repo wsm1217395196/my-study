@@ -26,7 +26,7 @@ public class MyUtils {
             if (isNullProperty && srcValue == null) {
                 emptyNames.add(pd.getName());
             }
-            if (isNullProperty && srcValue == "") {
+            if (isEmptyProperty && srcValue == "") {
                 emptyNames.add(pd.getName());
             }
         }
