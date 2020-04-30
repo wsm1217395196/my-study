@@ -8,6 +8,7 @@ import org.springframework.cloud.client.discovery.EnableDiscoveryClient;
 import org.springframework.cloud.netflix.hystrix.EnableHystrix;
 import org.springframework.cloud.netflix.hystrix.dashboard.EnableHystrixDashboard;
 import org.springframework.cloud.openfeign.EnableFeignClients;
+import org.springframework.context.annotation.EnableAspectJAutoProxy;
 
 
 @MapperScan("com.study.mapper")
@@ -17,6 +18,7 @@ import org.springframework.cloud.openfeign.EnableFeignClients;
 @EnableHystrix
 @EnableHystrixDashboard
 @EnableCaching
+@EnableAspectJAutoProxy(exposeProxy = true)
 public class DemoStart {
 
     public static void main(String[] args) {

@@ -1,5 +1,6 @@
 package com.study.service;
 
+import com.baomidou.dynamic.datasource.annotation.DS;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.study.mapper.RegionMapper;
 import com.study.model.RegionModel;
@@ -33,17 +34,20 @@ public class RegionService extends ServiceImpl<RegionMapper, RegionModel> {
     @Autowired
     private RegionMapper regionMapper;
 
+    @DS("slave")
     public List<RegionModel> getAll() {
         List<RegionModel> models = regionMapper.selectList(null);
         return models;
     }
 
+    @DS("slave")
     @Cacheable(key = "#id")
     public RegionModel getById(Long id) {
         RegionModel model = regionMapper.selectById(id);
         return model;
     }
 
+    @DS("master")
     @CachePut(key = "#model.id")
     public RegionModel add(RegionModel model) {
         LocalDateTime date = LocalDateTime.now();
@@ -56,6 +60,7 @@ public class RegionService extends ServiceImpl<RegionMapper, RegionModel> {
         return model;
     }
 
+    @DS("master")
     @CachePut(key = "#model.id")
     public RegionModel update(RegionModel model) {
         LocalDateTime date = LocalDateTime.now();
@@ -66,12 +71,14 @@ public class RegionService extends ServiceImpl<RegionMapper, RegionModel> {
         return regionModel;
     }
 
+    @DS("master")
     @CacheEvict(key = "#id")
     public Integer deleteById(Long id) {
         int i = regionMapper.deleteById(id);
         return i;
     }
 
+    @DS("master")
     public void deleteByIds(@RequestParam Long[] ids) {
         this.removeByIds(Arrays.asList(ids));
     }

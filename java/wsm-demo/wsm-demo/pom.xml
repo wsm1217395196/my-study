@@ -62,6 +62,12 @@
             <groupId>com.baomidou</groupId>
             <artifactId>mybatis-plus-boot-starter</artifactId>
         </dependency>
+        <!-- 实现对 dynamic-datasource 的自动化配置 -->
+        <dependency>
+            <groupId>com.baomidou</groupId>
+            <artifactId>dynamic-datasource-spring-boot-starter</artifactId>
+            <version>2.5.7</version>
+        </dependency>
         <!-- 代码生成器 依赖-->
         <dependency>
             <groupId>com.baomidou</groupId>
