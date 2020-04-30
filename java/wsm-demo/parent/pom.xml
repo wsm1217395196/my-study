@@ -21,6 +21,7 @@
         <module>../wsm-gateway</module>
         <module>../wsm-oauth</module>
         <module>../wsm-zull</module>
+        <module>../wsm-admin-server</module>
     </modules>
 
     <groupId>com.study</groupId>
@@ -60,11 +61,11 @@
         <!--</dependency>-->
 
         <!--热部署-->
-<!--        <dependency>-->
-<!--            <groupId>org.springframework.boot</groupId>-->
-<!--            <artifactId>spring-boot-devtools</artifactId>-->
-<!--            <scope>runtime</scope>-->
-<!--        </dependency>-->
+        <!--        <dependency>-->
+        <!--            <groupId>org.springframework.boot</groupId>-->
+        <!--            <artifactId>spring-boot-devtools</artifactId>-->
+        <!--            <scope>runtime</scope>-->
+        <!--        </dependency>-->
 
         <!--org.json-->
         <dependency>
@@ -197,6 +198,20 @@
                 <groupId>com.alibaba.cloud</groupId>
                 <artifactId>spring-cloud-starter-alibaba-sentinel</artifactId>
                 <version>2.1.2.RELEASE</version>
+            </dependency>
+
+            <!-- Spring Boot 监控工具 Admin-->
+            <dependency>
+                <groupId>de.codecentric</groupId>
+                <artifactId>spring-boot-admin-starter-server</artifactId>
+                <version>2.2.0</version>
+            </dependency>
+
+            <!-- 实现对 Spring Boot Admin Client 的自动化配置 -->
+            <dependency>
+                <groupId>de.codecentric</groupId>
+                <artifactId>spring-boot-admin-starter-client</artifactId>
+                <version>2.2.0</version>
             </dependency>
 
             <!--版本冲突检测-->

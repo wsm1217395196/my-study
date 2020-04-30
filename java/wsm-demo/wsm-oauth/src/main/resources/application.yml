@@ -14,6 +14,11 @@ spring:
   application:
     name: wsm-oauth #服务名
 
+  boot:
+    admin:
+      client:
+        url: http://@${eureka.instance.hostname}:8004 # Spring Boot Admin Server 地址
+
 #  mysql配置
   datasource:
     driver-class-name: com.mysql.jdbc.Driver
@@ -40,4 +45,14 @@ mybatis:
 
 my-config:
   clientId: client_oauth
+
+management:
+  endpoints:
+    # Actuator HTTP 配置项，对应 WebEndpointProperties 配置类
+    web:
+      exposure:
+        include: '*' # 需要开放的端点。默认值只打开 health 和 info 两个端点。通过设置 * ，可以开放所有端点。
+  endpoint:
+    logfile:
+      external-file: ../logs/oauth.log
 

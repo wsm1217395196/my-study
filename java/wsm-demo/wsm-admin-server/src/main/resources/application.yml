@@ -1,0 +1,16 @@
+server:
+  port: 8004
+
+eureka:
+  instance:
+    hostname: localhost #地址
+    prefer-ip-address: true
+  client:
+    service-url:
+      # 向注册中心注册服务
+      defaultZone: http://wsm:1@${eureka.instance.hostname}:8000/eureka
+    register-with-eureka: false # 不注册到 Eureka 中
+
+spring:
+  application:
+    name: wsm-admin-server

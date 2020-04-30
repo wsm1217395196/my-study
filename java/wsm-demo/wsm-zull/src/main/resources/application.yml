@@ -15,6 +15,11 @@ spring:
   application:
     name: wsm-zull #服务名
 
+  boot:
+    admin:
+      client:
+        url: http://@${eureka.instance.hostname}:8004 # Spring Boot Admin Server 地址
+
   servlet:
     multipart:
       max-file-size: 100MB #设置文件最大数据大小
@@ -72,10 +77,13 @@ ribbon:
   eureka:
     enabled: true
 
-
-
-
-
-
-
+management:
+  endpoints:
+    # Actuator HTTP 配置项，对应 WebEndpointProperties 配置类
+    web:
+      exposure:
+        include: '*' # 需要开放的端点。默认值只打开 health 和 info 两个端点。通过设置 * ，可以开放所有端点。
+  endpoint:
+    logfile:
+      external-file: ../logs/zull.log
 
