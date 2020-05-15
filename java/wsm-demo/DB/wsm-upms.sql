@@ -12,7 +12,46 @@ MySQL - 5.7.22 : Database - wsm-upms
 /*!40014 SET @OLD_FOREIGN_KEY_CHECKS=@@FOREIGN_KEY_CHECKS, FOREIGN_KEY_CHECKS=0 */;
 /*!40101 SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='NO_AUTO_VALUE_ON_ZERO' */;
 /*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
-CREATE DATABASE /*!32312 IF NOT EXISTS*/`wsm-upms` /*!40100 DEFAULT CHARACTER SET utf8 COLLATE utf8_unicode_ci */;
+/*Table structure for table `flyway_schema_history` */
+
+DROP TABLE IF EXISTS `flyway_schema_history`;
+
+CREATE TABLE `flyway_schema_history` (
+  `installed_rank` int(11) NOT NULL,
+  `version` varchar(50) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `description` varchar(200) COLLATE utf8_unicode_ci NOT NULL,
+  `type` varchar(20) COLLATE utf8_unicode_ci NOT NULL,
+  `script` varchar(1000) COLLATE utf8_unicode_ci NOT NULL,
+  `checksum` int(11) DEFAULT NULL,
+  `installed_by` varchar(100) COLLATE utf8_unicode_ci NOT NULL,
+  `installed_on` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `execution_time` int(11) NOT NULL,
+  `success` tinyint(1) NOT NULL,
+  PRIMARY KEY (`installed_rank`),
+  KEY `flyway_schema_history_s_idx` (`success`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+
+/*Data for the table `flyway_schema_history` */
+
+/*Table structure for table `gateway_api_define` */
+
+DROP TABLE IF EXISTS `gateway_api_define`;
+
+CREATE TABLE `gateway_api_define` (
+  `id` varchar(50) NOT NULL,
+  `path` varchar(255) NOT NULL,
+  `service_id` varchar(50) DEFAULT '',
+  `url` varchar(255) DEFAULT '',
+  `retryable` tinyint(1) DEFAULT '1',
+  `enabled` tinyint(1) DEFAULT '1' COMMENT '是否有效',
+  `strip_prefix` int(11) DEFAULT '1',
+  `api_name` varchar(255) DEFAULT '',
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+/*Data for the table `gateway_api_define` */
+
+insert  into `gateway_api_define`(`id`,`path`,`service_id`,`url`,`retryable`,`enabled`,`strip_prefix`,`api_name`) values ('1','/wsm-oauth/**','wsm-oauth','',1,1,1,''),('2','/wsm-upms/**','wsm-upms','',1,1,1,''),('3','/wsm-work/**','wsm-work','',1,1,1,''),('4','/wsm-public/**','wsm-public','',1,1,1,''),('5','/wsm-demo/**','wsm-demo','',1,1,1,'');
 
 /*Table structure for table `oauth_access_token` */
 

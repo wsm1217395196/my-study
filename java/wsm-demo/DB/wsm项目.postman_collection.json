@@ -752,6 +752,57 @@
 			]
 		},
 		{
+			"name": "网关",
+			"item": [
+				{
+					"name": "zuul查看路由",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "http://localhost:8001/watchRoute",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8001",
+							"path": [
+								"watchRoute"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "zuul刷新路由",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "http://localhost:8001/refreshRoute",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8001",
+							"path": [
+								"refreshRoute"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
 			"name": "文件操作",
 			"item": [
 				{

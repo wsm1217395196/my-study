@@ -15,6 +15,13 @@ spring:
   application:
     name: wsm-zull #服务名
 
+  # mysql配置
+  datasource:
+    driver-class-name: com.mysql.jdbc.Driver
+    username: admin
+    password: admin
+    url: jdbc:mysql://${eureka.instance.hostname}:3306/wsm-upms?characterEncoding=utf-8&useSSL=false&serverTimezone=UTC
+
   boot:
     admin:
       client:
@@ -27,28 +34,28 @@ spring:
 #      location: d:/wsm-upload-cache #设置临时缓存目录
 
 #网关路由
-zuul:
-  routes:
-    wsm-oauth:
-      path: /wsm-oauth/**
-      sensitiveHeaders:
-      serviceId : wsm-oauth
-    wsm-public:
-      path: /wsm-public/**
-      sensitiveHeaders:
-      serviceId : wsm-public
-    wsm-upms:
-      path: /wsm-upms/**
-      sensitiveHeaders:
-      serviceId : wsm-upms
-    wsm-work:
-      path: /wsm-work/**
-      sensitiveHeaders:
-      serviceId : wsm-work
-    wsm-demo:
-      path: /wsm-demo/**
-      sensitiveHeaders:
-      serviceId : wsm-demo
+#zuul:
+#  routes:
+#    wsm-oauth:
+#      path: /wsm-oauth/**
+#      sensitiveHeaders:
+#      serviceId : wsm-oauth
+#    wsm-public:
+#      path: /wsm-public/**
+#      sensitiveHeaders:
+#      serviceId : wsm-public
+#    wsm-upms:
+#      path: /wsm-upms/**
+#      sensitiveHeaders:
+#      serviceId : wsm-upms
+#    wsm-work:
+#      path: /wsm-work/**
+#      sensitiveHeaders:
+#      serviceId : wsm-work
+#    wsm-demo:
+#      path: /wsm-demo/**
+#      sensitiveHeaders:
+#      serviceId : wsm-demo
 
 security:
   oauth2:
