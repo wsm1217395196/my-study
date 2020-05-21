@@ -103,7 +103,7 @@ hystrix:
       execution:
         isolation:
           thread:
-            timeoutInMilliseconds: 10000 #请求处理的超时时间
+            timeoutInMilliseconds: 30000 #请求处理的超时时间
 
 
 

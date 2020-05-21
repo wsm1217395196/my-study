@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import java.util.UUID;
 import java.util.concurrent.atomic.AtomicInteger;
+import java.util.concurrent.atomic.AtomicStampedReference;
 import java.util.concurrent.locks.Lock;
 import java.util.concurrent.locks.ReentrantLock;
 
@@ -40,7 +41,7 @@ public class DistributedLockController {
     @GetMapping("/initCount")
     public ResultView initCount(int initCount) {
 
-        int count = (int) redisTemplate.opsForValue().get(key);
+        Integer count = (Integer) redisTemplate.opsForValue().get(key);
         System.err.println("上次的count = " + count + "  ——  本次设置的count = " + initCount);
 
         redisTemplate.opsForValue().set(key, initCount);

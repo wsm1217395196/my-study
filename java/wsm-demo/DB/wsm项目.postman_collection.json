@@ -752,6 +752,154 @@
 			]
 		},
 		{
+			"name": "demo",
+			"item": [
+				{
+					"name": "springcloud优雅下线",
+					"item": [
+						{
+							"name": "测试同步请求后，服务下线后也能正常执行",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": ""
+								},
+								"url": {
+									"raw": "http://localhost:8001/wsm-demo/testShutdown?sleep=15000",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8001",
+									"path": [
+										"wsm-demo",
+										"testShutdown"
+									],
+									"query": [
+										{
+											"key": "sleep",
+											"value": "15000"
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "设置服务状态：下线",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": ""
+								},
+								"url": {
+									"raw": "http://localhost:8001/wsm-demo/setServiceStatus?status=down",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8001",
+									"path": [
+										"wsm-demo",
+										"setServiceStatus"
+									],
+									"query": [
+										{
+											"key": "status",
+											"value": "down"
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "设置服务状态：上线",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": ""
+								},
+								"url": {
+									"raw": "http://localhost:8009/setServiceStatus?status=up",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8009",
+									"path": [
+										"setServiceStatus"
+									],
+									"query": [
+										{
+											"key": "status",
+											"value": "up"
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "initA",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": ""
+								},
+								"url": {
+									"raw": "http://localhost:8001/wsm-demo/initA",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8001",
+									"path": [
+										"wsm-demo",
+										"initA"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "getA",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": ""
+								},
+								"url": {
+									"raw": "http://localhost:8001/wsm-demo/getA",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8001",
+									"path": [
+										"wsm-demo",
+										"getA"
+									]
+								}
+							},
+							"response": []
+						}
+					],
+					"_postman_isSubFolder": true
+				}
+			]
+		},
+		{
 			"name": "网关",
 			"item": [
 				{
