@@ -51,15 +51,6 @@
             <scope>compile</scope>
         </dependency>
 
-        <!--common-utils 打jar用这个-->
-        <!--可把本项目中wsm-common-utils的代码放到utils文件夹wsm-common-utils项目中，然后打jar包放到maven本地仓库中-->
-        <!--<dependency>-->
-        <!--<groupId>wsm.common</groupId>-->
-        <!--<artifactId>wsm-common-utils</artifactId>-->
-        <!--<version>1.0-SNAPSHOT</version>-->
-        <!--<type>jar</type>-->
-        <!--</dependency>-->
-
         <!--热部署-->
         <!--        <dependency>-->
         <!--            <groupId>org.springframework.boot</groupId>-->

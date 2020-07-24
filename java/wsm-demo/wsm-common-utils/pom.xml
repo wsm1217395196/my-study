@@ -2,16 +2,20 @@
 
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
-    <parent>
-        <artifactId>parent</artifactId>
-        <groupId>com.study</groupId>
-        <version>0.0.1-SNAPSHOT</version>
-        <relativePath>../parent/pom.xml</relativePath>
-    </parent>
+
     <modelVersion>4.0.0</modelVersion>
 
+    <groupId>com.study</groupId>
     <artifactId>wsm-common-utils</artifactId>
+    <version>0.0.1-SNAPSHOT</version>
     <description>公共工具</description>
+
+    <!--版本-->
+    <properties>
+        <java.version>1.8</java.version>
+        <swagger.version>2.9.2</swagger.version>
+        <lombok.version>1.18.10</lombok.version>
+    </properties>
 
     <dependencies>
 
@@ -19,17 +23,20 @@
         <dependency>
             <groupId>io.springfox</groupId>
             <artifactId>springfox-swagger2</artifactId>
+            <version>${swagger.version}</version>
         </dependency>
         <dependency>
             <groupId>io.springfox</groupId>
             <artifactId>springfox-swagger-ui</artifactId>
+            <version>${swagger.version}</version>
         </dependency>
 
-        <!--jedis-->
+        <!--lombok插件-->
         <dependency>
-            <groupId>redis.clients</groupId>
-            <artifactId>jedis</artifactId>
-            <version>2.9.3</version>
+            <groupId>org.projectlombok</groupId>
+            <artifactId>lombok</artifactId>
+            <version>${lombok.version}</version>
+            <scope>provided</scope>
         </dependency>
     </dependencies>
 
