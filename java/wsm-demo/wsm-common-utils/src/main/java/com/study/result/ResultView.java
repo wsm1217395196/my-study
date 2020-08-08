@@ -9,7 +9,7 @@ import lombok.Data;
  */
 @Data
 @ApiModel(value = "ResultView对象", description = "通用结果视图类")
-public class ResultView {
+public class ResultView<T> {
     /**
      * 状态码
      */
@@ -26,7 +26,7 @@ public class ResultView {
      * 数据
      */
     @ApiModelProperty(value = "数据")
-    private Object data;
+    private T data;
 
     /**
      * 成功
@@ -43,7 +43,7 @@ public class ResultView {
      * @param data 数据
      * @return 结果视图
      */
-    public static ResultView success(Object data) {
+    public static <T> ResultView<T> success(T data) {
         return new ResultView(data);
     }
 
@@ -103,7 +103,7 @@ public class ResultView {
         this.msg = ResultEnum.CODE_1.getMsg();
     }
 
-    private ResultView(Object data) {
+    private ResultView(T data) {
         this.data = data;
         this.code = ResultEnum.CODE_1.getCode();
         this.msg = ResultEnum.CODE_1.getMsg();

@@ -1,7 +1,6 @@
 package study.config;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.cloud.netflix.zuul.filters.Route;
 import org.springframework.cloud.netflix.zuul.filters.RouteLocator;
@@ -13,12 +12,10 @@ import springfox.documentation.swagger.web.SwaggerResourcesProvider;
 import java.util.ArrayList;
 import java.util.List;
 
+@Slf4j
 @Component
 @Primary
 public class SwaggerResourceConfig implements SwaggerResourcesProvider {
-
-    Logger logger= LoggerFactory.getLogger(SwaggerResourceConfig.class);
-
 
     @Autowired
     RouteLocator routeLocator;
@@ -28,14 +25,14 @@ public class SwaggerResourceConfig implements SwaggerResourcesProvider {
         //获取所有router
         List<SwaggerResource> resources = new ArrayList<>();
         List<Route> routes = routeLocator.getRoutes();
-        logger.info("Route Size:{}",routes.size());
+        log.info("Route Size:{}",routes.size());
         for (Route route:routes) {
             resources.add(swaggerResource(route.getId(), route.getFullPath().replace("**", "v2/api-docs")));
         }
         return resources;
     }
     private SwaggerResource swaggerResource(String name, String location) {
-        logger.info("name:{},location:{}",name,location);
+        log.info("name:{},location:{}",name,location);
         SwaggerResource swaggerResource = new SwaggerResource();
         swaggerResource.setName(name);
         swaggerResource.setLocation(location);

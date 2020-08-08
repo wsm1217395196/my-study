@@ -1,7 +1,6 @@
 package study.config;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.BeanUtils;
 import org.springframework.cloud.netflix.zuul.filters.RefreshableRouteLocator;
 import org.springframework.cloud.netflix.zuul.filters.SimpleRouteLocator;
@@ -15,9 +14,8 @@ import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 
+@Slf4j
 public class CustomRouteLocator extends SimpleRouteLocator implements RefreshableRouteLocator {
-
-    public final static Logger logger = LoggerFactory.getLogger(CustomRouteLocator.class);
 
     /*数据库驱动*/
     private JdbcTemplate jdbcTemplate;
@@ -31,7 +29,7 @@ public class CustomRouteLocator extends SimpleRouteLocator implements Refreshabl
     public CustomRouteLocator(String servletPath, ZuulProperties properties) {
         super(servletPath, properties);
         this.properties = properties;
-        logger.info("servletPath:{}",servletPath);
+        log.info("servletPath:{}",servletPath);
     }
 
     //父类已经提供了这个方法，这里写出来只是为了说明这一个方法很重要！！！
@@ -90,7 +88,7 @@ public class CustomRouteLocator extends SimpleRouteLocator implements Refreshabl
             try {
                 BeanUtils.copyProperties(result,zuulRoute);
             } catch (Exception e) {
-                logger.error("=============load zuul route info from db with error==============",e);
+                log.error("=============load zuul route info from db with error==============",e);
             }
             routes.put(zuulRoute.getPath(),zuulRoute);
         }

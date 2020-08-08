@@ -1,9 +1,8 @@
 package study.fallback;
 
 import com.study.result.ResultEnum;
+import lombok.extern.slf4j.Slf4j;
 import org.json.JSONObject;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.cloud.netflix.zuul.filters.route.FallbackProvider;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
@@ -18,10 +17,9 @@ import java.io.InputStream;
 /**
  * 网关熔断配置
  */
+@Slf4j
 @Component
 public class MyFallback implements FallbackProvider {
-
-    Logger logger = LoggerFactory.getLogger(MyFallback.class);
 
     @Override
     public String getRoute() {
@@ -61,7 +59,7 @@ public class MyFallback implements FallbackProvider {
                 jsonObject.put("msg", resultEnum.getMsg());
                 jsonObject.put("data", data);
                 data = jsonObject.toString();
-                logger.error(data);
+                log.error(data);
                 return new ByteArrayInputStream(data.getBytes());
             }
 
