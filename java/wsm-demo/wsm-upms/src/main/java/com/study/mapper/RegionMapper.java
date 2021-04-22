@@ -2,6 +2,7 @@ package com.study.mapper;
 
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 import com.study.model.RegionModel;
+import org.apache.ibatis.annotations.Param;
 
 import java.util.List;
 
@@ -17,4 +18,5 @@ public interface RegionMapper extends BaseMapper<RegionModel> {
 
     int batchAdd(List<RegionModel> models);
 
+    int testUpdateLock(@Param("id") Long id, @Param("addNum") Integer addNum);
 }

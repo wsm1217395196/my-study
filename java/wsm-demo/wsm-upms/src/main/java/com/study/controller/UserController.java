@@ -6,9 +6,9 @@ import com.study.result.PageParam;
 import com.study.result.PageResult;
 import com.study.result.ResultView;
 import com.study.service.UserService;
-import com.study.utils.CreateUtil;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
+import org.hibernate.validator.constraints.Range;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.validation.annotation.Validated;
@@ -57,8 +57,8 @@ public class UserController {
     }
 
     @ApiOperation(value = "根据id查询", notes = "")
-    @GetMapping("/authority/getById/{id}")
-    public ResultView getById(@PathVariable Long id) {
+    @GetMapping("/getById/{id}")
+    public ResultView getById(@PathVariable @Range(min = 1L, max = 2L, message = "长度为 6-20 位") Long id) {
         UserModel model = userService.getById(id);
         return ResultView.success(model);
     }
@@ -91,14 +91,39 @@ public class UserController {
     }
 
     @ApiOperation(value = "根据id删除", notes = "")
-    @DeleteMapping("/authority_button/deleteById")
-    public ResultView deleteById(@RequestParam Long id) {
-        userService.removeById(id);
+    @DeleteMapping("/deleteById")
+    @Valid
+    public ResultView deleteById(@RequestParam @Range(min = 1L, max = 2L, message = "长度为 6-20 位") Long id) {
+        return ResultView.success();
+    }
+
+    @ApiOperation(value = "根据id删除1", notes = "")
+    @DeleteMapping("/deleteById1")
+    @Validated
+    public ResultView deleteById1(@RequestParam @Range(min = 1L, max = 2L, message = "长度为 6-20 位") Long id) {
+        return ResultView.success();
+    }
+
+    @ApiOperation(value = "根据id删除2", notes = "")
+    @DeleteMapping("/deleteById2")
+    public ResultView deleteById2(@RequestParam @Validated @Range(min = 1L, max = 2L, message = "长度为 6-20 位") Long id) {
+        return ResultView.success();
+    }
+
+    @ApiOperation(value = "根据id删除3", notes = "")
+    @DeleteMapping("/deleteById3")
+    public ResultView deleteById3(@RequestParam @Valid @Range(min = 1L, max = 2L, message = "长度为 6-20 位") Long id) {
+        return ResultView.success();
+    }
+
+    @ApiOperation(value = "根据id删除4", notes = "")
+    @DeleteMapping("/deleteById4")
+    public ResultView deleteById4(@RequestParam Long id) {
         return ResultView.success();
     }
 
     @ApiOperation(value = "根据ids删除", notes = "")
-    @DeleteMapping("/authority_button/deleteByIds")
+    @DeleteMapping("/deleteByIds")
     public ResultView deleteByIds(@RequestParam Long[] ids) {
         userService.removeByIds(Arrays.asList(ids));
         return ResultView.success();

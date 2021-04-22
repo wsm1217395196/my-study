@@ -24,4 +24,8 @@
             #{model.updateTime},#{model.isEnabled},#{model.remark})
         </foreach>
     </insert>
+
+    <update id="testUpdateLock">
+        update region set is_enabled = is_enabled + #{addNum} where id = #{id}
+    </update>
 </mapper>

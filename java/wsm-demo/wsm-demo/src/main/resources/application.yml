@@ -13,6 +13,7 @@ eureka:
 spring:
   application:
     name: wsm-demo #服务名
+
   #  mysql配置
   datasource:
     dynamic:
@@ -26,12 +27,12 @@ spring:
           driver-class-name: com.mysql.jdbc.Driver
           username: admin
           password: admin
-          url: jdbc:mysql://${eureka.instance.hostname}:3306/wsm-upms1?characterEncoding=utf-8&useSSL=false&serverTimezone=UTC
+          url: jdbc:mysql://${eureka.instance.hostname}:3306/wsm-upms?characterEncoding=utf-8&useSSL=false&serverTimezone=UTC
         slave_2:
           driver-class-name: com.mysql.jdbc.Driver
           username: admin
           password: admin
-          url: jdbc:mysql://${eureka.instance.hostname}:3306/wsm-upms2?characterEncoding=utf-8&useSSL=false&serverTimezone=UTC
+          url: jdbc:mysql://${eureka.instance.hostname}:3306/wsm-upms?characterEncoding=utf-8&useSSL=false&serverTimezone=UTC
 
   #    driver-class-name: com.mysql.jdbc.Driver
   #    username: admin
@@ -64,6 +65,9 @@ spring:
         min-idle: 0  # 连接池中的最小空闲连接
   cache:
     type: redis
+
+  resources:
+    static-locations: classpath:/
 
 # 配置mybatis-plus
 mybatis-plus:

@@ -1,6 +1,5 @@
 package com.study.dto;
 
-import com.baomidou.mybatisplus.annotation.TableField;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;
@@ -8,6 +7,7 @@ import org.hibernate.validator.constraints.Length;
 import org.hibernate.validator.constraints.Range;
 
 import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.Size;
 
 @Data
 @ApiModel(value="UserAddDTO", description="用户新增业务对象")
@@ -17,6 +17,7 @@ public class UserAddDTO {
 
     @NotEmpty(message = "用户名不能为空")
     @ApiModelProperty(value = "用户名")
+    @Size(min = 3, max = 8, message = "用户名长度为 3-8 位")
     private String name;
 
     @ApiModelProperty(value = "昵称")

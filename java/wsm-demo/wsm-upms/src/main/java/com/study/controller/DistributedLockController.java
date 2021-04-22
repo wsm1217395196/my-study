@@ -1,17 +1,21 @@
 package com.study.controller;
 
 import com.study.config.RedisLock;
+import com.study.mapper.RegionMapper;
+import com.study.model.RegionModel;
 import com.study.result.ResultView;
 import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.redis.core.RedisTemplate;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.util.UUID;
 import java.util.concurrent.atomic.AtomicInteger;
-import java.util.concurrent.atomic.AtomicStampedReference;
 import java.util.concurrent.locks.Lock;
 import java.util.concurrent.locks.ReentrantLock;
 
@@ -195,6 +199,42 @@ public class DistributedLockController {
         }
         System.err.println("count = " + count);
         return ResultView.success(count);
+    }
+
+
+    @Autowired
+    private RegionMapper regionMapper;
+    private Long id = 520l;
+
+    /**
+     * 测试更新锁(初始化)
+     */
+    @ApiOperation("测试更新锁(初始化)")
+    @GetMapping("/testUpdateLockInit")
+    public ResultView testUpdateLockInit() {
+        regionMapper.deleteById(id);
+        RegionModel model = new RegionModel();
+        model.setId(id);
+        model.setName(id + "");
+        model.setCode(id + "");
+        model.setIsEnabled(0);
+        regionMapper.insert(model);
+        return ResultView.success();
+    }
+
+    /**
+     * 测试更新锁
+     */
+    @ApiOperation("测试更新锁")
+    @GetMapping("/testUpdateLock")
+    @Transactional
+    public ResultView testUpdateLock(@RequestParam Integer addNum) {
+        int count = regionMapper.testUpdateLock(id, addNum);
+        if (count == 0) {
+            System.err.println("更新失败");
+            return ResultView.success("更新失败");
+        }
+        return ResultView.success();
     }
 
 }

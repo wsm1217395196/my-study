@@ -9,7 +9,9 @@ import com.study.service.RoleService;
 import com.study.utils.CreateUtil;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
+import org.hibernate.validator.constraints.Range;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
 import java.time.LocalDateTime;
@@ -27,6 +29,7 @@ import java.util.List;
 @Api(tags = "角色控制器")
 @RestController
 @RequestMapping("/role")
+@Validated
 public class RoleController {
 
     @Autowired
@@ -74,8 +77,8 @@ public class RoleController {
     }
 
     @ApiOperation(value = "根据id删除", notes = "")
-    @DeleteMapping("/authority_button/deleteById")
-    public ResultView deleteById(@RequestParam Long id) {
+    @DeleteMapping("/deleteById")
+    public ResultView deleteById(@RequestParam @Range(min = 1L, max = 2L, message = "长度为 6-20 位") Long id) {
         roleService.removeById(id);
         return ResultView.success();
     }
